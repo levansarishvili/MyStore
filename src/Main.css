@@ -7,7 +7,7 @@
   margin: 0 auto;
   height: calc(100vh - 14rem);
   overflow-y: hidden;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .line {
@@ -37,5 +37,9 @@
 }
 
 .player__img {
-  max-width: 4.2rem;
+  max-width: 4.5rem;
+}
+
+.player__club {
+  font-size: 1rem;
 }
