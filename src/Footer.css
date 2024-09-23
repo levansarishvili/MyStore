@@ -1,6 +1,5 @@
 .footer {
-  height: 12rem;
-  border: 1px solid red;
+  height: 8rem;
   display: flex;
   align-items: center;
   color: #60636c;
@@ -9,6 +8,8 @@
   left: 0;
   right: 0;
   font-size: 1.4rem;
+  z-index: 10;
+  background-color: #f8f9fa;
 }
 
 .footer__wrapper {
@@ -16,7 +17,6 @@
   margin: 0 auto;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,10 +40,10 @@
 }
 
 .social-icon {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  padding: 0.8rem;
+  padding: 0.5rem;
   cursor: pointer;
   background-color: #f03135;
   transition: all 0.2s;
