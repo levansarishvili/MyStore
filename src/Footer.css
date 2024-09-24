@@ -3,12 +3,7 @@
   display: flex;
   align-items: center;
   color: #60636c;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   font-size: 1.4rem;
-  z-index: 10;
   background-color: #f8f9fa;
 }
 
