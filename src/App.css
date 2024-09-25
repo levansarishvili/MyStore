@@ -7,10 +7,13 @@
 html {
   font-size: 62.5%;
   font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
 }
 
 .wrapper {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 6rem 1fr 8rem;
+  row-gap: 2rem;
+  overflow: hidden;
 }

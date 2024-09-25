@@ -1,12 +1,12 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 1.5rem;
-  max-width: 120rem;
+  width: 100%;
+  max-width: 128rem;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 0 4rem;
+  overflow-y: auto;
 }
 
 .line {
@@ -36,9 +36,32 @@
 }
 
 .player__img {
-  max-width: 4.5rem;
+  max-width: 5rem;
 }
 
 .player__club {
   font-size: 1rem;
+}
+
+/* Custom scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #adb5bd;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f03135;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ce3d40;
 }
