@@ -1,5 +1,5 @@
 import "./Formation.css";
-import playerData from "./playerData.js";
+import playerData from "../data/playerData.js";
 
 // Create Formation component
 function Formation() {

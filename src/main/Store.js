@@ -1,4 +1,4 @@
-import productData from "./productData.js";
+import productData from "../data/productData.js";
 import "./Store.css";
 
 // Create Online Store component

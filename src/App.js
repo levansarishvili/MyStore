@@ -1,6 +1,6 @@
-import Header from "./Header.js";
-import Main from "./Main.js";
-import Footer from "./Footer.js";
+import Header from "./header/Header.js";
+import Main from "./main/Main.js";
+import Footer from "./footer/Footer.js";
 import "./App.css";
 
 // Create App component
