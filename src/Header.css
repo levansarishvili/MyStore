@@ -64,6 +64,9 @@
 }
 
 .btn {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
   cursor: pointer;
   border: none;
   background-color: #f03135;
