@@ -1,12 +1,24 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 10rem;
   width: 100%;
   max-width: 128rem;
   margin: 0 auto;
   padding: 0 4rem;
   overflow-y: auto;
+}
+
+/* Formation CSS */
+.formation-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.section__header {
+  font-size: 2.8rem;
+  text-align: center;
 }
 
 .line {
@@ -36,7 +48,7 @@
 }
 
 .player__img {
-  max-width: 5rem;
+  max-width: 6rem;
 }
 
 .player__club {
@@ -64,4 +76,60 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #ce3d40;
+}
+
+/* Online Store CSS */
+.store-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.store {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 5rem;
+  row-gap: 5rem;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 30rem;
+  border: 1px solid #dcdee0;
+  border-radius: 6px;
+  padding: 2rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.product-card:hover .product__img {
+  opacity: 1;
+}
+
+.product__img {
+  width: 20rem;
+  border-radius: 6px;
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+
+.product__title {
+  color: #60636c;
+  font-weight: 400;
+}
+
+.product__desc {
+  display: flex;
+  gap: 2rem;
+  color: #60636c;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.product__price {
+  color: #ca003d;
 }
