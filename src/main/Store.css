@@ -19,10 +19,9 @@
   align-items: center;
   gap: 1.5rem;
   max-width: 30rem;
-  background-color: #f5f5f5;
   border: 1px solid #dcdee0;
   border-radius: 10px;
-  padding: 2rem;
+  padding: 2.5rem;
   cursor: pointer;
   text-align: center;
   transition: all 0.3s;
@@ -40,7 +39,6 @@
 
 .product__img {
   width: 22rem;
-  border-radius: 10px;
   opacity: 0.8;
   transition: all 0.3s;
 }
