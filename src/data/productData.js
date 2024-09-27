@@ -3,7 +3,7 @@ const productData = [
     name: "ეროვნული ნაკრების 2023 წლის სათამაშო მაისური",
     image: "./assets/black-shirt.png",
     color: "შავი",
-    size: "M",
+    size: "2XL",
     price: 220,
   },
   {
@@ -17,14 +17,14 @@ const productData = [
     name: "ეროვნული ნაკრების 2023 წლის სათამაშო მაისური",
     image: "./assets/white-shirt.png",
     color: "თეთრი",
-    size: "L",
+    size: "M",
     price: 220,
   },
   {
     name: "ეროვნული ნაკრების 2023 სეზონის შორტი",
     image: "./assets/white-short.jpg",
     color: "თეთრი",
-    size: "M",
+    size: "S",
     price: 80,
   },
   {
@@ -45,7 +45,7 @@ const productData = [
     name: "ჰუდი 2022",
     image: "./assets/white-hoodie.jpg",
     color: "თეთრი",
-    size: "L",
+    size: "3XL",
     price: 120,
   },
   {
@@ -59,7 +59,7 @@ const productData = [
     name: "პულოვერი 2022",
     image: "./assets/black-pullover.jpg",
     color: "შავი",
-    size: "L",
+    size: "M",
     price: 100,
   },
 

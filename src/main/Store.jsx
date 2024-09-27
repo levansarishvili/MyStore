@@ -30,6 +30,7 @@ function Product({ name, imageSrc, color, size, price }) {
       <h2 className="product__title">{name}</h2>
       <div className="product__desc">
         <p className="product__color">{color}</p>
+        <p className="product__size">{size}</p>
         <p className="product__price">{`${price}.00 ₾`}</p>
       </div>
       <Button />
