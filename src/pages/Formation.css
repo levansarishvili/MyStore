@@ -1,4 +1,15 @@
 /* Formation CSS */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  width: 100%;
+  max-width: 128rem;
+  margin: 0 auto;
+  padding: 0 4rem;
+  overflow-y: auto;
+}
+
 .formation-wrapper {
   display: flex;
   flex-direction: column;

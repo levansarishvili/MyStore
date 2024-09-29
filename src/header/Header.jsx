@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "./Header.css";
 
 // Create Header component
@@ -12,10 +13,24 @@ function Header() {
         ></img>
         <nav className="header__nav">
           <ul className="nav__list">
-            <li className="list__item">მთავარი</li>
-            <li className="list__item">შემადგენლობა</li>
-            <li className="list__item">სიახლეები</li>
-            <li className="list__item">მაღაზია</li>
+            <li className="list__item">
+              <NavLink to="/">მთავარი</NavLink>
+            </li>
+            <li className="list__item">
+              <NavLink to="/about">ჩვენს შესახებ</NavLink>
+            </li>
+            <li className="list__item">
+              <NavLink to="/formation">შემადგენლობა</NavLink>
+            </li>
+            <li className="list__item">
+              <NavLink to="/news">სიახლეები</NavLink>
+            </li>
+            <li className="list__item">
+              <NavLink to="/store">მაღაზია</NavLink>
+            </li>
+            <li className="list__item">
+              <NavLink to="/contact">კონტაქტი</NavLink>
+            </li>
           </ul>
           <Button />
         </nav>

@@ -1,4 +1,5 @@
 import "./Formation.css";
+import "./CustomScrollbar.css";
 import playerData from "../data/playerData.js";
 
 // Create Formation component
@@ -11,55 +12,57 @@ function Formation() {
   };
 
   return (
-    <section className="formation-wrapper">
-      <h1 className="section__header">
-        საქართველოს ფეხბურთის ეროვნული ნაკრები
-      </h1>{" "}
-      {/* Attack */}
-      <div className="attack line">
-        {formation.attack.map((player, index) => (
-          <Player
-            key={index}
-            playerName={player.name}
-            playerImageSrc={player.image}
-            playerClub={player.club}
-          />
-        ))}
-      </div>
-      {/* Midfield */}
-      <div className="midfield line">
-        {formation.midfield.map((player, index) => (
-          <Player
-            key={index}
-            playerName={player.name}
-            playerImageSrc={player.image}
-            playerClub={player.club}
-          />
-        ))}
-      </div>
-      {/* Defence */}
-      <div className="defence line">
-        {formation.defence.map((player, index) => (
-          <Player
-            key={index}
-            playerName={player.name}
-            playerImageSrc={player.image}
-            playerClub={player.club}
-          />
-        ))}
-      </div>
-      {/* Goalkeeper */}
-      <div className="goalkeeper line">
-        {formation.goalkeeper.map((player, index) => (
-          <Player
-            key={index}
-            playerName={player.name}
-            playerImageSrc={player.image}
-            playerClub={player.club}
-          />
-        ))}
-      </div>
-    </section>
+    <main className="main">
+      <section className="formation-wrapper">
+        <h1 className="section__header">
+          საქართველოს ფეხბურთის ეროვნული ნაკრები
+        </h1>{" "}
+        {/* Attack */}
+        <div className="attack line">
+          {formation.attack.map((player, index) => (
+            <Player
+              key={index}
+              playerName={player.name}
+              playerImageSrc={player.image}
+              playerClub={player.club}
+            />
+          ))}
+        </div>
+        {/* Midfield */}
+        <div className="midfield line">
+          {formation.midfield.map((player, index) => (
+            <Player
+              key={index}
+              playerName={player.name}
+              playerImageSrc={player.image}
+              playerClub={player.club}
+            />
+          ))}
+        </div>
+        {/* Defence */}
+        <div className="defence line">
+          {formation.defence.map((player, index) => (
+            <Player
+              key={index}
+              playerName={player.name}
+              playerImageSrc={player.image}
+              playerClub={player.club}
+            />
+          ))}
+        </div>
+        {/* Goalkeeper */}
+        <div className="goalkeeper line">
+          {formation.goalkeeper.map((player, index) => (
+            <Player
+              key={index}
+              playerName={player.name}
+              playerImageSrc={player.image}
+              playerClub={player.club}
+            />
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }
 

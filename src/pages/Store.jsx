@@ -1,24 +1,28 @@
 import productData from "../data/productData.js";
 import "./Store.css";
+import "./CustomScrollbar.css";
 
 // Create Online Store component
 function Store() {
   return (
-    <section className="store-wrapper">
-      <h1 className="section__header">GFF OFFICIAL FANSHOP</h1>
-      <div className="store">
-        {productData.map((product, index) => (
-          <Product
-            key={index}
-            name={product.name}
-            imageSrc={product.image}
-            color={product.color}
-            size={product.size}
-            price={product.price}
-          />
-        ))}
-      </div>
-    </section>
+    <main className="main">
+      {" "}
+      <section className="store-wrapper">
+        <h1 className="section__header">GFF OFFICIAL FANSHOP</h1>
+        <div className="store">
+          {productData.map((product, index) => (
+            <Product
+              key={index}
+              name={product.name}
+              imageSrc={product.image}
+              color={product.color}
+              size={product.size}
+              price={product.price}
+            />
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }
 

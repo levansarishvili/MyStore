@@ -1,5 +1,5 @@
 import Header from "./header/Header.jsx";
-import Main from "./main/Main.jsx";
+// import Main from "./main/Main.jsx";
 import Footer from "./footer/Footer.jsx";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,8 +13,10 @@ import Contact from "./pages/Contact.jsx";
 // Create App component
 function App() {
   return (
-    <>
+    <div className="wrapper">
       <BrowserRouter>
+        <Header />
+
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
           <Route path="/about" element={<About />}></Route>
@@ -23,14 +25,16 @@ function App() {
           <Route path="/store" element={<Store />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
         </Routes>
+
+        <Footer />
       </BrowserRouter>
 
-      <div className="wrapper">
+      {/* <div >
         <Header />
         <Main />
         <Footer />
-      </div>
-    </>
+      </div> */}
+    </div>
   );
 }
 

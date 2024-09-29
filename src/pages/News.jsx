@@ -1,5 +1,10 @@
 function News() {
-  return <h1>Thi is News page 😀</h1>;
+  return (
+    <div>
+      <h1>This is a News Page 😀</h1>
+      <h2>Content will be add 🔜</h2>
+    </div>
+  );
 }
 
 export default News;
