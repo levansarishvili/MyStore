@@ -1,4 +1,5 @@
 import "./Homepage.css";
+import "./CustomScrollbar.css";
 
 function Homepage() {
   return (

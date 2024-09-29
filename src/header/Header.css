@@ -41,6 +41,19 @@
   padding: 1rem 0;
 }
 
+.list__item a {
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+a {
+  color: #60636c;
+}
+
+.active {
+  color: #f03135;
+}
+
 .list__item::after {
   content: "";
   position: absolute;
@@ -55,11 +68,15 @@
   transition: opacity 0.3s;
 }
 
-.list__item:hover {
+.list__item:hover a {
   color: #f03135;
 }
 
 .list__item:hover::after {
+  opacity: 1;
+}
+
+.list__item:has(a.active)::after {
   opacity: 1;
 }
 

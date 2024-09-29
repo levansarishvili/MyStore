@@ -1,7 +1,5 @@
 import Header from "./header/Header.jsx";
-// import Main from "./main/Main.jsx";
 import Footer from "./footer/Footer.jsx";
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage.jsx";
 import About from "./pages/About.jsx";
@@ -9,6 +7,7 @@ import Formation from "./pages/Formation.jsx";
 import News from "./pages/News.jsx";
 import Store from "./pages/Store.jsx";
 import Contact from "./pages/Contact.jsx";
+import "./App.css";
 
 // Create App component
 function App() {
