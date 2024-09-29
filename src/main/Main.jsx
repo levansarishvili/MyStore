@@ -1,6 +1,6 @@
 import "./Main.css";
-import Formation from "./Formation.jsx";
-import Store from "./Store.jsx";
+import Formation from "../pages/Formation.jsx";
+import Store from "../pages/Store.jsx";
 
 // Create Main component
 function Main() {
