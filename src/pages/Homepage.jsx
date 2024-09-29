@@ -1,9 +1,13 @@
+import "./Homepage.css";
+
 function Homepage() {
   return (
-    <div>
-      <h1>This is a Home Page 😀</h1>
-      <h2>Content will be add 🔜</h2>
-    </div>
+    <main className="main">
+      <section className="home-wrapper">
+        <h1>ეს არის მთავარი გვერდი 😀</h1>
+        <p className="highlight-txt">კონტენტი მალე დაემატება ⌛</p>
+      </section>
+    </main>
   );
 }
 
