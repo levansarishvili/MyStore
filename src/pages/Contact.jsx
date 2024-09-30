@@ -5,6 +5,42 @@ function Contact() {
   return (
     <main className="main">
       <section className="contact-wrapper">
+        {/* Contact Form */}
+        <div className="contact-form-wrapper">
+          <h2 className="contact-form__title">მოგვწერე</h2>
+          <form action="" className="contact-form">
+            <input
+              type="text"
+              name=""
+              id=""
+              className="contact-input"
+              placeholder="სახელი"
+            />
+            <input
+              type="text"
+              name=""
+              id=""
+              className="contact-input"
+              placeholder="ელ.ფოსტა"
+            />
+            <input
+              type="text"
+              name=""
+              id=""
+              className="contact-input"
+              placeholder="ტელეფონი"
+            />
+            <textarea
+              type=""
+              name=""
+              id=""
+              className="contact-input text-input"
+              placeholder="ჩაწერე ტექსტი"
+            />
+            <button className="btn contact-btn">გაგზავნა</button>
+          </form>
+        </div>
+
         {/* Contact Info */}
         <div className="contact-info">
           <h2 className="contact-info__title">საკონტაქტო ინფორმაცია</h2>
@@ -52,41 +88,6 @@ function Contact() {
           </ul>
         </div>
 
-        {/* Contact Form */}
-        <div className="contact-form-wrapper">
-          <h2 className="contact-form__title">მოგვწერე</h2>
-          <form action="" className="contact-form">
-            <input
-              type="text"
-              name=""
-              id=""
-              className="contact-input"
-              placeholder="სახელი"
-            />
-            <input
-              type="text"
-              name=""
-              id=""
-              className="contact-input"
-              placeholder="ელ.ფოსტა"
-            />
-            <input
-              type="text"
-              name=""
-              id=""
-              className="contact-input"
-              placeholder="ტელეფონი"
-            />
-            <textarea
-              type=""
-              name=""
-              id=""
-              className="contact-input text-input"
-              placeholder="ჩაწერე ტექსტი"
-            />
-            <button className="btn contact-btn">გაგზავნა</button>
-          </form>
-        </div>
         <div></div>
       </section>
     </main>
