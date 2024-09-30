@@ -16,6 +16,12 @@ function Header() {
             <li className="list__item">
               <NavLink to="/">მთავარი</NavLink>
             </li>
+
+            {/* Temporary  */}
+            <li className="list__item">
+              <NavLink to="assignment3">Assignment3</NavLink>
+            </li>
+
             <li className="list__item">
               <NavLink to="/about">ჩვენს შესახებ</NavLink>
             </li>

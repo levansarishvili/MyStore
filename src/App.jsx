@@ -8,6 +8,7 @@ import News from "./pages/News.jsx";
 import Store from "./pages/Store.jsx";
 import Contact from "./pages/Contact.jsx";
 import "./App.css";
+import Assignment3 from "./pages/Assignment3.jsx";
 
 // Create App component
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
+          <Route path="assignment3" element={<Assignment3 />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/formation" element={<Formation />}></Route>
           <Route path="/news" element={<News />}></Route>
