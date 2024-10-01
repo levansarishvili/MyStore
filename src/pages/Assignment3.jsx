@@ -11,17 +11,17 @@ const Assignment3 = () => {
   };
 
   // Use reduce to generate the rows for the table
-  const list = Object.keys(obj).reduce((acc, key, index) => {
-    acc.push(
-      // Building rows
+  const list = Object.keys(obj).reduce(
+    (acc, key, index) => [
+      ...acc,
       <tr key={index}>
         <td>{key}</td>
         <td>{obj[key]}</td>
         <td>{index}</td>
-      </tr>
-    );
-    return acc;
-  }, []);
+      </tr>,
+    ],
+    []
+  );
 
   return (
     <main className="main">
