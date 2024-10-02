@@ -99,3 +99,25 @@ a {
 .btn:hover {
   background-color: #ea1116;
 }
+
+.header__icons {
+  display: flex;
+  gap: 3rem;
+  cursor: pointer;
+}
+
+.header__icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: #f03135;
+  border-radius: 50%;
+  padding: 0.5rem;
+  transition: all 0.3s;
+}
+
+.header__icon:hover {
+  background-color: #ea1116;
+}
+.header__icon path {
+  fill: #fff;
+}

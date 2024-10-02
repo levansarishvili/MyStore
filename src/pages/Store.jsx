@@ -6,7 +6,6 @@ import "./CustomScrollbar.css";
 function Store() {
   return (
     <main className="main">
-      {" "}
       <section className="store-wrapper">
         <h1 className="section__header">GFF OFFICIAL FANSHOP</h1>
         <div className="store">
