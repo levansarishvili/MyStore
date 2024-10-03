@@ -6,10 +6,10 @@ function Blog() {
       <section className="blog-wrapper">
         <h1 className="section-header">სტატიები ეროვნული ნაკრების შესახებ</h1>
 
-        <div className="blog__content">
-          <ul className="blog__list">
-            <li className="blog__list__item">
-              <img className="blog__img" src="../../assets/squad.jpg" alt="" />
+        <ul className="blog__list">
+          <li className="blog__list__item">
+            <img className="blog__img" src="../../assets/squad.jpg" alt="" />
+            <div className="blog__content">
               <h2 className="blog__title">
                 საქართველოს ნაკრების შემადგენლობა ოქტომბრის მატჩებისთვის
                 ცნობილია
@@ -51,14 +51,16 @@ function Blog() {
                 (სენტ-ეტიენი), ხვიჩა კვარაცხელია (ნაპოლი), გიორგი გულიაშვილი
                 (სარაევო), ბუდუ ზივზივაძე (კარლსრუე), გიორგი მიქაუტაძე (ლიონი)
               </p>
-            </li>
+            </div>
+          </li>
 
-            <li className="blog__list__item">
-              <img
-                className="blog__img"
-                src="../../assets/giorgi-kochorashvili-blog.jpg"
-                alt=""
-              />
+          <li className="blog__list__item">
+            <img
+              className="blog__img"
+              src="../../assets/giorgi-kochorashvili-blog.jpg"
+              alt=""
+            />
+            <div className="blog__content">
               <h2 className="blog__title">
                 "რა არის წარმატების მთავარი საიდუმლო? - სიმამაცე", - ვრცელი
                 ინტერვიუ გიორგი ქოჩორაშვილთან
@@ -110,14 +112,16 @@ function Blog() {
                   რომ გავუძლებ და გავძლიერდები.
                 </em>
               </p>
-            </li>
+            </div>
+          </li>
 
-            <li className="blog__list__item">
-              <img
-                className="blog__img"
-                src="../../assets/chakvetadze-blog.jpg"
-                alt=""
-              />
+          <li className="blog__list__item">
+            <img
+              className="blog__img"
+              src="../../assets/chakvetadze-blog.jpg"
+              alt=""
+            />
+            <div className="blog__content">
               <h2 className="blog__title">
                 უოტფორდში თავს ბედნიერად ვგრძნობ - ჩაკვეტაძე ახალი კონტრაქტის
                 გაფორმების შემდეგ
@@ -147,14 +151,16 @@ function Blog() {
                 დროში ქართველმა ფეხბურთელმა 44 მატჩი ჩაატარა, გაიტანა 2 გოლი და
                 6 საგოლე გადაცემითაც გამოირჩა.
               </p>
-            </li>
+            </div>
+          </li>
 
-            <li className="blog__list__item">
-              <img
-                className="blog__img"
-                src="../../assets/mamardashvili-blog.jpg"
-                alt=""
-              />
+          <li className="blog__list__item">
+            <img
+              className="blog__img"
+              src="../../assets/mamardashvili-blog.jpg"
+              alt=""
+            />
+            <div className="blog__content">
               <h2 className="blog__title">
                 ესპანური პრესა მამარდაშვილის კარგ თამაშს ეხმაურება: "მსოფლიოს
                 საუკეთესო მეკარეა"
@@ -192,11 +198,9 @@ function Blog() {
                 </em>
                 , - წერს სხვა ესპანური გამოცემა.
               </p>
-            </li>
-            <li className="blog__list__item"></li>
-            <li className="blog__list__item"></li>
-          </ul>
-        </div>
+            </div>
+          </li>
+        </ul>
       </section>
     </main>
   );

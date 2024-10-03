@@ -25,7 +25,7 @@ function About() {
               <li className="tech-list__item">მთავარი</li>
               <li className="tech-list__item">ჩვენს შესახებ</li>
               <li className="tech-list__item">შემადგენლობა</li>
-              <li className="tech-list__item">სიახლეები</li>
+              <li className="tech-list__item">ბლოგი</li>
               <li className="tech-list__item"> მაღაზია</li>
               <li className="tech-list__item">კონტაქტი</li>
             </ul>

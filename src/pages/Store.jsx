@@ -7,7 +7,7 @@ function Store() {
   return (
     <main className="main">
       <section className="store-wrapper">
-        <h1 className="section__header">GFF OFFICIAL FANSHOP</h1>
+        <h1 className="section__header">ოფიციალური მაღაზია</h1>
         <div className="store">
           {productData.map((product, index) => (
             <Product

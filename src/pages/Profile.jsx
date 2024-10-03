@@ -31,11 +31,13 @@ function Profile() {
               </div>
             </div>
 
-            <p className="profile-txt">სახელი:</p>
-            <p className="profile-txt">გვარი:</p>
-            <p className="profile-txt">ტელეფონი:</p>
-            <p className="profile-txt">ასაკი:</p>
-            <p className="profile-txt">ელ.ფოსტა:</p>
+            <div className="profile-txt-wrapper">
+              <p className="profile-txt">ლევანი სარიშვილი</p>
+
+              <p className="profile-txt">+995 558786740</p>
+              <p className="profile-txt">29</p>
+              <p className="profile-txt">levanisarishvili01@gmail.com</p>
+            </div>
           </div>
 
           {/* User Info */}
@@ -44,33 +46,33 @@ function Profile() {
             <form action="" className="profile__form">
               <div className="input-box">
                 <label className="input-label" htmlFor="fname">
-                  სახელი:
+                  სახელი*
                 </label>
                 <input className="profile__input" type="text" id="fname" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="lname">
-                  გვარი:
+                  გვარი*
                 </label>
                 <input className="profile__input" type="text" id="lname" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="age">
-                  ასაკი
+                  ასაკი*
                 </label>
-                <input className="profile__input" type="text" id="age" />
+                <input className="profile__input" type="number" id="age" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="phone">
-                  ტელეფონი:
+                  ტელეფონი*
                 </label>
-                <input className="profile__input" type="text" id="phone" />
+                <input className="profile__input" type="tel" id="phone" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="email">
-                  ელ.ფოსტა
+                  ელ.ფოსტა*
                 </label>
-                <input className="profile__input" type="text" id="email" />
+                <input className="profile__input" type="email" id="email" />
               </div>
             </form>
 
@@ -85,5 +87,5 @@ function Profile() {
 export default Profile;
 
 function Button() {
-  return <button className="btn">შენახვა</button>;
+  return <button className="btn">ცვლილებების შენახვა</button>;
 }

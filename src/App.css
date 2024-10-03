@@ -11,9 +11,7 @@ html {
 }
 
 .wrapper {
-  height: 100vh;
   display: grid;
   grid-template-rows: 6rem 1fr 8rem;
-  row-gap: 2rem;
-  overflow: hidden;
+  row-gap: 5rem;
 }

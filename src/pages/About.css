@@ -6,7 +6,7 @@
   height: 100%;
   font-size: 2.4rem;
   text-align: center;
-  padding: 10rem;
+  padding: 2rem 4rem;
 }
 
 .project-overview {
@@ -44,6 +44,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
 }
 
 .tech-list__item {

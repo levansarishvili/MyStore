@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 10rem;
   height: 100%;
+  padding: 2rem 4rem;
 }
 
 .contact-info {

@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 5rem;
+  padding: 2rem 4rem;
 }
 
 .profile-content {
@@ -20,8 +21,11 @@
 .profile-media-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 4rem;
   align-items: center;
+  background-color: #f1f3f5;
+  border-radius: 5px;
+  padding: 2rem;
 }
 
 .profile__img-wrapper {
@@ -38,6 +42,8 @@
   width: 10rem;
   height: 10rem;
   border: 2px solid #dcdee0;
+  background-color: #fff;
+
   border-radius: 50%;
   overflow: hidden;
 }
@@ -65,6 +71,13 @@
   fill: #495057;
 }
 
+.profile-txt-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: start;
+}
+
 .edit-icon {
   width: 2rem;
 }
@@ -76,7 +89,7 @@
 
 .profile-txt {
   font-size: 1.4rem;
-  color: #868e96;
+  color: #000;
 }
 
 /* Profile form */
@@ -86,6 +99,9 @@
   align-items: center;
   gap: 3rem;
   width: 100%;
+  background-color: #f1f3f5;
+  border-radius: 5px;
+  padding: 2rem;
 }
 
 .profile__form {
@@ -113,6 +129,14 @@
   height: 3rem;
   border: 1px solid #dcdee0;
   width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+}
+
+.profile__input:focus {
+  outline: 1px solid #ced4da;
+  box-shadow: none;
+  box-shadow: none;
 }
 
 .input-label {
