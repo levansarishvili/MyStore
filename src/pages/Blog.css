@@ -17,12 +17,12 @@
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 8rem;
-  row-gap: 5rem;
+  column-gap: 10rem;
+  row-gap: 10rem;
 }
 
 .blog__list__item {
-  max-width: 50rem;
+  max-width: 45rem;
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -30,6 +30,11 @@
   border: 1px solid #e9ecef;
   padding-bottom: 2rem;
   border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.blog__list__item:hover {
+  box-shadow: 0 0 10px 3px #e9ecef;
 }
 
 .blog__img {

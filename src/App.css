@@ -12,6 +12,6 @@ html {
 
 .wrapper {
   display: grid;
-  grid-template-rows: 6rem 1fr 8rem;
+  grid-template-rows: 6rem auto 8rem;
   row-gap: 5rem;
 }
