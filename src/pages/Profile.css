@@ -6,12 +6,11 @@
 }
 
 .profile-content {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  gap: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 5rem;
   padding-top: 2rem;
+  width: 100%;
 }
 
 .section-header {
@@ -22,11 +21,17 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  align-items: start;
-  justify-content: center;
+  align-items: center;
 }
 
 .profile__img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.profile__img-box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,14 +84,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
+  gap: 3rem;
+  width: 100%;
 }
 
 .profile__form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 3rem;
-  row-gap: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 70%;
+}
+
+.profile-info-header {
+  font-size: 2rem;
 }
 
 .input-box {
@@ -95,6 +105,7 @@
   justify-content: space-between;
   align-items: start;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .profile__input {
@@ -109,8 +120,4 @@
   color: #868e96;
   cursor: pointer;
   transition: all 0.3s;
-}
-
-.email-box {
-  grid-column: 1 / -1;
 }
