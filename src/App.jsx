@@ -31,12 +31,6 @@ function App() {
 
         <Footer />
       </BrowserRouter>
-
-      {/* <div >
-        <Header />
-        <Main />
-        <Footer />
-      </div> */}
     </div>
   );
 }
