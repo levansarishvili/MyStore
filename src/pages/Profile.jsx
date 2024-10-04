@@ -32,11 +32,11 @@ function Profile() {
             </div>
 
             <div className="profile-txt-wrapper">
-              <p className="profile-txt">Full Name</p>
+              <p className="profile-txt">ლევანი სარიშვილი</p>
 
               <p className="profile-txt">+995 558777777</p>
-              <p className="profile-txt">00</p>
-              <p className="profile-txt">user@gmail.com</p>
+              <p className="profile-txt">29</p>
+              <p className="profile-txt">levanisarishvili01@gmail.com</p>
             </div>
           </div>
 
