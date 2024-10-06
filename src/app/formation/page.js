@@ -1,5 +1,4 @@
 import "./Formation.css";
-// import "./CustomScrollbar.css";
 import playerData from "../../data/playerData.js";
 
 // Create Formation component

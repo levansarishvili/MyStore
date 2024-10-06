@@ -30,20 +30,32 @@
 
 .nav__list {
   display: flex;
+  align-items: center;
   gap: 3rem;
   list-style: none;
+  height: 5rem;
 }
 
 .list__item {
   cursor: pointer;
   transition: all 0.3s;
   position: relative;
-  padding: 1rem 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .list__item a {
   text-decoration: none;
   transition: all 0.3s;
+  display: flex;
+}
+
+.nav__link {
+  display: inline-block;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 a {
@@ -59,7 +71,7 @@ a {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -0.2rem;
+  bottom: 0.3rem;
   width: 5rem;
   height: 0.3rem;
   background-color: #f03135;

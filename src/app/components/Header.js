@@ -1,5 +1,6 @@
 // "use client";
 import Link from "next/link";
+import Navigation from "../components/Navigation.js";
 import "./Header.css";
 
 // Create Header component
@@ -8,37 +9,12 @@ function Header() {
     <header className="header">
       <div className="header__wrapper">
         <img
-          src="./assets/logo.svg"
+          src="/assets/logo.svg"
           alt="Georgia national football team logo"
           className="header__logo"
         ></img>
         <nav className="header__nav">
-          <ul className="nav__list">
-            <li className="list__item">
-              <Link href="/">მთავარი</Link>
-            </li>
-
-            {/* Temporary  */}
-            <li className="list__item">
-              <Link href="assignment3">Assignment3</Link>
-            </li>
-
-            <li className="list__item">
-              <Link href="/about">ჩვენს შესახებ</Link>
-            </li>
-            <li className="list__item">
-              <Link href="/formation">შემადგენლობა</Link>
-            </li>
-            <li className="list__item">
-              <Link href="/blog">ბლოგი</Link>
-            </li>
-            <li className="list__item">
-              <Link href="/store">მაღაზია</Link>
-            </li>
-            <li className="list__item">
-              <Link href="/contact">კონტაქტი</Link>
-            </li>
-          </ul>
+          <Navigation />
           <Button />
         </nav>
 

@@ -25,16 +25,18 @@ const Assignment3 = () => {
 
   return (
     <main className="main">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Value</th>
-            <th>Position</th>
-          </tr>
-        </thead>
-        <tbody>{list}</tbody>
-      </table>
+      <section className="assignment-wrapper">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Value</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+          <tbody>{list}</tbody>
+        </table>
+      </section>
     </main>
   );
 };

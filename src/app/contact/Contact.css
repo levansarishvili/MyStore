@@ -1,9 +1,18 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  width: 100%;
+  max-width: 128rem;
+  margin: 0 auto;
+  padding: 4rem;
+}
+
 .contact-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10rem;
   height: 100%;
-  padding: 2rem 4rem;
 }
 
 .contact-info {
