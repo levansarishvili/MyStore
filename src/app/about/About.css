@@ -87,6 +87,9 @@
 }
 
 .author-link {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
   text-decoration: none;
   font-size: 1.8rem;
   color: #000;
@@ -95,4 +98,12 @@
 
 .author-link:hover {
   color: #f03135;
+}
+
+.author__icon {
+  height: 3rem;
+}
+
+.author__icon path {
+  fill: #f03135;
 }

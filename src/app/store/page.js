@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Button from "../components/Button";
 import "./Store.css";
 
 // Fetching product data
 function ProductData() {
-  const [fetchedProductData, setFetchedProductData] = useState([]);
+  const [productData, setProductData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,18 +15,18 @@ function ProductData() {
         "https://dummyjson.com/products/category/sports-accessories"
       );
       const data = await response.json();
-      setFetchedProductData(data.products);
+      setProductData(data.products);
     }
     fetchData();
   }, []);
 
   // Handle loading state
-  if (fetchedProductData.length === 0) {
+  if (productData.length === 0) {
     return <div>Loading...</div>;
   }
 
   // Pass the fetched data to the Store component
-  return <Store products={fetchedProductData} />;
+  return <Store products={productData} />;
 }
 
 // Create Online Store component
@@ -53,7 +54,6 @@ function Store({ products }) {
 }
 
 // Product card component
-// Product card component
 function Product({ id, name, imageSrc, color, size, price }) {
   return (
     <div className="product-card">
@@ -67,14 +67,9 @@ function Product({ id, name, imageSrc, color, size, price }) {
         </div>
       </Link>
       {/* Link without <a> tag */}
-      <Button href={`/store/${id}`} className="btn" />
+      <Button className="btn" name="ADD TO CART" />
     </div>
   );
-}
-
-// Create Button component
-function Button() {
-  return <button className="btn">ADD TO CART</button>;
 }
 
 // Exporting Product component

@@ -8,11 +8,12 @@ export default function Navigation() {
           მთავარი
         </Link>
       </li>
-      <li className="list__item">
+      {/* Assignment - 3 */}
+      {/* <li className="list__item">
         <Link className="nav__link" href="/assignment-3">
           Assignment - 3
         </Link>
-      </li>
+      </li> */}
       <li className="list__item">
         <Link className="nav__link" href="/about">
           ჩვენს შესახებ

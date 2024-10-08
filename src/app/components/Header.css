@@ -118,16 +118,24 @@ a {
   cursor: pointer;
 }
 
-.header__icon {
+.header__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 4rem;
   height: 4rem;
-  background-color: #f03135;
   border-radius: 50%;
-  padding: 0.5rem;
-  transition: all 0.3s;
+  cursor: pointer;
+  background-color: #f03135;
+  transition: all 0.2s;
 }
 
-.header__icon:hover {
+.header__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.header__icon-wrapper:hover {
   background-color: #ea1116;
 }
 .header__icon path {

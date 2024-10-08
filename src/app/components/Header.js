@@ -1,6 +1,7 @@
 // "use client";
 import Link from "next/link";
 import Navigation from "../components/Navigation.js";
+import Button from "../components/Button.js";
 import "./Header.css";
 
 // Create Header component
@@ -9,49 +10,43 @@ function Header() {
     <header className="header">
       <div className="header__wrapper">
         <img
-          src="/assets/logo.svg"
+          src="../assets/logo.svg"
           alt="Georgia national football team logo"
           className="header__logo"
         ></img>
         <nav className="header__nav">
           <Navigation />
-          <Button />
+          <Button className="btn" name="ბილეთები" />
         </nav>
 
         {/* Profile and Shopping cart icons */}
         <div className="header__icons">
           <Link href="/profile">
+            <span className="header__icon-wrapper">
+              <svg
+                className="header__icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path d="M332.64 64.58C313.18 43.57 286 32 256 32c-30.16 0-57.43 11.5-76.8 32.38-19.58 21.11-29.12 49.8-26.88 80.78C156.76 206.28 203.27 256 256 256s99.16-49.71 103.67-110.82c2.27-30.7-7.33-59.33-27.03-80.6zM432 480H80a31 31 0 01-24.2-11.13c-6.5-7.77-9.12-18.38-7.18-29.11C57.06 392.94 83.4 353.61 124.8 326c36.78-24.51 83.37-38 131.2-38s94.42 13.5 131.2 38c41.4 27.6 67.74 66.93 76.18 113.75 1.94 10.73-.68 21.34-7.18 29.11A31 31 0 01432 480z" />
+              </svg>
+            </span>
+          </Link>
+          <span className="header__icon-wrapper">
             <svg
               className="header__icon"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="#000000"
-              viewBox="0 0 256 256"
+              viewBox="0 0 512 512"
             >
-              <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
+              <circle cx="176" cy="416" r="32" fill="#fff" />
+              <circle cx="400" cy="416" r="32" fill="#fff" />
+              <path d="M456.8 120.78a23.92 23.92 0 00-18.56-8.78H133.89l-6.13-34.78A16 16 0 00112 64H48a16 16 0 000 32h50.58l45.66 258.78A16 16 0 00160 368h256a16 16 0 000-32H173.42l-5.64-32h241.66A24.07 24.07 0 00433 284.71l28.8-144a24 24 0 00-5-19.93z" />
             </svg>
-          </Link>
-
-          <svg
-            className="header__icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="#000000"
-            viewBox="0 0 256 256"
-          >
-            <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"></path>
-          </svg>
+          </span>
         </div>
       </div>
     </header>
   );
-}
-
-// Create Button component
-function Button() {
-  return <button className="btn">ბილეთები</button>;
 }
 
 // Exporting Header component

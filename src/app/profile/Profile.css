@@ -57,6 +57,10 @@
   overflow: hidden;
 }
 
+.profile__img {
+  width: 80%;
+}
+
 .profile__icon {
   width: 100%;
 }

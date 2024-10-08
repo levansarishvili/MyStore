@@ -34,16 +34,23 @@
   gap: 1rem;
 }
 
-.social-icon {
+.footer__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  padding: 0.5rem;
   cursor: pointer;
   background-color: #f03135;
   transition: all 0.2s;
 }
 
-.social-icon:hover {
+.social-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.footer__icon-wrapper:hover {
   background-color: #ea1116;
 }

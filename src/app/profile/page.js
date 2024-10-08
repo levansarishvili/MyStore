@@ -1,4 +1,5 @@
 import "./Profile.css";
+import Button from "../components/Button";
 
 function Profile() {
   return (
@@ -12,7 +13,7 @@ function Profile() {
               <div className="profile__img-box">
                 <img
                   className="profile__img"
-                  src="../../assets/user-bold.svg"
+                  src="../../assets/person.svg"
                   alt="User"
                 />
               </div>
@@ -76,7 +77,7 @@ function Profile() {
               </div>
             </form>
 
-            <Button />
+            <Button className="btn" name="ცვლილებების შენახვა" />
           </div>
         </div>
       </section>
@@ -85,7 +86,3 @@ function Profile() {
 }
 
 export default Profile;
-
-function Button() {
-  return <button className="btn">ცვლილებების შენახვა</button>;
-}
