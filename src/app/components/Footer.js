@@ -12,9 +12,7 @@ function Footer() {
           alt="Georgia national football team logo"
           className="footer__logo"
         ></img>
-        <p className="copyright">
-          © GFF - საქართველოს ფეხბურთის ფედერაცია, 2024
-        </p>
+        <p className="copyright">© Levan Sarishvili, Tbilisi, Georgia, 2024.</p>
         <div className="social">
           <span className="footer__icon-wrapper">
             <svg

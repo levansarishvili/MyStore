@@ -5,7 +5,7 @@ function Profile() {
   return (
     <main className="main">
       <section className="profile-wrapper">
-        <h1 className="section-header">ჩემი პროფილი</h1>
+        <h1 className="section-header">MY ACCOUNT</h1>
         <div className="profile-content">
           {/* User Media */}
           <div className="profile-media-wrapper">
@@ -33,51 +33,50 @@ function Profile() {
             </div>
 
             <div className="profile-txt-wrapper">
-              <p className="profile-txt">ლევანი სარიშვილი</p>
+              <p className="profile-txt">Levan Sarishvili</p>
 
               <p className="profile-txt">+995 558777777</p>
-              <p className="profile-txt">29</p>
               <p className="profile-txt">levanisarishvili01@gmail.com</p>
             </div>
           </div>
 
           {/* User Info */}
           <div className="profile__info">
-            <h2 className="profile-info-header">პროფილის დეტალები</h2>
+            <h2 className="profile-info-header">ACCOUNT DETAILS</h2>
             <form action="" className="profile__form">
               <div className="input-box">
                 <label className="input-label" htmlFor="fname">
-                  სახელი*
+                  First Name*
                 </label>
                 <input className="profile__input" type="text" id="fname" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="lname">
-                  გვარი*
+                  Last Name*
                 </label>
                 <input className="profile__input" type="text" id="lname" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="age">
-                  ასაკი*
+                  Age*
                 </label>
                 <input className="profile__input" type="number" id="age" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="phone">
-                  ტელეფონი*
+                  Phone*
                 </label>
                 <input className="profile__input" type="tel" id="phone" />
               </div>
               <div className="input-box">
                 <label className="input-label" htmlFor="email">
-                  ელ.ფოსტა*
+                  Email*
                 </label>
                 <input className="profile__input" type="email" id="email" />
               </div>
             </form>
 
-            <Button className="btn" name="ცვლილებების შენახვა" />
+            <Button className="btn" name="Save Changes" />
           </div>
         </div>
       </section>

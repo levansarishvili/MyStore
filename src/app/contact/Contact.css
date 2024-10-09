@@ -18,15 +18,17 @@
 .contact-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   gap: 3rem;
   background-color: #f1f3f5;
   padding: 4rem;
   border-radius: 5px;
 }
 
-.contact-info__title {
+.contact-info__title,
+.contact-form__title {
   font-size: 2.8rem;
+  font-weight: 600;
 }
 
 .contact__list {
@@ -50,7 +52,7 @@
   height: 3.5rem;
   border-radius: 50%;
   cursor: pointer;
-  background-color: #f03135;
+  background-color: #ec5e2a;
   transition: all 0.2s;
 }
 
@@ -74,10 +76,6 @@
   border-radius: 5px;
 }
 
-.contact-form__title {
-  font-size: 2.8rem;
-}
-
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -95,6 +93,7 @@
   padding: 1.5rem 1rem;
   font-size: 1.4rem;
   color: #343a40;
+  font-family: inherit;
 }
 
 .contact-input:focus {

@@ -5,38 +5,27 @@ export default function Navigation() {
     <ul className="nav__list">
       <li className="list__item">
         <Link className="nav__link" href="/">
-          მთავარი
+          Home
         </Link>
       </li>
-      {/* Assignment - 3 */}
-      {/* <li className="list__item">
-        <Link className="nav__link" href="/assignment-3">
-          Assignment - 3
-        </Link>
-      </li> */}
       <li className="list__item">
         <Link className="nav__link" href="/about">
-          ჩვენს შესახებ
-        </Link>
-      </li>
-      <li className="list__item">
-        <Link className="nav__link" href="/formation">
-          შემადგენლობა
+          About
         </Link>
       </li>
       <li className="list__item">
         <Link className="nav__link" href="/store">
-          მაღაზია
+          Products
         </Link>
       </li>
       <li className="list__item">
         <Link className="nav__link" href="/blog">
-          ბლოგი
+          Blogs
         </Link>
       </li>
       <li className="list__item">
         <Link className="nav__link" href="/contact">
-          კონტაქტი
+          Contact
         </Link>
       </li>
     </ul>

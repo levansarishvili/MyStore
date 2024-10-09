@@ -50,7 +50,7 @@
   align-items: center;
   width: 10rem;
   height: 10rem;
-  border: 2px solid #dcdee0;
+  border: 2px solid #ec5e2a;
   background-color: #fff;
 
   border-radius: 50%;
@@ -58,7 +58,7 @@
 }
 
 .profile__img {
-  width: 80%;
+  width: 70%;
 }
 
 .profile__icon {
@@ -145,6 +145,7 @@
   padding: 1.5rem 1rem;
   font-size: 1.4rem;
   color: #343a40;
+  font-family: inherit;
 }
 
 .profile__input:focus {

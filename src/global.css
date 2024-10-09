@@ -1,4 +1,4 @@
-@import url("https://free.bboxtype.com/embedfonts/?family=FiraGO:400");
+/* @import url("https://free.bboxtype.com/embedfonts/?family=FiraGO:400"); */
 
 * {
   margin: 0;
@@ -8,13 +8,11 @@
 
 html {
   font-size: 62.5%;
-  font-family: "Roboto", sans-serif;
   scroll-behavior: smooth;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 body {
-  font-family: "FiraGO", sans-serif;
-  font-feature-settings: "case" on;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -26,7 +24,7 @@ code {
 
 .wrapper {
   display: grid;
-  grid-template-rows: 6rem auto 8rem;
+  grid-template-rows: 8rem auto 10rem;
   row-gap: 5rem;
 }
 
@@ -44,11 +42,11 @@ code {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #f03135;
+  background: #ec5e2a;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ce3d40;
+  background: #ec5e2a;
 }

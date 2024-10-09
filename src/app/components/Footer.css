@@ -3,7 +3,7 @@
   align-items: center;
   color: #60636c;
   font-size: 1.4rem;
-  background-color: #f8f9fa;
+  background-color: #f1f3f5;
   padding: 0 4rem;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .footer__logo {
-  height: 8rem;
+  height: 10rem;
 }
 
 .copyright {
@@ -40,17 +40,13 @@
   align-items: center;
   width: 3.5rem;
   height: 3.5rem;
-  border-radius: 50%;
+  border-radius: 1rem;
   cursor: pointer;
-  background-color: #f03135;
+  background-color: #ec5e2a;
   transition: all 0.2s;
 }
 
 .social-icon {
   width: 2rem;
   height: 2rem;
-}
-
-.footer__icon-wrapper:hover {
-  background-color: #ea1116;
 }

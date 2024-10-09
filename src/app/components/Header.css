@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   color: #60636c;
-  background-color: #f8f9fa;
+  background-color: #f1f3f5;
   box-shadow: 0 0 10px 3px #e9ecef;
   padding: 0 4rem;
 }
@@ -19,7 +19,7 @@
 }
 
 .header__logo {
-  height: 6rem;
+  height: 8rem;
 }
 
 .header__nav {
@@ -31,7 +31,7 @@
 .nav__list {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 5rem;
   list-style: none;
   height: 5rem;
 }
@@ -43,6 +43,8 @@
   height: 100%;
   display: flex;
   align-items: center;
+  font-size: 1.4rem;
+  font-weight: 500;
 }
 
 .list__item a {
@@ -63,7 +65,7 @@ a {
 }
 
 .active {
-  color: #f03135;
+  color: #ec5e2a;
 }
 
 .list__item::after {
@@ -74,14 +76,14 @@ a {
   bottom: 0.3rem;
   width: 5rem;
   height: 0.3rem;
-  background-color: #f03135;
+  background-color: #ec5e2a;
   border-radius: 10px;
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .list__item:hover a {
-  color: #f03135;
+  color: #ec5e2a;
 }
 
 .list__item:hover::after {
@@ -98,18 +100,18 @@ a {
   align-items: center;
   cursor: pointer;
   border: none;
-  background-color: #f03135;
+  background-color: #ec5e2a;
   color: #fff;
   font-size: 1.4rem;
-  padding: 1.2rem 2rem;
-  border-radius: 30px;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  border-radius: 1.2rem;
   font-family: inherit;
-  font-feature-settings: "case" on;
   transition: all 0.3s;
 }
 
 .btn:hover {
-  background-color: #ea1116;
+  background-color: #ec5e2a;
 }
 
 .header__icons {
@@ -118,26 +120,26 @@ a {
   cursor: pointer;
 }
 
-.header__icon-wrapper {
+.account-wrapper,
+.cart-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  cursor: pointer;
-  background-color: #f03135;
-  transition: all 0.2s;
+  justify-content: center;
+  gap: 1rem;
+  width: 12rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 1.2rem;
+  font-size: 1.4rem;
+  transition: all 0.3s;
+}
+
+.account-wrapper:hover,
+.cart-wrapper:hover {
+  box-shadow: inset 0 0 5px #adb5bd;
 }
 
 .header__icon {
   width: 2.5rem;
   height: 2.5rem;
-}
-
-.header__icon-wrapper:hover {
-  background-color: #ea1116;
-}
-.header__icon path {
-  fill: #fff;
 }

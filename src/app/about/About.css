@@ -36,7 +36,7 @@
 }
 
 .highlight-txt {
-  color: #f03135;
+  color: #ec5e2a;
 }
 
 .overview-header {
@@ -70,7 +70,7 @@
 
 .tech-list__item:hover {
   color: #fff;
-  background-color: #f03135;
+  background-color: #ec5e2a;
 }
 
 .author-list {
@@ -97,7 +97,7 @@
 }
 
 .author-link:hover {
-  color: #f03135;
+  color: #ec5e2a;
 }
 
 .author__icon {
@@ -105,5 +105,5 @@
 }
 
 .author__icon path {
-  fill: #f03135;
+  fill: #ec5e2a;
 }
