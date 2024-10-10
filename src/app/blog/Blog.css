@@ -27,13 +27,15 @@
   text-align: start;
   gap: 4rem;
   border: 1px solid #e9ecef;
-  padding-bottom: 2rem;
+  padding: 2rem;
   border-radius: 10px;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .blog__list__item:hover {
   box-shadow: 0 0 10px 3px #e9ecef;
+  background-color: #ec5e2a22;
 }
 
 .blog__img {
@@ -52,11 +54,16 @@
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  height: 100%;
 }
 
 .blog__title {
   font-size: 2rem;
+  color: #495057;
+  font-weight: 600;
 }
 
 .blog__txt {
@@ -65,7 +72,17 @@
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
   overflow: hidden;
+}
+
+.blog__link {
+  max-width: 15rem;
+}
+
+.blog-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

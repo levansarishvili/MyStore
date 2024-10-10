@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Button from "../components/Button";
-import Loading from "./loading";
+import Loading from "../components/loading";
 import "./Store.css";
 
 // Fetching product data

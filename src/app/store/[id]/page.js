@@ -12,7 +12,7 @@
 
 import { useEffect, useState } from "react";
 import ProductDetails from "./ProductDetails";
-import Loading from "../loading";
+import Loading from "../../components/loading";
 import PageNotFound from "../../components/PageNotFound";
 
 export default function ProductPage({ params }) {
@@ -37,10 +37,12 @@ export default function ProductPage({ params }) {
     fetchProductDetails();
   }, [id]);
 
+  // Handle page not found
   if (error) {
     return <PageNotFound />;
   }
 
+  // Handle loading state
   if (productDetails.length === 0) {
     return <Loading />;
   }
