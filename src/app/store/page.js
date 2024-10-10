@@ -31,46 +31,58 @@ function ProductData() {
 
 // Create Online Store component
 function Store({ products }) {
+  console.log(products);
   return (
-    <main className="main">
-      <section className="store-wrapper">
-        <h1 className="section__header">ოფიციალური მაღაზია</h1>
-        <div className="store">
-          {products.map((product, index) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.title}
-              imageSrc={product.thumbnail}
-              color={product.brand}
-              size={product.category}
-              price={product.price}
-            />
-          ))}
-        </div>
-      </section>
-    </main>
+    <section className="product__list-wrapper">
+      <h1 className="section__header">Products</h1>
+      <div className="product__list">
+        {products.map((product, index) => (
+          <Product
+            key={product.id}
+            id={product.id}
+            name={product.title}
+            imageSrc={product.thumbnail}
+            availabilityStatus={product.availabilityStatus}
+            size={product.category}
+            price={product.price}
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 
 // Product card component
-function Product({ id, name, imageSrc, color, size, price }) {
+function Product({ id, name, imageSrc, availabilityStatus, price }) {
+  let stockStatus = "";
+  if (availabilityStatus === "In Stock") {
+    stockStatus = "in-stock";
+  } else if (availabilityStatus === "Low Stock") {
+    stockStatus = "low-stock";
+  } else {
+    stockStatus = "out-of-stock";
+  }
+
   return (
     <div className="product-card">
       <Link href={`/store/${id}`}>
-        <img className="product__img" src={imageSrc} alt="Product"></img>
-        <h2 className="product__title">{name}</h2>
-        <div className="product__desc">
-          <p className="product__color">{color}</p>
-          <p className="product__size">{size}</p>
-          <p className="product__price">{`${price} ₾`}</p>
+        <div className="product-card__content">
+          <img className="product__img" src={imageSrc} alt="Product"></img>
+          <h2 className="product__title">{name}</h2>
+          <div className="product__desc">
+            <p className={`product__availabilityStatus ${stockStatus}`}>
+              {availabilityStatus}
+            </p>
+            <p className="product__price">{`${price} $`}</p>
+          </div>
         </div>
       </Link>
       {/* Link without <a> tag */}
-      <Button className="btn" name="ADD TO CART" />
+      <Button className="btn" name="Add to cart" />
     </div>
   );
 }
 
 // Exporting Product component
 export default ProductData;
+export { Product };

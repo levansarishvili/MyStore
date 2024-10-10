@@ -19,7 +19,7 @@
 }
 
 .footer__logo {
-  height: 10rem;
+  height: 6rem;
 }
 
 .copyright {
@@ -40,7 +40,7 @@
   align-items: center;
   width: 3.5rem;
   height: 3.5rem;
-  border-radius: 1rem;
+  border-radius: 50%;
   cursor: pointer;
   background-color: #ec5e2a;
   transition: all 0.2s;

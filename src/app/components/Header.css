@@ -1,10 +1,12 @@
 .header {
   display: flex;
   align-items: center;
-  color: #60636c;
   background-color: #f1f3f5;
   box-shadow: 0 0 10px 3px #e9ecef;
   padding: 0 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .header__wrapper {
@@ -16,10 +18,11 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem;
+  color: #212529;
 }
 
 .header__logo {
-  height: 8rem;
+  height: 4rem;
 }
 
 .header__nav {
@@ -61,7 +64,7 @@
 }
 
 a {
-  color: #60636c;
+  color: #212529;
 }
 
 .active {
@@ -101,7 +104,10 @@ a {
   cursor: pointer;
   border: none;
   background-color: #ec5e2a;
+  border: 2px solid #ec5e2a;
+
   color: #fff;
+
   font-size: 1.4rem;
   font-weight: 500;
   padding: 1rem 2rem;
@@ -111,7 +117,8 @@ a {
 }
 
 .btn:hover {
-  background-color: #ec5e2a;
+  background-color: #fff;
+  color: #000;
 }
 
 .header__icons {

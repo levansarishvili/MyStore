@@ -3,9 +3,10 @@ import Button from "../components/Button";
 
 function Contact() {
   return (
-    <main className="main">
-      <section className="contact-wrapper">
-        {/* Contact Form */}
+    <section className="contact-wrapper">
+      {/* Contact Form */}
+      <h1 className="section-header">Contact</h1>
+      <div className="contact-content">
         <div className="contact-form-wrapper">
           <h2 className="contact-form__title">Get in touch</h2>
           <form action="" className="contact-form">
@@ -43,7 +44,7 @@ function Contact() {
 
         {/* Contact Info */}
         <div className="contact-info">
-          <h2 className="contact-info__title">Contact info:</h2>
+          <h2 className="contact-info__title">Contact info</h2>
 
           <ul className="contact__list">
             <li className="contact__list__item">
@@ -85,8 +86,8 @@ function Contact() {
             </li>
           </ul>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
 

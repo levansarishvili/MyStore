@@ -9,7 +9,7 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -17,15 +17,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .wrapper {
   display: grid;
-  grid-template-rows: 8rem auto 10rem;
+  grid-template-rows: 7rem auto 15rem;
   row-gap: 5rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  width: 100%;
+  max-width: 128rem;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.section-header {
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* Custom scrollbar */
