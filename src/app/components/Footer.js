@@ -1,5 +1,4 @@
-// "use client";
-
+import Navigation from "./Navigation";
 import "./Footer.css";
 
 // Create Footer component
@@ -7,12 +6,22 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__wrapper">
+        {/* Footer logo */}
         <img
           src="../assets/logo.svg"
           alt="Georgia national football team logo"
           className="footer__logo"
         ></img>
+
+        {/* Page Navigation */}
+        <Navigation
+          navListClass="footer__nav__list"
+          navItemClass="footer__nav__item"
+        />
+
         <p className="copyright">© Levan Sarishvili, Tbilisi, Georgia, 2024.</p>
+
+        {/* Social icons */}
         <div className="social">
           <span className="footer__icon-wrapper">
             <svg
@@ -26,7 +35,7 @@ function Footer() {
               <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
             </svg>
           </span>
-          facebook
+
           <span className="footer__icon-wrapper">
             <svg
               className="social-icon"

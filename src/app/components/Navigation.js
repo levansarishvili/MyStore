@@ -1,29 +1,29 @@
 import Link from "next/link";
 
-export default function Navigation() {
+export default function Navigation({ navListClass, navItemClass }) {
   return (
-    <ul className="nav__list">
-      <li className="list__item">
+    <ul className={navListClass}>
+      <li className={navItemClass}>
         <Link className="nav__link" href="/">
           Home
         </Link>
       </li>
-      <li className="list__item">
+      <li className={navItemClass}>
         <Link className="nav__link" href="/about">
           About
         </Link>
       </li>
-      <li className="list__item">
+      <li className={navItemClass}>
         <Link className="nav__link" href="/store">
           Products
         </Link>
       </li>
-      <li className="list__item">
+      <li className={navItemClass}>
         <Link className="nav__link" href="/blog">
           Blogs
         </Link>
       </li>
-      <li className="list__item">
+      <li className={navItemClass}>
         <Link className="nav__link" href="/contact">
           Contact
         </Link>

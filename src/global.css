@@ -19,7 +19,7 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-rows: 7rem auto 15rem;
+  grid-template-rows: 7rem auto 18rem;
   row-gap: 5rem;
 }
 

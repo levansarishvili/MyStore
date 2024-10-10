@@ -18,7 +18,7 @@ function Header() {
         </Link>
 
         <nav className="header__nav">
-          <Navigation />
+          <Navigation navListClass="nav__list" navItemClass="list__item" />
           <Button className="btn" name="Buy now" />
         </nav>
 

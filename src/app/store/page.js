@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Button from "../components/Button";
+import Loading from "./loading";
 import "./Store.css";
 
 // Fetching product data
@@ -22,7 +23,7 @@ function ProductData() {
 
   // Handle loading state
   if (productData.length === 0) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   // Pass the fetched data to the Store component
