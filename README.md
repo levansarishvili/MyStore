@@ -15,4 +15,3 @@ Welcome to E-Shop, your go-to destination for all things sports! Whether you're 
 ## Links
 
 - [Solution URL](https://github.com/levansarishvili/TBC-Academy-React)
-- [Live Site URL](https://levansarishvili-tbcacademy.netlify.app/)
