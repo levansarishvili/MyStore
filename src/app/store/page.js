@@ -11,14 +11,14 @@ function ProductData() {
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchProductData() {
       const response = await fetch(
         "https://dummyjson.com/products/category/sports-accessories"
       );
       const data = await response.json();
       setProductData(data.products);
     }
-    fetchData();
+    fetchProductData();
   }, []);
 
   // Handle loading state
@@ -32,7 +32,6 @@ function ProductData() {
 
 // Create Online Store component
 function Store({ products }) {
-  console.log(products);
   return (
     <section className="product__list-wrapper">
       <h1 className="section__header">Products</h1>
@@ -78,7 +77,7 @@ function Product({ id, name, imageSrc, availabilityStatus, price }) {
           </div>
         </div>
       </Link>
-      {/* Link without <a> tag */}
+
       <Button className="btn" name="Add to cart" />
     </div>
   );
@@ -86,4 +85,3 @@ function Product({ id, name, imageSrc, availabilityStatus, price }) {
 
 // Exporting Product component
 export default ProductData;
-export { Product };

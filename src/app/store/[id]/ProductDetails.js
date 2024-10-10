@@ -2,7 +2,6 @@
 
 import "./ProductDetails.css";
 import Button from "../../components/Button.js";
-// import
 
 export default function ProductDetails({ product }) {
   return (
