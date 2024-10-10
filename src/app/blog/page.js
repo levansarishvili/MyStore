@@ -30,7 +30,6 @@ export default function PostData() {
 
 // Blogs Component
 function Blog({ posts }) {
-  console.log(posts);
   return (
     <section className="blog-wrapper">
       <h1 className="section-header">Blogs</h1>
