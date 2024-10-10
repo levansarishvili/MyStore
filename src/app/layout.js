@@ -4,10 +4,10 @@ import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 
 export const metadata = {
-  title: "ეროვნული ნაკრები",
+  title: "e-shop",
   description: "Web site created with Next.js.",
   icons: {
-    icon: "./favicon.svg",
+    icon: "./favicon.png",
   },
 };
 
