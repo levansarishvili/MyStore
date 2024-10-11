@@ -32,6 +32,11 @@
   padding: 2rem 6rem;
 }
 
+.product__filter-wrapper {
+  display: flex;
+  gap: 5rem;
+}
+
 .product-sort,
 .product-search {
   border: 1px solid #dcdee0;
@@ -39,10 +44,11 @@
   border-radius: 0.5rem;
   cursor: pointer;
   outline: none;
-  width: 15rem;
+  width: 20rem;
 }
 
-.product-sort:focus {
+.product-sort:focus,
+.product-search:focus {
   outline: 1px solid #ced4da;
 }
 
@@ -60,6 +66,7 @@
 .product-card__content {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 

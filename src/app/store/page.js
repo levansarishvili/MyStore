@@ -36,9 +36,9 @@ function Store({ products }) {
   const [sortBy, setSortBy] = useState("name");
   const [searchValue, setSearchValue] = useState("");
 
+  // Product sorting
   let sortedProducts;
 
-  // Product sorting
   if (sortBy === "name") {
     sortedProducts = products.sort((a, b) => a.title.localeCompare(b.title));
   }
@@ -48,31 +48,43 @@ function Store({ products }) {
   } else if (sortBy === "stock") {
     sortedProducts = products.sort((a, b) => b.stock - a.stock);
   }
+
+  // Product searching
+  if (searchValue) {
+    sortedProducts = products.filter((product) =>
+      product.title.toLowerCase().startsWith(searchValue.toLowerCase())
+    );
+  }
   console.log(products);
+  console.log(searchValue);
 
   return (
     <section className="product__list-wrapper">
       <h1 className="section__header">Products</h1>
 
-      {/* Product Sort/Filter/Search */}
+      <div className="product__filter-wrapper">
+        {/* Product Sort list */}
+        <select
+          className="product-sort"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="stock">Stock</option>
+        </select>
 
-      <select
-        className="product-sort"
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-      >
-        <option value="name">Name</option>
-        <option value="price">Price</option>
-        <option value="stock">Stock</option>
-      </select>
+        {/* Product Search input */}
+        <input
+          className="product-search"
+          type="text"
+          placeholder="Search"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        ></input>
+      </div>
 
-      <input
-        className="product-search"
-        type="text"
-        placeholder="Search"
-        value={searchValue}
-      ></input>
-
+      {/* Creating product card list */}
       <div className="product__list">
         {sortedProducts.map((product, index) => (
           <Product
