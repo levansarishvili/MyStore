@@ -32,15 +32,54 @@ function ProductData() {
 
 // Create Online Store component
 function Store({ products }) {
+  // Handle product sorting and searching
+  const [sortBy, setSortBy] = useState("name");
+  const [searchValue, setSearchValue] = useState("");
+
+  let sortedProducts;
+
+  // Product sorting
+  if (sortBy === "name") {
+    sortedProducts = products.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  if (sortBy === "price") {
+    sortedProducts = products.sort((a, b) => a.price - b.price);
+  } else if (sortBy === "stock") {
+    sortedProducts = products.sort((a, b) => b.stock - a.stock);
+  }
+  console.log(products);
+
   return (
     <section className="product__list-wrapper">
       <h1 className="section__header">Products</h1>
+
+      {/* Product Sort/Filter/Search */}
+
+      <select
+        className="product-sort"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+        <option value="stock">Stock</option>
+      </select>
+
+      <input
+        className="product-search"
+        type="text"
+        placeholder="Search"
+        value={searchValue}
+      ></input>
+
       <div className="product__list">
-        {products.map((product, index) => (
+        {sortedProducts.map((product, index) => (
           <Product
             key={product.id}
             id={product.id}
             name={product.title}
+            stock={product.stock}
             imageSrc={product.thumbnail}
             availabilityStatus={product.availabilityStatus}
             size={product.category}
@@ -53,7 +92,7 @@ function Store({ products }) {
 }
 
 // Product card component
-function Product({ id, name, imageSrc, availabilityStatus, price }) {
+function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
   let stockStatus = "";
   if (availabilityStatus === "In Stock") {
     stockStatus = "in-stock";
@@ -70,10 +109,13 @@ function Product({ id, name, imageSrc, availabilityStatus, price }) {
           <img className="product__img" src={imageSrc} alt="Product"></img>
           <h2 className="product__title">{name}</h2>
           <div className="product__desc">
-            <p className={`product__availabilityStatus ${stockStatus}`}>
-              {availabilityStatus}
-            </p>
-            <p className="product__price">{`${price} $`}</p>
+            <div className="product__stock-wrapper">
+              <p className={`product__availabilityStatus ${stockStatus}`}>
+                {availabilityStatus}
+              </p>
+              <p className="product__stock">{stock}</p>
+            </div>
+            <p className="product__price">{`  ${price} $`}</p>
           </div>
         </div>
       </Link>
