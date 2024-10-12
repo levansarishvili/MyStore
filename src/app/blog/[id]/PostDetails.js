@@ -1,6 +1,6 @@
 import "./PostDetails.css";
 
-export default function BlogPost({ post }) {
+export default function PostDetails({ post }) {
   return (
     <div className="post-details-wrapper">
       <h1 className="section-header">Blog Details</h1>

@@ -1,41 +1,21 @@
-"use client";
-import { useEffect, useState } from "react";
 import PageNotFound from "../../components/PageNotFound";
-import Loading from "../../components/loading";
-import BlogPost from "./PostDetails";
+import PostDetails from "./PostDetails";
 
-// Fetch posts data from API
-export default function fetchPostsDetails({ params }) {
+// Fetch posts data from API according to post ID
+export default async function PostsDetailsPage({ params }) {
   const { id } = params;
-  const [postDetails, setPostDetails] = useState([]);
-  const [error, setError] = useState(null);
+  let postDetailsData;
 
-  useEffect(() => {
-    async function fetchPostsDetails() {
-      try {
-        const response = await fetch(`https://dummyjson.com/posts/${id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch product");
-        }
-        const data = await response.json();
-        setPostDetails(data);
-      } catch (err) {
-        setError(err);
-      }
+  try {
+    const response = await fetch(`https://dummyjson.com/posts/${id}`);
+    if (!response.ok) {
+      // Handle non-200 status codes
+      return <PageNotFound />;
     }
-
-    fetchPostsDetails();
-  }, [id]);
-
-  // Handle page not found
-  if (error) {
-    return <PageNotFound />;
+    postDetailsData = await response.json();
+  } catch (err) {
+    console.error(err);
   }
 
-  // Handle loading state
-  if (postDetails.length === 0) {
-    return <Loading />;
-  }
-
-  return <BlogPost post={postDetails} />;
+  return <PostDetails post={postDetailsData} />;
 }

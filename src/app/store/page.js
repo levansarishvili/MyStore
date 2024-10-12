@@ -1,92 +1,28 @@
-"use client";
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import Button from "../components/Button";
-import Loading from "../components/loading";
 import "./Store.css";
 
-// Fetching product data
-function ProductData() {
-  const [productData, setProductData] = useState([]);
-
-  useEffect(() => {
-    async function fetchProductData() {
-      const response = await fetch(
-        "https://dummyjson.com/products/category/sports-accessories"
-      );
-      const data = await response.json();
-      setProductData(data.products);
-    }
-    fetchProductData();
-  }, []);
-
-  // Handle loading state
-  if (productData.length === 0) {
-    return <Loading />;
-  }
-
-  // Pass the fetched data to the Store component
-  return <Store products={productData} />;
+// Fetching function to fetch product data from API
+async function fetchProductData(category) {
+  const response = await fetch(
+    `https://dummyjson.com/products/category/${category}`
+  );
+  const data = await response.json();
+  return data.products;
 }
 
-// Create Online Store component
-function Store({ products }) {
-  // Handle product sorting and searching
-  const [sortBy, setSortBy] = useState("name");
-  const [searchValue, setSearchValue] = useState("");
-
-  // Product sorting
-  let sortedProducts;
-
-  if (sortBy === "name") {
-    sortedProducts = products.sort((a, b) => a.title.localeCompare(b.title));
-  }
-
-  if (sortBy === "price") {
-    sortedProducts = products.sort((a, b) => a.price - b.price);
-  } else if (sortBy === "stock") {
-    sortedProducts = products.sort((a, b) => b.stock - a.stock);
-  }
-
-  // Product searching
-  if (searchValue) {
-    sortedProducts = products.filter((product) =>
-      product.title.toLowerCase().startsWith(searchValue.toLowerCase())
-    );
-  }
-  console.log(products);
-  console.log(searchValue);
+// Create Online Store component and fetch product data
+export default async function Store() {
+  // Fetching product data
+  const products = await fetchProductData("sports-accessories");
 
   return (
     <section className="product__list-wrapper">
       <h1 className="section__header">Products</h1>
 
-      <div className="product__filter-wrapper">
-        {/* Product Sort list */}
-        <select
-          className="product-sort"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
-          <option value="name">Name</option>
-          <option value="price">Price</option>
-          <option value="stock">Stock</option>
-        </select>
-
-        {/* Product Search input */}
-        <input
-          className="product-search"
-          type="text"
-          placeholder="Search"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        ></input>
-      </div>
-
       {/* Creating product card list */}
       <div className="product__list">
-        {sortedProducts.map((product, index) => (
+        {products.map((product, index) => (
           <Product
             key={product.id}
             id={product.id}
@@ -136,6 +72,3 @@ function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
     </div>
   );
 }
-
-// Exporting Product component
-export default ProductData;

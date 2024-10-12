@@ -1,35 +1,19 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Loading from "../components/loading";
+// import Loading from "./loading";
 import "./Blog.css";
 import Button from "../components/Button";
 import Link from "next/link";
 
-// Fetch posts data from API
-export default function PostData() {
-  const [postData, setPostData] = useState([]);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      const response = await fetch("https://dummyjson.com/posts");
-      const data = await response.json();
-      setPostData(data.posts);
-    }
-
-    fetchPosts();
-  }, []);
-
-  // Handle loading state
-  if (postData.length === 0) {
-    return <Loading />;
-  }
-
-  return <Blog posts={postData} />;
+// Function to fetch posts data from API
+async function fetchPosts() {
+  const response = await fetch("https://dummyjson.com/posts");
+  const data = await response.json();
+  return data.posts;
 }
 
 // Blogs Component
-function Blog({ posts }) {
+export default async function Blog() {
+  const posts = await fetchPosts();
+
   return (
     <section className="blog-wrapper">
       <h1 className="section-header">Blogs</h1>
