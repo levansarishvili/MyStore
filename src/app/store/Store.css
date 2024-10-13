@@ -1,5 +1,5 @@
 /* Online Store CSS */
-.product__list-wrapper {
+.product__page-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,6 +9,12 @@
 .section__header {
   font-size: 2.8rem;
   font-weight: 600;
+}
+
+.product__page-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 8rem;
 }
 
 .product__list {

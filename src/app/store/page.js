@@ -1,39 +1,50 @@
 import Link from "next/link";
 import Button from "../components/Button";
+import Filter from "../components/Filter";
+import Loading from "./loading";
 import "./Store.css";
 
-// Fetching function to fetch product data from API
-async function fetchProductData(category) {
-  const response = await fetch(
-    `https://dummyjson.com/products/category/${category}`
-  );
-  const data = await response.json();
-  return data.products;
-}
-
 // Create Online Store component and fetch product data
-export default async function Store() {
-  // Fetching product data
-  const products = await fetchProductData("sports-accessories");
+export default async function Store({ searchParams }) {
+  const filter = searchParams?.category ?? "all";
+  console.log(filter);
+
+  let productsUrl;
+  if (filter === "all") {
+    productsUrl = `https://dummyjson.com/products`;
+  } else {
+    productsUrl = `https://dummyjson.com/products/category/${filter}`;
+  }
+
+  // Fetching function to fetch product data from API
+  async function FetchProductData() {
+    const response = await fetch(`${productsUrl}`);
+    const data = await response.json();
+
+    return data.products;
+  }
+
+  const products = await FetchProductData();
 
   return (
-    <section className="product__list-wrapper">
+    <section className="product__page-wrapper">
       <h1 className="section__header">Products</h1>
-
-      {/* Creating product card list */}
-      <div className="product__list">
-        {products.map((product, index) => (
-          <Product
-            key={product.id}
-            id={product.id}
-            name={product.title}
-            stock={product.stock}
-            imageSrc={product.thumbnail}
-            availabilityStatus={product.availabilityStatus}
-            size={product.category}
-            price={product.price}
-          />
-        ))}
+      <div className="product__page-content">
+        <Filter />
+        <div className="product__list">
+          {products.map((product, index) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              name={product.title}
+              stock={product.stock}
+              imageSrc={product.thumbnail}
+              availabilityStatus={product.availabilityStatus}
+              size={product.category}
+              price={product.price}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
