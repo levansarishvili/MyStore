@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Button from "../components/Button";
-import Filter from "../components/Filter";
+import ProductFilter from "../components/Filter";
 import Loading from "./loading";
 import "./Store.css";
 
@@ -30,7 +30,7 @@ export default async function Store({ searchParams }) {
     <section className="product__page-wrapper">
       <h1 className="section__header">Products</h1>
       <div className="product__page-content">
-        <Filter />
+        <ProductFilter />
         <div className="product__list">
           {products.map((product, index) => (
             <Product
