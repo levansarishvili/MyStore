@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 import "./ProductFilter.css";
 
 function ProductFilter() {
@@ -61,12 +62,12 @@ function ProductFilter() {
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
-  // Product search handler function
-  function handleSearch(e) {
+  // Handle Product search with debounced callback
+  const handleSearch = useDebouncedCallback((e) => {
     const params = new URLSearchParams(searchParams);
     params.set("search", e.target.value);
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
-  }
+  }, 400);
 
   return (
     <div className="product-filter-wrapper">

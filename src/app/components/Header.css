@@ -3,7 +3,6 @@
   align-items: center;
   background-color: #f1f3f5;
   box-shadow: 0 0 10px 3px #e9ecef;
-  padding: 0 4rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -19,6 +18,7 @@
   align-items: center;
   font-size: 1.4rem;
   color: #212529;
+  padding: 0 4rem;
 }
 
 .header__logo {
