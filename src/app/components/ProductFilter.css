@@ -1,16 +1,44 @@
 .product-filter-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   border-radius: 1rem;
   padding: 2rem;
-  height: 35rem;
+  height: 50rem;
+  width: 30rem;
   border: 1px solid #dcdee0;
   background-color: #f1f3f5;
 }
 
+.search-wrapper,
+.filter-wrapper,
+.sort-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.filter-wrapper {
+  height: 25rem;
+}
+
+.product-sort,
+.product-search,
+.sort-dropdown {
+  border: 1px solid #dcdee0;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.product-sort:focus,
+.product-search:focus,
+.sort-dropdown:focus {
+  outline: 1px solid #ced4da;
+}
+
 .filter-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 
@@ -21,24 +49,23 @@
   align-items: flex-start;
   gap: 1rem;
   overflow-y: scroll;
-  width: 20rem;
 }
 
 .filter__btn {
+  display: flex;
   background-color: #fff;
   border: none;
   padding: 0.5rem 1rem;
-  width: 15rem;
+  width: 17rem;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s;
-  text-align: start;
 }
 
-/* .filter__btn:hover {
+.filter__btn:hover {
   background-color: #ec5e2a;
   color: #fff;
-} */
+}
 
 .active-filter {
   background-color: #ec5e2a;

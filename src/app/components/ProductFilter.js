@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import "./ProductFilter.css";
 
-function Filter() {
+function ProductFilter() {
   const categories = [
     "all",
     "beauty",
@@ -32,30 +32,81 @@ function Filter() {
     "womens-watches",
   ];
 
+  const sortOptions = [
+    { label: "Price: Low to High", value: "price-asc" },
+    { label: "Price: High to Low", value: "price-desc" },
+    { label: "Name: A-Z", value: "name-asc" },
+    { label: "Name: Z-A", value: "name-desc" },
+  ];
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathName = usePathname();
 
-  const activeFilter = searchParams.get("category") ?? "all";
+  const activeCategory = searchParams.get("category") ?? "all";
+  const activeSort = searchParams.get("sort") ?? "price-asc";
+  const searchQuery = searchParams.get("search") ?? "";
 
+  // Handle filter by category
   function handleFilter(filter) {
     const params = new URLSearchParams(searchParams);
     params.set("category", filter);
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
+  // Handle sorting
+  function handleSort(sortOption) {
+    const params = new URLSearchParams(searchParams);
+    params.set("sort", sortOption);
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+  }
+
+  // Product search handler function
+  function handleSearch(e) {
+    const params = new URLSearchParams(searchParams);
+    params.set("search", e.target.value);
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+  }
+
   return (
     <div className="product-filter-wrapper">
-      <h2 className="filter-title">Categories</h2>
-      <div className="category-list">
-        {categories.map((category) => (
-          <CategoryButton
-            btnName={category}
-            key={category}
-            clickHandler={() => handleFilter(category)}
-            className={category === activeFilter ? "active-filter" : ""}
-          />
-        ))}
+      {/* Search bar */}
+      <div className="search-wrapper">
+        <h2 className="filter-title">Search Product</h2>
+        <input
+          className="product-search"
+          placeholder="Search product.."
+          onChange={handleSearch}
+        ></input>
+      </div>
+
+      <div className="filter-wrapper">
+        <h2 className="filter-title">Categories</h2>
+        <div className="category-list">
+          {categories.map((category) => (
+            <CategoryButton
+              btnName={category}
+              key={category}
+              clickHandler={() => handleFilter(category)}
+              className={category === activeCategory ? "active-filter" : ""}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="sort-wrapper">
+        <h2 className="filter-title">Sort By</h2>
+        <select
+          className="sort-dropdown"
+          value={activeSort}
+          onChange={(e) => handleSort(e.target.value)}
+        >
+          {sortOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
