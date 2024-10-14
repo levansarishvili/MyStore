@@ -111,3 +111,44 @@
 .out-of-stock {
   color: #e03131;
 }
+
+/* Product review */
+.reviews-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.reviews-content {
+  display: flex;
+  gap: 10rem;
+  border: 1px solid #dcdee0;
+  padding: 4rem;
+  border-radius: 1rem;
+  transition: all 0.3s;
+}
+
+.reviews-content:hover {
+  background-color: #ec5e2a22;
+}
+
+.product-review {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.review-header {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.reviewer-name {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.reviewer-comment {
+  font-size: 1.4rem;
+}

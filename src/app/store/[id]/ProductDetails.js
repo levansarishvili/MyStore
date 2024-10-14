@@ -4,6 +4,8 @@ import "./ProductDetails.css";
 import Button from "../../components/Button.js";
 
 export default function ProductDetails({ product }) {
+  const reviews = product.reviews;
+  console.log(product);
   return (
     <div className="product-details__wrapper">
       <h1 className="section-header">Product Details</h1>
@@ -49,6 +51,33 @@ export default function ProductDetails({ product }) {
           </div>
         </div>
       </div>
+      {/* Product Reviews */}
+      <div className="reviews-wrapper">
+        <h2 className="review-header">Reviews</h2>
+        <div className="reviews-content">
+          {reviews.map((review, index) => (
+            <Review
+              key={index}
+              reviewerName={review.reviewerName}
+              reviewRating={review.rating}
+              reviewerComment={review.comment}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Review component
+function Review({ reviewerName, reviewerComment, reviewDate, reviewRating }) {
+  return (
+    <div className="product-review">
+      <p className="reviewer-name">{reviewerName}</p>
+      <p className="review-rating"> {"⭐".repeat(reviewRating)}</p>
+      <p className="reviewer-comment">
+        <em>{reviewerComment}</em>
+      </p>
     </div>
   );
 }
