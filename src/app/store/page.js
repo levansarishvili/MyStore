@@ -2,6 +2,7 @@ import Link from "next/link";
 import Button from "../components/Button";
 import ProductFilter from "../components/ProductFilter";
 import "./Store.css";
+import "../mediaQueries.css";
 
 // Create Online Store component and fetch product data
 export default async function Store({ searchParams }) {
@@ -90,11 +91,11 @@ function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
           <div className="product__desc">
             <div className="product__stock-wrapper">
               <p className={`product__availabilityStatus ${stockStatus}`}>
-                {availabilityStatus}
+                {availabilityStatus}:
               </p>
               <p className="product__stock">{stock}</p>
             </div>
-            <p className="product__price">{`${price} 💲`}</p>
+            <p className="product__price">{`${price} $`}</p>
           </div>
         </div>
       </Link>

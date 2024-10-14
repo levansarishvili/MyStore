@@ -19,7 +19,7 @@ function Footer() {
           navItemClass="footer__nav__item"
         />
 
-        <p className="copyright">© Levan Sarishvili, Tbilisi, Georgia, 2024.</p>
+        {/* <p className="copyright">© Levan Sarishvili, Tbilisi, Georgia, 2024.</p> */}
 
         {/* Social icons */}
         <div className="social">
