@@ -46,7 +46,6 @@ function ProductFilter() {
 
   const activeCategory = searchParams.get("category") ?? "all";
   const activeSort = searchParams.get("sort") ?? "price-asc";
-  const searchQuery = searchParams.get("search") ?? "";
 
   // Handle filter by category
   function handleFilter(filter) {
@@ -66,6 +65,7 @@ function ProductFilter() {
   const handleSearch = useDebouncedCallback((e) => {
     const params = new URLSearchParams(searchParams);
     params.set("search", e.target.value);
+
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }, 400);
 

@@ -10,13 +10,16 @@ export default async function Store({ searchParams }) {
   const filter = searchParams?.category ?? "all";
   const sort = searchParams?.sort ?? "price-asc";
   const searchQuery = searchParams?.search ?? "";
+  console.log(searchQuery);
 
   // URL for fetching product data
   let productsUrl;
-  if (filter === "all") {
+  if (!searchQuery && filter === "all") {
     productsUrl = `https://dummyjson.com/products`;
-  } else {
+  } else if (!searchQuery && filter !== "all") {
     productsUrl = `https://dummyjson.com/products/category/${filter}`;
+  } else if (searchQuery) {
+    productsUrl = `https://dummyjson.com/products/search?q=${searchQuery}`;
   }
 
   // Fetching function to fetch product data from API
