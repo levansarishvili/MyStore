@@ -5,19 +5,23 @@ import Button from "../../components/Button.js";
 
 export default function ProductDetails({ product }) {
   const reviews = product.reviews;
-  console.log(product);
+
   return (
     <div className="product-details__wrapper">
       <h1 className="section-header">Product Details</h1>
+
       <div className="product-details__content">
         {/* Product Details */}
-
         <div className="product-img-wrapper">
-          <img
-            className="product-details__img"
-            src={product.thumbnail}
-            alt={product.title}
-          />
+          <div className="img-wrapper"></div>
+          {imagesArr.map((image, index) => (
+            <img
+              className="product-details__img"
+              src={image}
+              alt={product.title}
+              key={index}
+            />
+          ))}
         </div>
 
         {/* Product Settings */}

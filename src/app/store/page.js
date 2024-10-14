@@ -27,6 +27,7 @@ export default async function Store({ searchParams }) {
   }
 
   let products = await FetchProductData();
+  const reviews = products.map((product) => product.reviews);
 
   // Searching products based on search query
   if (searchQuery) {

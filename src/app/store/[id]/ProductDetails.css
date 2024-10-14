@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 8rem;
   border: 1px solid #dcdee0;
   border-radius: 1rem;
   padding: 4rem;
@@ -23,16 +23,18 @@
 .product-img-wrapper {
   display: flex;
   align-items: center;
-  max-width: 30rem;
-  overflow: hidden;
+  justify-content: center;
+  gap: 0;
+  max-width: 35rem;
   width: 100%;
+  overflow: hidden;
   height: 100%;
   transition: all 0.3s;
   cursor: pointer;
 }
 
 .product-details__img {
-  width: 100%;
+  width: 80%;
 }
 
 .product-details {
