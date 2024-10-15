@@ -7,19 +7,30 @@ import "../mediaQueries.css";
 // Create Online Store component and fetch product data
 export default async function Store({ searchParams }) {
   // Extracting filter, sort and search query from searchParams
-  const filter = searchParams?.category ?? "all";
-  const sort = searchParams?.sort ?? "price-asc";
+
+  // Extracting search query from searchParams
   const searchQuery = searchParams?.search ?? "";
   console.log(searchQuery);
 
+  // Extracting category filter query from searchParams
+  const filter = searchParams?.category ?? "all";
+  console.log(filter);
+
+  // Extracting sort query from searchParams
+  const sortOptions = searchParams?.sort ?? "title-asc";
+  const [sortByValue, orderValue] = sortOptions.split("-");
+  console.log(sortByValue, orderValue);
+  console.log(sortOptions);
+
   // URL for fetching product data
-  let productsUrl;
-  if (!searchQuery && filter === "all") {
-    productsUrl = `https://dummyjson.com/products`;
-  } else if (!searchQuery && filter !== "all") {
-    productsUrl = `https://dummyjson.com/products/category/${filter}`;
-  } else if (searchQuery) {
+  let productsUrl = "https://dummyjson.com/products";
+
+  if (searchQuery) {
     productsUrl = `https://dummyjson.com/products/search?q=${searchQuery}`;
+  } else if (sortOptions !== "title-asc") {
+    productsUrl = `https://dummyjson.com/products?sortBy=${sortByValue}&order=${orderValue}`;
+  } else if (filter !== "all") {
+    productsUrl = `https://dummyjson.com/products/category/${filter}`;
   }
 
   // Fetching function to fetch product data from API
@@ -29,27 +40,27 @@ export default async function Store({ searchParams }) {
     return data.products;
   }
 
-  let products = await FetchProductData();
+  const products = await FetchProductData();
   const reviews = products.map((product) => product.reviews);
 
   // Searching products based on search query
-  if (searchQuery) {
-    const searchTerm = searchQuery.toLowerCase();
-    products = products.filter((product) =>
-      product.title.toLowerCase().includes(searchTerm)
-    );
-  }
+  // if (searchQuery) {
+  //   const searchTerm = searchQuery.toLowerCase();
+  //   products = products.filter((product) =>
+  //     product.title.toLowerCase().includes(searchTerm)
+  //   );
+  // }
 
   // Sorting products based on sort query
-  if (sort === "price-asc") {
-    products.sort((a, b) => a.price - b.price);
-  } else if (sort === "price-desc") {
-    products.sort((a, b) => b.price - a.price);
-  } else if (sort === "name-asc") {
-    products.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sort === "name-desc") {
-    products.sort((a, b) => b.title.localeCompare(a.title));
-  }
+  // if (sortOptions === "price-asc") {
+  //   products.sort((a, b) => a.price - b.price);
+  // } else if (sort === "price-desc") {
+  //   products.sort((a, b) => b.price - a.price);
+  // } else if (sort === "name-asc") {
+  //   products.sort((a, b) => a.title.localeCompare(b.title));
+  // } else if (sort === "name-desc") {
+  //   products.sort((a, b) => b.title.localeCompare(a.title));
+  // }
 
   return (
     <section className="product__page-wrapper">
