@@ -1,5 +1,4 @@
 import "../global.css";
-import Navigation from "./components/Navigation.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 

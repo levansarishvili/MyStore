@@ -1,9 +1,11 @@
 import ProductDetails from "./ProductDetails";
 import PageNotFound from "../../components/PageNotFound";
+import React, { Suspense } from "react";
 
 // Fetch product data from API according to product ID
 export default async function ProductDetailsPage({ params }) {
   const { id } = params;
+  console.log(id);
   let product;
   try {
     const response = await fetch(`https://dummyjson.com/products/${id}`);

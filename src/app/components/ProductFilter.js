@@ -3,7 +3,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import "./ProductFilter.css";
-import { act } from "react";
 
 function ProductFilter() {
   const categories = [
@@ -35,8 +34,8 @@ function ProductFilter() {
   ];
 
   const sortOptions = [
-    { label: "Name: A-Z", value: "title-asc" },
-    { label: "Name: Z-A", value: "title-desc" },
+    { label: "Name: A - Z", value: "title-asc" },
+    { label: "Name: Z - A", value: "title-desc" },
     { label: "Price: Low to High", value: "price-asc" },
     { label: "Price: High to Low", value: "price-desc" },
   ];
@@ -46,7 +45,7 @@ function ProductFilter() {
   const pathName = usePathname();
 
   const activeCategory = searchParams.get("category") ?? "all";
-  const activeSort = searchParams.get("sort") ?? "title-asc";
+  const activeSort = searchParams.get("sortBy") ?? "title-asc";
 
   // Handle filter by category
   function handleFilter(filter) {
@@ -57,9 +56,8 @@ function ProductFilter() {
 
   // Handle sorting
   function handleSort(sortOption) {
-    console.log(sortOption);
     const params = new URLSearchParams(searchParams);
-    params.set("sort", sortOption);
+    params.set("sortBy", sortOption);
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
@@ -67,6 +65,7 @@ function ProductFilter() {
   const handleSearch = useDebouncedCallback((e) => {
     const params = new URLSearchParams(searchParams);
     params.set("search", e.target.value);
+    console.log(params.toString());
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }, 400);
 

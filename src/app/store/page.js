@@ -7,21 +7,15 @@ import "../mediaQueries.css";
 
 // Create Online Store component and fetch product data
 export default async function Store({ searchParams }) {
-  // Extracting filter, sort and search query from searchParams
-
   // Extracting search query from searchParams
   const searchQuery = searchParams?.search ?? "";
-  console.log(searchQuery);
 
   // Extracting category filter query from searchParams
   const filter = searchParams?.category ?? "all";
-  console.log(filter);
 
   // Extracting sort query from searchParams
-  const sortOptions = searchParams?.sort ?? "title-asc";
+  const sortOptions = searchParams?.sortBy ?? "title-asc";
   const [sortByValue, orderValue] = sortOptions.split("-");
-  console.log(sortByValue, orderValue);
-  console.log(sortOptions);
 
   // URL for fetching product data
   let productsUrl = "https://dummyjson.com/products";
@@ -42,49 +36,36 @@ export default async function Store({ searchParams }) {
   }
 
   const products = await FetchProductData();
-  console.log(products);
+
   const reviews = products.map((product) => product.reviews);
-
-  // Searching products based on search query
-  // if (searchQuery) {
-  //   const searchTerm = searchQuery.toLowerCase();
-  //   products = products.filter((product) =>
-  //     product.title.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // Sorting products based on sort query
-  // if (sortOptions === "price-asc") {
-  //   products.sort((a, b) => a.price - b.price);
-  // } else if (sort === "price-desc") {
-  //   products.sort((a, b) => b.price - a.price);
-  // } else if (sort === "name-asc") {
-  //   products.sort((a, b) => a.title.localeCompare(b.title));
-  // } else if (sort === "name-desc") {
-  //   products.sort((a, b) => b.title.localeCompare(a.title));
-  // }
 
   return (
     <section className="product__page-wrapper">
       <h1 className="section__header">Products</h1>
       <div className="product__page-content">
         <ProductFilter />
-        <div className="product__list">
-          {products.map((product) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.title}
-              stock={product.stock}
-              imageSrc={product.images[0]}
-              availabilityStatus={product.availabilityStatus}
-              size={product.category}
-              price={product.price}
-            />
-          ))}
-        </div>
+        <ProductList products={products} />
       </div>
     </section>
+  );
+}
+
+// Product list component
+function ProductList({ products }) {
+  return (
+    <div className="product__list">
+      {products.map((product) => (
+        <Product
+          key={product.id}
+          id={product.id}
+          name={product.title}
+          imageSrc={product.thumbnail}
+          availabilityStatus={product.availabilityStatus}
+          stock={product.stock}
+          price={product.price}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -110,6 +91,8 @@ function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
             alt={name}
             width={100}
             height={100}
+            quality={50}
+            priority={true}
           />
         </div>
 

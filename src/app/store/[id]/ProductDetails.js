@@ -2,6 +2,7 @@
 
 import "./ProductDetails.css";
 import Button from "../../components/Button.js";
+import Image from "next/image";
 
 export default function ProductDetails({ product }) {
   const reviews = product.reviews;
@@ -13,10 +14,19 @@ export default function ProductDetails({ product }) {
         {/* Product Details */}
 
         <div className="product-img-wrapper">
-          <img
+          {/* <img
             className="product-details__img"
             src={product.thumbnail}
             alt={product.title}
+          /> */}
+          <Image
+            className="product-details__img"
+            src={product.thumbnail}
+            alt={product.title}
+            width={250}
+            height={250}
+            quality={100}
+            priority={true}
           />
         </div>
 
