@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Button from "../components/Button";
 import ProductFilter from "../components/ProductFilter";
+import Image from "next/image";
 import "./Store.css";
 import "../mediaQueries.css";
 
@@ -41,6 +42,7 @@ export default async function Store({ searchParams }) {
   }
 
   const products = await FetchProductData();
+  console.log(products);
   const reviews = products.map((product) => product.reviews);
 
   // Searching products based on search query
@@ -74,7 +76,7 @@ export default async function Store({ searchParams }) {
               id={product.id}
               name={product.title}
               stock={product.stock}
-              imageSrc={product.thumbnail}
+              imageSrc={product.images[0]}
               availabilityStatus={product.availabilityStatus}
               size={product.category}
               price={product.price}
@@ -100,7 +102,17 @@ function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
   return (
     <div className="product-card">
       <Link className="product__link" href={`/store/${id}`}>
-        <img className="product__img" src={imageSrc} alt="Product"></img>
+        {/* <img className="product__img" src={imageSrc} alt="Product"></img> */}
+        <div className="product__img-wrapper">
+          <Image
+            className="product__img"
+            src={imageSrc}
+            alt={name}
+            width={100}
+            height={100}
+          />
+        </div>
+
         <div className="product-card__content">
           <h2 className="product__title">{name}</h2>
           <div className="product__desc">

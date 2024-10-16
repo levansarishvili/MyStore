@@ -5,6 +5,10 @@ const nextConfig = {
   // experimental: {
   //   appDir: true, // Ensure this is set to true for App Router
   // },
+
+  images: {
+    domains: ["cdn.dummyjson.com"],
+  },
 };
 
 export default nextConfig;

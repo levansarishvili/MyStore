@@ -73,8 +73,19 @@
   gap: 1.5rem;
 }
 
+.product__img-wrapper {
+  width: 15rem;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 .product__img {
+  object-fit: contain;
   max-width: 10rem;
+  max-height: 10rem;
   opacity: 0.8;
   transition: all 0.3s;
 }
