@@ -22,8 +22,15 @@ export default async function BlogPage({ searchParams }) {
   let postsUrl = "https://dummyjson.com/posts";
 
   if (searchQuery) {
+    // If search query exists, search posts and then apply sorting
     postsUrl = `https://dummyjson.com/posts/search?q=${searchQuery}`;
+
+    // If sort options are provided, append them to the search URL
+    if (sortOptions) {
+      postsUrl += `&sortBy=${sortByValue}&order=${orderValue}`;
+    }
   } else if (sortOptions) {
+    // If no search query, but sorting options are provided, sort the general posts list
     postsUrl = `https://dummyjson.com/posts?sortBy=${sortByValue}&order=${orderValue}`;
   }
   const posts = await fetchPosts(postsUrl);
