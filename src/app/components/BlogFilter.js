@@ -6,6 +6,7 @@ import "./BlogFilter.css";
 
 export default function PostFilter() {
   const sortOptions = [
+    { label: "Sort is not applied", value: "" },
     { label: "Name: A - Z", value: "title-asc" },
     { label: "Name: Z - A", value: "title-desc" },
     { label: "Views: Low to High", value: "views-asc" },
@@ -16,7 +17,7 @@ export default function PostFilter() {
   const router = useRouter();
   const pathName = usePathname();
 
-  const activeSort = searchParams.get("sortBy") ?? "title-asc";
+  const activeSort = searchParams.get("sortBy") ?? "";
 
   // Handle sorting
   function handleSort(sortOption) {

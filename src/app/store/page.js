@@ -14,7 +14,7 @@ export default async function Store({ searchParams }) {
   const filter = searchParams?.category ?? "all";
 
   // Extracting sort query from searchParams
-  const sortOptions = searchParams?.sortBy ?? "title-asc";
+  const sortOptions = searchParams?.sortBy ?? "";
   const [sortByValue, orderValue] = sortOptions.split("-");
 
   // URL for fetching product data
@@ -25,7 +25,7 @@ export default async function Store({ searchParams }) {
     if (sortOptions) {
       productsUrl += `&sortBy=${sortByValue}&order=${orderValue}`;
     }
-  } else if (sortOptions !== "title-asc") {
+  } else if (sortOptions) {
     productsUrl = `https://dummyjson.com/product?sortBy=${sortByValue}&order=${orderValue}`;
   } else if (filter !== "all") {
     productsUrl = `https://dummyjson.com/product/category/${filter}`;

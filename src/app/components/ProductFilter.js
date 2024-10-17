@@ -34,6 +34,7 @@ function ProductFilter() {
   ];
 
   const sortOptions = [
+    { label: "Sort is not applied", value: "" },
     { label: "Name: A - Z", value: "title-asc" },
     { label: "Name: Z - A", value: "title-desc" },
     { label: "Price: Low to High", value: "price-asc" },
@@ -45,7 +46,7 @@ function ProductFilter() {
   const pathName = usePathname();
 
   const activeCategory = searchParams.get("category") ?? "all";
-  const activeSort = searchParams.get("sortBy") ?? "title-asc";
+  const activeSort = searchParams.get("sortBy") ?? "";
 
   // Handle filter by category
   function handleFilter(filter) {
