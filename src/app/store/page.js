@@ -21,16 +21,14 @@ export default async function Store({ searchParams }) {
   let productsUrl = "https://dummyjson.com/product";
 
   if (searchQuery) {
-    // If search query exists, search posts and then apply sorting
     productsUrl = `https://dummyjson.com/product/search?q=${searchQuery}`;
-
-    // If sort options are provided, append them to the search URL
     if (sortOptions) {
       productsUrl += `&sortBy=${sortByValue}&order=${orderValue}`;
     }
-  } else if (sortOptions) {
-    // If no search query, but sorting options are provided, sort the general posts list
+  } else if (sortOptions !== "title-asc") {
     productsUrl = `https://dummyjson.com/product?sortBy=${sortByValue}&order=${orderValue}`;
+  } else if (filter !== "all") {
+    productsUrl = `https://dummyjson.com/product/category/${filter}`;
   }
 
   // Fetching function to fetch product data from API
