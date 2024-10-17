@@ -51,14 +51,14 @@ function ProductFilter() {
   function handleFilter(filter) {
     const params = new URLSearchParams(searchParams);
     params.set("category", filter);
-    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+    router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
   // Handle sorting
   function handleSort(sortOption) {
     const params = new URLSearchParams(searchParams);
     params.set("sortBy", sortOption);
-    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+    router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
   // Handle Product search with debounced callback
@@ -66,7 +66,7 @@ function ProductFilter() {
     const params = new URLSearchParams(searchParams);
     params.set("search", e.target.value);
     console.log(params.toString());
-    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+    router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }, 400);
 
   return (
