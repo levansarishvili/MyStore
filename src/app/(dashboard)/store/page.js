@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Button from "../components/Button";
-import ProductFilter from "../components/ProductFilter";
+import Button from "../../components/Button";
+import ProductFilter from "../../components/ProductFilter";
 import Image from "next/image";
 import "./Store.css";
 import "../mediaQueries.css";
