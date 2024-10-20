@@ -46,7 +46,7 @@ export default function HomePage() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="home-wrapper">
       <h1>Welcome to My Next.js App</h1>
       {user && (
         <p>
