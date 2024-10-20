@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import ProductFilter from "../../components/ProductFilter";
 import Image from "next/image";
 import "./Store.css";
-import "../mediaQueries.css";
+import "../../mediaQueries.css";
 
 // Create Online Store component and fetch product data
 export default async function Store({ searchParams }) {
