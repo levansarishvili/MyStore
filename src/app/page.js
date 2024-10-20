@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import "./Homepage.css";
 
 export default function HomePage() {
   const [user, setUser] = useState(null);
