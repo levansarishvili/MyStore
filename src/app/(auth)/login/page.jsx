@@ -1,11 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("auth");
+
+    if (isAuthenticated === "true") {
+      router.push("/");
+    }
+  }, [router]);
 
   async function handleLogin(event) {
     event.preventDefault();
