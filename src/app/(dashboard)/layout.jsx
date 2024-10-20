@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main>{children}</main>
     </>
   );
