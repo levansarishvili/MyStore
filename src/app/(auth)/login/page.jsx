@@ -1,37 +1,49 @@
 "use client";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default function LoginPage() {
+function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = () => {
-    if (username === "test" && password === "password") {
+  async function handleLogin(event) {
+    event.preventDefault();
+    const response = await fetch("https://dummyjson.com/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (response.ok) {
+      const { accessToken } = await response.json();
+      localStorage.setItem("accessToken", accessToken);
+
       localStorage.setItem("auth", "true");
-      router.push("/dashboard");
+
+      router.push("/profile");
     } else {
-      alert("Invalid credentials");
+      alert("Failed to log in");
     }
-  };
+  }
 
   return (
-    <div>
-      <h1>Login</h1>
+    <form onSubmit={handleLogin}>
       <input
         type="text"
-        placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
       />
       <input
         type="password"
-        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
       />
-      <button onClick={handleLogin}>Login</button>
-    </div>
+      <button type="submit">Login</button>
+    </form>
   );
 }
+
+export default LoginPage;
