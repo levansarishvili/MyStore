@@ -1,13 +1,11 @@
 import React from "react";
 import { cookies } from "next/headers";
+import { useRouter } from "next/navigation";
 
 export default async function ProfilePage() {
+  const router = useRouter();
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
-
-  if (!accessToken) {
-    return <p>You are not logged in. Please log in first.</p>;
-  }
 
   const res = await fetch("https://dummyjson.com/auth/me", {
     method: "GET",
@@ -16,8 +14,8 @@ export default async function ProfilePage() {
     },
   });
 
-  if (!res.ok) {
-    return <p>Failed to fetch user profile. Please try again.</p>;
+  if (!res.ok || !accessToken) {
+    router.push("/login");
   }
 
   const user = await res.json();
