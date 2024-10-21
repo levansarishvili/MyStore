@@ -9,17 +9,18 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Check if user is logged in
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isAuth");
     if (isLoggedIn) {
       router.push("/");
+    } else {
+      setLoading(false);
     }
   }, [router]);
 
-  // Input change handlers
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
@@ -28,7 +29,6 @@ export default function LoginPage() {
     setPassword(e.target.value);
   }
 
-  // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
@@ -40,10 +40,10 @@ export default function LoginPage() {
         body: JSON.stringify({ username, password }),
       });
       if (res.ok) {
-        // Redirect to home page
         const data = await res.json();
 
-        // Add auth status in local storage
+        console.log("data", data);
+
         localStorage.setItem("isAuth", "true");
         router.push("/");
       } else {
@@ -54,6 +54,10 @@ export default function LoginPage() {
       console.error("An error occurred:", error);
       setError("An unexpected error occurred");
     }
+  }
+
+  if (loading) {
+    return <div className="loading">Loading...</div>;
   }
 
   return (
@@ -85,7 +89,6 @@ export default function LoginPage() {
           <Button type="submit" className="btn login-button" name="Sign in" />
         </form>
 
-        {/* Render error message */}
         {error && <p className="error-message">{error}</p>}
         <div className="login-footer">
           <p className="login-footer-txt">

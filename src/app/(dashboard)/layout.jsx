@@ -1,17 +1,28 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+"use client";
 
-export default async function DashboardLayout({ children }) {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-  if (!accessToken) {
-    return redirect("/login");
+export default function DashboardLayout({ children }) {
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isAuth");
+
+    if (!isLoggedIn) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, [router]);
+
+  if (loading) {
+    return <div className="loading">Loading...</div>; // Optional loading component
   }
 
   return (
     <>
-      {/* <Header /> */}
       <main>{children}</main>
     </>
   );
