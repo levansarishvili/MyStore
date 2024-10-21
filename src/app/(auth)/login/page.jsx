@@ -20,7 +20,7 @@ export default function LoginPage() {
     } else {
       setLoading(false);
     }
-  }, [router]);
+  }, [router, setLoading]);
 
   function handleUsernameChange(e) {
     setUsername(e.target.value);
