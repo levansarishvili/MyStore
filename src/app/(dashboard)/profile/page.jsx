@@ -1,50 +1,26 @@
-"use client";
-import { useEffect, useState } from "react";
-import "./Profile.css";
+import React from "react";
+import { cookies } from "next/headers";
 
-export default function ProfilePage() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+export default async function ProfilePage() {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-  useEffect(() => {
-    async function fetchUserProfile() {
-      const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) {
+    return <p>You are not logged in. Please log in first.</p>;
+  }
 
-      if (!accessToken) {
-        setErrorMessage("Access token not found. Please log in.");
-        setLoading(false);
-        return;
-      }
+  const res = await fetch("https://dummyjson.com/auth/me", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
-      try {
-        const response = await fetch("https://dummyjson.com/auth/me", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+  if (!res.ok) {
+    return <p>Failed to fetch user profile. Please try again.</p>;
+  }
 
-        const data = await response.json();
-        if (response.ok) {
-          setUser(data);
-        } else {
-          throw new Error(data.message || "Failed to fetch user profile.");
-        }
-      } catch (error) {
-        console.error("Fetching user profile failed:", error);
-        setErrorMessage(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchUserProfile();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (errorMessage) return <p>Error: {errorMessage}</p>;
-  if (!user) return <p>No profile data available.</p>;
+  const user = await res.json();
 
   return (
     <section className="profile-wrapper">
@@ -67,13 +43,19 @@ export default function ProfilePage() {
             </p>
             <p className="profile-txt">Phone: {user.phone || "N/A"}</p>
             <p className="profile-txt">Email: {user.email}</p>
+            <p className="profile-txt">
+              Address:
+              <span>{user.address.address}</span>
+              <span>{user.address.city}</span>
+              <span>{user.address.country}</span>
+            </p>
+            <p className="profile-txt">Profession: {user.company.title}</p>
           </div>
         </div>
 
         <div className="profile__info">
           <h2 className="profile-info-header">Account Details</h2>
           <form className="profile__form">
-            {/* Each field is ReadOnly; enable editing if needed */}
             <div className="input-box">
               <label className="input-label" htmlFor="fname">
                 First Name*
@@ -123,7 +105,6 @@ export default function ProfilePage() {
               />
             </div>
           </form>
-          {/* <button className="btn">Save Changes</button> */}
         </div>
       </div>
     </section>
