@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../../components/Button";
-import "./LoginForm.css";
+import "./LoginPage.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
+  let isAuthenticated = false;
 
   // Input change handlers
   function handleUsernameChange(e) {
@@ -33,6 +34,9 @@ export default function LoginPage() {
       });
       if (res.ok) {
         // Redirect to home page
+
+        const data = await res.json();
+        console.log(data);
         router.push("/");
       } else {
         const errorData = await res.json();
