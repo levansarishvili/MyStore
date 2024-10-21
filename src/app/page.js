@@ -1,49 +1,25 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import "./Homepage.css";
+import { cookies } from "next/headers";
 
-export default function HomePage() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+export default async function HomePage() {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) {
+    return <p>You are not logged in. Please log in first.</p>;
+  }
 
-    if (!accessToken) {
-      router.push("/login");
-    } else {
-      const fetchUserProfile = async () => {
-        try {
-          const response = await fetch("https://dummyjson.com/auth/me", {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-            // credentials: "include",
-          });
+  const res = await fetch("https://dummyjson.com/auth/me", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
-          const data = await response.json();
-          if (response.ok) {
-            setUser(data);
-          } else {
-            console.error("Error fetching user data");
-            localStorage.removeItem("accessToken");
-            router.push("/login");
-          }
-        } catch (error) {
-          console.error("An error occurred:", error);
-          router.push("/login");
-        } finally {
-          setLoading(false);
-        }
-      };
+  if (!res.ok) {
+    return <p>Failed to fetch user profile. Please try again.</p>;
+  }
 
-      fetchUserProfile();
-    }
-  }, [router]);
-
-  if (loading) return <p>Loading...</p>;
+  const user = await res.json();
 
   return (
     <div className="home-wrapper">
