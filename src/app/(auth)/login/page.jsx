@@ -1,33 +1,54 @@
 "use client";
-import "./LoginForm.css";
-import Button from "../../components/Button";
-import LoginUser from "./LoginForm";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Button from "../../components/Button";
+import "./LoginForm.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const router = useRouter();
+
   // Input change handlers
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
+
   function handlePasswordChange(e) {
     setPassword(e.target.value);
   }
+
   // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
-    LoginUser(username, password);
+    setError(null);
 
-    if (localStorage.getItem("accessToken")) {
-      window.location.href = "/store";
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      if (res.ok) {
+        // Redirect to home page
+        router.push("/");
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setError("An unexpected error occurred");
     }
   }
+
   return (
     <div className="login-page__wrapper">
       <h1 className="section-header">Login Form</h1>
+
       <div className="login-form-wrapper">
-        {/* Login form */}
         <form className="login-form" onSubmit={handleSubmit}>
           <label className="login-input__label" htmlFor="username">
             <p className="login-label__txt">Username:</p>
@@ -51,6 +72,9 @@ export default function LoginPage() {
           </label>
           <Button type="submit" className="btn login-button" name="Sign in" />
         </form>
+
+        {/* Render error message */}
+        {error && <p className="error-message">{error}</p>}
         <div className="login-footer">
           <p className="login-footer-txt">
             Forgot <span className="highlight">Username / Password</span>?
