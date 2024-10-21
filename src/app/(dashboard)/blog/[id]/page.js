@@ -1,4 +1,4 @@
-import PageNotFound from "../../components/PageNotFound";
+import PageNotFound from "../../../components/PageNotFound";
 import PostDetails from "./PostDetails";
 
 // Fetch posts data from API according to post ID

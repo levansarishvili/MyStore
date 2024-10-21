@@ -1,10 +1,8 @@
 // "use client";
 import React from "react";
 import { cookies } from "next/headers";
-// import { useRouter } from "next/navigation";
 
 export default async function ProfilePage() {
-  // const router = useRouter();
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
 
@@ -14,10 +12,6 @@ export default async function ProfilePage() {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-
-  // if (!res.ok || !accessToken) {
-  //   router.push("/login");
-  // }
 
   const user = await res.json();
 

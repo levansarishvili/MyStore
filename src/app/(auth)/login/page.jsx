@@ -10,7 +10,14 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  let isAuthenticated = false;
+
+  // Check if user is logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isAuth");
+    if (isLoggedIn) {
+      router.push("/");
+    }
+  }, [router]);
 
   // Input change handlers
   function handleUsernameChange(e) {
@@ -34,9 +41,10 @@ export default function LoginPage() {
       });
       if (res.ok) {
         // Redirect to home page
-
         const data = await res.json();
-        console.log(data);
+
+        // Add auth status in local storage
+        localStorage.setItem("isAuth", "true");
         router.push("/");
       } else {
         const errorData = await res.json();
