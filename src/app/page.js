@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 export default async function HomePage() {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
+
   console.log(accessToken);
 
   if (!accessToken) {

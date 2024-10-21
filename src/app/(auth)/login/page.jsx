@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../../components/Button";
+import Loading from "../../loading";
 import "./LoginPage.css";
 
 export default function LoginPage() {
@@ -57,7 +58,7 @@ export default function LoginPage() {
   }
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <Loading />;
   }
 
   return (

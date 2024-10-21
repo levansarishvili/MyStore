@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Loading from "../loading";
 
 export default function DashboardLayout({ children }) {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function DashboardLayout({ children }) {
   }, [router]);
 
   if (loading) {
-    return <div className="loading">Loading...</div>; // Optional loading component
+    return <Loading />;
   }
 
   return (
