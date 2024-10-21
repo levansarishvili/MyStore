@@ -1,5 +1,5 @@
 import "./Contact.css";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 function Contact() {
   return (

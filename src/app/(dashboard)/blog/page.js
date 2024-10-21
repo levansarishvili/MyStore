@@ -1,7 +1,7 @@
 // import Loading from "./loading";
 import "./Blog.css";
-import Button from "../components/Button";
-import BlogFilter from "../components/BlogFilter";
+import Button from "../../components/Button";
+import BlogFilter from "../../components/BlogFilter";
 import Link from "next/link";
 
 // Function to fetch posts data from API
