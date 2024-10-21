@@ -1,11 +1,12 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function HomePage() {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
 
   if (!accessToken) {
-    return <p>You are not logged in. Please log in first.</p>;
+    return redirect("/login");
   }
 
   const res = await fetch("https://dummyjson.com/auth/me", {

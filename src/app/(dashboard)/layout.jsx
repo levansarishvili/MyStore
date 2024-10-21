@@ -1,22 +1,13 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Header from "../components/Header";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({ children }) {
-  const router = useRouter();
+export default async function DashboardLayout({ children }) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-  useEffect(() => {
-    const checkAuthentication = () => {
-      const isAuthenticated = localStorage.getItem("auth");
-      if (!isAuthenticated) {
-        router.push("/login");
-      }
-    };
-    if (typeof window !== "undefined") {
-      checkAuthentication();
-    }
-  }, [router]);
+  if (!accessToken) {
+    return redirect("/login");
+  }
 
   return (
     <>
