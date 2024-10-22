@@ -117,3 +117,8 @@
   display: flex;
   justify-content: center;
 }
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}

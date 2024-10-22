@@ -15,6 +15,14 @@ export default function BlogPage({ searchParams }) {
   const [postsUrl, setPostUrl] = useState(url);
   const [posts, setPosts] = useState([]);
 
+  function handleDelete(id) {
+    localStorage.setItem(
+      "posts",
+      JSON.stringify(posts.filter((post) => post.id !== id))
+    );
+    setPosts(JSON.parse(localStorage.getItem("posts")));
+  }
+
   useEffect(() => {
     if (searchQuery) {
       url = `https://dummyjson.com/posts/search?q=${searchQuery}`;
@@ -32,19 +40,23 @@ export default function BlogPage({ searchParams }) {
     if (typeof window !== "undefined") {
       const savedPosts = localStorage.getItem("posts");
 
-      const fetchData = async () => {
-        try {
-          const response = await fetch(postsUrl);
-          const postsData = await response.json();
+      if (savedPosts) {
+        setPosts(JSON.parse(savedPosts)); // Use posts from localStorage if available
+      } else {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(postsUrl);
+            const postsData = await response.json();
 
-          localStorage.setItem("posts", JSON.stringify(postsData.posts));
-          setPosts(postsData.posts);
-        } catch (error) {
-          console.error("Failed to fetch data", error);
-        }
-      };
+            localStorage.setItem("posts", JSON.stringify(postsData.posts));
+            setPosts(postsData.posts);
+          } catch (error) {
+            console.error("Failed to fetch data", error);
+          }
+        };
 
-      fetchData();
+        fetchData();
+      }
     }
   }, [postsUrl]);
 
@@ -61,6 +73,7 @@ export default function BlogPage({ searchParams }) {
               title={post.title}
               content={post.body}
               views={post.views}
+              onDelete={handleDelete}
             />
           ))}
         </ul>
@@ -70,7 +83,7 @@ export default function BlogPage({ searchParams }) {
 }
 
 // Blog item component
-function BlogItem({ id, title, content, views }) {
+function BlogItem({ id, title, content, views, onDelete }) {
   return (
     <li className="blog__list__item">
       <div className="blog__content">
@@ -89,10 +102,14 @@ function BlogItem({ id, title, content, views }) {
           </svg>
           <span className="blog__views">{views}</span>
         </div>
-
-        <Link className="blog__link" href={`/blog/${id}`}>
-          <Button className="btn blog-btn" name="Read more" />
-        </Link>
+        <div className="buttons">
+          <Link className="blog__link" href={`/blog/${id}`}>
+            <Button className="btn blog-btn" name="Read more" />
+          </Link>
+          <button className="btn" onClick={() => onDelete(id)}>
+            Delete
+          </button>
+        </div>
       </div>
     </li>
   );
