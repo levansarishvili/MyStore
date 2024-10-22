@@ -9,7 +9,7 @@ export async function POST(req) {
       body: JSON.stringify({
         username,
         password,
-        expiresInMins: 30,
+        // expiresInMins: 30,
       }),
     });
     if (!response.ok) {
