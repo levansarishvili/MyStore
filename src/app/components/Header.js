@@ -9,7 +9,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header__wrapper">
-        <Link href="/">
+        <Link href="/home">
           <img
             src="../assets/logo.svg"
             alt="Georgia national football team logo"

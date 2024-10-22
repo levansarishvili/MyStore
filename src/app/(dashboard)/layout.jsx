@@ -1,5 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Header from "../components/Header.js";
+import Footer from "../components/Footer.js";
+import "../../../src/global.css";
 
 export default async function DashboardLayout({ children }) {
   const cookieStore = cookies();
@@ -11,8 +14,9 @@ export default async function DashboardLayout({ children }) {
 
   return (
     <>
-      {/* <Header /> */}
-      <main>{children}</main>
+      <Header />
+      <main className="main">{children}</main>
+      <Footer />
     </>
   );
 }

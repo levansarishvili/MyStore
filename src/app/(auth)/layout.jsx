@@ -1,5 +1,3 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import "../../global.css";
 
 export const metadata = {
@@ -11,12 +9,5 @@ export const metadata = {
 };
 
 export default function AuthLayout({ children }) {
-  return (
-    <div className="wrapper">
-      <Header />
-
-      <main className="main">{children}</main>
-      <Footer />
-    </div>
-  );
+  return <main className="main">{children}</main>;
 }

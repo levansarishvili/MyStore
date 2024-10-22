@@ -4,7 +4,7 @@ export default function Navigation({ navListClass, navItemClass }) {
   return (
     <ul className={navListClass}>
       <li className={navItemClass}>
-        <Link className="nav__link" href="/">
+        <Link className="nav__link" href="/home">
           Home
         </Link>
       </li>

@@ -16,7 +16,7 @@ export default function LoginPage() {
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isAuth");
     if (isLoggedIn) {
-      router.push("/");
+      router.push("/home");
     } else {
       setLoading(false);
     }
@@ -46,7 +46,7 @@ export default function LoginPage() {
         console.log("data", data);
 
         localStorage.setItem("isAuth", "true");
-        router.push("/");
+        router.push("/home");
       } else {
         const errorData = await res.json();
         setError(errorData.error);
@@ -62,44 +62,54 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-page__wrapper">
-      <h1 className="section-header">Login Form</h1>
+    <>
+      <header className="login-header">
+        <img className="login-header__logo" src="../assets/logo.svg"></img>
+      </header>
 
-      <div className="login-form-wrapper">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label className="login-input__label" htmlFor="username">
-            <p className="login-label__txt">Username:</p>
-            <input
-              value={username}
-              className="login-input"
-              type="text"
-              id="username"
-              onChange={handleUsernameChange}
-            />
-          </label>
-          <label className="login-input__label" htmlFor="password">
-            <p className="login-label__txt">Password:</p>
-            <input
-              value={password}
-              className="login-input"
-              type="password"
-              id="password"
-              onChange={handlePasswordChange}
-            />
-          </label>
-          <Button type="submit" className="btn login-button" name="Sign in" />
-        </form>
+      <div className="login-page__wrapper">
+        <h1 className="section-header">Welcome back</h1>
 
-        {error && <p className="error-message">{error}</p>}
-        <div className="login-footer">
-          <p className="login-footer-txt">
-            Forgot <span className="highlight">Username / Password</span>?
-          </p>
-          <p className="login-footer-txt">
-            Don't have an account? <span className="highlight">Sign Up</span>
-          </p>
+        <div className="login-form-wrapper">
+          <form className="login-form" onSubmit={handleSubmit}>
+            <label className="login-input__label" htmlFor="username">
+              <p className="login-label__txt">Username:</p>
+              <input
+                value={username}
+                className="login-input"
+                type="text"
+                id="username"
+                onChange={handleUsernameChange}
+              />
+            </label>
+            <label className="login-input__label" htmlFor="password">
+              <p className="login-label__txt">Password:</p>
+              <input
+                value={password}
+                className="login-input"
+                type="password"
+                id="password"
+                onChange={handlePasswordChange}
+              />
+            </label>
+            <Button type="submit" className="btn login-button" name="Sign in" />
+          </form>
+
+          {error && <p className="error-message">{error}</p>}
+          <div className="login-footer">
+            <p className="login-footer-txt">
+              Forgot <span className="highlight">Username / Password</span>?
+            </p>
+            <p className="login-footer-txt">
+              Don't have an account? <span className="highlight">Sign Up</span>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+
+      <footer className="login-page-footer">
+        <p className="login-page-footer__txt">Georgia, Copyright &copy; 2024</p>
+      </footer>
+    </>
   );
 }
