@@ -1,40 +1,56 @@
+"use client";
 // import Loading from "./loading";
 import "./Blog.css";
 import Button from "../components/Button";
 import BlogFilter from "../components/BlogFilter";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-// Function to fetch posts data from API
-async function fetchPosts(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.posts;
-}
-
-// Blog Page Component
-export default async function BlogPage({ searchParams }) {
+export default function BlogPage({ searchParams }) {
   const searchQuery = searchParams?.search ?? "";
   const sortOptions = searchParams?.sortBy ?? "";
   const [sortByValue, orderValue] = sortOptions.split("-");
-  console.log(searchQuery, sortByValue, orderValue);
+  let url = "https://dummyjson.com/posts";
 
-  // Create posts url
-  let postsUrl = "https://dummyjson.com/posts";
+  const [postsUrl, setPostUrl] = useState(url);
+  const [posts, setPosts] = useState([]);
 
-  if (searchQuery) {
-    postsUrl = `https://dummyjson.com/posts/search?q=${searchQuery}`;
-    if (sortOptions) {
-      postsUrl += `&sortBy=${sortByValue}&order=${orderValue}`;
+  useEffect(() => {
+    if (searchQuery) {
+      url = `https://dummyjson.com/posts/search?q=${searchQuery}`;
+      if (sortOptions) {
+        url += `&sortBy=${sortByValue}&order=${orderValue}`;
+      }
+    } else if (sortOptions) {
+      url = `https://dummyjson.com/posts?sortBy=${sortByValue}&order=${orderValue}`;
     }
-  } else if (sortOptions) {
-    postsUrl = `https://dummyjson.com/posts?sortBy=${sortByValue}&order=${orderValue}`;
-  }
-  const posts = await fetchPosts(postsUrl);
+
+    setPostUrl(url);
+  }, [searchQuery, sortOptions, sortByValue, orderValue]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedPosts = localStorage.getItem("posts");
+
+      const fetchData = async () => {
+        try {
+          const response = await fetch(postsUrl);
+          const postsData = await response.json();
+
+          localStorage.setItem("posts", JSON.stringify(postsData.posts));
+          setPosts(postsData.posts);
+        } catch (error) {
+          console.error("Failed to fetch data", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [postsUrl]);
 
   return (
     <section className="blog-wrapper">
       <h1 className="section-header">Blogs</h1>
-
       <div className="blog__page-content">
         <BlogFilter />
         <ul className="blog__list">
