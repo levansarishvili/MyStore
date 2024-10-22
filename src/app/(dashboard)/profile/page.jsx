@@ -1,5 +1,3 @@
-// "use client";
-import React from "react";
 import { cookies } from "next/headers";
 
 export default async function ProfilePage() {
@@ -14,6 +12,7 @@ export default async function ProfilePage() {
   });
 
   const user = await res.json();
+  console.log(user);
 
   return (
     <section className="profile-wrapper">

@@ -9,6 +9,7 @@ export async function POST(req) {
       body: JSON.stringify({
         username,
         password,
+        expiresInMins: 30 * 24 * 60,
       }),
     });
     if (!response.ok) {
@@ -27,7 +28,7 @@ export async function POST(req) {
     responseWithCookies.cookies.set("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 30,
+      maxAge: 60 * 60 * 24 * 7, // 1 week
       path: "/",
     });
     return responseWithCookies;
