@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import "./Home.css";
 
 export default async function HomePage() {
   const cookieStore = cookies();
@@ -26,11 +27,14 @@ export default async function HomePage() {
 
   return (
     <div className="home-wrapper">
-      <h1>Welcome to My Next.js App</h1>
+      <h1 className="section-header">
+        Welcome to <strong className="highlight">E-shop</strong> ecommerce
+        website 👋
+      </h1>
       {user && (
-        <p>
-          Hello, {user.firstName}! Explore the app and manage your products and
-          blog posts.
+        <p className="home-txt">
+          Hello, <strong className="highlight">{user.firstName}</strong> !
+          Explore the app and manage your products and blog posts.
         </p>
       )}
     </div>
