@@ -37,10 +37,11 @@ export default function BlogPage({ searchParams }) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const savedPostsUrl = localStorage.getItem("postsUrl");
       const savedPosts = localStorage.getItem("posts");
 
-      if (savedPosts) {
-        setPosts(JSON.parse(savedPosts)); // Use posts from localStorage if available
+      if (savedPosts && savedPostsUrl === postsUrl) {
+        setPosts(JSON.parse(savedPosts));
       } else {
         const fetchData = async () => {
           try {
