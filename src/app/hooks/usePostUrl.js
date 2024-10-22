@@ -20,5 +20,5 @@ export default function usePostsUrl(searchQuery, sortOptions) {
     setPostsUrl(url);
   }, [searchQuery, sortOptions]);
 
-  return { postsUrl, setPostsUrl };
+  return postsUrl;
 }

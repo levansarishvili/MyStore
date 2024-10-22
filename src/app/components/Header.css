@@ -114,6 +114,7 @@ a {
   border-radius: 1.2rem;
   font-family: inherit;
   transition: all 0.3s;
+  height: 5rem;
 }
 
 .btn:hover {
