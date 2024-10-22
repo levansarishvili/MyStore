@@ -9,7 +9,6 @@ export async function POST(req) {
       body: JSON.stringify({
         username,
         password,
-        expiresInMins: 60 * 30 * 12,
       }),
     });
     if (!response.ok) {
