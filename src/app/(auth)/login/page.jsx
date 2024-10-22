@@ -13,6 +13,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  // Redirect if user is already logged in
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isAuth");
     if (isLoggedIn) {
@@ -22,38 +23,47 @@ export default function LoginPage() {
     }
   }, [router]);
 
-  function handleUsernameChange(e) {
-    setUsername(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
+  // Function to check if the user credentials are correct
+  async function checkAuth(username, password) {
+    setLoading(true);
     setError(null);
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
-        // headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          password,
+          expiresInMins: 60,
+        }),
       });
-      if (res.ok) {
-        const data = await res.json();
 
-        console.log("data", data);
-
-        localStorage.setItem("isAuth", "true");
-        router.push("/home");
-      } else {
-        const errorData = await res.json();
-        setError(errorData.error);
+      if (!res.ok) {
+        throw new Error("Invalid username or password. Please try again.");
       }
+
+      const data = await res.json();
+
+      // If login is successful, store authentication status and navigate to home
+      localStorage.setItem("isAuth", true);
+      localStorage.setItem("accessToken", data.accessToken);
+      router.push("/home");
     } catch (error) {
-      console.error("An error occurred:", error);
-      setError("An unexpected error occurred");
+      console.error(error);
+      setError("Invalid username or password. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Handle form submission
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (username && password) {
+      checkAuth(username, password);
+    } else {
+      setError("Please enter both username and password.");
     }
   }
 
@@ -64,12 +74,17 @@ export default function LoginPage() {
   return (
     <>
       <header className="login-header">
-        <img className="login-header__logo" src="../assets/logo.svg"></img>
+        <img
+          className="login-header__logo"
+          src="../assets/logo.svg"
+          alt="Logo"
+        />
       </header>
 
       <div className="login-page__wrapper">
         <h1 className="section-header">Welcome back</h1>
 
+        {/* Login form */}
         <div className="login-form-wrapper">
           <form className="login-form" onSubmit={handleSubmit}>
             <label className="login-input__label" htmlFor="username">
@@ -79,7 +94,7 @@ export default function LoginPage() {
                 className="login-input"
                 type="text"
                 id="username"
-                onChange={handleUsernameChange}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </label>
             <label className="login-input__label" htmlFor="password">
@@ -89,12 +104,13 @@ export default function LoginPage() {
                 className="login-input"
                 type="password"
                 id="password"
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <Button type="submit" className="btn login-button" name="Sign in" />
           </form>
 
+          {/* Display error */}
           {error && <p className="error-message">{error}</p>}
           <div className="login-footer">
             <p className="login-footer-txt">
