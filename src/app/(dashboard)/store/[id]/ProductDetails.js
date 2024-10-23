@@ -1,7 +1,7 @@
 "use client";
 
 import "./ProductDetails.css";
-import Button from "../../components/Button.js";
+import Button from "../../../components/Button";
 import Image from "next/image";
 
 export default function ProductDetails({ product }) {

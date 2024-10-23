@@ -1,6 +1,4 @@
 import "../global.css";
-import Header from "./components/Header.js";
-import Footer from "./components/Footer.js";
 
 export const metadata = {
   title: "e-shop",
@@ -23,13 +21,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <div className="wrapper">
-          <Header />
-
-          <main className="main">{children}</main>
-          <Footer />
+          <>{children}</>
         </div>
-
-        {/* <div id="root">{children}</div> */}
       </body>
     </html>
   );

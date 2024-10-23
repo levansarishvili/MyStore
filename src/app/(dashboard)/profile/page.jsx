@@ -1,26 +1,47 @@
-import React from "react";
-import { cookies } from "next/headers";
+"use client";
 
-export default async function ProfilePage() {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Loading from "../../loading";
+import "./Profile.css";
 
-  if (!accessToken) {
-    return <p>You are not logged in. Please log in first.</p>;
+export default function ProfilePage() {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+    async function fetchUser() {
+      try {
+        const res = await fetch("https://dummyjson.com/user/me", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          console.error("Failed to fetch profile data");
+          return;
+        }
+
+        const data = await res.json();
+
+        // Update the user state
+        setUser(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchUser();
+  }, [router]);
+
+  // Render loading state if user is null
+  if (!user) {
+    return <Loading />;
   }
-
-  const res = await fetch("https://dummyjson.com/auth/me", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    return <p>Failed to fetch user profile. Please try again.</p>;
-  }
-
-  const user = await res.json();
 
   return (
     <section className="profile-wrapper">

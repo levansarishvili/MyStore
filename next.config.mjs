@@ -6,6 +6,16 @@ const nextConfig = {
   //   appDir: true, // Ensure this is set to true for App Router
   // },
 
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     domains: ["cdn.dummyjson.com"],
   },

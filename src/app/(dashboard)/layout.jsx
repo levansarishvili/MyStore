@@ -1,27 +1,41 @@
 "use client";
-import { useEffect } from "react";
+
+import Header from "../components/Header.js";
+import Footer from "../components/Footer.js";
+import "../../../src/global.css";
 import { useRouter } from "next/navigation";
-import Header from "../components/Header";
+import { useEffect, useState } from "react";
+import Loading from "../loading.js";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkAuthentication = () => {
-      const isAuthenticated = localStorage.getItem("auth");
+      const isAuthenticated = JSON.parse(localStorage.getItem("isAuth"));
       if (!isAuthenticated) {
         router.push("/login");
+      } else {
+        setIsLoading(false);
       }
     };
+
     if (typeof window !== "undefined") {
       checkAuthentication();
     }
   }, [router]);
 
+  // Render loading state until authentication check is done
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
-      {/* <Header /> */}
-      <main>{children}</main>
+      <Header />
+      <main className="main">{children}</main>
+      <Footer />
     </>
   );
 }
