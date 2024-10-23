@@ -1,14 +1,14 @@
 "use client";
 // import Loading from "./loading";
+
 import "./Blog.css";
 import BlogItem from "./BlogItem";
-import BlogForm from "./BlogForm";
 import BlogFilter from "../../components/BlogFilter";
 
 import usePostsUrl from "../../hooks/usePostUrl";
 import useFetchPosts from "../../hooks/useFetchPosts";
-import { useState, useEffect } from "react";
 import { handleDelete } from "../../components/handleDelete";
+import { useState } from "react";
 
 export default function BlogPage({ searchParams }) {
   const searchQuery = searchParams?.search ?? "";
@@ -17,41 +17,66 @@ export default function BlogPage({ searchParams }) {
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
   const { posts, setPosts } = useFetchPosts(postsUrl);
 
-  // fetch posts from local storage when the component mounts
-  useEffect(() => {
-    const savedPosts = JSON.parse(localStorage.getItem("posts")) || [];
-    if (savedPosts.length) {
-      setPosts((prevPosts) => [...prevPosts, ...savedPosts]);
-    }
-  }, [setPosts]);
+  const [newPost, setNewPost] = useState({ title: "", content: "", views: 0 });
 
-  const handleAddPost = (newPost) => {
-    setPosts((prevPosts) => [...prevPosts, newPost]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewPost((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const existingPosts = JSON.parse(localStorage.getItem("posts")) || [];
-    localStorage.setItem("posts", JSON.stringify([...existingPosts, newPost]));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newPostWithId = { ...newPost, id: Date.now() };
+    setPosts((prev) => [newPostWithId, ...prev]);
+    setNewPost({ title: "", content: "", views: 0 });
+
+    // save to local storage
+    localStorage.setItem("posts", JSON.stringify([newPostWithId, ...posts]));
   };
 
   return (
     <section className="blog-wrapper">
       <h1 className="section-header">Blogs</h1>
+      <form className="new-post-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Post Title"
+          value={newPost.title}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="content"
+          placeholder="Post Content"
+          value={newPost.content}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="number"
+          name="views"
+          placeholder="Views"
+          value={newPost.views}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Create Post</button>
+      </form>
       <div className="blog__page-content">
         <BlogFilter />
-        <div>
-          <BlogForm onAddPost={handleAddPost} />
-          <ul className="blog__list">
-            {posts.map((post) => (
-              <BlogItem
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                content={post.body}
-                views={post.views}
-                onDelete={() => handleDelete(posts, "posts", post.id, setPosts)}
-              />
-            ))}
-          </ul>
-        </div>
+        <ul className="blog__list">
+          {posts.map((post) => (
+            <BlogItem
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              content={post.body}
+              views={post.views}
+              onDelete={() => handleDelete(posts, "posts", post.id, setPosts)}
+            />
+          ))}
+        </ul>
       </div>
     </section>
   );
