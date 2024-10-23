@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import Button from "../components/Button";
-import ProductFilter from "../components/ProductFilter";
+import Button from "../../components/Button";
+import ProductFilter from "../../components/ProductFilter";
 import Image from "next/image";
 import "./Store.css";
-import "../mediaQueries.css";
-import useProductsUrl from "../hooks/useProductsUrl";
-import useFetchProducts from "../hooks/useFetchProducts";
-import DeleteButton from "../components/DeleteButton";
-import { handleDelete } from "../components/handleDelete";
+import useProductsUrl from "../../hooks/useProductsUrl";
+import useFetchProducts from "../../hooks/useFetchProducts";
+import DeleteButton from "../../components/DeleteButton";
+import { handleDelete } from "../../components/handleDelete";
+import "../../mediaQueries.css";
 
 export default function Store({ searchParams }) {
   // Extracting search query from searchParams

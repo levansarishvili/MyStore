@@ -1,12 +1,12 @@
 "use client";
 // import Loading from "./loading";
 import "./Blog.css";
-import BlogFilter from "../components/BlogFilter";
 import BlogItem from "./BlogItem";
+import BlogFilter from "../../components/BlogFilter";
 
-import usePostsUrl from "../hooks/usePostUrl";
-import useFetchPosts from "../hooks/useFetchPosts";
-import { handleDelete } from "../components/handleDelete";
+import usePostsUrl from "../../hooks/usePostUrl";
+import useFetchPosts from "../../hooks/useFetchPosts";
+import { handleDelete } from "../../components/handleDelete";
 
 export default function BlogPage({ searchParams }) {
   const searchQuery = searchParams?.search ?? "";

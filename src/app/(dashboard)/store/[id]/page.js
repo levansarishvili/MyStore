@@ -1,5 +1,5 @@
 import ProductDetails from "./ProductDetails";
-import PageNotFound from "../../components/PageNotFound";
+import PageNotFound from "../../../components/PageNotFound";
 import React, { Suspense } from "react";
 
 // Fetch product data from API according to product ID
