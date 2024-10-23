@@ -8,7 +8,7 @@ export default function useFetchPosts(postsUrl) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedPosts = localStorage.getItem("posts");
-      const savedPostsUrl = localStorage.getItem(postsUrl);
+      const savedPostsUrl = localStorage.getItem("postsUrl");
 
       if (savedPosts !== "undefined" && savedPostsUrl === postsUrl) {
         setPosts(JSON.parse(savedPosts));

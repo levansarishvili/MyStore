@@ -7,7 +7,7 @@ import Image from "next/image";
 import "./Store.css";
 import "../mediaQueries.css";
 import useProductsUrl from "../hooks/useProductsUrl";
-// import useFetchData from "../hooks/useFetchPosts";
+import useFetchProducts from "../hooks/useFetchProducts";
 import DeleteButton from "../components/DeleteButton";
 
 export default function Store({ searchParams }) {
@@ -23,19 +23,17 @@ export default function Store({ searchParams }) {
 
   const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
 
-  // const { list, setList } = useFetchData("products", productsUrl);
+  const { products, setProducts } = useFetchProducts(productsUrl);
 
   function handleDelete(id) {
-    // localStorage.setItem(
-    //   "products",
-    //   JSON.stringify(list.filter((product) => product.id !== id))
-    // );
-    // setList((curProducts) =>
-    //   curProducts.filter((product) => product.id !== id)
-    // );
+    localStorage.setItem(
+      "products",
+      JSON.stringify(products.filter((product) => product.id !== id))
+    );
+    setProducts((curProducts) =>
+      curProducts.filter((product) => product.id !== id)
+    );
   }
-
-  const products = [];
 
   return (
     <section className="product__page-wrapper">
