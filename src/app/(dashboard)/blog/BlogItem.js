@@ -1,7 +1,7 @@
 // Blog item component
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import Link from "next/link";
-import DeleteButton from "../components/DeleteButton";
+import DeleteButton from "../../components/DeleteButton";
 export default function BlogItem({ id, title, content, views, onDelete }) {
   return (
     <li className="blog__list__item">
