@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function BlogForm({ onAddPost }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [views, setViews] = useState(""); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,35 +13,42 @@ export default function BlogForm({ onAddPost }) {
       id: Date.now(),
       title,
       body: content,
-      views: 0,
+      views,
     };
 
     setTitle("");
     setContent("");
+    setViews(0); 
 
     onAddPost(newPost);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Content</label>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Add Post</button>
+    <form className="new-post-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="title"
+        placeholder="Post Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <textarea
+        name="content"
+        placeholder="Post Content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        required
+      />
+      <input
+        type="number"
+        name="views"
+        placeholder="Views"
+        value={views}
+        onChange={(e) => setViews(Number(e.target.value))}
+        required
+      />
+      <button type="submit">Create Post</button>
     </form>
   );
 }
