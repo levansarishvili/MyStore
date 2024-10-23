@@ -35,7 +35,7 @@ export default function LoginPage() {
         body: JSON.stringify({
           username,
           password,
-          expiresInMins: 60,
+          expiresInMins: 60 * 24 * 7,
         }),
       });
 

@@ -11,11 +11,6 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    if (!token) {
-      // Redirect to login page if token is not present
-      router.push("/login");
-      return;
-    }
 
     async function fetchUser() {
       try {
