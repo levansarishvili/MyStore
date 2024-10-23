@@ -1,23 +1,30 @@
 "use client";
 // import Loading from "./loading";
 
-import "./Blog.css";
-import BlogItem from "./BlogItem";
-import BlogFilter from "../../components/BlogFilter";
+import "./Blog.css"; 
+import BlogItem from "./BlogItem"; 
+import BlogFilter from "../../components/BlogFilter"; 
 
-import usePostsUrl from "../../hooks/usePostUrl";
-import useFetchPosts from "../../hooks/useFetchPosts";
-import { handleDelete } from "../../components/handleDelete";
-import { useState } from "react";
+import usePostsUrl from "../../hooks/usePostUrl"; 
+import useFetchPosts from "../../hooks/useFetchPosts"; 
+import { handleDelete } from "../../components/handleDelete"; 
+import { useState, useEffect } from "react";
 
 export default function BlogPage({ searchParams }) {
   const searchQuery = searchParams?.search ?? "";
   const sortOptions = searchParams?.sortBy ?? "";
-
+  
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
   const { posts, setPosts } = useFetchPosts(postsUrl);
 
-  const [newPost, setNewPost] = useState({ title: "", content: "", views: 0 });
+  const [newPost, setNewPost] = useState({ title: '', content: '', views: 0 });
+
+  useEffect(() => {
+    const savedPosts = JSON.parse(localStorage.getItem('posts'));
+    if (savedPosts) {
+      setPosts(savedPosts);
+    }
+  }, [setPosts]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,10 +33,13 @@ export default function BlogPage({ searchParams }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPostWithId = { ...newPost, id: Date.now() };
+    const newPostWithId = {
+      ...newPost,
+      id: Date.now(), 
+      body: newPost.content, 
+    };
     setPosts((prev) => [newPostWithId, ...prev]);
     setNewPost({ title: "", content: "", views: 0 });
-
     // save to local storage
     localStorage.setItem("posts", JSON.stringify([newPostWithId, ...posts]));
   };
