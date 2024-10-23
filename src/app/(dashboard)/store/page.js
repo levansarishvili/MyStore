@@ -1,12 +1,17 @@
+"use client";
+
 import Link from "next/link";
-import Button from "../components/Button";
-import ProductFilter from "../components/ProductFilter";
+import Button from "../../components/Button";
+import ProductFilter from "../../components/ProductFilter";
 import Image from "next/image";
 import "./Store.css";
-import "../mediaQueries.css";
+import useProductsUrl from "../../hooks/useProductsUrl";
+import useFetchProducts from "../../hooks/useFetchProducts";
+import DeleteButton from "../../components/DeleteButton";
+import { handleDelete } from "../../components/handleDelete";
+import "../../mediaQueries.css";
 
-// Create Online Store component and fetch product data
-export default async function Store({ searchParams }) {
+export default function Store({ searchParams }) {
   // Extracting search query from searchParams
   const searchQuery = searchParams?.search ?? "";
 
@@ -15,65 +20,47 @@ export default async function Store({ searchParams }) {
 
   // Extracting sort query from searchParams
   const sortOptions = searchParams?.sortBy ?? "";
-  const [sortByValue, orderValue] = sortOptions.split("-");
 
-  // URL for fetching product data
-  let productsUrl = "https://dummyjson.com/product";
+  const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
 
-  if (searchQuery) {
-    productsUrl = `https://dummyjson.com/product/search?q=${searchQuery}`;
-    if (sortOptions) {
-      productsUrl += `&sortBy=${sortByValue}&order=${orderValue}`;
-    }
-  } else if (sortOptions) {
-    productsUrl = `https://dummyjson.com/product?sortBy=${sortByValue}&order=${orderValue}`;
-  } else if (filter !== "all") {
-    productsUrl = `https://dummyjson.com/product/category/${filter}`;
-  }
-
-  // Fetching function to fetch product data from API
-  async function FetchProductData() {
-    const response = await fetch(`${productsUrl}`);
-    const data = await response.json();
-    return data.products;
-  }
-
-  const products = await FetchProductData();
-
-  const reviews = products.map((product) => product.reviews);
+  const { products, setProducts } = useFetchProducts(productsUrl);
 
   return (
     <section className="product__page-wrapper">
       <h1 className="section__header">Products</h1>
       <div className="product__page-content">
         <ProductFilter />
-        <ProductList products={products} />
+        <div className="product__list">
+          {products.map((product) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              name={product.title}
+              imageSrc={product.thumbnail}
+              availabilityStatus={product.availabilityStatus}
+              stock={product.stock}
+              price={product.price}
+              onDelete={() =>
+                handleDelete(products, "products", product.id, setProducts)
+              }
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
-// Product list component
-function ProductList({ products }) {
-  return (
-    <div className="product__list">
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          id={product.id}
-          name={product.title}
-          imageSrc={product.thumbnail}
-          availabilityStatus={product.availabilityStatus}
-          stock={product.stock}
-          price={product.price}
-        />
-      ))}
-    </div>
-  );
-}
-
 // Product card component
-function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
+function Product({
+  id,
+  name,
+  imageSrc,
+  availabilityStatus,
+  stock,
+  price,
+  onDelete,
+}) {
   let stockStatus = "";
   if (availabilityStatus === "In Stock") {
     stockStatus = "in-stock";
@@ -112,8 +99,10 @@ function Product({ id, name, imageSrc, availabilityStatus, stock, price }) {
           </div>
         </div>
       </Link>
-
-      <Button className="btn" name="Add to cart" />
+      <div className="buttons">
+        <Button className="btn" name="Add to cart" />
+        <DeleteButton onDelete={onDelete} />
+      </div>
     </div>
   );
 }
