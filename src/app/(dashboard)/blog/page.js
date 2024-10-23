@@ -17,7 +17,7 @@ export default function BlogPage({ searchParams }) {
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
   const { posts, setPosts } = useFetchPosts(postsUrl);
 
-  const [newPost, setNewPost] = useState({ title: '', content: '', views: 0 });
+  const [newPost, setNewPost] = useState({ title: '', content: '', views: '' });
 
   useEffect(() => {
     const savedPosts = JSON.parse(localStorage.getItem('posts'));
