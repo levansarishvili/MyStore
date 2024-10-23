@@ -8,6 +8,7 @@ import BlogFilter from "../../components/BlogFilter";
 import usePostsUrl from "../../hooks/usePostUrl";
 import useFetchPosts from "../../hooks/useFetchPosts";
 import { handleDelete } from "../../components/handleDelete";
+import { handleAddPost } from "../../components/handleAddPost"; 
 import { useState, useEffect } from "react";
 import BlogForm from "./BlogForm";
 
@@ -25,16 +26,10 @@ export default function BlogPage({ searchParams }) {
     }
   }, [setPosts]);
 
-  const handleAddPost = (newPost) => {
-    setPosts((prev) => [newPost, ...prev]);
-    // save to local storage
-    localStorage.setItem("posts", JSON.stringify([newPost, ...posts]));
-  };
-
   return (
     <section className="blog-wrapper">
       <h1 className="section-header">Blogs</h1>
-      <BlogForm onAddPost={handleAddPost} />
+      <BlogForm onAddPost={(newPost) => handleAddPost(newPost, posts, setPosts)} /> 
       <div className="blog__page-content">
         <BlogFilter />
         <ul className="blog__list">
