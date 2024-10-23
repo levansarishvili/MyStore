@@ -41,7 +41,7 @@ export default function ProfilePage() {
     }
 
     fetchUser();
-  }, [router]); // Added router as a dependency
+  }, [router]);
 
   // Render loading state if user is null
   if (!user) {

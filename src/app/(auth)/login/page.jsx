@@ -15,7 +15,7 @@ export default function LoginPage() {
 
   // Redirect if user is already logged in
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isAuth");
+    const isLoggedIn = JSON.parse(localStorage.getItem("isAuth")); // Parse boolean value
     if (isLoggedIn) {
       router.push("/home");
     } else {
@@ -46,7 +46,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       // If login is successful, store authentication status and navigate to home
-      localStorage.setItem("isAuth", true);
+      localStorage.setItem("isAuth", JSON.stringify(true));
       localStorage.setItem("accessToken", data.accessToken);
       router.push("/home");
     } catch (error) {
