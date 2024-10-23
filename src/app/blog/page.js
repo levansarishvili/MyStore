@@ -5,22 +5,22 @@ import BlogFilter from "../components/BlogFilter";
 import BlogItem from "./BlogItem";
 
 import usePostsUrl from "../hooks/usePostUrl";
-import useFetchData from "../hooks/useFetchData";
+import useFetchPosts from "../hooks/useFetchPosts";
 
 export default function BlogPage({ searchParams }) {
   const searchQuery = searchParams?.search ?? "";
   const sortOptions = searchParams?.sortBy ?? "";
 
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
-  const { list, setList } = useFetchData("posts", postsUrl);
+  const { posts, setPosts } = useFetchPosts(postsUrl);
 
   // Handle Delete
   function handleDelete(id) {
     localStorage.setItem(
       "posts",
-      JSON.stringify(list.filter((post) => post.id !== id))
+      JSON.stringify(posts.filter((post) => post.id !== id))
     );
-    setList((curPosts) => curPosts.filter((post) => post.id !== id));
+    setPosts((curPosts) => curPosts.filter((post) => post.id !== id));
   }
 
   return (
@@ -29,7 +29,7 @@ export default function BlogPage({ searchParams }) {
       <div className="blog__page-content">
         <BlogFilter />
         <ul className="blog__list">
-          {list.map((post) => (
+          {posts.map((post) => (
             <BlogItem
               key={post.id}
               id={post.id}
