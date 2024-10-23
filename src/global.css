@@ -54,3 +54,8 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #ec5e2a;
 }
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
