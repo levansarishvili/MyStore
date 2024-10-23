@@ -9,6 +9,7 @@ import "../mediaQueries.css";
 import useProductsUrl from "../hooks/useProductsUrl";
 import useFetchProducts from "../hooks/useFetchProducts";
 import DeleteButton from "../components/DeleteButton";
+import { handleDelete } from "../components/handleDelete";
 
 export default function Store({ searchParams }) {
   // Extracting search query from searchParams
@@ -19,50 +20,34 @@ export default function Store({ searchParams }) {
 
   // Extracting sort query from searchParams
   const sortOptions = searchParams?.sortBy ?? "";
-  // const [sortByValue, orderValue] = sortOptions.split("-");
 
   const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
 
   const { products, setProducts } = useFetchProducts(productsUrl);
-
-  function handleDelete(id) {
-    localStorage.setItem(
-      "products",
-      JSON.stringify(products.filter((product) => product.id !== id))
-    );
-    setProducts((curProducts) =>
-      curProducts.filter((product) => product.id !== id)
-    );
-  }
 
   return (
     <section className="product__page-wrapper">
       <h1 className="section__header">Products</h1>
       <div className="product__page-content">
         <ProductFilter />
-        <ProductList products={products} onDelete={handleDelete} />
+        <div className="product__list">
+          {products.map((product) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              name={product.title}
+              imageSrc={product.thumbnail}
+              availabilityStatus={product.availabilityStatus}
+              stock={product.stock}
+              price={product.price}
+              onDelete={() =>
+                handleDelete(products, "products", product.id, setProducts)
+              }
+            />
+          ))}
+        </div>
       </div>
     </section>
-  );
-}
-
-// Product list component
-function ProductList({ products, onDelete }) {
-  return (
-    <div className="product__list">
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          id={product.id}
-          name={product.title}
-          imageSrc={product.thumbnail}
-          availabilityStatus={product.availabilityStatus}
-          stock={product.stock}
-          price={product.price}
-          onDelete={onDelete}
-        />
-      ))}
-    </div>
   );
 }
 
@@ -116,7 +101,7 @@ function Product({
       </Link>
       <div className="buttons">
         <Button className="btn" name="Add to cart" />
-        <DeleteButton onDelete={onDelete} id={id} />
+        <DeleteButton onDelete={onDelete} />
       </div>
     </div>
   );

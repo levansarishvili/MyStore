@@ -6,6 +6,7 @@ import BlogItem from "./BlogItem";
 
 import usePostsUrl from "../hooks/usePostUrl";
 import useFetchPosts from "../hooks/useFetchPosts";
+import { handleDelete } from "../components/handleDelete";
 
 export default function BlogPage({ searchParams }) {
   const searchQuery = searchParams?.search ?? "";
@@ -13,15 +14,6 @@ export default function BlogPage({ searchParams }) {
 
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
   const { posts, setPosts } = useFetchPosts(postsUrl);
-
-  // Handle Delete
-  function handleDelete(id) {
-    localStorage.setItem(
-      "posts",
-      JSON.stringify(posts.filter((post) => post.id !== id))
-    );
-    setPosts((curPosts) => curPosts.filter((post) => post.id !== id));
-  }
 
   return (
     <section className="blog-wrapper">
@@ -36,7 +28,7 @@ export default function BlogPage({ searchParams }) {
               title={post.title}
               content={post.body}
               views={post.views}
-              onDelete={handleDelete}
+              onDelete={() => handleDelete(posts, "posts", post.id, setPosts)}
             />
           ))}
         </ul>

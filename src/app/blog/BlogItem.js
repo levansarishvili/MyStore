@@ -25,7 +25,7 @@ export default function BlogItem({ id, title, content, views, onDelete }) {
           <Link className="blog__link" href={`/blog/${id}`}>
             <Button className="btn blog-btn" name="Read more" />
           </Link>
-          <DeleteButton onDelete={onDelete} id={id} />
+          <DeleteButton onDelete={onDelete} />
         </div>
       </div>
     </li>
