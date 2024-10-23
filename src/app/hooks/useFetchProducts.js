@@ -18,7 +18,7 @@ export default function useFetchProducts(productsUrl) {
             const response = await fetch(productsUrl);
             const productsData = await response.json();
             localStorage.setItem(
-              "posts",
+              "products",
               JSON.stringify(productsData.products)
             );
             localStorage.setItem("productsUrl", productsUrl);
