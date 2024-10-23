@@ -1,10 +1,9 @@
-export function handleDelete(list, listName, id, setlist) {
-  // Update localStorage
-  localStorage.setItem(
-    listName,
-    JSON.stringify(list.filter((single) => single.id !== id))
-  );
+export const handleDelete = (posts, storageKey, postId, setPosts) => {
+  const updatedPosts = posts.filter((post) => post.id !== postId);
+  setPosts(updatedPosts);
 
-  // Update the state
-  setlist((curList) => curList.filter((single) => single.id !== id));
-}
+  // update local storage
+  const savedPosts = JSON.parse(localStorage.getItem(storageKey)) || [];
+  const updatedSavedPosts = savedPosts.filter((post) => post.id !== postId);
+  localStorage.setItem(storageKey, JSON.stringify(updatedSavedPosts));
+};
