@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Button from "../../components/Button";
+import Button from "../../components/buttons/Button";
 import Loading from "../../loading";
 import "./LoginPage.css";
 
@@ -21,7 +21,7 @@ export default function LoginPage() {
     } else {
       setLoading(false);
     }
-  }, [router]);
+  }, []);
 
   // Function to check if the user credentials are correct
   async function checkAuth(username, password) {

@@ -1,5 +1,5 @@
 import "./PageNotFound.css";
-import Button from "./Button";
+import Button from "./buttons/Button";
 import Link from "next/link";
 
 export default function PageNotFound() {

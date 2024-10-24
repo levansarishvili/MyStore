@@ -9,7 +9,7 @@
   margin: 0 auto;
   padding: 0 4rem;
 }
-
+ 
 .blog-wrapper {
   display: flex;
   flex-direction: column;
@@ -20,11 +20,11 @@
   font-size: 2.4rem;
   text-align: center;
 }
-
+ 
 .section-header {
   font-size: 2.8rem;
 }
-
+ 
 .blog__page-content {
   display: flex;
   gap: 8rem;
@@ -32,7 +32,7 @@
   justify-content: space-between;
   width: 100%;
 }
-
+ 
 .blog__list {
   list-style: none;
   display: grid;
@@ -40,7 +40,7 @@
   column-gap: 6rem;
   row-gap: 6rem;
 }
-
+ 
 .blog__list__item {
   position: relative;
   max-width: 45rem;
@@ -55,12 +55,12 @@
   cursor: pointer;
   height: 30rem;
 }
-
+ 
 .blog__list__item:hover {
   box-shadow: 0 0 10px 3px #e9ecef;
   background-color: #ec5e2a22;
 }
-
+ 
 .blog__img {
   width: 100%;
   border-radius: 10px 10px 0 0;
@@ -68,11 +68,11 @@
   opacity: 0.9;
   transition: opacity 0.3s;
 }
-
+ 
 .blog__list__item:hover .blog__img {
   opacity: 1;
 }
-
+ 
 .blog__content {
   padding: 0 2rem;
   display: flex;
@@ -82,54 +82,59 @@
   gap: 3rem;
   height: 100%;
 }
-
+ 
 .blog__title {
   font-size: 1.8rem;
   color: #495057;
   font-weight: 600;
 }
-
+ 
 .blog__txt {
   font-size: 1.4rem;
   line-height: 2rem;
-
+ 
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   line-clamp: 4;
   overflow: hidden;
 }
-
+ 
 .blog__views-wrapper {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-
+ 
 .post-icon.blog-page {
   width: 2rem;
   height: 2rem;
 }
-
+ 
 .post-icon.blog-page path {
   fill: #ec5e2a;
 }
-
+ 
 .blog__views {
   font-size: 1.4rem;
   font-weight: 500;
 }
-
+ 
 .blog__link {
   max-width: 15rem;
 }
-
+ 
 .blog-btn {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-
+ 
+/* Post add form */
+.blog__form-wrapper {
+  max-width: 30rem;
+}
+ 
 .new-post-form {
   display: flex;
   flex-direction: column;
@@ -139,9 +144,10 @@
   border: 1px solid #dcdee0;
   border-radius: 0.5rem;
   background-color: #f1f3f5;
-  width: 500px;
+  width: 100%;
+  margin-top: 0.2rem;
 }
-
+ 
 .new-post-form input,
 .new-post-form textarea {
   padding: 0.8rem;
@@ -150,12 +156,12 @@
   font-size: 1.4rem;
   outline: none;
 }
-
+ 
 .new-post-form input:hover,
 .new-post-form textarea:hover {
   border: 1px solid #ec5e2a;
 }
-
+ 
 .new-post-form button {
   padding: 0.8rem;
   background-color: #ec5e2a;
@@ -165,7 +171,7 @@
   font-size: 1.6rem;
   cursor: pointer;
 }
-
+ 
 textarea {
   resize: none;
 }

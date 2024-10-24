@@ -1,7 +1,7 @@
 "use client";
 
 import "./ProductDetails.css";
-import Button from "../../../components/Button";
+import Button from "../../../components/buttons/Button";
 import Image from "next/image";
 
 export default function ProductDetails({ product }) {
@@ -14,11 +14,6 @@ export default function ProductDetails({ product }) {
         {/* Product Details */}
 
         <div className="product-img-wrapper">
-          {/* <img
-            className="product-details__img"
-            src={product.thumbnail}
-            alt={product.title}
-          /> */}
           <Image
             className="product-details__img"
             src={product.thumbnail}

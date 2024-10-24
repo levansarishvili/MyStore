@@ -1,0 +1,54 @@
+.product-form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.product-add-form-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.product-add-input {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  outline: none;
+  width: 20rem;
+  transition: all 0.3s;
+}
+
+.product-add-input:hover {
+  border: 1px solid #ec5e2a;
+}
+
+.product-add-form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #ec5e2a;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 15rem;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+
+.product-add-form-btn:hover {
+  background-color: #ec5e2ae9;
+}
