@@ -1,0 +1,8 @@
+.logout-btn{
+    padding: 8px;
+    width: 2.8rem;
+    height: 2.8rem;
+}
+.logout-btn:hover svg{
+    fill: #ec5e2a;
+}
