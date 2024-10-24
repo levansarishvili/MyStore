@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Button from "../../components/Button";
 import DeleteButton from "../../components/DeleteButton";
+import EditButton from "../../components/EditButton";
 
 // Product card component
 export default function ProductItem({
@@ -12,6 +13,7 @@ export default function ProductItem({
     stock,
     price,
     onDelete,
+    onEdit,
   }) {
     let stockStatus = "";
     if (availabilityStatus === "In Stock") {
@@ -53,6 +55,7 @@ export default function ProductItem({
         </Link>
         <div className="buttons">
           <Button className="btn" name="Add to cart" />
+          <EditButton onEdit={onEdit} id={id}/>
           <DeleteButton onDelete={onDelete} />
         </div>
       </div>
