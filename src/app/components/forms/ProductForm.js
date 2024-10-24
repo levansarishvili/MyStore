@@ -62,14 +62,17 @@ export default function ProductForm({ products, setProducts }) {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="availabilityStatus">Availability:</label>
-        <input
-          type="text"
-          id="availabilityStatus"
-          value={availabilityStatus}
-          onChange={(e) => setAvailabilityStatus(e.target.value)}
-          required
-        />
+        <label>
+          Availability Status:
+          <select
+            value={availabilityStatus}
+            onChange={(e) => setAvailabilityStatus(e.target.value)}
+          >
+            <option value="in stock">In Stock</option>
+            <option value="out of stock">Out of Stock</option>
+            <option value="low stock">Low Stock</option>
+          </select>
+        </label>
       </div>
       <div className="form-group">
         <label htmlFor="inStock">Stock Quantity:</label>
