@@ -72,60 +72,46 @@ export default function LoginPage() {
   }
 
   return (
-    <>
-      <header className="login-header">
-        <img
-          className="login-header__logo"
-          src="../assets/logo.svg"
-          alt="Logo"
-        />
-      </header>
+    <div className="login-page__wrapper">
+      <h1 className="section-header">Login form</h1>
 
-      <div className="login-page__wrapper">
-        <h1 className="section-header">Welcome back</h1>
+      {/* Login form */}
+      <div className="login-form-wrapper">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label className="login-input__label" htmlFor="username">
+            <p className="login-label__txt">Username:</p>
+            <input
+              value={username}
+              className="login-input"
+              type="text"
+              id="username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <label className="login-input__label" htmlFor="password">
+            <p className="login-label__txt">Password:</p>
+            <input
+              value={password}
+              className="login-input"
+              type="password"
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <Button type="submit" className=" login-button" name="Sign in" />
+        </form>
 
-        {/* Login form */}
-        <div className="login-form-wrapper">
-          <form className="login-form" onSubmit={handleSubmit}>
-            <label className="login-input__label" htmlFor="username">
-              <p className="login-label__txt">Username:</p>
-              <input
-                value={username}
-                className="login-input"
-                type="text"
-                id="username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </label>
-            <label className="login-input__label" htmlFor="password">
-              <p className="login-label__txt">Password:</p>
-              <input
-                value={password}
-                className="login-input"
-                type="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <Button type="submit" className=" login-button" name="Sign in" />
-          </form>
-
-          {/* Display error */}
-          {error && <p className="error-message">{error}</p>}
-          <div className="login-footer">
-            <p className="login-footer-txt">
-              Forgot <span className="highlight">Username / Password</span>?
-            </p>
-            <p className="login-footer-txt">
-              Don't have an account? <span className="highlight">Sign Up</span>
-            </p>
-          </div>
+        {/* Display error */}
+        {error && <p className="error-message">{error}</p>}
+        <div className="login-footer">
+          <p className="login-footer-txt">
+            Forgot <span className="highlight">Username / Password</span>?
+          </p>
+          <p className="login-footer-txt">
+            Don't have an account? <span className="highlight">Sign Up</span>
+          </p>
         </div>
       </div>
-
-      <footer className="login-page-footer">
-        <p className="login-page-footer__txt">Georgia, Copyright &copy; 2024</p>
-      </footer>
-    </>
+    </div>
   );
 }

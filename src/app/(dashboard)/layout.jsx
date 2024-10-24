@@ -21,9 +21,7 @@ export default function DashboardLayout({ children }) {
       }
     };
 
-    if (typeof window !== "undefined") {
-      checkAuthentication();
-    }
+    checkAuthentication();
   }, []);
 
   // Render loading state until authentication check is done
