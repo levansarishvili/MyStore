@@ -10,6 +10,7 @@ import { handleEdit } from "../../components/functions/handleEdit";
 import "../../mediaQueries.css";
 import ProductItem from "./ProductItem";
 import ProductEditForm from "../../components/forms/ProductEditForm";
+import ProductForm from "../../components/forms/ProductForm";
 
 export default function Store({ searchParams }) {
   // Extract query parameters
@@ -37,6 +38,9 @@ export default function Store({ searchParams }) {
         />
       ) : null}
       <h1 className="section__header">Products</h1>
+
+      <ProductForm products={products} setProducts={setProducts} />
+
       <div className="product__page-content">
         <ProductFilter />
         <div className="product__list">
