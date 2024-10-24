@@ -45,11 +45,15 @@ export default function BlogPage({ searchParams }) {
         />
       ) : null}
       <h1 className="section-header">Blogs</h1>
-      <BlogForm
-        onAddPost={(newPost) => handleAddPost(newPost, posts, setPosts)}
-      />
+ 
       <div className="blog__page-content">
-        <BlogFilter />
+        <div className="blog__form-wrapper">
+          <BlogForm
+            onAddPost={(newPost) => handleAddPost(newPost, posts, setPosts)}
+          />
+          <BlogFilter />
+        </div>
+ 
         <ul className="blog__list">
           {posts.map((post) => (
             <BlogItem
