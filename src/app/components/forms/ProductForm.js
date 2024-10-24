@@ -68,9 +68,9 @@ export default function ProductForm({ products, setProducts }) {
             value={availabilityStatus}
             onChange={(e) => setAvailabilityStatus(e.target.value)}
           >
-            <option value="in stock">In Stock</option>
-            <option value="out of stock">Out of Stock</option>
-            <option value="low stock">Low Stock</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Out of stock">Out of Stock</option>
+            <option value="Low Stock">Low Stock</option>
           </select>
         </label>
       </div>
