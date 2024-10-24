@@ -2,7 +2,8 @@
 import Button from "../../components/Button";
 import Link from "next/link";
 import DeleteButton from "../../components/DeleteButton";
-export default function BlogItem({ id, title, content, views, onDelete }) {
+import EditButton from "../../components/EditButton"
+export default function BlogItem({ id, title, content, views, onDelete, onEdit }) {
   return (
     <li className="blog__list__item">
       <div className="blog__content">
@@ -25,6 +26,7 @@ export default function BlogItem({ id, title, content, views, onDelete }) {
           <Link className="blog__link" href={`/blog/${id}`}>
             <Button className="btn blog-btn" name="Read more" />
           </Link>
+          <EditButton onEdit={onEdit} id={id}/>
           <DeleteButton onDelete={onDelete} />
         </div>
       </div>
