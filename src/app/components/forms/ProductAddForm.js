@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { handleAddProduct } from "../functions/handleAddProduct";
+import "./ProductAddForm.css";
 
 export default function ProductForm({ products, setProducts }) {
   const [title, setTitle] = useState("");
@@ -30,8 +31,11 @@ export default function ProductForm({ products, setProducts }) {
   return (
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="title">Product Title:</label>
+        <label className="product-add-form-label" htmlFor="title">
+          Product Title:
+        </label>
         <input
+          className="product-add-input"
           type="text"
           id="title"
           value={title}
@@ -40,8 +44,11 @@ export default function ProductForm({ products, setProducts }) {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="price">Price:</label>
+        <label className="product-add-form-label" htmlFor="price">
+          Price:
+        </label>
         <input
+          className="product-add-input"
           type="number"
           id="price"
           value={price}
@@ -50,21 +57,26 @@ export default function ProductForm({ products, setProducts }) {
         />
       </div>
       <div className="form-group">
-        <label>
+        <label className="product-add-form-label" htmlFor="availabilityStatus">
           Availability Status:
-          <select
-            value={availabilityStatus}
-            onChange={(e) => setAvailabilityStatus(e.target.value)}
-          >
-            <option value="In Stock">In Stock</option>
-            <option value="Out of stock">Out of Stock</option>
-            <option value="Low Stock">Low Stock</option>
-          </select>
         </label>
+        <select
+          className="product-add-input"
+          value={availabilityStatus}
+          onChange={(e) => setAvailabilityStatus(e.target.value)}
+          id="availabilityStatus"
+        >
+          <option value="In Stock">In Stock</option>
+          <option value="Out of stock">Out of Stock</option>
+          <option value="Low Stock">Low Stock</option>
+        </select>
       </div>
       <div className="form-group">
-        <label htmlFor="inStock">Stock Quantity:</label>
+        <label className="product-add-form-label" htmlFor="inStock">
+          Stock Quantity:
+        </label>
         <input
+          className="product-add-input"
           type="number"
           id="inStock"
           value={inStock}
@@ -72,7 +84,8 @@ export default function ProductForm({ products, setProducts }) {
           required
         />
       </div>
-      <button type="submit" className="submit-button">
+
+      <button type="submit" className="product-add-form-btn">
         Add Product
       </button>
     </form>
