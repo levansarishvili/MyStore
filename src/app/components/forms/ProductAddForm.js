@@ -32,7 +32,7 @@ export default function ProductForm({ products, setProducts }) {
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label className="product-add-form-label" htmlFor="title">
-          Product Title:
+          Product Title
         </label>
         <input
           className="product-add-input"
@@ -45,7 +45,7 @@ export default function ProductForm({ products, setProducts }) {
       </div>
       <div className="form-group">
         <label className="product-add-form-label" htmlFor="price">
-          Price:
+          Price
         </label>
         <input
           className="product-add-input"
@@ -58,7 +58,7 @@ export default function ProductForm({ products, setProducts }) {
       </div>
       <div className="form-group">
         <label className="product-add-form-label" htmlFor="availabilityStatus">
-          Availability Status:
+          Availability Status
         </label>
         <select
           className="product-add-input"
@@ -73,7 +73,7 @@ export default function ProductForm({ products, setProducts }) {
       </div>
       <div className="form-group">
         <label className="product-add-form-label" htmlFor="inStock">
-          Stock Quantity:
+          Stock Quantity
         </label>
         <input
           className="product-add-input"

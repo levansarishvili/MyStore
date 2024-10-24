@@ -87,12 +87,16 @@
   color: #fff;
   border-radius: 1rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    opacity 0.3s ease;
   font-family: inherit;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .login-button:hover {
   background-color: #ec5e2a;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
 }
 
 .login-footer {

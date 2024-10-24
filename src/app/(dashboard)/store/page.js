@@ -39,10 +39,12 @@ export default function Store({ searchParams }) {
       ) : null}
       <h1 className="section__header">Products</h1>
 
-      <ProductForm products={products} setProducts={setProducts} />
-
       <div className="product__page-content">
-        <ProductFilter />
+        <div className="product__settings-wrapper">
+          <ProductForm products={products} setProducts={setProducts} />
+          <ProductFilter />
+        </div>
+
         <div className="product__list">
           {products.map((product) => (
             <ProductItem

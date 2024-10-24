@@ -1,77 +1,74 @@
 /* Post edit form */
 .product-edit-form {
-    position: fixed;
-    z-index: 10;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 80rem;
-    width: 100%;
-    padding: 8rem;
-    border-radius: 1rem;
-    border: 1px solid #e9ecef;
-    color: #e9ecef;
-    cursor: pointer;
-    transition: all 0.3s;
-    background-color: #495057ed;
-    font-size: 1.8rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3rem;
-  }
-  
-  
-  .product-edit-input-wrapper {
-    display: flex;
-    gap: 4rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  
-  .product-edit-form-input {
-    width: 40rem;
-    padding: 1rem 2rem;
-    font-family: inherit;
-    outline: none;
-    border: 2px solid #495057;
-    transition: all 0.3s;
-    border-radius: 0.5rem;
-  }
-  
-  
-  .product-edit-form-input:focus {
-    border: 2px solid #ec5e2a;
-  }
-  
-  
-  .product-edit-form-btn {
-    width: 30rem;
-  }
-  
-  
-  .product-edit-form-content {
-    height: 14rem;
-  }
-  
-  
-  .product-edit-form-close-btn {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    background-color: #ec5e2a;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-    color: #fff;
-  }
-  
-  
-  .product-edit-form-close-btn:hover {
-    background-color: #fff;
-    color: #000;
-  }
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80rem;
+  width: 100%;
+  padding: 8rem;
+  border-radius: 1rem;
+  border: 1px solid #e9ecef;
+  color: #e9ecef;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #495057ed;
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.product-edit-input-wrapper {
+  width: 100%;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-edit-form-input {
+  width: 40rem;
+  padding: 1rem 2rem;
+  font-family: inherit;
+  outline: none;
+  border: 2px solid #495057;
+  transition: all 0.3s;
+  border-radius: 0.5rem;
+}
+
+.product-edit-form-input:focus {
+  border: 2px solid #ec5e2a;
+}
+
+.product-edit-form-btn {
+  width: 20rem;
+  height: 4rem;
+  margin-top: 2rem;
+}
+
+.product-edit-form-content {
+  height: 14rem;
+}
+
+.product-edit-form-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #ec5e2a;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  color: #fff;
+}
+
+.product-edit-form-close-btn:hover {
+  background-color: #fff;
+  color: #000;
+}

@@ -48,9 +48,9 @@ export default function LoginPage() {
       // If login is successful, store authentication status and navigate to home
       localStorage.setItem("isAuth", JSON.stringify(true));
       localStorage.setItem("accessToken", data.accessToken);
+
       router.push("/home");
     } catch (error) {
-      console.error(error);
       setError("Invalid username or password. Please try again.");
     } finally {
       setLoading(false);
@@ -107,7 +107,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <Button type="submit" className="btn login-button" name="Sign in" />
+            <Button type="submit" className=" login-button" name="Sign in" />
           </form>
 
           {/* Display error */}

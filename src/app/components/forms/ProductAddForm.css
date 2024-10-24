@@ -1,31 +1,39 @@
 .product-form {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
+  background-color: #f1f3f5;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid #dcdee0;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
+  width: 100%;
 }
 
 .product-add-form-label {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 
 .product-add-input {
-  padding: 1rem;
+  padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1.2rem;
   outline: none;
   width: 20rem;
   transition: all 0.3s;
+  width: 100%;
+  cursor: pointer;
 }
 
 .product-add-input:hover {
@@ -36,7 +44,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.8rem;
   background-color: #ec5e2a;
   color: white;
   border: none;
@@ -44,11 +52,15 @@
   cursor: pointer;
   font-size: 1.4rem;
   font-weight: 500;
-  width: 15rem;
+  width: 12rem;
   font-family: inherit;
-  transition: all 0.3s;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    opacity 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-add-form-btn:hover {
-  background-color: #ec5e2ae9;
+  background-color: #ec5e2a;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
 }

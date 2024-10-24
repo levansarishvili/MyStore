@@ -97,31 +97,6 @@ a {
   opacity: 1;
 }
 
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  background-color: #ec5e2a;
-  border: 2px solid #ec5e2a;
-
-  color: #fff;
-
-  font-size: 1.4rem;
-  font-weight: 500;
-  padding: 1rem 2rem;
-  border-radius: 1.2rem;
-  font-family: inherit;
-  transition: all 0.3s;
-  height: 5rem;
-}
-
-.btn:hover {
-  background-color: #fff;
-  color: #000;
-}
-
 .header__icons {
   display: flex;
   gap: 1.5rem;

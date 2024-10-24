@@ -32,6 +32,12 @@
   gap: 8rem;
 }
 
+.product__settings-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
 .product__list {
   flex: 1;
   display: grid;

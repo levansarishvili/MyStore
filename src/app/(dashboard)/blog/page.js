@@ -26,13 +26,6 @@ export default function BlogPage({ searchParams }) {
   const [active, setActive] = useState(false);
   const [currentPost, setCurrentPost] = useState({});
 
-  useEffect(() => {
-    const savedPosts = JSON.parse(localStorage.getItem("posts"));
-    if (savedPosts) {
-      setPosts(savedPosts);
-    }
-  }, [setPosts]);
-
   return (
     <section className="blog-wrapper">
       {/* Conditionally render edit form */}
@@ -45,7 +38,7 @@ export default function BlogPage({ searchParams }) {
         />
       ) : null}
       <h1 className="section-header">Blogs</h1>
- 
+
       <div className="blog__page-content">
         <div className="blog__form-wrapper">
           <BlogForm
@@ -53,7 +46,7 @@ export default function BlogPage({ searchParams }) {
           />
           <BlogFilter />
         </div>
- 
+
         <ul className="blog__list">
           {posts.map((post) => (
             <BlogItem
