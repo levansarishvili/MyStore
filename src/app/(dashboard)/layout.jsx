@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }) {
     if (typeof window !== "undefined") {
       checkAuthentication();
     }
-  }, [router]);
+  }, []);
 
   // Render loading state until authentication check is done
   if (isLoading) {

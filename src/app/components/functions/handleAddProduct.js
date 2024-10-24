@@ -2,29 +2,36 @@ export function handleAddProduct(
   list,
   listName,
   setList,
-  id,
   title,
   price,
   availabilityStatus,
   inStock
 ) {
-  if (!id || !title || !price || !availabilityStatus || !inStock) {
+  if (!title || !price || !availabilityStatus || !inStock) {
     alert("Please fill out all fields before adding the product.");
     return;
   }
 
-  // create a new product object
+  // Calculate the next ID
+  let nextId = 200;
+  if (list.length > 0) {
+    const highestId = Math.max(...list.map((product) => product.id));
+    nextId = highestId + 1;
+  }
+
+  // Create a new product object
   const newProduct = {
-    id: parseInt(id, 10),
+    id: nextId,
     title: title.trim(),
     price: parseFloat(price),
     availabilityStatus: availabilityStatus.trim(),
     stock: parseInt(inStock, 10),
   };
 
-  // update localStorage
-  localStorage.setItem(listName, JSON.stringify([newProduct, ...list]));
+  // Update localStorage
+  const updatedList = [newProduct, ...list];
+  localStorage.setItem(listName, JSON.stringify(updatedList));
 
-  // update the state
-  setList((curList) => [newProduct, ...curList]);
+  // Update the state
+  setList(updatedList);
 }

@@ -10,7 +10,7 @@ import { handleEdit } from "../../components/functions/handleEdit";
 import "../../mediaQueries.css";
 import ProductItem from "./ProductItem";
 import ProductEditForm from "../../components/forms/ProductEditForm";
-import ProductForm from "../../components/forms/ProductForm";
+import ProductForm from "../../components/forms/ProductAddForm";
 
 export default function Store({ searchParams }) {
   // Extract query parameters

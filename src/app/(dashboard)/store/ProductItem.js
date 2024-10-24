@@ -31,7 +31,7 @@ export default function ProductItem({
         <div className="product__img-wrapper">
           <Image
             className="product__img"
-            src={imageSrc}
+            src={imageSrc || "/assets/placeholder-img.png"}
             alt={name}
             width={100}
             height={100}

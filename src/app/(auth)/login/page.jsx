@@ -21,7 +21,7 @@ export default function LoginPage() {
     } else {
       setLoading(false);
     }
-  }, [router]);
+  }, []);
 
   // Function to check if the user credentials are correct
   async function checkAuth(username, password) {
@@ -42,12 +42,12 @@ export default function LoginPage() {
       if (!res.ok) {
         throw new Error("Invalid username or password. Please try again.");
       }
+
       const data = await res.json();
 
       // If login is successful, store authentication status and navigate to home
       localStorage.setItem("isAuth", JSON.stringify(true));
       localStorage.setItem("accessToken", data.accessToken);
-
       router.push("/home");
     } catch (error) {
       console.error(error);
