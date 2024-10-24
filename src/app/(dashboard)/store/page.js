@@ -1,41 +1,33 @@
 "use client";
 
-
-import ProductFilter from "../../components/ProductFilter";
-
+import ProductFilter from "../../components/filters/ProductFilter";
 import "./Store.css";
 import useProductsUrl from "../../hooks/useProductsUrl";
 import useFetchProducts from "../../hooks/useFetchProducts";
 import { useState } from "react";
-import { handleDelete } from "../../components/handleDelete";
-import { handleEdit } from "../../components/handleEdit";
+import { handleDelete } from "../../components/functions/handleDelete";
+import { handleEdit } from "../../components/functions/handleEdit";
 import "../../mediaQueries.css";
-import ProductItem from "./ProductItem"
-import ProductEditForm from "../../components/ProductEditForm";
+import ProductItem from "./ProductItem";
+import ProductEditForm from "../../components/forms/ProductEditForm";
 
 export default function Store({ searchParams }) {
-  // Extracting search query from searchParams
+  // Extract query parameters
   const searchQuery = searchParams?.search ?? "";
-
-  // Extracting category filter query from searchParams
   const filter = searchParams?.category ?? "all";
-
-  // Extracting sort query from searchParams
   const sortOptions = searchParams?.sortBy ?? "";
 
+  // Create products URL and fetch products
   const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
-
   const { products, setProducts } = useFetchProducts(productsUrl);
 
-  // for edit form
-
-  const [currentProduct, setCurrentProduct] = useState({})
+  // For edit form
+  const [currentProduct, setCurrentProduct] = useState({});
   const [active, setActive] = useState(false);
-
 
   return (
     <section className="product__page-wrapper">
-      {/* conditional rendering  */}
+      {/* Conditional rendering of edit form */}
       {active ? (
         <ProductEditForm
           currentProduct={currentProduct}
@@ -77,5 +69,3 @@ export default function Store({ searchParams }) {
     </section>
   );
 }
-
-

@@ -3,29 +3,28 @@
 
 import "./Blog.css";
 import BlogItem from "./BlogItem";
-import BlogFilter from "../../components/BlogFilter";
-
+import BlogFilter from "../../components/filters/BlogFilter";
 import usePostsUrl from "../../hooks/usePostUrl";
 import useFetchPosts from "../../hooks/useFetchPosts";
-import { handleDelete } from "../../components/handleDelete";
-import { handleAddPost } from "../../components/handleAddPost";
-import { handleEdit } from "../../components/handleEdit";
+import { handleDelete } from "../../components/functions/handleDelete";
+import { handleAddPost } from "../../components/functions/handleAddPost";
+import { handleEdit } from "../../components/functions/handleEdit";
 import { useState, useEffect } from "react";
-import BlogForm from "./BlogForm";
-import PostEditForm from "../../components/PostEditForm";
+import BlogForm from "../../components/forms/BlogAddForm";
+import PostEditForm from "../../components/forms/PostEditForm";
 
 export default function BlogPage({ searchParams }) {
+  // Extract query parameters
   const searchQuery = searchParams?.search ?? "";
   const sortOptions = searchParams?.sortBy ?? "";
 
+  // Create posts URL and fetch posts
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
   const { posts, setPosts } = useFetchPosts(postsUrl);
 
-// for edit form
-
+  // For edit form
   const [active, setActive] = useState(false);
   const [currentPost, setCurrentPost] = useState({});
-
 
   useEffect(() => {
     const savedPosts = JSON.parse(localStorage.getItem("posts"));
@@ -33,8 +32,6 @@ export default function BlogPage({ searchParams }) {
       setPosts(savedPosts);
     }
   }, [setPosts]);
-
-
 
   return (
     <section className="blog-wrapper">

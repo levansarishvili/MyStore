@@ -1,7 +1,7 @@
 // "use client";
 import Link from "next/link";
 import Navigation from "../components/Navigation.js";
-import Button from "../components/Button.js";
+import Button from "../components/buttons/Button.js";
 import "./Header.css";
 
 // Create Header component

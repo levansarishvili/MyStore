@@ -3,12 +3,12 @@ import { useState } from "react";
 export default function BlogForm({ onAddPost }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [views, setViews] = useState(""); 
+  const [views, setViews] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // create a new post object
+    // ჩreate a new post object
     const newPost = {
       id: Date.now(),
       title,
@@ -18,7 +18,7 @@ export default function BlogForm({ onAddPost }) {
 
     setTitle("");
     setContent("");
-    setViews(0); 
+    setViews(0);
 
     onAddPost(newPost);
   };
