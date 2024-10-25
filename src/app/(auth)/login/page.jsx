@@ -15,7 +15,7 @@ export default function LoginPage() {
 
   // Redirect if user is already logged in
   useEffect(() => {
-    const isLoggedIn = JSON.parse(localStorage.getItem("isAuth")); // Parse boolean value
+    const isLoggedIn = JSON.parse(localStorage.getItem("isAuth"));
     if (isLoggedIn) {
       router.push("/home");
     } else {
@@ -48,7 +48,6 @@ export default function LoginPage() {
       // If login is successful, store authentication status and navigate to home
       localStorage.setItem("isAuth", JSON.stringify(true));
       localStorage.setItem("accessToken", data.accessToken);
-
       router.push("/home");
     } catch (error) {
       setError("Invalid username or password. Please try again.");

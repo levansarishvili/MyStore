@@ -22,7 +22,7 @@ export default function useProductsUrl(searchQuery, sortOptions, filter) {
     } else if (filter !== "all") {
       productsUrl = `https://dummyjson.com/product/category/${filter}`;
     }
-    setProductsUrl(productsUrl);
+    setProductsUrl(() => productsUrl);
   }, [searchQuery, sortOptions, filter]);
 
   return productsUrl;

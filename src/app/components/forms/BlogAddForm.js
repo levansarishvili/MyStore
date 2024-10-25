@@ -8,7 +8,7 @@ export default function BlogForm({ onAddPost }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ჩreate a new post object
+    // Create a new post object
     const newPost = {
       id: Date.now(),
       title,

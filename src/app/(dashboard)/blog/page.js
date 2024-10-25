@@ -10,7 +10,7 @@ import { handleDelete } from "../../components/functions/handleDelete";
 import { handleAddPost } from "../../components/functions/handleAddPost";
 import { handleEdit } from "../../components/functions/handleEdit";
 import { useState } from "react";
-import BlogForm from "../../components/forms/BlogAddForm";
+import BlogAddForm from "../../components/forms/BlogAddForm";
 import PostEditForm from "../../components/forms/PostEditForm";
 
 export default function BlogPage() {
@@ -42,7 +42,7 @@ export default function BlogPage() {
 
       <div className="blog__page-content">
         <div className="blog__form-wrapper">
-          <BlogForm
+          <BlogAddForm
             onAddPost={(newPost) => handleAddPost(newPost, posts, setPosts)}
           />
           <BlogFilter />

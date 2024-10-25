@@ -25,7 +25,7 @@ export function handleAddProduct(
     title: title.trim(),
     price: parseFloat(price),
     availabilityStatus: availabilityStatus.trim(),
-    stock: parseInt(inStock, 10),
+    stock: parseInt(inStock),
   };
 
   // Update localStorage

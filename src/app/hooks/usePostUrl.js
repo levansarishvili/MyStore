@@ -17,7 +17,7 @@ export default function usePostsUrl(searchQuery, sortOptions) {
       const [sortByValue, orderValue] = sortOptions.split("-");
       url = `https://dummyjson.com/posts?sortBy=${sortByValue}&order=${orderValue}`;
     }
-    setPostsUrl(url);
+    setPostsUrl(() => url);
   }, [searchQuery, sortOptions]);
 
   return postsUrl;

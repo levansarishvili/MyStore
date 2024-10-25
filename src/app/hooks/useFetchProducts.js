@@ -10,7 +10,7 @@ export default function useFetchProducts(productsUrl) {
     const savedProductsUrl = localStorage.getItem("productsUrl");
 
     if (savedProducts !== "undefined" && savedProductsUrl === productsUrl) {
-      setProducts(JSON.parse(savedProducts));
+      setProducts(() => JSON.parse(savedProducts));
     } else {
       const fetchData = async () => {
         try {
@@ -21,7 +21,7 @@ export default function useFetchProducts(productsUrl) {
             JSON.stringify(productsData.products)
           );
           localStorage.setItem("productsUrl", productsUrl);
-          setProducts(productsData.products);
+          setProducts(() => productsData.products);
         } catch (error) {
           console.error("Failed to fetch data", error);
         }
