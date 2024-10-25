@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import ProductFilter from "../../components/filters/ProductFilter";
 import "./Store.css";
 import useProductsUrl from "../../hooks/useProductsUrl";
@@ -12,11 +13,12 @@ import ProductItem from "./ProductItem";
 import ProductEditForm from "../../components/forms/ProductEditForm";
 import ProductForm from "../../components/forms/ProductAddForm";
 
-export default function Store({ searchParams }) {
-  // Extract query parameters
-  const searchQuery = searchParams?.search ?? "";
-  const filter = searchParams?.category ?? "all";
-  const sortOptions = searchParams?.sortBy ?? "";
+export default function Store() {
+  // Access search params directly
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search") ?? "";
+  const filter = searchParams.get("category") ?? "all";
+  const sortOptions = searchParams.get("sortBy") ?? "";
 
   // Create products URL and fetch products
   const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
