@@ -1,17 +1,16 @@
 "use client";
- 
+
 import "./LogoutButton.css";
 import { useRouter } from "next/navigation";
- 
+
 export default function LogoutButton() {
   const router = useRouter();
- 
+
   const logoutHandler = () => {
-    localStorage.removeItem("isAuth");
-    localStorage.removeItem("accessToken");
+    localStorage.clear();
     router.push("/login");
   };
- 
+
   return (
     <div className="logout-btn" onClick={logoutHandler}>
       <svg
@@ -27,4 +26,3 @@ export default function LogoutButton() {
     </div>
   );
 }
- 

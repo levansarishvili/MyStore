@@ -1,8 +1,8 @@
 "use client";
- 
+
 import { useState } from "react";
 import "./ProductEditForm.css";
- 
+
 // Product edit form
 export default function ProductEditForm({
   setActive,
@@ -16,11 +16,11 @@ export default function ProductEditForm({
     currentProduct.availabilityStatus
   );
   const [stock, setFormStock] = useState(currentProduct.stock);
-  console.log(currentProduct);
- 
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
- 
+
     // Update the current product in the products list
     const updatedProducts = products.map((product) =>
       product.id === currentProduct.id
@@ -33,29 +33,27 @@ export default function ProductEditForm({
           }
         : product
     );
- 
+
     // Update the products state
     setProducts(updatedProducts);
- 
+
     // Update localStorage with the updated products list
     localStorage.setItem("products", JSON.stringify(updatedProducts));
- 
-    // Close the form
     setActive(false);
   };
- 
+
   // Handle close form
   const handleCloseForm = (e) => {
     e.preventDefault();
     setActive(false);
   };
- 
+
   return (
     <form className="product-edit-form" onSubmit={handleSubmit}>
       <button className="product-edit-form-close-btn" onClick={handleCloseForm}>
         X
       </button>
- 
+
       <div className="product-edit-input-wrapper">
         <label className="label" htmlFor="title">
           Title
@@ -69,7 +67,7 @@ export default function ProductEditForm({
           name="title"
         />
       </div>
- 
+
       <div className="product-edit-input-wrapper">
         <label className="label" htmlFor="stockStatus">
           Availability Status
@@ -78,13 +76,14 @@ export default function ProductEditForm({
           value={availabilityStatus}
           onChange={(e) => setFormAvailabilityStatus(e.target.value)}
           className="product-edit-form-input"
+          id="stockStatus"
         >
           <option>Low Stock</option>
           <option> In Stock</option>
           <option> Out of Stock</option>
         </select>
       </div>
- 
+
       <div className="product-edit-input-wrapper">
         <label className="label" htmlFor="stock">
           Stock
@@ -97,7 +96,7 @@ export default function ProductEditForm({
           id="stock"
         />
       </div>
- 
+
       <div className="product-edit-input-wrapper">
         <label className="label" htmlFor="price">
           Price
@@ -110,11 +109,10 @@ export default function ProductEditForm({
           id="price"
         />
       </div>
- 
+
       <button className="btn product-edit-form-btn" type="submit">
         Save Changes
       </button>
     </form>
   );
 }
- 
