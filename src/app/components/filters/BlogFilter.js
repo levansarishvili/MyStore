@@ -23,14 +23,14 @@ export default function PostFilter() {
   function handleSort(sortOption) {
     const params = new URLSearchParams(searchParams);
     params.set("sortBy", sortOption);
-    router.push(`${pathName}?${params.toString()}`, { scroll: false });
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
   // Handle Product search with debounced callback
   const handleSearch = useDebouncedCallback((e) => {
     const params = new URLSearchParams(searchParams);
     params.set("search", e.target.value);
-    router.push(`${pathName}?${params.toString()}`, { scroll: false });
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }, 400);
 
   return (
