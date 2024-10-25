@@ -1,6 +1,6 @@
 "use client";
-// import Loading from "./loading";
 
+import { useSearchParams } from "next/navigation";
 import "./Blog.css";
 import BlogItem from "./BlogItem";
 import BlogFilter from "../../components/filters/BlogFilter";
@@ -9,14 +9,15 @@ import useFetchPosts from "../../hooks/useFetchPosts";
 import { handleDelete } from "../../components/functions/handleDelete";
 import { handleAddPost } from "../../components/functions/handleAddPost";
 import { handleEdit } from "../../components/functions/handleEdit";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import BlogForm from "../../components/forms/BlogAddForm";
 import PostEditForm from "../../components/forms/PostEditForm";
 
-export default function BlogPage({ searchParams }) {
-  // Extract query parameters
-  const searchQuery = searchParams?.search ?? "";
-  const sortOptions = searchParams?.sortBy ?? "";
+export default function BlogPage() {
+  // Access search params directly
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("search") ?? "";
+  const sortOptions = searchParams.get("sortBy") ?? "";
 
   // Create posts URL and fetch posts
   const postsUrl = usePostsUrl(searchQuery, sortOptions);
