@@ -14,7 +14,7 @@ export default function LoginPage() {
   const router = useRouter();
 
   const loadingRedirect = useAuthRedirect();
-  const { checkAuth, loading, error } = useAuth();
+  const { checkAuth, loading, error, setError } = useAuth();
 
   // Handle form submission
   async function handleSubmit(e) {

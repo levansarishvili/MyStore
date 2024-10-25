@@ -39,5 +39,5 @@ export function useAuth() {
     }
   };
 
-  return { checkAuth, loading, error };
+  return { checkAuth, loading, error, setError };
 }
