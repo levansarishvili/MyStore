@@ -1,72 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../../components/buttons/Button";
 import Loading from "../../loading";
+import { useAuthRedirect } from "../../hooks/useAuthRedirect";
+import { useAuth } from "../../hooks/useAuth";
 import "./LoginPage.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Redirect if user is already logged in
-  useEffect(() => {
-    const isLoggedIn = JSON.parse(localStorage.getItem("isAuth"));
-    if (isLoggedIn) {
-      router.push("/home");
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
-  // Function to check if the user credentials are correct
-  async function checkAuth(username, password) {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const res = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          password,
-          expiresInMins: 60 * 24 * 7,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Invalid username or password. Please try again.");
-      }
-
-      const data = await res.json();
-
-      // If login is successful, store authentication status and navigate to home
-      localStorage.setItem("isAuth", JSON.stringify(true));
-      localStorage.setItem("accessToken", data.accessToken);
-      router.push("/home");
-    } catch (error) {
-      setError("Invalid username or password. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const loadingRedirect = useAuthRedirect();
+  const { checkAuth, loading, error, setError } = useAuth();
 
   // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
-    if (username && password) {
-      checkAuth(username, password);
-    } else {
+    if (!username || !password) {
       setError("Please enter both username and password.");
+      return;
+    }
+    const success = await checkAuth(username, password);
+    if (success) {
+      router.push("/home");
     }
   }
 
-  if (loading) {
+  if (loadingRedirect || loading) {
     return <Loading />;
   }
 
