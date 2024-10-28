@@ -11,7 +11,7 @@ import { handleEdit } from "../../components/functions/handleEdit";
 import "../../mediaQueries.css";
 import ProductItem from "./ProductItem";
 import ProductEditForm from "../../components/forms/ProductEditForm";
-import ProductForm from "../../components/forms/ProductAddForm";
+import ProductAddForm from "../../components/forms/ProductAddForm";
 
 export default function Store() {
   // Access search params directly
@@ -43,7 +43,7 @@ export default function Store() {
 
       <div className="product__page-content">
         <div className="product__settings-wrapper">
-          <ProductForm products={products} setProducts={setProducts} />
+          <ProductAddForm products={products} setProducts={setProducts} />
           <ProductFilter />
         </div>
 
