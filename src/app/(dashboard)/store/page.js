@@ -2,7 +2,6 @@
 
 import { useSearchParams } from "next/navigation";
 import ProductFilter from "../../components/filters/ProductFilter";
-import "./Store.css";
 import useProductsUrl from "../../hooks/useProductsUrl";
 import useFetchProducts from "../../hooks/useFetchProducts";
 import { useState } from "react";
@@ -29,7 +28,7 @@ export default function Store() {
   const [active, setActive] = useState(false);
 
   return (
-    <section className="product__page-wrapper">
+    <section className="product__page-wrapper flex flex-col items-center gap-20 w-full">
       {/* Conditional rendering of edit form */}
       {active ? (
         <ProductEditForm
@@ -39,15 +38,15 @@ export default function Store() {
           setActive={setActive}
         />
       ) : null}
-      <h1 className="section__header">Products</h1>
+      <h1 className="section__header text-5xl font-semibold">Products</h1>
 
-      <div className="product__page-content">
-        <div className="product__settings-wrapper">
+      <div className="product__page-content flex items-start justify-between w-full gap-32">
+        <div className="product__settings-wrapper flex flex-col gap-16">
           <ProductAddForm products={products} setProducts={setProducts} />
           <ProductFilter />
         </div>
 
-        <div className="product__list">
+        <div className="product__list flex gap-16 flex-wrap justify-center">
           {products.map((product) => (
             <ProductItem
               key={product.id}

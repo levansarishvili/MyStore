@@ -1,5 +1,9 @@
 /* @import url("https://free.bboxtype.com/embedfonts/?family=FiraGO:400"); */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -77,9 +81,4 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #ec5e2a;
-}
-
-.buttons {
-  display: flex;
-  gap: 1rem;
 }
