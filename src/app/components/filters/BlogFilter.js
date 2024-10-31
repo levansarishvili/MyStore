@@ -2,7 +2,6 @@
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import "./BlogFilter.css";
 
 export default function PostFilter() {
   const sortOptions = [
@@ -34,28 +33,34 @@ export default function PostFilter() {
   }, 400);
 
   return (
-    <div className="post-filter-wrapper">
+    <div className="post-filter-wrapper flex flex-col gap-8 rounded-2xl w-[30rem] p-8 border bg-[#f1f3f5]">
       {/* Searching functionality */}
-      <div className="post-search-wrapper">
-        <label className="search-title" htmlFor="search">
+      <div className="post-search-wrapper flex flex-col items-start gap-4 w-full">
+        <label
+          className="search-title text-3xl font-semibold cursor-pointer"
+          htmlFor="search"
+        >
           Search Product:
         </label>
         <input
           id="search"
-          className="post-search"
+          className="post-search border px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
           placeholder="Search post.."
           onChange={handleSearch}
         ></input>
       </div>
 
       {/* Sorting functionality */}
-      <div className="post-sort-wrapper">
-        <label className="sort-title" htmlFor="sort">
+      <div className="post-sort-wrapper flex flex-col items-start gap-4 w-full">
+        <label
+          className="sort-title text-3xl font-semibold cursor-pointer"
+          htmlFor="sort"
+        >
           Sort By:
         </label>
         <select
           id="sort"
-          className="post-sort"
+          className="post-sort border px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
           value={activeSort}
           onChange={(e) => handleSort(e.target.value)}
         >

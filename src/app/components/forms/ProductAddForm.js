@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { handleAddProduct } from "../functions/handleAddProduct";
-import "./ProductAddForm.css";
 
 export default function ProductForm({ products, setProducts }) {
   const [title, setTitle] = useState("");
@@ -29,13 +28,19 @@ export default function ProductForm({ products, setProducts }) {
   };
 
   return (
-    <form className="product-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label className="product-add-form-label" htmlFor="title">
+    <form
+      className="product-form flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl border"
+      onSubmit={handleSubmit}
+    >
+      <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
+        <label
+          className="product-add-form-label text-[1.6rem] font-semibold"
+          htmlFor="title"
+        >
           Product Title
         </label>
         <input
-          className="product-add-input"
+          className="product-add-input w-full p-3 border border-gray-300 rounded-md text-xl outline-none transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="text"
           id="title"
           value={title}
@@ -43,12 +48,15 @@ export default function ProductForm({ products, setProducts }) {
           required
         />
       </div>
-      <div className="form-group">
-        <label className="product-add-form-label" htmlFor="price">
+      <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
+        <label
+          className="product-add-form-label text-[1.6rem] font-semibold"
+          htmlFor="price"
+        >
           Price
         </label>
         <input
-          className="product-add-input"
+          className="product-add-input p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
           id="price"
           value={price}
@@ -56,12 +64,15 @@ export default function ProductForm({ products, setProducts }) {
           required
         />
       </div>
-      <div className="form-group">
-        <label className="product-add-form-label" htmlFor="availabilityStatus">
+      <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
+        <label
+          className="product-add-form-label text-[1.6rem] font-semibold"
+          htmlFor="availabilityStatus"
+        >
           Availability Status
         </label>
         <select
-          className="product-add-input"
+          className="product-add-input p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           value={availabilityStatus}
           onChange={(e) => setAvailabilityStatus(e.target.value)}
           id="availabilityStatus"
@@ -71,12 +82,15 @@ export default function ProductForm({ products, setProducts }) {
           <option value="Low Stock">Low Stock</option>
         </select>
       </div>
-      <div className="form-group">
-        <label className="product-add-form-label" htmlFor="inStock">
+      <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
+        <label
+          className="product-add-form-label text-[1.6rem] font-semibold"
+          htmlFor="inStock"
+        >
           Stock Quantity
         </label>
         <input
-          className="product-add-input"
+          className="product-add-input p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
           id="inStock"
           value={inStock}
@@ -85,7 +99,10 @@ export default function ProductForm({ products, setProducts }) {
         />
       </div>
 
-      <button type="submit" className="product-add-form-btn">
+      <button
+        type="submit"
+        className="product-add-form-btn flex items-center justify-center p-3 bg-[#ec5e2a] text-white border-none rounded-md cursor-pointer text-[1.4rem] font-medium w-48 transition-all duration-300 hover:bg-white hover:text-[#ec5e2a] hover:shadow-md"
+      >
         Add Product
       </button>
     </form>

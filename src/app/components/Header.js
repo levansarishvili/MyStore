@@ -3,31 +3,33 @@ import Link from "next/link";
 import Navigation from "../components/Navigation.js";
 import Button from "../components/buttons/Button.js";
 import LogoutButton from "./buttons/LogoutButton.js";
-import "./Header.css";
 
 // Create Header component
 function Header() {
   return (
-    <header className="header">
-      <div className="header__wrapper">
+    <header
+      className="header flex items-center bg-[#f1f3f5]
+    shadow-md sticky top-0 z-10"
+    >
+      <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
         <Link href="/home">
           <img
             src="../assets/logo.svg"
             alt="Georgia national football team logo"
-            className="header__logo"
+            className="header__logo h-16"
           ></img>
         </Link>
 
-        <nav className="header__nav">
-          <Navigation navListClass="nav__list" navItemClass="list__item" />
+        <nav className="header__nav flex items-center gap-12">
+          <Navigation />
         </nav>
 
         {/* Profile and Shopping cart icons */}
-        <div className="header__icons">
+        <div className="header__icons flex gap-6 cursor-pointer items-center justify-center">
           <Link href="/profile">
-            <div className="account-wrapper">
+            <div className="account-wrapper flex justify-center items-center p-3  text-2xl group">
               <svg
-                className="header__icon"
+                className="header__icon w-12 h-12 group-hover:fill-[#ec5e2a] transition-all duration-300"
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"
@@ -39,9 +41,9 @@ function Header() {
             </div>
           </Link>
 
-          <div className="cart-wrapper">
+          <div className="cart-wrapper flex justify-center items-center p-3 rounded-full text-2xl group">
             <svg
-              className="header__icon"
+              className="header__icon w-12 h-12 group-hover:transition-all group-hover:fill-[#ec5e2a] transition-all duration-300"
               xmlns="http://www.w3.org/2000/svg"
               width="32"
               height="32"

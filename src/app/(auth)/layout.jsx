@@ -11,17 +11,18 @@ export default function AuthLayout({ children }) {
     <>
       <header className="login-header">
         <img
-          className="login-header__logo"
+          className="login-header__logo ml-32 mt-4 w-60"
           src="../assets/logo.svg"
           alt="Logo"
-          style={{ marginLeft: "8rem", marginTop: "1rem" }}
         />
       </header>
 
-      <main className="main">{children}</main>
+      <main className="main max-w-[144rem] mx-auto my-0 px-16 py-0 flex flex-col items-center">
+        {children}
+      </main>
 
       <footer className="login-page-footer">
-        <p style={{ textAlign: "center" }} className="login-page-footer__txt">
+        <p className="login-page-footer__txt text-center">
           Georgia, Copyright &copy; 2024
         </p>
       </footer>

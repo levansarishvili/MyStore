@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import "./Home.css";
 import Loading from "../../loading";
 
 export default function HomePage() {
@@ -47,15 +46,19 @@ export default function HomePage() {
   }
 
   return (
-    <div className="home-wrapper">
+    <div className="home-wrapper max-w-[144rem] mx-auto my-0 px-16 py-0 flex flex-col items-center justify-center gap-16 h-[35rem] text-center">
       <h1 className="section-header">
-        Welcome to <strong className="highlight">E-shop</strong> ecommerce
-        website 👋
+        Welcome to{" "}
+        <strong className="highlight text-[#ec5e2a] font-bold">E-shop</strong>
+        ecommerce website 👋
       </h1>
       {user ? (
-        <p className="home-txt">
-          Hello, <strong className="highlight">{user.firstName}</strong>!
-          Explore the app and manage your products and blog posts.
+        <p className="home-txt text-3xl">
+          Hello,{" "}
+          <strong className="highlight text-[#ec5e2a] font-bold">
+            {user.firstName}
+          </strong>
+          ! Explore the app and manage your products and blog posts.
         </p>
       ) : (
         <p className="home-txt">You are not logged in.</p>

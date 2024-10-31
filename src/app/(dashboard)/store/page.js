@@ -7,7 +7,6 @@ import useFetchProducts from "../../hooks/useFetchProducts";
 import { useState } from "react";
 import { handleDelete } from "../../components/functions/handleDelete";
 import { handleEdit } from "../../components/functions/handleEdit";
-import "../../mediaQueries.css";
 import ProductItem from "./ProductItem";
 import ProductEditForm from "../../components/forms/ProductEditForm";
 import ProductAddForm from "../../components/forms/ProductAddForm";

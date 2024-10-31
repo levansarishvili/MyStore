@@ -1,63 +1,102 @@
-import "./About.css";
-// import "./CustomScrollbar.css";
-
 function About() {
   return (
-    <section className="about-wrapper">
-      <div className="project-overview">
-        <div className="overview-block">
-          <h1 className="section-header">Project Overview</h1>
-          <p className="overview-txt">
-            Welcome to <strong>E-Shop</strong>, your go-to destination for all
-            things sports! Whether you're a seasoned athlete or just starting
-            your fitness journey, we've got the gear you need to stay at the top
-            of your game. Our passion for sports drives us to provide the best
-            products from leading brands, ensuring you always have access to the
-            <span className="highlight-txt">
+    <section className="about-wrapper flex flex-col items-center justify-center gap-4 text-4xl text-center max-w-[80rem]">
+      <div className="project-overview flex flex-col gap-40">
+        <div className="overview-block flex flex-col gap-20">
+          <h1 className="section-header text-4xl font-semibold">
+            Project Overview
+          </h1>
+          <p className="overview-txt text-[1.6rem]">
+            Welcome to
+            <strong className="highlight-txt text-[#ec5e2a] font-bold">
+              E-Shop
+            </strong>
+            , your go-to destination for all things sports! Whether you're a
+            seasoned athlete or just starting your fitness journey, we've got
+            the gear you need to stay at the top of your game. Our passion for
+            sports drives us to provide the best products from leading brands,
+            ensuring you always have access to the
+            <span className="highlight-txt text-[#ec5e2a] font-medium">
               &nbsp;highest quality equipment and apparel.
             </span>
           </p>
         </div>
 
-        <div className="overview-block">
-          <h2 className="overview-subheader">Website Pages</h2>
-          <ul className="tech-list">
-            <li className="tech-list__item">Home</li>
-            <li className="tech-list__item">About</li>
-            <li className="tech-list__item">Products</li>
-            <li className="tech-list__item">Blogs</li>
-            <li className="tech-list__item"> Contact</li>
-            <li className="tech-list__item"> Buy Now</li>
+        <div className="overview-block flex flex-col gap-16">
+          <h2 className="overview-subheader text-3xl font-semibold">
+            Website Pages
+          </h2>
+          <ul className="tech-list list-none text-3xl grid grid-cols-3 gap-x-8 gap-y-10 content-center justify-items-center">
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Home
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              About
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Products
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Blogs
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Contact
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Buy Now
+            </li>
           </ul>
         </div>
 
-        <div className="overview-block">
-          <h2 className="overview-subheader">Used Technologies</h2>
-          <ul className="tech-list">
-            <li className="tech-list__item">HTML</li>
-            <li className="tech-list__item">CSS</li>
-            <li className="tech-list__item">Javascript</li>
-            <li className="tech-list__item">React.js</li>
-            <li className="tech-list__item">React Router</li>
-            <li className="tech-list__item">Next.js</li>
-            <li className="tech-list__item">NPM</li>
-            <li className="tech-list__item">Git/Github</li>
-            <li className="tech-list__item">Netlify</li>
+        <div className="overview-block flex flex-col gap-16">
+          <h2 className="overview-subheader text-3xl font-semibold">
+            Used Technologies
+          </h2>
+          <ul className="tech-list list-none text-3xl grid grid-cols-3 gap-x-8 gap-y-10 content-center justify-items-center">
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              HTML
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              CSS
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Javascript
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              React.js
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              React Router
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Next.js
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              NPM
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Git/Github
+            </li>
+            <li className="tech-list__item border rounded-xl w-80 p-4 cursor-pointer transition-all duration-300 hover:text-white hover:bg-[#ec5e2a]">
+              Netlify
+            </li>
           </ul>
         </div>
 
-        <div className="overview-block">
-          <h2 className="overview-subheader">Author - Levan Sarishvili</h2>
-          <ul className="author-list">
-            <li className="author-list__item">
+        <div className="overview-block flex flex-col gap-16">
+          <h2 className="overview-subheader text-3xl font-semibold">
+            Author - Levan Sarishvili
+          </h2>
+          <ul className="author-list list-none flex justify-center gap-20">
+            <li className="author-list__item flex items-center gap-4">
               <a
                 rel="noreferrer"
                 target="_blank"
-                className="author-link"
+                className="author-link flex items-center gap-8 text-3xl transition-all duration-300 hover:text-[#ec5e2a] group"
                 href="https://www.linkedin.com/in/levan-s-b87245b1/"
               >
                 <svg
-                  className="author__icon"
+                  className="author__icon h-12 group-hover:fill-[#ec5e2a] transition-all duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -66,15 +105,15 @@ function About() {
                 Linkedin ➡
               </a>
             </li>
-            <li className="author-list__item">
+            <li className="author-list__item flex items-center gap-4">
               <a
                 rel="noreferrer"
                 target="_blank"
-                className="author-link"
+                className="author-link flex items-center gap-8 text-3xl transition-all duration-300 hover:text-[#ec5e2a] group"
                 href="https://github.com/levansarishvili"
               >
                 <svg
-                  className="author__icon"
+                  className="author__icon h-12 group-hover:fill-[#ec5e2a] transition-all duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >

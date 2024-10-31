@@ -1,41 +1,45 @@
-import "./Contact.css";
 import Button from "../../components/buttons/Button";
 
 function Contact() {
   return (
-    <section className="contact-wrapper">
+    <section className="contact-wrapper flex flex-col items-center gap-20">
       {/* Contact Form */}
-      <h1 className="section-header">Contact</h1>
-      <div className="contact-content">
-        <div className="contact-form-wrapper">
-          <h2 className="contact-form__title">Get in touch</h2>
-          <form action="" className="contact-form">
+      <h1 className="section-header text-4xl font-semibold">Contact</h1>
+      <div className="contact-content grid grid-cols-2 h-full border rounded-2xl hover:shadow-lg bg-[#f1f3f5] transition-all duration-300">
+        <div className="contact-form-wrapper flex flex-col items-center justify-center gap-16 p-16">
+          <h2 className="contact-form__title text-[2.2rem] font-semibold">
+            Get in touch
+          </h2>
+          <form
+            action=""
+            className="contact-form flex flex-col gap-6 items-center justify-center flex-wrap"
+          >
             <input
               type="text"
               name=""
               id=""
-              className="contact-input"
+              className="contact-input w-[35rem] h-12 rounded-md border outline-none border-gray-300 px-4 py-6 text-[1.4rem] transition-all duration-300 focus:border-[#ec5e2a]"
               placeholder="Name"
             />
             <input
               type="text"
               name=""
               id=""
-              className="contact-input"
+              className="contact-input w-[35rem] h-12 rounded-md border outline-none border-gray-300 px-4 py-6 text-[1.4rem] transition-all duration-300 focus:border-[#ec5e2a]"
               placeholder="Email"
             />
             <input
               type="text"
               name=""
               id=""
-              className="contact-input"
+              className="contact-input outlined-none w-[35rem] h-12 rounded-md border outline-none border-gray-300 px-4 py-6 text-[1.4rem] transition-all duration-300 focus:border-[#ec5e2a]"
               placeholder="Phone"
             />
             <textarea
               type=""
               name=""
               id=""
-              className="contact-input text-input"
+              className="contact-input w-[35rem] outline-none rounded-md border border-gray-300 px-4 py-6 text-[1.4rem] text-input h-40 transition-all duration-300 focus:border-[#ec5e2a]"
               placeholder="Write text"
             />
             <Button className="btn" name="Send" />
@@ -43,14 +47,16 @@ function Contact() {
         </div>
 
         {/* Contact Info */}
-        <div className="contact-info">
-          <h2 className="contact-info__title">Contact info</h2>
+        <div className="contact-info flex flex-col items-center justify-start gap-16 p-16 h-full">
+          <h2 className="contact-info__title text-[2.2rem] font-semibold">
+            Contact info
+          </h2>
 
-          <ul className="contact__list">
-            <li className="contact__list__item">
-              <span className="contact__icon-wrapper">
+          <ul className="contact__list flex flex-col gap-20">
+            <li className="contact__list__item flex items-center gap-8 text-[1.6rem]">
+              <span className="contact__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full bg-[#ec5e2a]">
                 <svg
-                  className="contact__icon"
+                  className="contact__icon w-8 h-8 fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -60,10 +66,10 @@ function Contact() {
 
               <p>Tbilisi 0179, Chavchavadze street #12</p>
             </li>
-            <li className="contact__list__item">
-              <span className="contact__icon-wrapper">
+            <li className="contact__list__item flex items-center gap-8 text-[1.6rem]">
+              <span className="contact__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full bg-[#ec5e2a]">
                 <svg
-                  className="contact__icon"
+                  className="contact__icon w-8 h-8 fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -72,10 +78,10 @@ function Contact() {
               </span>
               <p>032 227 26 40</p>
             </li>
-            <li className="contact__list__item">
-              <span className="contact__icon-wrapper">
+            <li className="contact__list__item flex items-center gap-8 text-[1.6rem]">
+              <span className="contact__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full bg-[#ec5e2a]">
                 <svg
-                  className="contact__icon"
+                  className="contact__icon w-8 h-8 fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >

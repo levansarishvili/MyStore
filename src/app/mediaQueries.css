@@ -1,6 +1,0 @@
-/* Media queries for responsive design */
-@media (max-width: 1400px) {
-  .product__list {
-    grid-template-columns: 1fr 1fr;
-  }
-}

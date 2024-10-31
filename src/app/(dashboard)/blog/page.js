@@ -1,7 +1,6 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import "./Blog.css";
 import BlogItem from "./BlogItem";
 import BlogFilter from "../../components/filters/BlogFilter";
 import usePostsUrl from "../../hooks/usePostUrl";
@@ -28,7 +27,7 @@ export default function BlogPage() {
   const [currentPost, setCurrentPost] = useState({});
 
   return (
-    <section className="blog-wrapper">
+    <section className="blog-wrapper flex flex-col items-center w-full gap-20 h-full text-center">
       {/* Conditionally render edit form */}
       {active ? (
         <PostEditForm
@@ -38,17 +37,17 @@ export default function BlogPage() {
           setPosts={setPosts}
         />
       ) : null}
-      <h1 className="section-header">Blogs</h1>
+      <h1 className="section-header text-4xl font-semibold">Blogs</h1>
 
-      <div className="blog__page-content">
-        <div className="blog__form-wrapper">
+      <div className="blog__page-content flex gap-32 items-start justify-between w-full">
+        <div className="blog__form-wrapper max-w-[30rem]">
           <BlogAddForm
             onAddPost={(newPost) => handleAddPost(newPost, posts, setPosts)}
           />
           <BlogFilter />
         </div>
 
-        <ul className="blog__list">
+        <ul className="blog__list list-none grid grid-cols-2 gap-x-24 gap-y-24">
           {posts.map((post) => (
             <BlogItem
               key={post.id}

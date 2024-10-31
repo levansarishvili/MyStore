@@ -1,31 +1,24 @@
-import Navigation from "./Navigation";
-import "./Footer.css";
-
 // Create Footer component
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer__wrapper">
+    <footer className="footer flex items-center text-gray-700 text-2xl bg-[#f1f3f5]">
+      <div className="footer__wrapper max-w-[144rem] mx-auto my-0 w-full h-full flex justify-between items-center px-16 py-0">
         {/* Footer logo */}
         <img
           src="../assets/logo.svg"
           alt="Georgia national football team logo"
-          className="footer__logo"
+          className="footer__logo h-24"
         ></img>
 
-        {/* Page Navigation */}
-        <Navigation
-          navListClass="footer__nav__list"
-          navItemClass="footer__nav__item"
-        />
-
-        {/* <p className="copyright">© Levan Sarishvili, Tbilisi, Georgia, 2024.</p> */}
+        <p className="copyright max-w-[30rem] text-center">
+          © Levan Sarishvili, Tbilisi, Georgia, 2024.
+        </p>
 
         {/* Social icons */}
-        <div className="social">
-          <span className="footer__icon-wrapper">
+        <div className="social flex justify-end gap-4">
+          <span className="footer__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full cursor-pointer bg-[#ec5e2ae2] transition-all duration-300 hover:bg-[#ec5e2a] ">
             <svg
-              className="social-icon"
+              className="social-icon w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -36,9 +29,9 @@ function Footer() {
             </svg>
           </span>
 
-          <span className="footer__icon-wrapper">
+          <span className="footer__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full cursor-pointer bg-[#ec5e2ae2] transition-all duration-300 hover:bg-[#ec5e2a]">
             <svg
-              className="social-icon"
+              className="social-icon w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
               width="32"
               height="32"
@@ -48,9 +41,9 @@ function Footer() {
               <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,72a24,24,0,1,1,24-24A24,24,0,0,1,128,152ZM176,20H80A60.07,60.07,0,0,0,20,80v96a60.07,60.07,0,0,0,60,60h96a60.07,60.07,0,0,0,60-60V80A60.07,60.07,0,0,0,176,20Zm36,156a36,36,0,0,1-36,36H80a36,36,0,0,1-36-36V80A36,36,0,0,1,80,44h96a36,36,0,0,1,36,36ZM196,76a16,16,0,1,1-16-16A16,16,0,0,1,196,76Z"></path>
             </svg>
           </span>
-          <span className="footer__icon-wrapper">
+          <span className="footer__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full cursor-pointer bg-[#ec5e2ae2] transition-all duration-300 hover:bg-[#ec5e2a]">
             <svg
-              className="social-icon"
+              className="social-icon w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
               fill="#fff"
@@ -58,9 +51,9 @@ function Footer() {
               <path d="M508.64 148.79c0-45-33.1-81.2-74-81.2C379.24 65 322.74 64 265 64h-18c-57.6 0-114.2 1-169.6 3.6C36.6 67.6 3.5 104 3.5 149 1 184.59-.06 220.19 0 255.79q-.15 53.4 3.4 106.9c0 45 33.1 81.5 73.9 81.5 58.2 2.7 117.9 3.9 178.6 3.8q91.2.3 178.6-3.8c40.9 0 74-36.5 74-81.5 2.4-35.7 3.5-71.3 3.4-107q.34-53.4-3.26-106.9zM207 353.89v-196.5l145 98.2z" />
             </svg>
           </span>
-          <span className="footer__icon-wrapper">
+          <span className="footer__icon-wrapper flex justify-center items-center w-12 h-12 rounded-full cursor-pointer bg-[#ec5e2ae2] transition-all duration-300 hover:bg-[#ec5e2a]">
             <svg
-              className="social-icon"
+              className="social-icon w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
               fill="#fff"
