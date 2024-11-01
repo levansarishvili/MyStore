@@ -29,7 +29,7 @@ export default function ProductForm({ products, setProducts }) {
 
   return (
     <form
-      className="product-form flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl border"
+      className="product-form dark:bg-[#313131] flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl border"
       onSubmit={handleSubmit}
     >
       <div className="form-group flex flex-col items-start justify-center gap-4 w-full">

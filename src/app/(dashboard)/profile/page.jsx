@@ -47,7 +47,7 @@ export default function ProfilePage() {
       <h1 className="section-header text-4xl font-semibold">My Account</h1>
 
       {/* Profile content */}
-      <div className="profile-content grid grid-cols-2 gap-x-40 w-full border rounded-2xl bg-[#f1f3f5] p-16">
+      <div className="profile-content dark:bg-[#313131] dark:text-[#f8f9fa] grid grid-cols-2 gap-x-40 w-full border rounded-2xl bg-[#f1f3f5] p-16">
         <div className="profile-media-wrapper flex flex-col items-center gap-16">
           <div className="profile__img-wrapper flex flex-col items-center gap-3">
             <div className="profile__img-box flex items-center justify-center w-40 h-40 rounded-full border-2 border-[#ec5e2a] overflow-hidden bg-white">
@@ -60,22 +60,20 @@ export default function ProfilePage() {
           </div>
 
           <div className="profile-txt-wrapper flex flex-col gap-12 items-start">
-            <p className="profile-txt text-[1.4rem] text-gray-900">
+            <p className="profile-txt text-[1.4rem]">
               Name: {user.firstName} {user.lastName}
             </p>
-            <p className="profile-txt text-[1.4rem] text-gray-900">
+            <p className="profile-txt text-[1.4rem]">
               Phone: {user.phone || "N/A"}
             </p>
-            <p className="profile-txt text-[1.4rem] text-gray-900">
-              Email: {user.email}
-            </p>
-            <p className="profile-txt text-[1.4rem] text-gray-900">
+            <p className="profile-txt text-[1.4rem]">Email: {user.email}</p>
+            <p className="profile-txt text-[1.4rem]">
               Address:
               <span>{user.address.address}</span>
               <span>{user.address.city}</span>
               <span>{user.address.country}</span>
             </p>
-            <p className="profile-txt text-[1.4rem] text-gray-900">
+            <p className="profile-txt text-[1.4rem]">
               Profession: {user.company.title}
             </p>
           </div>

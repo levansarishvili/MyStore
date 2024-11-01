@@ -11,16 +11,20 @@ export default function LogoutButton() {
   };
 
   return (
-    <div className="logout-btn w-12 h-12 group" onClick={logoutHandler}>
+    <div className="logout-btn w-10 h-10 group" onClick={logoutHandler}>
       <svg
-        className="header__icon group-hover:fill-[#ec5e2a] transition-all duration-300"
         xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        fill="#000000"
-        viewBox="0 0 256 256"
+        className="header__icon group-hover:stroke-[#ec5e2a] transition-all duration-300 dark:fill-white"
+        viewBox="0 0 512 512"
       >
-        <path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path>
+        <path
+          d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256"
+          fill="none"
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="32"
+        />
       </svg>
     </div>
   );

@@ -49,7 +49,7 @@ export default function ProductEditForm({
 
   return (
     <form
-      className="product-edit-form fixed z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[80rem] w-full p-32 border rounded-2xl cursor-pointer transition-all duration-300 bg-[#495057ed] text-3xl flex flex-col justify-center items-center gap-12"
+      className="product-edit-form dark:bg-[#313131] fixed z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[80rem] w-full p-32 border rounded-2xl cursor-pointer transition-all duration-300 bg-[#495057ed] text-3xl flex flex-col justify-center items-center gap-12"
       onSubmit={handleSubmit}
     >
       <button

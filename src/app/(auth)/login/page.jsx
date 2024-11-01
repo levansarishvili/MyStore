@@ -33,7 +33,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-page__wrapper border rounded-2xl p-16 flex flex-col items-center gap-12 max-w-fit transition-all duration-300 hover:shadow-lg cursor-pointer bg-gray-100">
+    <div className="login-page__wrapper dark:bg-[#313131] border rounded-2xl p-16 flex flex-col items-center gap-12 max-w-fit transition-all duration-300 hover:shadow-lg cursor-pointer bg-gray-100">
       <h1 className="section-header text-4xl font-semibold">Login form</h1>
 
       {/* Login form */}

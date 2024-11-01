@@ -25,7 +25,7 @@ export default function BlogForm({ onAddPost }) {
 
   return (
     <form
-      className="new-post-form flex flex-col gap-8 items-center mb-12 p-8 border rounded-2xl bg-[#f1f3f5] w-full mt-1"
+      className="new-post-form dark:bg-[#313131] flex flex-col gap-8 items-center mb-12 p-8 border rounded-2xl bg-[#f1f3f5] w-full mt-1"
       onSubmit={handleSubmit}
     >
       <div className="form-group flex flex-col items-start gap-4 w-full">

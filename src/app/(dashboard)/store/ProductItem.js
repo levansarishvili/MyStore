@@ -16,7 +16,7 @@ export default function ProductItem({
   onEdit,
 }) {
   return (
-    <div className="product-card group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[28rem] h-[32rem] border rounded-2xl hover:shadow-md hover:bg-[#ec5e2a22]">
+    <div className="product-card dark:bg-[#313131] group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[28rem] h-[32rem] border rounded-2xl hover:shadow-md hover:bg-[#ec5e2a22]">
       <Link
         className="product__link flex flex-col justify-center items-center gap-8"
         href={`/store/${id}`}
@@ -35,7 +35,7 @@ export default function ProductItem({
         </div>
 
         <div className="product-card__content flex flex-col gap-6 items-center">
-          <h2 className="product__title text-2xl text-gray-600 font-semibold">
+          <h2 className="product__title dark:text-[#f8f9fa] text-2xl text-gray-600 font-semibold">
             {name}
           </h2>
           <div className="product__desc flex flex-col gap-4">

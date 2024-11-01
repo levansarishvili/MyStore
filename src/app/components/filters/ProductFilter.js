@@ -70,7 +70,7 @@ function ProductFilter() {
   }, 400);
 
   return (
-    <div className="product-filter-wrapper flex flex-col gap-8 border rounded-2xl p-8 h-[50rem] w-[30rem] bg-[#f1f3f5]">
+    <div className="product-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 border rounded-2xl p-8 h-[50rem] w-[30rem] bg-[#f1f3f5]">
       {/* Searching functionality */}
       <div className="search-wrapper text-xl flex flex-col gap-4">
         <h2 className="filter-title text-3xl font-semibold">Search Product</h2>

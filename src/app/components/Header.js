@@ -3,12 +3,13 @@ import Link from "next/link";
 import Navigation from "../components/Navigation.js";
 import Button from "../components/buttons/Button.js";
 import LogoutButton from "./buttons/LogoutButton.js";
+import ColorTheme from "./ColorTheme";
 
 // Create Header component
 function Header() {
   return (
     <header
-      className="header flex items-center bg-[#f1f3f5]
+      className="header flex items-center bg-[#f1f3f5] dark:bg-[#313131] 
     shadow-md sticky top-0 z-10"
     >
       <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
@@ -26,10 +27,13 @@ function Header() {
 
         {/* Profile and Shopping cart icons */}
         <div className="header__icons flex gap-6 cursor-pointer items-center justify-center">
+          {/* Color Theme */}
+          <ColorTheme />
+
           <Link href="/profile">
             <div className="account-wrapper flex justify-center items-center p-3  text-2xl group">
               <svg
-                className="header__icon w-12 h-12 group-hover:fill-[#ec5e2a] transition-all duration-300"
+                className="header__icon w-10 h-10 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"
@@ -43,7 +47,7 @@ function Header() {
 
           <div className="cart-wrapper flex justify-center items-center p-3 rounded-full text-2xl group">
             <svg
-              className="header__icon w-12 h-12 group-hover:transition-all group-hover:fill-[#ec5e2a] transition-all duration-300"
+              className="header__icon w-10 h-10 group-hover:transition-all group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
               xmlns="http://www.w3.org/2000/svg"
               width="32"
               height="32"

@@ -12,9 +12,9 @@ export default function BlogItem({
   onEdit,
 }) {
   return (
-    <li className="blog__list__item relative max-w-[45rem] flex flex-col items-start gap-8 border p-8 rounded-2xl transition-all duration-300 cursor-pointer h-[30rem] hover:shadow-md hover:bg-[#ec5e2a22]">
+    <li className="blog__list__item dark:bg-[#313131] relative max-w-[45rem] flex flex-col items-start gap-8 border p-8 rounded-2xl transition-all duration-300 cursor-pointer h-[30rem] hover:shadow-md hover:bg-[#ec5e2a22]">
       <div className="blog__content w-full p-x-8 py-0 flex flex-col justify-between items-center gap-12 h-full">
-        <h2 className="blog__title text-3xl text-gray-700 font-semibold">
+        <h2 className="blog__title dark:text-[#f8f9fa] text-3xl text-gray-700 font-semibold">
           {title}
         </h2>
         <p className="blog__txt text-[1.4rem] line-clamp-3 text-start">
