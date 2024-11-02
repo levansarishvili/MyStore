@@ -29,18 +29,18 @@ function ColorTheme() {
 
   const colorThemes = [
     {
-      name: "OS Default",
+      name: "System",
       value: "system",
       icon: (
         <svg
-          className="theme-icon w-8 h-8 cursor-pointer"
+          className="theme-icon w-10 h-10 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
           fill="#000000"
           viewBox="0 0 256 256"
         >
-          <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM40,128a88.1,88.1,0,0,1,88-88V216A88.1,88.1,0,0,1,40,128Z"></path>
+          <path d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24h72v16H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V200h72a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40ZM48,56H208a8,8,0,0,1,8,8v80H40V64A8,8,0,0,1,48,56ZM208,184H48a8,8,0,0,1-8-8V160H216v16A8,8,0,0,1,208,184Z"></path>
         </svg>
       ),
     },
@@ -49,7 +49,7 @@ function ColorTheme() {
       value: "light",
       icon: (
         <svg
-          className="theme-icon w-8 h-8 cursor-pointer"
+          className="theme-icon w-10 h-10 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -65,14 +65,14 @@ function ColorTheme() {
       value: "dark",
       icon: (
         <svg
-          className="theme-icon w-8 h-8 cursor-pointer"
+          className="theme-icon w-10 h-10 cursor-pointer"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
           fill="#000000"
           viewBox="0 0 256 256"
         >
-          <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
+          <path d="M240,96a8,8,0,0,1-8,8H216v16a8,8,0,0,1-16,0V104H184a8,8,0,0,1,0-16h16V72a8,8,0,0,1,16,0V88h16A8,8,0,0,1,240,96ZM144,56h8v8a8,8,0,0,0,16,0V56h8a8,8,0,0,0,0-16h-8V32a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16Zm72.77,97a8,8,0,0,1,1.43,8A96,96,0,1,1,95.07,37.8a8,8,0,0,1,10.6,9.06A88.07,88.07,0,0,0,209.14,150.33,8,8,0,0,1,216.77,153Zm-19.39,14.88c-1.79.09-3.59.14-5.38.14A104.11,104.11,0,0,1,88,64c0-1.79,0-3.59.14-5.38A80,80,0,1,0,197.38,167.86Z"></path>
         </svg>
       ),
     },
@@ -81,7 +81,7 @@ function ColorTheme() {
   // Apply class from local storage on initial render
   useEffect(() => {
     const savedTheme = JSON.parse(localStorage.getItem("colorTheme"));
-    const currTheme = savedTheme || "system";
+    const currTheme = savedTheme || "";
     setColorTheme(currTheme);
     updateClass(currTheme);
   }, []);
@@ -93,11 +93,11 @@ function ColorTheme() {
   return (
     <div className="color-theme-wrapper flex items-center justify-center gap-4 relative">
       <div
-        className="active-color-theme flex items-center gap-2 text-gray-900 font-medium text-xl cursor-pointer transition-all duration-300 hover:bg-[#e9ecef] w-40 px-4 py-2 rounded-md"
+        className="active-color-theme flex items-center gap-2 text-gray-900 font-medium text-xl cursor-pointer transition-all duration-300 hover:bg-[#e9ecef] px-4 py-2 rounded-md"
         onClick={toggleDropdown}
       >
         {activeTheme.icon}
-        <p>Theme</p>
+        {/* <p>Theme</p> */}
       </div>
 
       {/* Color Theme Options */}
@@ -106,7 +106,7 @@ function ColorTheme() {
           {colorThemes.map((theme) => (
             <div
               key={theme.name}
-              className="color-theme-option flex items-center justify-start gap-3 text-gray-900 text-xl cursor-pointer transition-all duration-300 hover:bg-[#e9ecef] w-full px-2 py-1 rounded-md"
+              className="color-theme-option flex items-center justify-start gap-4 text-gray-900 text-xl cursor-pointer transition-all duration-300 hover:bg-[#e9ecef] w-full px-2 py-1 rounded-md"
               onClick={() => changeColorTheme(theme.value)}
             >
               {theme.icon}
