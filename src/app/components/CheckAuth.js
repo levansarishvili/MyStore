@@ -1,6 +1,5 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
-import Loading from "../loading";
 
 export default async function CheckAuth({ children }) {
   const session = await getSession();
