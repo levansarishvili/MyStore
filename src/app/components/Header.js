@@ -25,10 +25,6 @@ function Header() {
           <Navigation />
         </nav>
 
-        {/* Login and Logout */}
-        <a href="/api/auth/login">Login</a>
-        <a href="/api/auth/logout">Logout</a>
-
         {/* Profile and Shopping cart icons */}
         <div className="header__icons flex gap-6 cursor-pointer items-center justify-center">
           {/* Color Theme */}

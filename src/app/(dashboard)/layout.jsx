@@ -1,26 +1,16 @@
-"use client";
-
-import Header from "../components/Header.js";
-import Footer from "../components/Footer.js";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import "../../../src/global.css";
-import Loading from "../loading.js";
-import { useAuthCheck } from "../hooks/useAuthCheck.js";
+import CheckAuth from "../components/CheckAuth";
 
 export default function DashboardLayout({ children }) {
-  const isLoading = useAuthCheck();
-
-  // Render loading state until authentication check is done
-  if (isLoading) {
-    return <Loading />;
-  }
-
   return (
-    <>
+    <CheckAuth>
       <Header />
       <main className="main flex flex-col justify-center items-center gap-40 w-full max-w-[144rem] my-0 mx-auto px-16 py-0">
         {children}
       </main>
       <Footer />
-    </>
+    </CheckAuth>
   );
 }

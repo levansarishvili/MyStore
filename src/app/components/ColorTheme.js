@@ -14,7 +14,7 @@ function ColorTheme() {
   // Function to update class
   function updateClass(theme) {
     document.documentElement.classList.remove("light", "dark", "system");
-    document.documentElement.classList.add(theme);
+    // document.documentElement.classList.add(theme);
   }
 
   // Function to change color theme
