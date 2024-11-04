@@ -9,7 +9,7 @@ export default function ProductDetails({ product }) {
   return (
     <div className="product-details__wrapper flex flex-col items-center gap-20">
       <h1 className="section-header text-4xl font-semibold">Product Details</h1>
-      <div className="product-details__content flex justify-center items-center gap-32 border rounded-2xl p-16 transition-all duration-300 hover:shadow-lg hover:bg-[#ec5e2a22]">
+      <div className="product-details__content flex justify-center items-center gap-32 rounded-2xl p-16 transition-all duration-300 hover:shadow-lg bg-[#f1f3f5] dark:bg-[#313131] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a]">
         {/* Product Details */}
 
         <div className="product-img-wrapper flex justify-center items-center w-[35rem] overflow-hidden h-[30rem] transition-all duration-300">
@@ -68,7 +68,7 @@ export default function ProductDetails({ product }) {
       {/* Product Reviews */}
       <div className="reviews-wrapper flex flex-col items-center justify-center gap-12">
         <h2 className="review-header text-3xl font-semibold">Reviews</h2>
-        <div className="reviews-content flex gap-40 border rounded-2xl transition-all duration-300 hover:shadow-lg hover:bg-[#ec5e2a22]">
+        <div className="reviews-content flex gap-40 rounded-2xl transition-all duration-300 hover:shadow-lg bg-[#f1f3f5] dark:bg-[#313131] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a]">
           {reviews.map((review, index) => (
             <Review
               key={index}

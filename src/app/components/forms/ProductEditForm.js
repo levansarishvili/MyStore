@@ -66,7 +66,7 @@ export default function ProductEditForm({
         <input
           value={title}
           onChange={(e) => setFormTitle(e.target.value)}
-          className="product-edit-form-input w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
+          className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           type="text"
           id="title"
           name="title"
@@ -80,7 +80,7 @@ export default function ProductEditForm({
         <select
           value={availabilityStatus}
           onChange={(e) => setFormAvailabilityStatus(e.target.value)}
-          className="product-edit-form-input w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
+          className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           id="stockStatus"
         >
           <option>Low Stock</option>
@@ -96,7 +96,7 @@ export default function ProductEditForm({
         <input
           value={stock}
           onChange={(e) => setFormStock(e.target.value)}
-          className="product-edit-form-input w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
+          className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           type="number"
           id="stock"
         />
@@ -109,7 +109,7 @@ export default function ProductEditForm({
         <input
           value={price}
           onChange={(e) => setFormPrice(e.target.value)}
-          className="product-edit-form-input w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
+          className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           type="number"
           id="price"
         />

@@ -96,7 +96,7 @@ function About() {
                 href="https://www.linkedin.com/in/levan-s-b87245b1/"
               >
                 <svg
-                  className="author__icon h-12 group-hover:fill-[#ec5e2a] transition-all duration-300"
+                  className="author__icon h-12 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -113,7 +113,7 @@ function About() {
                 href="https://github.com/levansarishvili"
               >
                 <svg
-                  className="author__icon h-12 group-hover:fill-[#ec5e2a] transition-all duration-300"
+                  className="author__icon h-12 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >

@@ -53,7 +53,7 @@ export default async function ProfilePage() {
                 First Name*
               </label>
               <input
-                className="profile__input rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
+                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
                 type="text"
                 id="fname"
               />
@@ -66,7 +66,7 @@ export default async function ProfilePage() {
                 Last Name*
               </label>
               <input
-                className="profile__input rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
+                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
                 type="text"
                 id="lname"
               />
@@ -79,7 +79,7 @@ export default async function ProfilePage() {
                 Phone*
               </label>
               <input
-                className="profile__input rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
+                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
                 type="tel"
                 id="phone"
               />
@@ -92,7 +92,7 @@ export default async function ProfilePage() {
                 Email*
               </label>
               <input
-                className="profile__input rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
+                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
                 type="email"
                 id="email"
               />

@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
       <UserProvider>
-        <body className="dark:bg-[#1b1b1b] dark:text-[#f8f9fa]">
+        <body className="dark:bg-[#1f1f1f] dark:text-[#f8f9fa]">
           <div className="wrapper">
             <>{children}</>
           </div>

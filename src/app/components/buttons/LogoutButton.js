@@ -1,20 +1,16 @@
 export default function LogoutButton() {
   return (
     <a href="/api/auth/logout">
-      <div className="logout-btn w-10 h-10 group">
+      <div className="logout-btn group">
         <svg
+          className="header__icon w-10 h-10 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
           xmlns="http://www.w3.org/2000/svg"
-          className="header__icon group-hover:stroke-[#ec5e2a] transition-all duration-300 dark:fill-white"
-          viewBox="0 0 512 512"
+          width="32"
+          height="32"
+          fill="#000000"
+          viewBox="0 0 256 256"
         >
-          <path
-            d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256"
-            fill="none"
-            stroke="#000"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="32"
-          />
+          <path d="M120,128V48a8,8,0,0,1,16,0v80a8,8,0,0,1-16,0Zm60.37-78.7a8,8,0,0,0-8.74,13.4C194.74,77.77,208,101.57,208,128a80,80,0,0,1-160,0c0-26.43,13.26-50.23,36.37-65.3a8,8,0,0,0-8.74-13.4C47.9,67.38,32,96.06,32,128a96,96,0,0,0,192,0C224,96.06,208.1,67.38,180.37,49.3Z"></path>
         </svg>
       </div>
     </a>

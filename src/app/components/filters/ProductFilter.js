@@ -70,12 +70,12 @@ function ProductFilter() {
   }, 400);
 
   return (
-    <div className="product-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 border rounded-2xl p-8 h-[50rem] w-[30rem] bg-[#f1f3f5]">
+    <div className="product-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 rounded-2xl p-8 h-[50rem] w-[30rem] bg-[#f1f3f5]">
       {/* Searching functionality */}
       <div className="search-wrapper text-xl flex flex-col gap-4">
         <h2 className="filter-title text-3xl font-semibold">Search Product</h2>
         <input
-          className="product-search border border-gray-300 px-4 py-3 rounded-lg cursor-pointer outline-none transition-all duration-300 focus:border-[#ec5e2a]"
+          className="product-search dark:bg-[#4a4a4a] border border-gray-300 px-4 py-3 rounded-lg cursor-pointer outline-none transition-all duration-300 focus:border-[#ec5e2a]"
           placeholder="Search product.."
           onChange={handleSearch}
         ></input>
@@ -85,7 +85,7 @@ function ProductFilter() {
       <div className="sort-wrapper text-xl flex flex-col gap-4">
         <h2 className="filter-title text-3xl font-semibold">Sort By</h2>
         <select
-          className="sort-dropdown border border-gray-300 px-4 py-3 rounded-lg cursor-pointer outline-none transition-all duration-300 focus:border-[#ec5e2a]"
+          className="sort-dropdown dark:bg-[#4a4a4a] border border-gray-300 px-4 py-3 rounded-lg cursor-pointer outline-none transition-all duration-300 focus:border-[#ec5e2a]"
           value={activeSort}
           onChange={(e) => handleSort(e.target.value)}
         >
@@ -104,7 +104,7 @@ function ProductFilter() {
           {categories.map((category, index) => (
             <button
               key={category}
-              className={`filter__btn flex text-xl border-none px-4 py-2 w-72 rounded-lg cursor-pointer transition-all duration-300 hover:bg-[#ec5e2a] hover:text-white ${
+              className={`filter__btn dark:bg-[#4a4a4a] dark:text-white flex text-xl border-none px-4 py-2 w-72 rounded-lg cursor-pointer transition-all duration-300 hover:bg-[#ec5e2a] hover:text-white ${
                 category === activeCategory
                   ? "bg-[#ec5e2a] text-white"
                   : "bg-white text-black hover:bg-[#ec5e2a] hover:text-white"

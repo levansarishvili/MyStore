@@ -33,7 +33,7 @@ export default function PostFilter() {
   }, 400);
 
   return (
-    <div className="post-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 rounded-2xl w-[30rem] p-8 border bg-[#f1f3f5]">
+    <div className="post-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 rounded-2xl w-[30rem] p-8 bg-[#f1f3f5]">
       {/* Searching functionality */}
       <div className="post-search-wrapper flex flex-col items-start gap-4 w-full">
         <label
@@ -44,7 +44,7 @@ export default function PostFilter() {
         </label>
         <input
           id="search"
-          className="post-search border px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
+          className="post-search border dark:bg-[#4a4a4a] px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
           placeholder="Search post.."
           onChange={handleSearch}
         ></input>
@@ -60,7 +60,7 @@ export default function PostFilter() {
         </label>
         <select
           id="sort"
-          className="post-sort border px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
+          className="post-sort border dark:bg-[#4a4a4a] px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
           value={activeSort}
           onChange={(e) => handleSort(e.target.value)}
         >

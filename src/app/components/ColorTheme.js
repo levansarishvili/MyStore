@@ -46,7 +46,7 @@ function ColorTheme() {
       value: "system",
       icon: (
         <svg
-          className="theme-icon w-10 h-10 cursor-pointer"
+          className="theme-icon w-10 h-10 cursor-pointer dark:fill-white"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -62,7 +62,7 @@ function ColorTheme() {
       value: "light",
       icon: (
         <svg
-          className="theme-icon w-10 h-10 cursor-pointer"
+          className="theme-icon w-10 h-10 cursor-pointer dark:fill-white"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -78,7 +78,7 @@ function ColorTheme() {
       value: "dark",
       icon: (
         <svg
-          className="theme-icon w-10 h-10 cursor-pointer"
+          className="theme-icon w-10 h-10 cursor-pointer dark:fill-white"
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
@@ -106,7 +106,7 @@ function ColorTheme() {
   return (
     <div className="color-theme-wrapper flex items-center justify-center gap-4 relative">
       <div
-        className="active-color-theme flex items-center gap-2 text-gray-900 font-medium text-xl cursor-pointer transition-all duration-300 hover:bg-[#e9ecef] px-4 py-2 rounded-md"
+        className="active-color-theme flex items-center gap-2 text-gray-900 font-medium text-xl cursor-pointer transition-all duration-300 hover:bg-[#dee2e6] px-4 py-2 rounded-md dark:hover:bg-[#1b1b1b]"
         onClick={toggleDropdown}
       >
         {activeTheme.icon}
@@ -114,11 +114,11 @@ function ColorTheme() {
 
       {/* Color Theme Options */}
       {isDropdownOpen && (
-        <div className="color-theme-options-wrapper absolute z-20 top-16 w-52 p-4 flex flex-col items-start gap-3 border shadow-lg bg-[#f1f3f5] rounded-xl">
+        <div className="color-theme-options-wrapper absolute z-20 top-16 w-52 p-4 flex flex-col items-start gap-3 border shadow-lg bg-[#f1f3f5] rounded-xl dark:bg-[#313131]">
           {colorThemes.map((theme) => (
             <div
               key={theme.name}
-              className="color-theme-option flex items-center justify-start gap-4 text-gray-900 text-xl cursor-pointer transition-all duration-300 hover:bg-[#e9ecef] w-full px-2 py-1 rounded-md"
+              className="color-theme-option flex items-center justify-start gap-4 text-gray-900 text-xl cursor-pointer transition-all duration-300 hover:bg-[#dee2e6] w-full px-2 py-1 rounded-md dark:text-white dark:hover:bg-[#1b1b1b]"
               onClick={() => changeColorTheme(theme.value)}
             >
               {theme.icon}

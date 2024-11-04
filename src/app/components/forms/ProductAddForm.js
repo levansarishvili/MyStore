@@ -29,7 +29,7 @@ export default function ProductForm({ products, setProducts }) {
 
   return (
     <form
-      className="product-form dark:bg-[#313131] flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl border"
+      className="product-form dark:bg-[#313131] flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl"
       onSubmit={handleSubmit}
     >
       <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
@@ -40,7 +40,7 @@ export default function ProductForm({ products, setProducts }) {
           Product Title
         </label>
         <input
-          className="product-add-input w-full p-3 border border-gray-300 rounded-md text-xl outline-none transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
+          className="product-add-input dark:bg-[#4a4a4a] w-full p-3 border border-gray-300 rounded-md text-xl outline-none transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="text"
           id="title"
           value={title}
@@ -56,7 +56,7 @@ export default function ProductForm({ products, setProducts }) {
           Price
         </label>
         <input
-          className="product-add-input p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
+          className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
           id="price"
           value={price}
@@ -72,7 +72,7 @@ export default function ProductForm({ products, setProducts }) {
           Availability Status
         </label>
         <select
-          className="product-add-input p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
+          className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           value={availabilityStatus}
           onChange={(e) => setAvailabilityStatus(e.target.value)}
           id="availabilityStatus"
@@ -90,7 +90,7 @@ export default function ProductForm({ products, setProducts }) {
           Stock Quantity
         </label>
         <input
-          className="product-add-input p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
+          className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
           id="inStock"
           value={inStock}

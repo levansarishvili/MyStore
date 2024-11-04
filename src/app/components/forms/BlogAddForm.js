@@ -25,7 +25,7 @@ export default function BlogForm({ onAddPost }) {
 
   return (
     <form
-      className="new-post-form dark:bg-[#313131] flex flex-col gap-8 items-center mb-12 p-8 border rounded-2xl bg-[#f1f3f5] w-full mt-1"
+      className="new-post-form dark:bg-[#313131] flex flex-col gap-8 items-center mb-12 p-8 rounded-2xl bg-[#f1f3f5] w-full mt-1"
       onSubmit={handleSubmit}
     >
       <div className="form-group flex flex-col items-start gap-4 w-full">
@@ -36,7 +36,7 @@ export default function BlogForm({ onAddPost }) {
           Post Title
         </label>
         <input
-          className="p-3 border rounded-lg text-[1.4rem] outline-none transition-all duration-300 w-full focus:border-[#ec5e2a]"
+          className="p-3 border dark:bg-[#4a4a4a] rounded-lg text-[1.4rem] outline-none transition-all duration-300 w-full focus:border-[#ec5e2a]"
           type="text"
           id="title"
           name="title"
@@ -55,7 +55,7 @@ export default function BlogForm({ onAddPost }) {
           Post Content
         </label>
         <textarea
-          className="add-form-textarea p-3 border rounded-lg text-[1.4rem] outline-none transition-all duration-300 w-full focus:border-[#ec5e2a] h-40"
+          className="add-form-textarea dark:bg-[#4a4a4a] p-3 border rounded-lg text-[1.4rem] outline-none transition-all duration-300 w-full focus:border-[#ec5e2a] h-40"
           id="content"
           name="content"
           placeholder="Post Content"
@@ -73,7 +73,7 @@ export default function BlogForm({ onAddPost }) {
           Views
         </label>
         <input
-          className="p-3 border rounded-lg text-[1.4rem] outline-none transition-all duration-300 w-full focus:border-[#ec5e2a]"
+          className="p-3 border dark:bg-[#4a4a4a] rounded-lg text-[1.4rem] outline-none transition-all duration-300 w-full focus:border-[#ec5e2a]"
           type="number"
           id="views"
           name="views"

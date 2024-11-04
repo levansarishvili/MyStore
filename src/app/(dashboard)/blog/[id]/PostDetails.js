@@ -2,7 +2,7 @@ export default function PostDetails({ post }) {
   return (
     <div className="post-details-wrapper flex flex-col items-center justify-center gap-12 max-w-[70rem]">
       <h1 className="section-header text-4xl font-semibold">Blog Details</h1>
-      <div className="post-content flex flex-col items-start gap-12 justify-center w-full border p-16 rounded-2xl transition-all duration-300 cursor-pointer hover:shadow-lg hover:bg-[#ec5e2a22]">
+      <div className="post-content flex flex-col items-start gap-12 justify-center w-full p-16 rounded-2xl transition-all duration-300 cursor-pointer hover:shadow-lg dark:bg-[#313131] bg-[#f1f3f5] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a]">
         <h2 className="post-title text-[#ec5e2a] font-semibold text-3xl">
           {post.title}
         </h2>

@@ -12,11 +12,9 @@ async function Header() {
   const session = await getSession();
   const user = session?.user;
 
-  <CheckAuth />;
-
   return (
     <header
-      className="header flex items-center bg-[#f1f3f5] dark:bg-[#313131] 
+      className="header flex items-center bg-[#f1f3f5] dark:bg-[#313131]
     shadow-md sticky top-0 z-10"
     >
       <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
