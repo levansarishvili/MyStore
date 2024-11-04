@@ -61,7 +61,7 @@ export default function PostEditForm({
         <input
           value={title}
           onChange={(e) => setFormTitle(e.target.value)}
-          className="edit-form-input w-[50rem] p-4 outline-none border-2 border-[#495057] transition-all duration-300 rounded-lg focus:border-[#ec5e2a]"
+          className="edit-form-input dark:bg-[#4a4a4a] dark:text-white w-[50rem] p-4 outline-none border-2 border-[#495057] transition-all duration-300 rounded-lg focus:border-[#ec5e2a]"
           type="text"
           id="title"
           name="title"
@@ -78,7 +78,7 @@ export default function PostEditForm({
         <textarea
           value={content}
           onChange={(e) => setFormContent(e.target.value)}
-          className="edit-form-input w-[50rem] p-4 outline-none  border-2 border-[#495057] ransition-all duration-300 rounded-lg focus:border-[#ec5e2a] edit-form-content h-56"
+          className="edit-form-input dark:bg-[#4a4a4a] dark:text-white w-[50rem] p-4 outline-none  border-2 border-[#495057] ransition-all duration-300 rounded-lg focus:border-[#ec5e2a] edit-form-content h-56"
           id="content"
           name="content"
         />
@@ -94,7 +94,7 @@ export default function PostEditForm({
         <input
           value={views}
           onChange={(e) => setFormViews(e.target.value)}
-          className="edit-form-input w-[50rem] p-4 outline-none border-2 border-[#495057] transition-all duration-300 rounded-lg focus:border-[#ec5e2a]"
+          className="edit-form-input dark:bg-[#4a4a4a] dark:text-white w-[50rem] p-4 outline-none border-2 border-[#495057] transition-all duration-300 rounded-lg focus:border-[#ec5e2a]"
           type="number"
           id="views"
           name="views"
