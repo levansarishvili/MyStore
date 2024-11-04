@@ -41,7 +41,7 @@ export default function PostEditForm({
 
   return (
     <form
-      className="post-edit-form dark:bg-[#313131] fixed z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[80rem] p-32 rounded-2xl border-[#e9ecef] text-gray-800 text-2xl cursor-pointer transition-all duration-300 bg-[#495057ed] flex flex-col gap-12 items-center justify-center"
+      className="post-edit-form dark:bg-[#313131] fixed z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[80rem] p-32 rounded-2xl border border-[#e9ecef] text-gray-800 text-2xl cursor-pointer transition-all duration-300 bg-[#495057ed] flex flex-col gap-12 items-center justify-center"
       onSubmit={handleSubmit}
     >
       <button
