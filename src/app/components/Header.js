@@ -5,13 +5,14 @@ import Button from "../components/buttons/Button.js";
 import LogoutButton from "./buttons/LogoutButton.js";
 import ColorTheme from "./ColorTheme";
 import { getSession } from "@auth0/nextjs-auth0";
+import CheckAuth from "./CheckAuth.js";
 
 // Create Header component
 async function Header() {
   const session = await getSession();
   const user = session?.user;
 
-  console.log(user);
+  <CheckAuth />;
 
   return (
     <header
@@ -31,8 +32,6 @@ async function Header() {
           <Navigation />
         </nav>
 
-        <a href="/api/auth/login">login</a>
-
         {/* Profile and Shopping cart icons */}
         <div className="header__icons flex gap-6 cursor-pointer items-center justify-center">
           {/* Color Theme */}
@@ -40,19 +39,9 @@ async function Header() {
 
           <Link href="/profile">
             <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
-              {/* <svg
-                className="header__icon w-10 h-10 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                fill="#000000"
-                viewBox="0 0 256 256"
-              >
-                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
-              </svg> */}
               <img
                 src={user?.picture || "../../assets/person.svg"}
-                alt={user?.name}
+                alt={"User"}
                 className="rounded-full"
               ></img>
             </div>

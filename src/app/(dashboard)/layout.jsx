@@ -1,9 +1,18 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { redirect } from "next/navigation";
+import CheckAuth from "../components/CheckAuth";
 import "../../../src/global.css";
-// import CheckAuth from "../components/CheckAuth";
+import { type } from "@testing-library/user-event/dist/type";
+import { replace } from "react-router-dom";
 
-export default function DashboardLayout({ children }) {
+export default async function DashboardLayout({ children }) {
+  const loginStatus = await CheckAuth();
+  console.log(loginStatus);
+  if (!loginStatus) {
+    redirect("/api/auth/login");
+  }
+
   return (
     <>
       <Header />

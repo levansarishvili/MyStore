@@ -1,15 +1,15 @@
 import { getSession } from "@auth0/nextjs-auth0";
-import { redirect } from "next/navigation";
 
-export default async function CheckAuth({ children }) {
+export default async function CheckAuth() {
   const session = await getSession();
   const user = session?.user;
 
-  // Redirect to login if the user is not authenticated
-  if (!user) {
-    redirect("/api/auth/login");
-    return null;
+  let loginStatus;
+
+  // Check if user is logged in
+  if (user) {
+    loginStatus = true;
   }
 
-  return children;
+  return loginStatus;
 }
