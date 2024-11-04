@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 function ColorTheme() {
-  const [colorTheme, setColorTheme] = useState("OS Default");
+  const [colorTheme, setColorTheme] = useState("system");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Function to toggle dropdown
@@ -11,10 +11,23 @@ function ColorTheme() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
-  // Function to update class
+  // Function to update classes
   function updateClass(theme) {
     document.documentElement.classList.remove("light", "dark", "system");
-    // document.documentElement.classList.add(theme);
+    document.documentElement.classList.add(theme);
+
+    // Check user preference
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else if (theme === "light") {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.toggle(
+        "dark",
+        !("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+      );
+    }
   }
 
   // Function to change color theme
@@ -23,7 +36,7 @@ function ColorTheme() {
     setIsDropdownOpen(false);
 
     // Save theme in local storage
-    localStorage.setItem("colorTheme", JSON.stringify(theme));
+    localStorage.setItem("colorTheme", theme);
     updateClass(theme);
   }
 
@@ -80,8 +93,8 @@ function ColorTheme() {
 
   // Apply class from local storage on initial render
   useEffect(() => {
-    const savedTheme = JSON.parse(localStorage.getItem("colorTheme"));
-    const currTheme = savedTheme || "";
+    const savedTheme = localStorage.getItem("colorTheme");
+    const currTheme = savedTheme || "system";
     setColorTheme(currTheme);
     updateClass(currTheme);
   }, []);
@@ -97,7 +110,6 @@ function ColorTheme() {
         onClick={toggleDropdown}
       >
         {activeTheme.icon}
-        {/* <p>Theme</p> */}
       </div>
 
       {/* Color Theme Options */}

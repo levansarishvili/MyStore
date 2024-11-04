@@ -8,7 +8,6 @@ import { replace } from "react-router-dom";
 
 export default async function DashboardLayout({ children }) {
   const loginStatus = await CheckAuth();
-  console.log(loginStatus);
   if (!loginStatus) {
     redirect("/api/auth/login");
   }
