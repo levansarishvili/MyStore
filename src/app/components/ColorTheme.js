@@ -6,6 +6,14 @@ function ColorTheme() {
   const [colorTheme, setColorTheme] = useState("system");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  // Apply class from local storage on initial render
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("colorTheme");
+    const currTheme = savedTheme || "system";
+    setColorTheme(currTheme);
+    updateClass(currTheme);
+  }, []);
+
   // Function to toggle dropdown
   function toggleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
@@ -37,6 +45,12 @@ function ColorTheme() {
 
     // Save theme in local storage
     localStorage.setItem("colorTheme", theme);
+
+    // If theme is system, remove theme from local storage
+    if (theme === "system") {
+      localStorage.removeItem("colorTheme");
+    }
+
     updateClass(theme);
   }
 
@@ -90,14 +104,6 @@ function ColorTheme() {
       ),
     },
   ];
-
-  // Apply class from local storage on initial render
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("colorTheme");
-    const currTheme = savedTheme || "system";
-    setColorTheme(currTheme);
-    updateClass(currTheme);
-  }, []);
 
   // Find out which theme is active
   const activeTheme =

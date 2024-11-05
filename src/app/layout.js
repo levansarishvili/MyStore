@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="">
       <head>
+        {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
         <link

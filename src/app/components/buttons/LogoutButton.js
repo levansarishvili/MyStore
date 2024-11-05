@@ -1,7 +1,13 @@
+"use client";
+
 export default function LogoutButton() {
+  function handleLogout() {
+    localStorage.clear();
+  }
+
   return (
     <a href="/api/auth/logout">
-      <div className="logout-btn group">
+      <div className="logout-btn group" onClick={handleLogout}>
         <svg
           className="header__icon w-10 h-10 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
           xmlns="http://www.w3.org/2000/svg"
