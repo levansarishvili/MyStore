@@ -16,10 +16,6 @@ html {
   font-family: "Montserrat", sans-serif;
 }
 
-html:not(.hydrated) {
-  transition: background-color 0.2s ease;
-}
-
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

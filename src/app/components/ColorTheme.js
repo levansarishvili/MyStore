@@ -8,49 +8,52 @@ function ColorTheme() {
 
   // Apply class from local storage on initial render
   useEffect(() => {
-    const savedTheme = localStorage.getItem("colorTheme");
-    const currTheme = savedTheme || "system";
-    setColorTheme(currTheme);
-    updateClass(currTheme);
-  }, []);
+    const savedTheme = localStorage.getItem("colorTheme") || "system";
+    setColorTheme(savedTheme);
+    updateClass(savedTheme);
 
-  // Function to toggle dropdown
+    if (colorTheme === "system") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handleSystemThemeChange = (e) => {
+        updateClass(e.matches ? "dark" : "light");
+      };
+      // Apply system theme on change
+      mediaQuery.addEventListener("change", handleSystemThemeChange);
+
+      // Clean up listener
+      return () =>
+        mediaQuery.removeEventListener("change", handleSystemThemeChange);
+    }
+  }, [colorTheme]);
+
+  // Toggle dropdown visibility
   function toggleDropdown() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
-  // Function to update classes
+  // Update document classes based on theme
   function updateClass(theme) {
-    document.documentElement.classList.remove("light", "dark", "system");
-    document.documentElement.classList.add(theme);
-
-    // Check user preference
-    if (theme === "dark") {
+    document.documentElement.classList.remove("light", "dark");
+    if (
+      theme === "dark" ||
+      (theme === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
       document.documentElement.classList.add("dark");
-    } else if (theme === "light") {
-      document.documentElement.classList.add("light");
     } else {
-      document.documentElement.classList.toggle(
-        "dark",
-        !("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-      );
+      document.documentElement.classList.add("light");
     }
   }
 
-  // Function to change color theme
+  // Change color theme and save to localStorage
   function changeColorTheme(theme) {
     setColorTheme(theme);
     setIsDropdownOpen(false);
-
-    // Save theme in local storage
-    localStorage.setItem("colorTheme", theme);
-
-    // If theme is system, remove theme from local storage
     if (theme === "system") {
       localStorage.removeItem("colorTheme");
+    } else {
+      localStorage.setItem("colorTheme", theme);
     }
-
     updateClass(theme);
   }
 
@@ -105,7 +108,6 @@ function ColorTheme() {
     },
   ];
 
-  // Find out which theme is active
   const activeTheme =
     colorThemes.find((theme) => theme.value === colorTheme) || colorThemes[0];
 
@@ -118,7 +120,6 @@ function ColorTheme() {
         {activeTheme.icon}
       </div>
 
-      {/* Color Theme Options */}
       {isDropdownOpen && (
         <div className="color-theme-options-wrapper absolute z-20 top-16 w-52 p-4 flex flex-col items-start gap-3 border shadow-lg bg-[#f1f3f5] rounded-xl dark:bg-[#313131]">
           {colorThemes.map((theme) => (
