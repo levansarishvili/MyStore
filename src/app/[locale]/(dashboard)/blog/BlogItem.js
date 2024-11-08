@@ -1,8 +1,8 @@
 // Blog item component
-import Button from "../../components/buttons/Button";
+import Button from "../../../components/buttons/Button";
 import Link from "next/link";
-import DeleteButton from "../../components/buttons/DeleteButton";
-import EditButton from "../../components/buttons/EditButton";
+import DeleteButton from "../../../components/buttons/DeleteButton";
+import EditButton from "../../../components/buttons/EditButton";
 export default function BlogItem({
   id,
   title,

@@ -1,4 +1,4 @@
-import Button from "../../components/buttons/Button";
+import Button from "../../../components/buttons/Button";
 
 function Contact() {
   return (

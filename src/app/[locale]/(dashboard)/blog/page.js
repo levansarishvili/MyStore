@@ -2,15 +2,15 @@
 
 import { useSearchParams } from "next/navigation";
 import BlogItem from "./BlogItem";
-import BlogFilter from "../../components/filters/BlogFilter";
-import usePostsUrl from "../../hooks/usePostUrl";
-import useFetchPosts from "../../hooks/useFetchPosts";
-import { handleDelete } from "../../components/functions/handleDelete";
-import { handleAddPost } from "../../components/functions/handleAddPost";
-import { handleEdit } from "../../components/functions/handleEdit";
+import BlogFilter from "../../../components/filters/BlogFilter";
+import usePostsUrl from "../../../hooks/usePostUrl";
+import useFetchPosts from "../../../hooks/useFetchPosts";
+import { handleDelete } from "../../../components/functions/handleDelete";
+import { handleAddPost } from "../../../components/functions/handleAddPost";
+import { handleEdit } from "../../../components/functions/handleEdit";
 import { useState } from "react";
-import BlogAddForm from "../../components/forms/BlogAddForm";
-import PostEditForm from "../../components/forms/PostEditForm";
+import BlogAddForm from "../../../components/forms/BlogAddForm";
+import PostEditForm from "../../../components/forms/PostEditForm";
 
 export default function BlogPage() {
   // Access search params directly

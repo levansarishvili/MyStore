@@ -1,15 +1,15 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import ProductFilter from "../../components/filters/ProductFilter";
-import useProductsUrl from "../../hooks/useProductsUrl";
-import useFetchProducts from "../../hooks/useFetchProducts";
+import ProductFilter from "../../../components/filters/ProductFilter";
+import useProductsUrl from "../../../hooks/useProductsUrl";
+import useFetchProducts from "../../../hooks/useFetchProducts";
 import { useState } from "react";
-import { handleDelete } from "../../components/functions/handleDelete";
-import { handleEdit } from "../../components/functions/handleEdit";
+import { handleDelete } from "../../../components/functions/handleDelete";
+import { handleEdit } from "../../../components/functions/handleEdit";
 import ProductItem from "./ProductItem";
-import ProductEditForm from "../../components/forms/ProductEditForm";
-import ProductAddForm from "../../components/forms/ProductAddForm";
+import ProductEditForm from "../../../components/forms/ProductEditForm";
+import ProductAddForm from "../../../components/forms/ProductAddForm";
 
 export default function Store() {
   // Access search params directly

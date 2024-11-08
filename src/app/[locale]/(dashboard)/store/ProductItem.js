@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import Button from "../../components/buttons/Button";
-import DeleteButton from "../../components/buttons/DeleteButton";
-import EditButton from "../../components/buttons/EditButton";
+import Button from "../../../components/buttons/Button";
+import DeleteButton from "../../../components/buttons/DeleteButton";
+import EditButton from "../../../components/buttons/EditButton";
 
 // Product card component
 export default function ProductItem({

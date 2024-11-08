@@ -1,7 +1,5 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import Image from "next/image";
-import Loading from "../../loading";
-import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
   const session = await getSession();
