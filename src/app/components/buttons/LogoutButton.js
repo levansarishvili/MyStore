@@ -1,8 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function LogoutButton() {
+  const router = useRouter();
   function handleLogout() {
     localStorage.clear();
+    router.push("/api/auth/login");
   }
 
   return (

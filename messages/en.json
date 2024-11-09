@@ -1,6 +1,17 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "title-part1": "Welcome to",
+    "title-part2": "ecommerce website",
+    "description": "Explore the app and manage your products and blog posts."
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "blogs": "Blogs",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "copyright": "© Levan Sarishvili, Tbilisi, Georgia, 2024."
   }
 }

@@ -1,5 +1,9 @@
+import { useTranslations } from "next-intl";
+
 // Create Footer component
 function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer className="footer dark:bg-[#313131] dark:text-white dark:shadow-td flex items-center text-gray-700 text-2xl bg-[#f1f3f5]">
       <div className="footer__wrapper max-w-[144rem] mx-auto my-0 w-full h-full flex justify-between items-center px-16 py-0">
@@ -10,9 +14,7 @@ function Footer() {
           className="footer__logo h-24"
         ></img>
 
-        <p className="copyright max-w-[30rem] text-center">
-          © Levan Sarishvili, Tbilisi, Georgia, 2024.
-        </p>
+        <p className="copyright max-w-[30rem] text-center">{t("copyright")}</p>
 
         {/* Social icons */}
         <div className="social flex justify-end gap-4">
