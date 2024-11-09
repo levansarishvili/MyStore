@@ -6,7 +6,7 @@ function Footer() {
         {/* Footer logo */}
         <img
           src="../assets/logo.svg"
-          alt="Georgia national football team logo"
+          alt="E-shop logo"
           className="footer__logo h-24"
         ></img>
 

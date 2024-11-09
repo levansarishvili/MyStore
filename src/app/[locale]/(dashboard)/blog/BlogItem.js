@@ -1,6 +1,6 @@
 // Blog item component
 import Button from "../../../components/buttons/Button";
-import Link from "next/link";
+import { Link } from "../../../../i18n/routing";
 import DeleteButton from "../../../components/buttons/DeleteButton";
 import EditButton from "../../../components/buttons/EditButton";
 export default function BlogItem({

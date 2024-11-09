@@ -1,11 +1,8 @@
-// "use client";
-import Link from "next/link";
-import Navigation from "../components/Navigation.js";
-import Button from "../components/buttons/Button.js";
+import { Link } from "../../i18n/routing.js";
+import Navigation from "./Navigation.js";
 import LogoutButton from "./buttons/LogoutButton.js";
-import ColorTheme from "./ColorTheme";
+import ColorTheme from "./ColorTheme.js";
 import { getSession } from "@auth0/nextjs-auth0";
-import CheckAuth from "./CheckAuth.js";
 
 // Create Header component
 async function Header() {
@@ -18,10 +15,10 @@ async function Header() {
     shadow-md sticky top-0 z-10"
     >
       <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
-        <Link href="/home">
+        <Link href="/">
           <img
             src="../assets/logo.svg"
-            alt="Georgia national football team logo"
+            alt="E-shop logo"
             className="header__logo h-16"
           ></img>
         </Link>
