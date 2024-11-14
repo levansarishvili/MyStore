@@ -1,17 +1,15 @@
-"use client";
+import { redirect } from "next/navigation";
+import CheckAuth from "../../components/CheckAuth";
 
-import { useRouter } from "next/navigation";
-
-export default function LogoutButton() {
-  const router = useRouter();
-  function handleLogout() {
-    localStorage.clear();
-    router.push("/api/auth/login");
+export default async function LogoutButton() {
+  const loginStatus = await CheckAuth();
+  if (!loginStatus) {
+    redirect("/api/auth/login");
   }
 
   return (
     <a href="/api/auth/logout">
-      <div className="logout-btn group" onClick={handleLogout}>
+      <div className="logout-btn group">
         <svg
           className="header__icon w-10 h-10 group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
           xmlns="http://www.w3.org/2000/svg"
