@@ -4,7 +4,7 @@ export default async function CheckAuth() {
   const session = await getSession();
   const user = session?.user;
 
-  let loginStatus;
+  let loginStatus = false;
 
   // Check if user is logged in
   if (user) {

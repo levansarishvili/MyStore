@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function LanguageToggle() {
   const router = useRouter();
@@ -16,8 +16,8 @@ function LanguageToggle() {
     setLanguage(currentLang);
   }, [pathname]);
 
-  const handleLanguageChange = (e) => {
-    const selectedLang = e.target.value;
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedLang: string = e.target.value;
     setLanguage(selectedLang);
     router.push(`/${selectedLang}${pathname.slice(3)}`);
 

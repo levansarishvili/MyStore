@@ -1,12 +1,7 @@
 import { redirect } from "next/navigation";
-import CheckAuth from "../../components/CheckAuth";
+import CheckAuth from "../CheckAuth";
 
-export default async function LogoutButton() {
-  const loginStatus = await CheckAuth();
-  if (!loginStatus) {
-    redirect("/api/auth/login");
-  }
-
+export default function LogoutButton() {
   return (
     <a href="/api/auth/logout">
       <div className="logout-btn group">

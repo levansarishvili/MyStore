@@ -2,6 +2,13 @@
 
 import { useState, useEffect } from "react";
 
+// ColorTheme Props Type
+interface ColorThemesType {
+  name: string;
+  value: string;
+  icon: JSX.Element;
+}
+
 function ColorTheme() {
   const [colorTheme, setColorTheme] = useState("system");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -14,7 +21,7 @@ function ColorTheme() {
 
     if (colorTheme === "system") {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleSystemThemeChange = (e) => {
+      const handleSystemThemeChange = (e: MediaQueryListEvent) => {
         updateClass(e.matches ? "dark" : "light");
       };
       // Apply system theme on change
@@ -32,7 +39,7 @@ function ColorTheme() {
   }
 
   // Update document classes based on theme
-  function updateClass(theme) {
+  function updateClass(theme: string) {
     document.documentElement.classList.remove("light", "dark");
     if (
       theme === "dark" ||
@@ -46,7 +53,7 @@ function ColorTheme() {
   }
 
   // Change color theme and save to localStorage
-  function changeColorTheme(theme) {
+  function changeColorTheme(theme: string) {
     setColorTheme(theme);
     setIsDropdownOpen(false);
     if (theme === "system") {
@@ -57,7 +64,7 @@ function ColorTheme() {
     updateClass(theme);
   }
 
-  const colorThemes = [
+  const colorThemes: ColorThemesType[] = [
     {
       name: "System",
       value: "system",

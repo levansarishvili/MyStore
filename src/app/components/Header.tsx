@@ -1,7 +1,7 @@
-import { Link } from "../../i18n/routing.js";
-import Navigation from "../[locale]/Navigation.js";
-import LogoutButton from "./buttons/LogoutButton.js";
-import ColorTheme from "./ColorTheme.js";
+import { Link } from "../../i18n/routing";
+import Navigation from "../[locale]/Navigation";
+import LogoutButton from "./buttons/LogoutButton";
+import ColorTheme from "./ColorTheme";
 import { getSession } from "@auth0/nextjs-auth0";
 import LanguageToggle from "./LanguageToggle";
 import Image from "next/image";

@@ -6,9 +6,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../../global.css";
 
-export default async function LocaleLayout({ children, params: { locale } }) {
+export default async function LocaleLayout({
+  children,
+  params: { locale },
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale)) {
+  if (!routing.locales.includes(locale as "en" | "ka")) {
     notFound();
   }
 
