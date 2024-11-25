@@ -42,14 +42,14 @@ export default function ProductDetails({ product }: { product: ProductsType }) {
           <div className="stock-wrapper flex gap-4">
             <p
               className={`product-details__availability text-2xl font-semibold ${
-                product.availabilityStatus === "In Stock"
+                product.availabilitystatus === "In Stock"
                   ? "text-green-700"
-                  : product.availabilityStatus === "Low Stock"
+                  : product.availabilitystatus === "Low Stock"
                   ? "text-orange-500"
                   : "text-red-500"
               }`}
             >
-              {product.availabilityStatus}:
+              {product.availabilitystatus}:
             </p>
             <p className="product-details__stock text-2xl font-semibold">
               {product.stock}

@@ -9,7 +9,7 @@ export interface ProductsType {
   title: string;
   description: string;
   price: number;
-  availabilityStatus: string;
+  availabilitystatus: string;
   stock: number;
   category: string;
   thumbnail: string;

@@ -19,8 +19,8 @@ export default function ProductEditForm({
 }: Props) {
   const [title, setFormTitle] = useState(currentProduct.title);
   const [price, setFormPrice] = useState(currentProduct.price);
-  const [availabilityStatus, setFormAvailabilityStatus] = useState(
-    currentProduct.availabilityStatus
+  const [availabilitystatus, setFormAvailabilityStatus] = useState(
+    currentProduct.availabilitystatus
   );
   const [stock, setFormStock] = useState(currentProduct.stock);
 
@@ -35,7 +35,7 @@ export default function ProductEditForm({
             ...product,
             title: title,
             price: price,
-            availabilityStatus: availabilityStatus,
+            availabilitystatus: availabilitystatus,
             stock: stock,
           }
         : product
@@ -86,7 +86,7 @@ export default function ProductEditForm({
           Availability Status
         </label>
         <select
-          value={availabilityStatus}
+          value={availabilitystatus}
           onChange={(e) => setFormAvailabilityStatus(e.target.value)}
           className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           id="stockStatus"

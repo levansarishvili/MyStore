@@ -22,6 +22,7 @@ export default function Store() {
   // Create products URL and fetch products
   const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
   const { products, setProducts } = useFetchProducts(productsUrl);
+  console.log(products);
 
   // For edit form
   const [currentProduct, setCurrentProduct] = useState<ProductsType | null>(
@@ -55,7 +56,7 @@ export default function Store() {
               id={product.id}
               name={product.title}
               imageSrc={product.thumbnail}
-              availabilityStatus={product.availabilityStatus}
+              availabilitystatus={product.availabilitystatus}
               stock={product.stock}
               price={product.price}
               onDelete={() =>

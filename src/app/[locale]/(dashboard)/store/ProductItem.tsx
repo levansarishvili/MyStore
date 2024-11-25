@@ -8,7 +8,7 @@ interface Props {
   id: number;
   name: string;
   imageSrc: string;
-  availabilityStatus: string;
+  availabilitystatus: string;
   stock: number;
   price: number;
   onDelete: () => void;
@@ -20,7 +20,7 @@ export default function ProductItem({
   id,
   name,
   imageSrc,
-  availabilityStatus,
+  availabilitystatus,
   stock,
   price,
   onDelete,
@@ -53,20 +53,20 @@ export default function ProductItem({
             <div className="product__stock-wrapper flex items-center justify-center gap-4 text-gray-600 text-xl">
               <p
                 className={`product__availabilityStatus text-xl font-semibold   ${
-                  availabilityStatus === "In Stock"
+                  availabilitystatus === "In Stock"
                     ? "text-green-700"
-                    : availabilityStatus === "Low Stock"
+                    : availabilitystatus === "Low Stock"
                     ? "text-orange-500"
                     : "text-red-600"
                 }`}
               >
-                {availabilityStatus}:
+                {availabilitystatus}:
               </p>
-              <p className="product__stock text-gray-600 font-medium">
+              <p className="product__stock text-gray-600 font-medium dark:text-gray-100">
                 {stock}
               </p>
             </div>
-            <p className="product__price text-2xl font-medium text-gray-600">{`${price} $`}</p>
+            <p className="product__price text-2xl font-medium text-gray-600 dark:text-gray-100">{`${price} $`}</p>
           </div>
         </div>
       </Link>
