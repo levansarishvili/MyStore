@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
-interface Post {
+export interface Post {
   id: number;
   title: string;
   body: string;
-  userId: number;
-}
-
-interface PostResponse {
-  posts: Post[];
+  views: number;
+  likes?: number;
+  dislikes?: number;
 }
 
 export default function useFetchPosts(postsUrl: string) {
@@ -29,15 +28,17 @@ export default function useFetchPosts(postsUrl: string) {
     } else {
       const fetchData = async () => {
         try {
-          const response = await fetch(postsUrl);
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
+          const { data, error } = await supabase.from("posts").select("*");
+
+          if (error) {
+            console.error(error);
+            return;
           }
 
-          const postsData: PostResponse = await response.json();
-          localStorage.setItem("posts", JSON.stringify(postsData.posts));
+          const postsData: Post[] = data;
+          localStorage.setItem("posts", JSON.stringify(postsData));
           localStorage.setItem("postsUrl", postsUrl);
-          setPosts(postsData.posts);
+          setPosts(postsData);
         } catch (error) {
           console.error("Failed to fetch data", error);
         }

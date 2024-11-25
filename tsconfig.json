@@ -25,7 +25,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/hooks/useFetchPosts.ts",
-    "src/app/components/functions/handleAddPost.js"
+    "src/app/components/functions/handleAddPost.ts"
   ],
   "exclude": ["node_modules"]
 }

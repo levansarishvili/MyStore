@@ -32,7 +32,7 @@ export default function Store() {
   return (
     <section className="product__page-wrapper flex flex-col items-center gap-20 w-full">
       {/* Conditional rendering of edit form */}
-      {active ? (
+      {active && currentProduct ? (
         <ProductEditForm
           currentProduct={currentProduct}
           products={products}

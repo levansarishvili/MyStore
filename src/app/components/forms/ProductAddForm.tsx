@@ -5,7 +5,7 @@ import { handleAddProduct } from "../functions/handleAddProduct";
 import type { ProductsType } from "../../hooks/useFetchProducts";
 
 interface ProductFormProps {
-  products: ProductsType;
+  products: ProductsType[];
   setProducts: React.Dispatch<React.SetStateAction<ProductsType[]>>;
 }
 
