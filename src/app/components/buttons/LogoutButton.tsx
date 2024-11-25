@@ -1,6 +1,3 @@
-import { redirect } from "next/navigation";
-import CheckAuth from "../CheckAuth";
-
 export default function LogoutButton() {
   return (
     <a href="/api/auth/logout">
