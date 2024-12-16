@@ -22,7 +22,6 @@ export default function Store() {
   // Create products URL and fetch products
   const productsUrl = useProductsUrl(searchQuery, sortOptions, filter);
   const { products, setProducts } = useFetchProducts(productsUrl);
-  console.log(products);
 
   // For edit form
   const [currentProduct, setCurrentProduct] = useState<ProductsType | null>(
