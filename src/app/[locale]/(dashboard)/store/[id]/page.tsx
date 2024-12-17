@@ -2,7 +2,7 @@ import ProductDetails from "./ProductDetails";
 import PageNotFound from "../../../../components/PageNotFound";
 import React from "react";
 import type { ProductsType } from "../../../../hooks/useFetchProducts";
-import { supabase } from "../../../../lib/supabaseClient";
+import { supabase } from "../../../../../lib/supabaseClient";
 
 interface paramsType {
   id: string;

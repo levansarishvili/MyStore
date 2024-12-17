@@ -1,6 +1,6 @@
 import PageNotFound from "../../../../components/PageNotFound";
 import PostDetails from "./PostDetails";
-import { supabase } from "../../../../lib/supabaseClient";
+import { supabase } from "../../../../../lib/supabaseClient";
 
 import type { Post } from "../../../../hooks/useFetchPosts";
 

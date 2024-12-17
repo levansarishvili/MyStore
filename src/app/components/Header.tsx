@@ -5,6 +5,7 @@ import ColorTheme from "./ColorTheme";
 import { getSession } from "@auth0/nextjs-auth0";
 import LanguageToggle from "./LanguageToggle";
 import Image from "next/image";
+import { Crown } from "lucide-react";
 
 // Create Header component
 async function Header() {
@@ -19,7 +20,7 @@ async function Header() {
       <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
         <Link href="/">
           <img
-            src="../assets/logo.svg"
+            src="/assets/logo.svg"
             alt="E-shop logo"
             className="header__logo h-16"
           ></img>
@@ -36,6 +37,11 @@ async function Header() {
 
           {/* Color Theme */}
           <ColorTheme />
+
+          {/* Buy subscription */}
+          <Link href="/pricing">
+            <Crown className="hover:stroke-[#ec5e2a] duration-300" />
+          </Link>
 
           <Link href="/profile">
             <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
