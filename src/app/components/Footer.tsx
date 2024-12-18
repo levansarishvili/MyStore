@@ -9,7 +9,7 @@ function Footer() {
       <div className="footer__wrapper max-w-[144rem] mx-auto my-0 w-full h-full flex justify-between items-center px-16 py-0">
         {/* Footer logo */}
         <img
-          src="../assets/logo.svg"
+          src="/assets/logo.svg"
           alt="E-shop logo"
           className="footer__logo h-24"
         ></img>

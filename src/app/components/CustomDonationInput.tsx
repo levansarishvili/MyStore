@@ -20,7 +20,7 @@ export default function CustomDonationInput({
   className?: string;
 }): JSX.Element {
   return (
-    <label>
+    <label className="flex flex-col gap-4">
       Custom donation amount ({formatAmountForDisplay(min, currency)}-
       {formatAmountForDisplay(max, currency)}):
       <input

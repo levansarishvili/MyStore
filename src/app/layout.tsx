@@ -27,7 +27,7 @@ export default function RootLayout({
       </head>
       <UserProvider>
         <body className="dark:bg-[#1f1f1f] dark:text-[#f8f9fa]">
-          <div className="wrapper">
+          <div className="wrapper min-h-screen">
             <>{children}</>
           </div>
         </body>

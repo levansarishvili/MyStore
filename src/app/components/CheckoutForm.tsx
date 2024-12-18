@@ -61,7 +61,7 @@ export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
         />
 
         <button
-          className="checkout-style-background"
+          className="w-full mt-6 bg-[#ec5e2a] px-12 py-3 font-medium rounded-lg text-white hover:shadow-lg transition-all duration-300"
           type="submit"
           disabled={loading}
         >
