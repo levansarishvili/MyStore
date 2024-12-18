@@ -1,13 +1,42 @@
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 export default function Pricing() {
   return (
     <div className="flex flex-col gap-12 rounded-2xl bg-[#f1f3f5] justify-center items-center max-w-[100rem] px-[4.8rem] py-[3.2rem]">
       <h1 className="text-[2.2rem] font-semibold">Buy Subscription</h1>
 
-      {/* Free Plan */}
+      {/* Stripe */}
+      <ul className="card-list">
+        <li>
+          <Link
+            href="/donate-with-embedded-checkout"
+            className="card checkout-style-background"
+          >
+            <h2 className="bottom">Donate with embedded Checkout</h2>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/donate-with-checkout"
+            className="card checkout-style-background"
+          >
+            <h2 className="bottom">Donate with hosted Checkout</h2>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/donate-with-elements"
+            className="card elements-style-background"
+          >
+            <h2 className="bottom">Donate with Elements</h2>
+          </Link>
+        </li>
+      </ul>
+
       <div className="flex gap-8">
-        <div className="flex flex-col gap-8 items-start w-[26rem] p-8 bg-white rounded-lg cursor-pointer">
+        {/* Free Plan */}
+        <div className="flex flex-col gap-8 items-start w-[26rem] p-8 bg-white rounded-lg">
           <div className="flex flex-col">
             <h2 className="text-[#202842] text-[2.2rem] font-semibold">
               Free Plan
