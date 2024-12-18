@@ -1,7 +1,13 @@
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-export default function Pricing() {
+interface Props {
+  params: { locale: string };
+}
+
+export default function Pricing({ params }: Props) {
+  const locale = params.locale;
+
   return (
     <div className="flex flex-col gap-12 rounded-2xl bg-[#f1f3f5] justify-center items-center max-w-[100rem] px-[4.8rem] py-[3.2rem]">
       <h1 className="text-[2.2rem] font-semibold">Buy Subscription</h1>
@@ -10,7 +16,7 @@ export default function Pricing() {
       <ul className="card-list">
         <li>
           <Link
-            href="/donate-with-embedded-checkout"
+            href={`/${locale}/donate-with-embedded-checkout`}
             className="card checkout-style-background"
           >
             <h2 className="bottom">Donate with embedded Checkout</h2>
@@ -18,7 +24,7 @@ export default function Pricing() {
         </li>
         <li>
           <Link
-            href="/donate-with-checkout"
+            href={`/${locale}/donate-with-checkout`}
             className="card checkout-style-background"
           >
             <h2 className="bottom">Donate with hosted Checkout</h2>
@@ -26,7 +32,7 @@ export default function Pricing() {
         </li>
         <li>
           <Link
-            href="/donate-with-elements"
+            href={`/${locale}/donate-with-elements`}
             className="card elements-style-background"
           >
             <h2 className="bottom">Donate with Elements</h2>
