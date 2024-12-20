@@ -1,4 +1,3 @@
-import { getSession } from "@auth0/nextjs-auth0";
 import Image from "next/image";
 
 interface userType {
@@ -9,13 +8,6 @@ interface userType {
 }
 
 export default async function ProfilePage() {
-  const session = await getSession();
-  const user = session?.user as userType;
-
-  if (!user) {
-    return <div>Please log in to access your profile.</div>;
-  }
-
   return (
     <section className="profile-wrapper flex flex-col items-center gap-20">
       <h1 className="section-header text-4xl font-semibold">My Account</h1>
@@ -25,23 +17,23 @@ export default async function ProfilePage() {
         <div className="profile-media-wrapper flex flex-col items-center gap-16">
           <div className="profile__img-wrapper flex flex-col items-center gap-3">
             <div className="profile__img-box flex items-center justify-center w-40 h-40 rounded-full border-2 border-[#ec5e2a] overflow-hidden bg-white">
-              <Image
+              {/* <Image
                 className="profile__img rounded-full w-11/12"
                 src={user.picture || "../../assets/person.svg"}
                 alt={user?.name || "User"}
                 width={100}
                 height={100}
                 quality={100}
-              ></Image>
+              ></Image> */}
             </div>
           </div>
 
           <div className="profile-txt-wrapper flex flex-col gap-12 items-start">
-            <p className="profile-txt text-[1.4rem]">Name: {user.name}</p>
+            {/* <p className="profile-txt text-[1.4rem]">Name: {user.name}</p> */}
             <p className="profile-txt text-[1.4rem]">
-              Nickname: {user?.nickname}
+              {/* Nickname: {user?.nickname} */}
             </p>
-            <p className="profile-txt text-[1.4rem]">Email: {user?.email}</p>
+            {/* <p className="profile-txt text-[1.4rem]">Email: {user?.email}</p> */}
           </div>
         </div>
 

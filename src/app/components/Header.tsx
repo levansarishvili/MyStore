@@ -2,16 +2,12 @@ import { Link } from "../../i18n/routing";
 import Navigation from "../[locale]/Navigation";
 import LogoutButton from "./buttons/LogoutButton";
 import ColorTheme from "./ColorTheme";
-import { getSession } from "@auth0/nextjs-auth0";
 import LanguageToggle from "./LanguageToggle";
 import Image from "next/image";
 import { Crown } from "lucide-react";
 
 // Create Header component
 async function Header() {
-  const session = await getSession();
-  const user = session?.user;
-
   return (
     <header
       className="header flex items-center bg-[#f1f3f5] dark:bg-[#313131]
@@ -45,13 +41,13 @@ async function Header() {
 
           <Link href="/profile">
             <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
-              <Image
+              {/* <Image
                 src={user?.picture || "../../assets/person.svg"}
                 alt={"User"}
                 className="rounded-full"
                 width={100}
                 height={100}
-              ></Image>
+              ></Image> */}
             </div>
           </Link>
 

@@ -1,5 +1,4 @@
 import "../global.css";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export const metadata = {
   title: "e-shop",
@@ -25,13 +24,12 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <UserProvider>
-        <body className="dark:bg-[#1f1f1f] dark:text-[#f8f9fa]">
-          <div className="wrapper min-h-screen">
-            <>{children}</>
-          </div>
-        </body>
-      </UserProvider>
+
+      <body className="dark:bg-[#1f1f1f] dark:text-[#f8f9fa]">
+        <div className="wrapper min-h-screen">
+          <>{children}</>
+        </div>
+      </body>
     </html>
   );
 }
