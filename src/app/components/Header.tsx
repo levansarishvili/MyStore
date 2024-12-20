@@ -41,13 +41,13 @@ async function Header() {
 
           <Link href="/profile">
             <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
-              {/* <Image
-                src={user?.picture || "../../assets/person.svg"}
+              <Image
+                src={"../../assets/person.svg"}
                 alt={"User"}
                 className="rounded-full"
                 width={100}
                 height={100}
-              ></Image> */}
+              ></Image>
             </div>
           </Link>
 
