@@ -17,8 +17,8 @@ export async function createCheckoutSession(
 
   const origin: string = headers().get("origin") as string;
 
-  // Get language from the form data
-  const language = (data.get("lang") as string) || "en";
+  // // Get language from the form data
+  // const language = (data.get("lang") as string) || "en";
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.create({
@@ -40,11 +40,11 @@ export async function createCheckoutSession(
         },
       ],
       ...(ui_mode === "hosted" && {
-        success_url: `${origin}/${language}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${origin}/${language}/donate-with-checkout`,
+        success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/donate-with-checkout`,
       }),
       ...(ui_mode === "embedded" && {
-        return_url: `${origin}/${language}/donate-with-embedded-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+        return_url: `${origin}/donate-with-embedded-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
       }),
       ui_mode,
     });

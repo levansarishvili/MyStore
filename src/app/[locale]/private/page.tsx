@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { createClient } from "../../utils/supabase/server";
+import { createClient } from "../../../utils/supabase/server";
 
 interface ParamsType {
   params: { locale: string };
