@@ -41,16 +41,6 @@ async function Header() {
           {/* User Profile */}
           <ProfileToggle />
 
-          {/* <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
-              <Image
-                src={"../../assets/person.svg"}
-                alt={"User"}
-                className="rounded-full"
-                width={100}
-                height={100}
-              ></Image>
-            </div> */}
-
           <div className="cart-wrapper flex justify-center items-center p-3 rounded-full text-2xl group">
             <svg
               className="header__icon w-10 h-10 group-hover:transition-all group-hover:fill-[#ec5e2a] transition-all duration-300 dark:fill-white"
