@@ -1,11 +1,9 @@
 import { Link } from "../../i18n/routing";
 import Navigation from "../[locale]/Navigation";
-import LogoutButton from "./buttons/LogoutButton";
 import ColorTheme from "./ColorTheme";
 import LanguageToggle from "./LanguageToggle";
-import Image from "next/image";
 import { Crown } from "lucide-react";
-import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
+import ProfileToggle from "./ProfileToggle";
 
 // Create Header component
 async function Header() {
@@ -40,11 +38,10 @@ async function Header() {
             <Crown className="hover:stroke-[#ec5e2a] duration-300" />
           </Link>
 
-          {/* Login */}
-          <Link href="/login">Sign in</Link>
+          {/* User Profile */}
+          <ProfileToggle />
 
-          <Link href="/profile">
-            <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
+          {/* <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
               <Image
                 src={"../../assets/person.svg"}
                 alt={"User"}
@@ -52,8 +49,7 @@ async function Header() {
                 width={100}
                 height={100}
               ></Image>
-            </div>
-          </Link>
+            </div> */}
 
           <div className="cart-wrapper flex justify-center items-center p-3 rounded-full text-2xl group">
             <svg
@@ -67,11 +63,6 @@ async function Header() {
               <path d="M104,216a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,192,200ZM239.71,74.14l-25.64,92.28A24.06,24.06,0,0,1,191,184H92.16A24.06,24.06,0,0,1,69,166.42L33.92,40H16a8,8,0,0,1,0-16H40a8,8,0,0,1,7.71,5.86L57.19,64H232a8,8,0,0,1,7.71,10.14ZM221.47,80H61.64l22.81,82.14A8,8,0,0,0,92.16,168H191a8,8,0,0,0,7.71-5.86Z"></path>
             </svg>
           </div>
-
-          {/* Logout */}
-          <form action={logout}>
-            <button type="submit">logout</button>
-          </form>
         </div>
       </div>
     </header>

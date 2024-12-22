@@ -128,7 +128,7 @@ function ColorTheme() {
       </div>
 
       {isDropdownOpen && (
-        <div className="color-theme-options-wrapper absolute z-20 top-16 w-52 p-4 flex flex-col items-start gap-3 border shadow-lg bg-[#f1f3f5] rounded-xl dark:bg-[#313131]">
+        <div className="absolute z-20 top-16 w-52 p-4 flex flex-col items-start gap-3 border shadow-lg bg-[#f1f3f5] rounded-xl dark:bg-[#313131]">
           {colorThemes.map((theme) => (
             <div
               key={theme.name}
