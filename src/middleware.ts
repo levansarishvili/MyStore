@@ -10,7 +10,3 @@ export default createMiddleware(routing);
 export const config = {
   matcher: ["/", "/(ka|en)/:path*"],
 };
-
-// export async function middleware(request: NextRequest) {
-//   return await updateSession(request);
-// }

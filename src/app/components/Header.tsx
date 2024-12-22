@@ -5,6 +5,7 @@ import ColorTheme from "./ColorTheme";
 import LanguageToggle from "./LanguageToggle";
 import Image from "next/image";
 import { Crown } from "lucide-react";
+import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
 
 // Create Header component
 async function Header() {
@@ -39,6 +40,9 @@ async function Header() {
             <Crown className="hover:stroke-[#ec5e2a] duration-300" />
           </Link>
 
+          {/* Login */}
+          <Link href="/login">Sign in</Link>
+
           <Link href="/profile">
             <div className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group overflow-hidden">
               <Image
@@ -64,7 +68,10 @@ async function Header() {
             </svg>
           </div>
 
-          <LogoutButton />
+          {/* Logout */}
+          <form action={logout}>
+            <button type="submit">logout</button>
+          </form>
         </div>
       </div>
     </header>

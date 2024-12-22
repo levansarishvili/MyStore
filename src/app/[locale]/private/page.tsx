@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-
 import { createClient } from "../../../utils/supabase/server";
 
 interface ParamsType {
@@ -8,6 +7,7 @@ interface ParamsType {
 
 export default async function PrivatePage({ params }: ParamsType) {
   const locale = params.locale;
+  console.log(locale);
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
