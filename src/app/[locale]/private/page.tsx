@@ -7,11 +7,10 @@ interface ParamsType {
 
 export default async function PrivatePage({ params }: ParamsType) {
   const locale = params.locale;
-  console.log(locale);
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
-  console.log(data);
+  // console.log(data);
   if (error || !data?.user) {
     redirect(`/${locale}/login`);
   }

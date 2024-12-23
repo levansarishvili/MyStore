@@ -1,13 +1,12 @@
 import Image from "next/image";
-
-interface userType {
-  name: string;
-  picture: string;
-  email?: string;
-  nickname?: string;
-}
+import { createClient } from "../../../../utils/supabase/server";
 
 export default async function ProfilePage() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  const userData = data?.user;
+  console.log(userData?.email);
+
   return (
     <section className="profile-wrapper flex flex-col items-center gap-20">
       <h1 className="section-header text-4xl font-semibold">My Account</h1>
@@ -17,14 +16,14 @@ export default async function ProfilePage() {
         <div className="profile-media-wrapper flex flex-col items-center gap-16">
           <div className="profile__img-wrapper flex flex-col items-center gap-3">
             <div className="profile__img-box flex items-center justify-center w-40 h-40 rounded-full border-2 border-[#ec5e2a] overflow-hidden bg-white">
-              {/* <Image
+              <Image
                 className="profile__img rounded-full w-11/12"
-                src={user.picture || "../../assets/person.svg"}
-                alt={user?.name || "User"}
+                src={"/assets/user-avatar.png"}
+                alt="User"
                 width={100}
                 height={100}
                 quality={100}
-              ></Image> */}
+              ></Image>
             </div>
           </div>
 
@@ -33,7 +32,9 @@ export default async function ProfilePage() {
             <p className="profile-txt text-[1.4rem]">
               {/* Nickname: {user?.nickname} */}
             </p>
-            {/* <p className="profile-txt text-[1.4rem]">Email: {user?.email}</p> */}
+            <p className="profile-txt text-[1.4rem]">
+              Email: {userData?.email}
+            </p>
           </div>
         </div>
 
