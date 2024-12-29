@@ -5,7 +5,7 @@ export default async function ProfilePage() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
   const userData = data?.user;
-  console.log(userData?.email);
+  console.log(userData);
 
   return (
     <section className="profile-wrapper flex flex-col items-center gap-20">

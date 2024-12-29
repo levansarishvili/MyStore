@@ -8,6 +8,7 @@ export default async function LoginlLayout({
 }) {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
+  console.log(data);
 
   if (data?.user) {
     redirect("/");
