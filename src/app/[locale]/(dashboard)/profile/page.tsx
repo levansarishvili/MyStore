@@ -18,7 +18,11 @@ export default async function ProfilePage() {
             <div className="profile__img-box flex items-center justify-center w-40 h-40 rounded-full border-2 border-[#ec5e2a] overflow-hidden bg-white">
               <Image
                 className="profile__img rounded-full w-11/12"
-                src={"/assets/user-avatar.png"}
+                src={`${
+                  userData?.user_metadata.avatar_url
+                    ? userData?.user_metadata.avatar_url
+                    : "/assets/user-avatar.png"
+                }`}
                 alt="User"
                 width={100}
                 height={100}
@@ -29,9 +33,12 @@ export default async function ProfilePage() {
 
           <div className="profile-txt-wrapper flex flex-col gap-12 items-start">
             {/* <p className="profile-txt text-[1.4rem]">Name: {user.name}</p> */}
-            <p className="profile-txt text-[1.4rem]">
-              {/* Nickname: {user?.nickname} */}
-            </p>
+            {userData?.user_metadata?.user_name && (
+              <p className="profile-txt text-[1.4rem]">
+                Username: {userData?.user_metadata?.user_name}
+              </p>
+            )}
+
             <p className="profile-txt text-[1.4rem]">
               Email: {userData?.email}
             </p>
