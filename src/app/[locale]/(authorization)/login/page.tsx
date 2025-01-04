@@ -1,7 +1,4 @@
-"use client";
-
-import { login, signup } from "./actions";
-import signInWithGithub from "../../../components/SignInWithGithub";
+import { login, signup, signInWithGithub } from "./actions";
 
 export default function LoginPage() {
   return (
@@ -17,7 +14,7 @@ export default function LoginPage() {
             id="email"
             name="email"
             type="email"
-            required
+            // required
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -29,11 +26,10 @@ export default function LoginPage() {
             id="password"
             name="password"
             type="password"
-            required
+            // required
           />
         </div>
       </div>
-
       <div className="flex gap-8 justify-center">
         <button
           formAction={login}
@@ -48,10 +44,9 @@ export default function LoginPage() {
           Sign up
         </button>
       </div>
-
       {/* Sign in with GitHub */}
       <button
-        onClick={signInWithGithub}
+        formAction={signInWithGithub}
         className="flex items-center gap-4 hover:text-[#ec5e2a] duration-300 font-medium hover:fill-[#ec5e2a]"
       >
         Sign in with GitHub
