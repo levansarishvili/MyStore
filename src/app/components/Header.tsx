@@ -4,9 +4,14 @@ import ColorTheme from "./ColorTheme";
 import LanguageToggle from "./LanguageToggle";
 import { Crown } from "lucide-react";
 import ProfileToggle from "./ProfileToggle";
+import GetUserData from "./GetUserData";
 
 // Create Header component
 async function Header() {
+  const user = await GetUserData();
+  const userData = user.data.user;
+  const userImageUrl = userData?.user_metadata?.avatar_url;
+  console.log(userData);
   return (
     <header
       className="header flex items-center bg-[#f1f3f5] dark:bg-[#313131]
@@ -39,7 +44,7 @@ async function Header() {
           </Link>
 
           {/* User Profile */}
-          <ProfileToggle />
+          <ProfileToggle userImageUrl={userImageUrl} />
 
           <div className="cart-wrapper flex justify-center items-center p-3 rounded-full text-2xl group">
             <svg

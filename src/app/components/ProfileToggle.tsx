@@ -5,7 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
 
-export default function ProfileToggle() {
+export default function ProfileToggle({
+  userImageUrl,
+}: {
+  userImageUrl: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggle() {
@@ -19,7 +23,7 @@ export default function ProfileToggle() {
         className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group"
       >
         <Image
-          src={"../../assets/person.svg"}
+          src={userImageUrl || "/assets/user-avatar.png"}
           alt={"User"}
           className="rounded-full"
           width={100}
