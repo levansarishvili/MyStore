@@ -12,6 +12,7 @@ export default async function LoginlLayout({
 
   if (data?.user) {
     redirect("/");
+    console.log(data);
   }
   return <div className="">{children}</div>;
 }
