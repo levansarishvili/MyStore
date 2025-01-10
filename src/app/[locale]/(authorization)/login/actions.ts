@@ -59,7 +59,6 @@ export async function signInWithGithub() {
     },
   });
 
-
   if (error) {
     console.error(error);
   }
@@ -69,7 +68,7 @@ export async function signInWithGithub() {
   }
 }
 
-// Sign in with Github
+// Sign in with Google
 export async function signInWithGoogle() {
   const supabase = await createClient();
   const auth_callback_url = `${process.env.NEXT_PUBLIC_BASE_URL}/en/auth/callback`;
