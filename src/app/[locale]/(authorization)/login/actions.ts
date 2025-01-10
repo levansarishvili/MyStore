@@ -46,3 +46,49 @@ export async function signup(formData: FormData) {
   revalidatePath("/", "layout");
   redirect("/");
 }
+
+// Sign in with Github
+export async function signInWithGithub() {
+  const supabase = await createClient();
+  const auth_callback_url = `${process.env.NEXT_PUBLIC_BASE_URL}/en/auth/callback`;
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: auth_callback_url,
+    },
+  });
+
+  console.log(data);
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (data.url) {
+    redirect(data.url);
+  }
+}
+
+// Sign in with Github
+export async function signInWithGoogle() {
+  const supabase = await createClient();
+  const auth_callback_url = `${process.env.NEXT_PUBLIC_BASE_URL}/en/auth/callback`;
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: auth_callback_url,
+    },
+  });
+
+  console.log(data, error);
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (data.url) {
+    redirect(data.url);
+  }
+}
