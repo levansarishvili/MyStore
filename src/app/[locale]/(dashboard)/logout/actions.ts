@@ -3,8 +3,10 @@
 import { createClient } from "../../../../utils/supabase/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export async function logout() {
+  const locale = cookies().get("NEXT_LOCALE")?.value || "en"; // Default to 'en' if not found
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();
@@ -14,5 +16,7 @@ export async function logout() {
   }
 
   revalidatePath("/", "layout");
-  redirect("/login");
+
+  // Redirect to login page with the locale, ensuring it's not doubled
+  redirect(`/${locale}/login`);
 }
