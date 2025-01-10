@@ -50,7 +50,7 @@ export async function signup(formData: FormData) {
 // Sign in with Github
 export async function signInWithGithub() {
   const supabase = await createClient();
-  const auth_callback_url = `${process.env.NEXT_PUBLIC_BASE_URL}/en/auth/callback`;
+  const auth_callback_url = `${process.env.BASE_URL}/en/auth/callback`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
@@ -71,7 +71,7 @@ export async function signInWithGithub() {
 // Sign in with Google
 export async function signInWithGoogle() {
   const supabase = await createClient();
-  const auth_callback_url = `${process.env.NEXT_PUBLIC_BASE_URL}/en/auth/callback`;
+  const auth_callback_url = `${process.env.BASE_URL}/en/auth/callback`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
