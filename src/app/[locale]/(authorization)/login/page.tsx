@@ -1,13 +1,16 @@
 import { login, signup, signInWithGithub, signInWithGoogle } from "./actions";
+import { useTranslations } from "next-intl";
 
 export default function LoginPage() {
+  const t = useTranslations("LoginPage");
+
   return (
     <form className="flex flex-col items-center gap-16 justify-center border w-[32rem] mx-auto rounded-xl p-6 shadow-md">
-      <h1 className="text-[2.4rem] font-medium">Login</h1>
+      <h1 className="text-[2.4rem] font-medium">{t("login-header")}</h1>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2 min-w-[26rem]">
           <label className="text-[1.6rem]" htmlFor="email">
-            Email:
+            {t("email")}:
           </label>
           <input
             className="border rounded-lg px-4 py-2 text-[1.4rem] dark:bg-[#4a4a4a]"
@@ -19,7 +22,7 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-[1.6rem]" htmlFor="password">
-            Password:
+            {t("password")}:
           </label>
           <input
             className="border rounded-lg px-4 py-2 text-[1.4rem] dark:bg-[#4a4a4a]"
@@ -35,18 +38,18 @@ export default function LoginPage() {
           formAction={login}
           className="px-4 py-2 rounded-lg text-white bg-[#ec5e2a] hover:bg-[#ec5e2a]/80 duration-300"
         >
-          Log in
+          {t("login-button")}
         </button>
         <button
           formAction={signup}
           className="px-4 py-2 rounded-lg text-white bg-gray-400 hover:bg-gray-400/80 duration-300"
         >
-          Sign up
+          {t("register-button")}
         </button>
       </div>
 
       <div className="flex flex-col gap-4 justify-center items-center">
-        <p className="text-[1.4rem]">or sign in with</p>
+        <p className="text-[1.4rem]">{t("sign-in-with")}</p>
         <div className="flex gap-8">
           {/* Sign in with GitHub */}
           <button

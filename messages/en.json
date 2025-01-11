@@ -13,5 +13,13 @@
   },
   "Footer": {
     "copyright": "© Levan Sarishvili, Tbilisi, Georgia, 2024."
+  },
+  "LoginPage": {
+    "login-header": "Login",
+    "email": "Email",
+    "password": "Password",
+    "login-button": "Login",
+    "register-button": "Register",
+    "sign-in-with": "or sign in with"
   }
 }

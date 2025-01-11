@@ -8,6 +8,11 @@ import { cookies } from "next/headers";
 export async function logout() {
   const locale = cookies().get("NEXT_LOCALE")?.value || "en"; // Default to 'en' if not found
   const supabase = await createClient();
+  const user = await supabase.auth.getUser();
+
+  if (!user.data.user) {
+    return;
+  }
 
   const { error } = await supabase.auth.signOut();
 

@@ -13,5 +13,13 @@
   },
   "Footer": {
     "copyright": "© ლევან სარიშვილი, თბილისი, საქართველო, 2024."
+  },
+  "LoginPage": {
+    "login-header": "ავტორიზაცია",
+    "email": "ელ-ფოსტა",
+    "password": "პაროლი",
+    "login-button": "შესვლა",
+    "register-button": "რეგისტრაცია",
+    "sign-in-with": "ან გაიარეთ ავტორიზაცია"
   }
 }

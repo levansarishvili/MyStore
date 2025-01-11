@@ -53,8 +53,12 @@ export default function ProfileToggle({
           action={logout}
           className="w-full text-red-600 hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] duration-300 px-4 py-2 rounded-lg"
         >
-          <button onClick={handleToggle} type="submit">
-            Logout
+          <button
+            onClick={handleToggle}
+            type="submit"
+            className="dark:text-white font-medium"
+          >
+            Sign out
           </button>
         </form>
       </div>
