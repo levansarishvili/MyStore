@@ -24,14 +24,29 @@ export default async function LocaleLayout({
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
   const userData = data?.user;
+  const userId = userData?.id;
+  console.log(userData);
 
   // Get user name and email
   const email = userData?.email ?? "undefined";
-  const name = userData?.user_metadata.full_name ?? "undefined";
+  const name = userData?.user_metadata.full_name ?? "test_user";
 
   if (userData) {
     // After successful login/signup add user to Stripe if it doesn't exist
-    AddCustomerOnStripe(email, name);
+    const stripeCustomer = await AddCustomerOnStripe(email, name);
+    const stripeCustomerId = stripeCustomer?.id;
+    console.log(userId, email, stripeCustomerId);
+
+    // Add user to supabase in user_profiles table with customer ID from Stripe
+    await supabase.from("user_profiles").insert([
+      {
+        user_id: userId,
+        email: email,
+        subscription_id: null,
+        stripe_customer_id: stripeCustomerId,
+        subscription_status: null,
+      },
+    ]);
   }
   // Fetch messages on the server-side
   const messages = await getMessages();
