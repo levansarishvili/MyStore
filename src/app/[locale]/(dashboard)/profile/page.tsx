@@ -1,11 +1,13 @@
 import Image from "next/image";
-import { createClient } from "../../../../utils/supabase/server";
-import AddCustomerOnStripe from "../../../components/AddCustomerOnStripe";
+import { Crown } from "lucide-react";
+import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
+import GetUserData from "../../../components/GetUserData";
 
 export default async function ProfilePage() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-  const userData = data?.user;
+  const userData = await GetUserData();
+
+  // Get subscription status
+  const isProMember = await CheckSubscriptionStatus();
 
   return (
     <section className="profile-wrapper flex flex-col items-center gap-20">
@@ -15,7 +17,11 @@ export default async function ProfilePage() {
       <div className="profile-content dark:bg-[#313131] dark:text-[#f8f9fa] grid grid-cols-2 gap-x-40 w-full border rounded-2xl bg-[#f1f3f5] p-16">
         <div className="profile-media-wrapper flex flex-col items-center gap-16">
           <div className="profile__img-wrapper flex flex-col items-center gap-3">
-            <div className="profile__img-box flex items-center justify-center w-40 h-40 rounded-full border-2 border-[#ec5e2a] overflow-hidden bg-white">
+            <div
+              className={`profile__img-box flex items-center justify-center w-40 h-40 rounded-full ${
+                isProMember && "border-2 border-[#ec5e2a]"
+              }`}
+            >
               <Image
                 className="profile__img rounded-full w-11/12"
                 src={`${
@@ -30,6 +36,14 @@ export default async function ProfilePage() {
               ></Image>
             </div>
           </div>
+
+          {/* If user is a pro member */}
+          {isProMember && (
+            <div className="flex gap-6 items-center">
+              <Crown className="w-16 h-16 fill-[#ec5e2a] stroke-[#ec5e2a]" />
+              <p className="text-[1.4rem]">You are a pro member!</p>
+            </div>
+          )}
 
           <div className="profile-txt-wrapper flex flex-col gap-12 items-start">
             {/* <p className="profile-txt text-[1.4rem]">Name: {user.name}</p> */}

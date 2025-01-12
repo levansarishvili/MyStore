@@ -25,7 +25,6 @@ export default async function LocaleLayout({
   const { data, error } = await supabase.auth.getUser();
   const userData = data?.user;
   const userId = userData?.id;
-  console.log(userData);
 
   // Get user name and email
   const email = userData?.email ?? "undefined";
@@ -35,7 +34,6 @@ export default async function LocaleLayout({
     // After successful login/signup add user to Stripe if it doesn't exist
     const stripeCustomer = await AddCustomerOnStripe(email, name);
     const stripeCustomerId = stripeCustomer?.id;
-    console.log(userId, email, stripeCustomerId);
 
     // Add user to supabase in user_profiles table with customer ID from Stripe
     await supabase.from("user_profiles").insert([

@@ -20,7 +20,7 @@ export default function ProfileToggle({
     <div className="relative">
       <button
         onClick={handleToggle}
-        className="account-wrapper w-12 h-12 rounded-full flex justify-center items-center text-2xl group"
+        className="account-wrapper w-14 h-14 rounded-full flex justify-center items-center text-2xl group"
       >
         <Image
           src={userImageUrl || "/assets/user-avatar.png"}

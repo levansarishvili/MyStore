@@ -5,14 +5,15 @@ import LanguageToggle from "./LanguageToggle";
 import { Crown } from "lucide-react";
 import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
+import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
 
 // Create Header component
 async function Header() {
-  const user = await GetUserData();
-  const userData = user.data.user;
+  const userData = await GetUserData();
   const userImageUrl = userData?.user_metadata?.avatar_url;
 
-  const isNotAuthenticated = !user.data.user;
+  const isNotAuthenticated = !userData;
+  const isProMember = await CheckSubscriptionStatus();
 
   return (
     <header
@@ -50,7 +51,13 @@ async function Header() {
           )}
 
           {/* User Profile */}
-          <ProfileToggle userImageUrl={userImageUrl} />
+          <div
+            className={`${
+              isProMember && "border-2 border-[#ec5e2a] rounded-full"
+            }`}
+          >
+            <ProfileToggle userImageUrl={userImageUrl} />
+          </div>
 
           {!isNotAuthenticated && (
             <div className="cart-wrapper flex justify-center items-center p-3 rounded-full text-2xl group">
