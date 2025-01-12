@@ -26,14 +26,15 @@ export default async function ResultPage({
   const supabase = await createClient();
   const { data: user } = await supabase.auth.getUser();
 
-  const { data, error } = await supabase.from("user_profiles").update([
-    {
-      email: email,
-      subscription_id: subscription?.id,
-      subscription_status: subscription?.status,
-      stripe_customer_id: checkoutSession.customer,
-    },
-  ]);
+  const { data, error } = await supabase
+    .from("user_profiles")
+    .update([
+      {
+        subscription_id: subscription?.id,
+        subscription_status: subscription?.status,
+      },
+    ])
+    .eq("email", email);
 
   return (
     <div className="flex flex-col gap-8 bg-[#f1f3f5] rounded-3xl p-12 justify-center items-center max-w-[50rem] text-center mx-auto shadow-xl dark:bg-[#313131]">
