@@ -1,5 +1,6 @@
 import { createClient } from "../../../utils/supabase/server";
 import { redirect } from "next/navigation";
+import AddCustomerOnStripe from "../../components/AddCustomerOnStripe";
 
 export default async function DashboardLayout({
   children,
