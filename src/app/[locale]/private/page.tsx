@@ -13,8 +13,7 @@ export default async function PrivatePage({ params }: ParamsType) {
 
   // Check if the user exists, otherwise redirect
   if (error || !data?.user) {
-    // redirect(`/${locale}/login`);
-    console.log(data);
+    redirect(`/${locale}/login`);
   }
 
   return <p>Hello {data.user?.email}</p>;

@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { CURRENCY } from "../../config";
 import { formatAmountForStripe } from "../../utils/stripe-helpers";
 import { stripe } from "../../lib/stripe";
+import { createClient } from "../../utils/supabase/server";
 
 export async function createCheckoutSession(
   data: FormData
@@ -15,11 +16,27 @@ export async function createCheckoutSession(
     throw new Error("uiMode is required.");
   }
 
+  // Get authenticated user customer ID from stripe
+  const supabase = await createClient();
+  const user = await supabase.auth.getUser();
+  const userData = user.data.user;
+
+  if (!userData) {
+    throw new Error("User is not authenticated.");
+  }
+
+  const customerId = await supabase
+    .from("user_profiles")
+    .select("stripe_customer_id")
+    .eq("email", userData.email)
+    .single();
+
   const origin: string = headers().get("origin") || "http://localhost:3000";
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.create({
       mode: "subscription",
+      customer: customerId.data?.stripe_customer_id,
       line_items: [
         {
           quantity: 1,

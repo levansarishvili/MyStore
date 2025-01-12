@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { createClient } from "../../../../utils/supabase/server";
+import AddCustomerOnStripe from "../../../components/AddCustomerOnStripe";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
