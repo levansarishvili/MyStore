@@ -13,14 +13,15 @@ export default async function ResultPage({
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.retrieve(searchParams.session_id, {
-      expand: ["line_items", "payment_intent"],
+      expand: ["line_items", "payment_intent", "subscription"],
     });
 
-  const paymentIntent = checkoutSession.payment_intent as Stripe.PaymentIntent;
+  const subscription =
+    checkoutSession.subscription as Stripe.Subscription | null;
 
   return (
     <>
-      <h2>Status: {paymentIntent.status}</h2>
+      <h2>Status: {subscription?.status}</h2>
       <h3>Checkout Session response:</h3>
       <PrintObject content={checkoutSession} />
     </>

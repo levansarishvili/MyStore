@@ -1,11 +1,29 @@
+"use client";
+
 import { Check } from "lucide-react";
 import Link from "next/link";
+import { createCheckoutSession } from "../../../actions/stripe";
 
 interface Props {
   params: { locale: string };
 }
 
 export default function Pricing({ params }: Props) {
+  // Handle form submission
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      const { url } = await createCheckoutSession(formData);
+      if (url) {
+        window.location.href = url;
+      }
+    } catch (error) {
+      console.error("Failed to create checkout session:", error);
+    }
+  }
+
   const locale = params.locale;
 
   return (
@@ -14,14 +32,6 @@ export default function Pricing({ params }: Props) {
 
       {/* Stripe */}
       <ul className="card-list">
-        {/* <li>
-          <Link
-            href={`/${locale}/donate-with-embedded-checkout`}
-            className="card checkout-style-background"
-          >
-            <h2 className="bottom">Donate with embedded Checkout</h2>
-          </Link>
-        </li> */}
         <li>
           <Link
             href={`/${locale}/donate-with-checkout`}
@@ -32,14 +42,6 @@ export default function Pricing({ params }: Props) {
             </h2>
           </Link>
         </li>
-        {/* <li>
-          <Link
-            href={`/${locale}/donate-with-elements`}
-            className="card elements-style-background"
-          >
-            <h2 className="bottom">Donate with Elements</h2>
-          </Link>
-        </li> */}
       </ul>
 
       <div className="flex gap-36">
@@ -82,7 +84,7 @@ export default function Pricing({ params }: Props) {
           <div className="flex flex-col">
             <h2 className="text-[2.2rem] font-semibold">Pro Plan</h2>
           </div>
-          <p className="text-[2.6rem] font-medium">$49</p>
+          <p className="text-[2.6rem] font-medium">$29</p>
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-4">
               <div className="bg-[#ec5e2a] rounded-full flex justify-center items-center w-[2.6rem] h-[2.6rem] p-1">
@@ -128,9 +130,14 @@ export default function Pricing({ params }: Props) {
             </div>
           </div>
           <div className="flex justify-center w-full">
-            <button className="flex justify-center text-[1.6rem] items-center bg-[#ec5e2a] rounded-full text-[#F4F2FD] font-medium px-6 py-2">
-              Subscribe now
-            </button>
+            <form onSubmit={handleSubmit}>
+              <button
+                type="submit"
+                className="flex justify-center text-[1.6rem] items-center bg-[#ec5e2a] rounded-full text-[#F4F2FD] font-medium px-6 py-2 hover:bg-slate-200 hover:text-[#ec5e2a] duration-300"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
       </div>
