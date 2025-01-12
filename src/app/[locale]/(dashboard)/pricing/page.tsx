@@ -1,8 +1,8 @@
 "use client";
 
 import { Check } from "lucide-react";
-import Link from "next/link";
 import { createCheckoutSession } from "../../../actions/stripe";
+import { supabase } from "../../../../lib/supabaseClient";
 
 interface Props {
   params: { locale: string };
@@ -31,18 +31,6 @@ export default function Pricing({ params }: Props) {
       <h1 className="text-[2.2rem] font-semibold">Buy Subscription</h1>
 
       {/* Stripe */}
-      <ul className="card-list">
-        <li>
-          <Link
-            href={`/${locale}/donate-with-checkout`}
-            className="card checkout-style-background"
-          >
-            <h2 className="bottom text-[#202842] dark:text-white font-medium hover:text-[#ec5e2a] duration-300">
-              Donate with hosted Checkout ➡
-            </h2>
-          </Link>
-        </li>
-      </ul>
 
       <div className="flex gap-36">
         {/* Free Plan */}
