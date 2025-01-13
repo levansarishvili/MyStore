@@ -2,16 +2,34 @@
 
 import { Check } from "lucide-react";
 import { createCheckoutSession } from "../../../actions/stripe";
-import { supabase } from "../../../../lib/supabaseClient";
+import CheckSubscriptionStatusClient from "../../../components/CheckSubscriptionStatusClient";
+import Loading from "../../../loading";
+import { useState } from "react";
 
 interface Props {
   params: { locale: string };
 }
 
 export default function Pricing({ params }: Props) {
+  // Check if the user is already a Pro member
+  const { isProMember, loading } = CheckSubscriptionStatusClient();
+  const [showMessage, setShowMessage] = useState(false);
+
+  // Show a loading indicator while fetching the subscription status
+  if (loading) {
+    return <Loading />;
+  }
+
   // Handle form submission
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // If user already has a subscription show a message and don't create a new checkout session
+    if (isProMember) {
+      setShowMessage(() => true);
+      return;
+    }
+
     const formData = new FormData(event.currentTarget);
 
     try {
@@ -30,7 +48,11 @@ export default function Pricing({ params }: Props) {
     <div className="flex flex-col gap-8 rounded-2xl bg-[#f1f3f5] justify-center items-center max-w-[100rem] px-[4.8rem] py-[3.2rem] dark:bg-[#313131]">
       <h1 className="text-[2.2rem] font-semibold">Buy Subscription</h1>
 
-      {/* Stripe */}
+      {showMessage && (
+        <p className="text-green-600 font-medium">
+          You are a pro member already! 👑
+        </p>
+      )}
 
       <div className="flex gap-36">
         {/* Free Plan */}
@@ -117,7 +139,7 @@ export default function Pricing({ params }: Props) {
               <p className="text-[1.4rem]">Add new blogs</p>
             </div>
           </div>
-          <div className="flex justify-center w-full">
+          <div className="flex justify-center w-full flex-col items-center gap-6">
             <form onSubmit={handleSubmit}>
               <button
                 type="submit"

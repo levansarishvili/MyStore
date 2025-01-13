@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Crown } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
-import CancelSubscription from "../../../components/CancelSubscription";
+
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
