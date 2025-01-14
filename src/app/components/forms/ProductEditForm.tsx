@@ -1,68 +1,13 @@
-"use client";
-
-import React, { useState } from "react";
-import type { ProductsType } from "../../hooks/useFetchProducts";
-
-interface Props {
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  currentProduct: ProductsType;
-  products: ProductsType[];
-  setProducts: React.Dispatch<React.SetStateAction<ProductsType[]>>;
-}
-
 // Product edit form
-export default function ProductEditForm({
-  setActive,
-  currentProduct,
-  products,
-  setProducts,
-}: Props) {
-  const [title, setFormTitle] = useState(currentProduct.title);
-  const [price, setFormPrice] = useState(currentProduct.price);
-  const [availabilitystatus, setFormAvailabilityStatus] = useState(
-    currentProduct.availabilitystatus
-  );
-  const [stock, setFormStock] = useState(currentProduct.stock);
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Update the current product in the products list
-    const updatedProducts = products.map((product) =>
-      product.id === currentProduct.id
-        ? {
-            ...product,
-            title: title,
-            price: price,
-            availabilitystatus: availabilitystatus,
-            stock: stock,
-          }
-        : product
-    );
-
-    // Update the products state
-    setProducts(updatedProducts);
-
-    // Update localStorage with the updated products list
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
-    setActive(false);
-  };
-
-  // Handle close form
-  const handleCloseForm = (e: React.FormEvent) => {
-    e.preventDefault();
-    setActive(false);
-  };
-
+export default function ProductEditForm() {
   return (
     <form
       className="product-edit-form dark:bg-[#313131] fixed z-10 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[80rem] w-full p-32 border rounded-2xl cursor-pointer transition-all duration-300 bg-[#495057ed] text-3xl flex flex-col justify-center items-center gap-12"
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
     >
       <button
         className="product-edit-form-close-btn w-10 font-medium absolute top-8 right-8 text-[1.4rem] cursor-pointer transition-all duration-300 bg-[#ec5e2a] px-2 py-1 rounded-lg text-white hover:bg-white hover:text-[#ec5e2a]"
-        onClick={handleCloseForm}
+        // onClick={handleCloseForm}
       >
         X
       </button>
@@ -72,8 +17,8 @@ export default function ProductEditForm({
           Title
         </label>
         <input
-          value={title}
-          onChange={(e) => setFormTitle(e.target.value)}
+          // value={title}
+          // onChange={(e) => setFormTitle(e.target.value)}
           className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           type="text"
           id="title"
@@ -86,8 +31,8 @@ export default function ProductEditForm({
           Availability Status
         </label>
         <select
-          value={availabilitystatus}
-          onChange={(e) => setFormAvailabilityStatus(e.target.value)}
+          // value={availabilitystatus}
+          // onChange={(e) => setFormAvailabilityStatus(e.target.value)}
           className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           id="stockStatus"
         >
@@ -102,8 +47,8 @@ export default function ProductEditForm({
           Stock
         </label>
         <input
-          value={stock}
-          onChange={(e) => setFormStock(Number(e.target.value))}
+          // value={stock}
+          // onChange={(e) => setFormStock(Number(e.target.value))}
           className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           type="number"
           id="stock"
@@ -115,8 +60,8 @@ export default function ProductEditForm({
           Price
         </label>
         <input
-          value={price}
-          onChange={(e) => setFormPrice(Number(e.target.value))}
+          // value={price}
+          // onChange={(e) => setFormPrice(Number(e.target.value))}
           className="product-edit-form-input dark:bg-[#4a4a4a] w-[40rem] px-8 py-4 rounded-lg border-2 border-[#495057] outline-none transition-all duration-300 text-2xl focus:border-[#ec5e2a]"
           type="number"
           id="price"

@@ -2,9 +2,8 @@
 
 import Button from "../../../../components/buttons/Button";
 import Image from "next/image";
-import type { ProductsType } from "../../../../hooks/useFetchProducts";
 
-export default function ProductDetails({ product }: { product: ProductsType }) {
+export default function ProductDetails(product: any) {
   // const reviews = product.reviews;
 
   return (

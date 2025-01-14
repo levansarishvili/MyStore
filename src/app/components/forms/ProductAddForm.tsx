@@ -1,45 +1,8 @@
-"use client";
-
-import { useState } from "react";
-import { handleAddProduct } from "../functions/handleAddProduct";
-import type { ProductsType } from "../../hooks/useFetchProducts";
-
-interface ProductFormProps {
-  products: ProductsType[];
-  setProducts: React.Dispatch<React.SetStateAction<ProductsType[]>>;
-}
-
-export default function ProductForm({
-  products,
-  setProducts,
-}: ProductFormProps) {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [availabilityStatus, setAvailabilityStatus] = useState("In Stock");
-  const [inStock, setInStock] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleAddProduct(
-      products,
-      "products",
-      setProducts,
-      title,
-      price,
-      availabilityStatus,
-      inStock
-    );
-
-    setTitle("");
-    setPrice("");
-    setAvailabilityStatus("");
-    setInStock("");
-  };
-
+export default function ProductForm() {
   return (
     <form
       className="product-form dark:bg-[#313131] flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl"
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
     >
       <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
         <label
@@ -52,8 +15,8 @@ export default function ProductForm({
           className="product-add-input dark:bg-[#4a4a4a] w-full p-3 border border-gray-300 rounded-md text-xl outline-none transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="text"
           id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          // value={title}
+          // onChange={(e) => setTitle(e.target.value)}
           required
         />
       </div>
@@ -68,8 +31,8 @@ export default function ProductForm({
           className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
           id="price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          // value={price}
+          // onChange={(e) => setPrice(e.target.value)}
           required
         />
       </div>
@@ -82,8 +45,8 @@ export default function ProductForm({
         </label>
         <select
           className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
-          value={availabilityStatus}
-          onChange={(e) => setAvailabilityStatus(e.target.value)}
+          // value={availabilityStatus}
+          // onChange={(e) => setAvailabilityStatus(e.target.value)}
           id="availabilityStatus"
         >
           <option value="In Stock">In Stock</option>
@@ -102,8 +65,8 @@ export default function ProductForm({
           className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
           id="inStock"
-          value={inStock}
-          onChange={(e) => setInStock(e.target.value)}
+          // value={inStock}
+          // onChange={(e) => setInStock(e.target.value)}
           required
         />
       </div>

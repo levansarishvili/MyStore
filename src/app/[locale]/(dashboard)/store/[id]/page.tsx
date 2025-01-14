@@ -1,7 +1,6 @@
 import ProductDetails from "./ProductDetails";
 import PageNotFound from "../../../../components/PageNotFound";
 import React from "react";
-import type { ProductsType } from "../../../../hooks/useFetchProducts";
 import { supabase } from "../../../../../lib/supabaseClient";
 
 interface paramsType {
@@ -15,7 +14,7 @@ export default async function ProductDetailsPage({
   params: paramsType;
 }) {
   const { id } = params;
-  let product: ProductsType | null = null;
+  // let product: ProductsType | null = null;
 
   try {
     const { data, error } = await supabase
