@@ -36,7 +36,6 @@ export default function CreateProductForm() {
 
     let stripeProduct;
     let stripePrice;
-    let productIsCreated;
 
     // Create Stripe product
     try {
@@ -52,7 +51,7 @@ export default function CreateProductForm() {
     // Create Stripe price
     try {
       stripePrice = await stripe.prices.create({
-        unit_amount: price * 100,
+        unit_amount: Math.round(price * 100),
         currency: "usd",
         product: stripeProduct?.id,
       });
@@ -66,7 +65,7 @@ export default function CreateProductForm() {
     try {
       const { data, error } = await supabase.from("products").insert({
         name: name,
-        price: price,
+        price: Math.round(price * 100),
         category: category,
         description: description,
         image_url: imageUrl,
@@ -86,7 +85,7 @@ export default function CreateProductForm() {
   return (
     <form
       action={createProduct}
-      className="product-form dark:bg-[#313131] flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl"
+      className="product-form dark:bg-[#313131] flex flex-col items-center justify-center gap-6 bg-[#f1f3f5] p-8 rounded-2xl w-[36rem]"
     >
       <div className="form-group flex flex-col items-start justify-center gap-4 w-full">
         <label
@@ -113,6 +112,7 @@ export default function CreateProductForm() {
         <input
           className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"
           type="number"
+          step="0.01"
           id="price"
           name="price"
           required
@@ -153,7 +153,7 @@ export default function CreateProductForm() {
           className="product-add-form-label text-[1.6rem] font-semibold"
           htmlFor="image"
         >
-          Image
+          Image url
         </label>
         <input
           className="product-add-input dark:bg-[#4a4a4a] p-3 border border-gray-300 rounded-md text-xl outline-none w-full transition-all duration-300 cursor-pointer focus:border-[#ec5e2a]"

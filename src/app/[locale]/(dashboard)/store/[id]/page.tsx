@@ -22,18 +22,8 @@ export default async function ProductDetailsPage({
       .select("*")
       .eq("id", id)
       .single();
-
-    product = data;
   } catch (err) {
     console.error(err);
     return <PageNotFound />;
   }
-
-  // Ensure product is not null before passing it to ProductDetails
-  if (!product) {
-    return <PageNotFound />;
-  }
-
-  // Pass the product data to the ProductDetails component
-  return <ProductDetails product={product} />;
 }

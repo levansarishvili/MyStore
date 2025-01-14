@@ -1,18 +1,32 @@
-// import { useSearchParams } from "next/navigation";
-// import ProductFilter from "../../../components/filters/ProductFilter";
-// import { useState } from "react";
-// import { handleDelete } from "../../../components/functions/handleDelete";
-// import { handleEdit } from "../../../components/functions/handleEdit";
-// import ProductItem from "./ProductItem";
-// import ProductEditForm from "../../../components/forms/ProductEditForm";
-// import ProductAddForm from "../../../components/forms/ProductAddForm";
+import { createClient } from "../../../../utils/supabase/server";
 import CreateProductForm from "../../../components/forms/CreateProductForm";
+import ProductItem from "./ProductItem";
 
-export default function Store() {
+export default async function Store() {
+  // Fetch products
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("products").select("*");
+  const products = data;
+  // console.log(products);
   return (
-    <>
-      <h1>Store Page</h1>
-      <CreateProductForm />
-    </>
+    <section className="flex flex-col items-center gap-20 w-full">
+      <h1 className="text-3xl font-semibold">Products</h1>
+      <div className="flex gap-36 w-full">
+        <div className="flex items-start">
+          <CreateProductForm />
+        </div>
+        <div className="flex flex-wrap gap-12">
+          {products?.map((product) => (
+            <ProductItem
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              imageSrc={product.image_url}
+              price={product.price}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
