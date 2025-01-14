@@ -30,7 +30,9 @@ export default function useFetchProducts(productsUrl: string) {
       const fetchData = async () => {
         try {
           // Fetch data from supabase
-          const { data, error } = await supabase.from("products").select("*");
+          const { data, error } = await supabase
+            .from("products_old")
+            .select("*");
 
           if (error) {
             console.error(error);

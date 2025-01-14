@@ -19,7 +19,7 @@ export default async function ProductDetailsPage({
 
   try {
     const { data, error } = await supabase
-      .from("products")
+      .from("products_old")
       .select("*")
       .eq("id", id)
       .single();

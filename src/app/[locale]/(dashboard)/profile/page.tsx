@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Crown } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
-
+import CancelSubscription from "../../../components/CancelSubscription";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
@@ -45,6 +45,8 @@ export default async function ProfilePage() {
               <p className="text-[1.4rem]">You are a pro member!</p>
             </div>
           )}
+
+          {/* Cancel subscription */}
 
           <div className="profile-txt-wrapper flex flex-col gap-12 items-start">
             {/* <p className="profile-txt text-[1.4rem]">Name: {user.name}</p> */}
