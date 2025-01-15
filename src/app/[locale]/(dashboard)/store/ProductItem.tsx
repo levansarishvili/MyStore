@@ -36,7 +36,9 @@ export default function ProductItem({ id, name, imageSrc, price }: Props) {
           </h2>
           <div className="product__desc flex flex-col gap-4">
             <div className="product__stock-wrapper flex items-center justify-center gap-4 text-gray-600 text-xl"></div>
-            <p className="product__price text-2xl font-medium text-gray-600 dark:text-gray-100">{`${price} $`}</p>
+            <p className="product__price text-2xl font-medium text-gray-600 dark:text-gray-100">{`${
+              price / 100
+            } $`}</p>
           </div>
         </div>
       </Link>
