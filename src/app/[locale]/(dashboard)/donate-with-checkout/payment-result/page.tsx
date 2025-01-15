@@ -2,6 +2,7 @@ import type { Stripe } from "stripe";
 
 import { stripe } from "../../../../../lib/stripe";
 import { createClient } from "../../../../../utils/supabase/server";
+import { metadata } from "../page";
 
 export default async function ResultPage({
   searchParams,
@@ -11,30 +12,40 @@ export default async function ResultPage({
   if (!searchParams.session_id)
     throw new Error("Please provide a valid session_id (`cs_test_...`)");
 
+  const supabase = await createClient();
+  const { data: user } = await supabase.auth.getUser();
+
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.retrieve(searchParams.session_id, {
       expand: ["line_items", "payment_intent", "subscription"],
     });
+  const orderData = checkoutSession;
 
-  const subscription =
-    checkoutSession.subscription as Stripe.Subscription | null;
-  console.log(subscription);
+  const payment_intent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 
-  // Assuming `customer_email` was passed when creating the Stripe session
-  const email = checkoutSession.customer_details?.email;
+  // Add order in supabase after payment is successful if it doesn't exist
+  const { data: existingOrder } = await supabase
+    .from("orders")
+    .select("id")
+    .eq("stripe_purchase_id", orderData.id)
+    .single();
 
-  const supabase = await createClient();
-  const { data: user } = await supabase.auth.getUser();
+  if (existingOrder) {
+    console.log("Order already exists in Supabase");
+  } else {
+    const { data, error } = await supabase.from("orders").insert({
+      user_id: orderData.metadata?.user_id,
+      product_id: orderData.metadata?.product_id,
+      stripe_product_id: orderData.metadata?.stripe_product_id,
+      stripe_price_id: orderData.metadata?.stripe_price_id,
+      stripe_purchase_id: orderData.id,
+      price: orderData.amount_total,
+    });
 
-  const { data, error } = await supabase
-    .from("user_profiles")
-    .update([
-      {
-        subscription_id: subscription?.id,
-        subscription_status: subscription?.status,
-      },
-    ])
-    .eq("email", email);
+    if (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="flex flex-col gap-8 bg-[#f1f3f5] rounded-3xl p-12 justify-center items-center max-w-[50rem] text-center mx-auto shadow-xl dark:bg-[#313131]">

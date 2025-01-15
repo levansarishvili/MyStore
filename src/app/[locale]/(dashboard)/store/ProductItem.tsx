@@ -4,6 +4,7 @@ import { Link } from "../../../../i18n/routing";
 import Image from "next/image";
 import Button from "../../../components/buttons/Button";
 import { useRouter } from "next/navigation";
+import { Trash, Trash2 } from "lucide-react";
 
 interface Props {
   id: string;
@@ -16,6 +17,7 @@ interface Props {
 export default function ProductItem({ id, name, imageSrc, price }: Props) {
   const router = useRouter();
 
+  // Function to handle product deletion
   const handleDelete = async (productId: string) => {
     try {
       const res = await fetch(`/api/delete-product`, {
@@ -34,6 +36,33 @@ export default function ProductItem({ id, name, imageSrc, price }: Props) {
       router.refresh();
     } catch (error) {
       console.error("Error deleting product:", error);
+    }
+  };
+
+  // Function to handle buy product button click
+  const handleBuyProduct = async (productId: string) => {
+    try {
+      const res = await fetch(`/api/buy-product`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Failed to buy product:", data.message);
+        return;
+      }
+
+      const data = await res.json();
+
+      console.log("Product bought successfully");
+      if (data.success && data.url) {
+        // Redirect to Stripe checkout page
+        router.push(data.url);
+      }
+    } catch (error) {
+      console.error("Error buying product:", error);
     }
   };
 
@@ -70,7 +99,10 @@ export default function ProductItem({ id, name, imageSrc, price }: Props) {
       <div className="buttons flex gap-4">
         <Button className="btn" name="Add to cart" />
         <button className="btn" onClick={() => handleDelete(id)}>
-          Delete
+          <Trash2 className="w-6 h-6" />
+        </button>
+        <button className="btn" onClick={() => handleBuyProduct(id)}>
+          Buy now
         </button>
       </div>
     </div>

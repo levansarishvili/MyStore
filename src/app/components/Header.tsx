@@ -2,7 +2,7 @@ import { Link } from "../../i18n/routing";
 import Navigation from "../[locale]/Navigation";
 import ColorTheme from "./ColorTheme";
 import LanguageToggle from "./LanguageToggle";
-import { Crown } from "lucide-react";
+import { Star } from "lucide-react";
 import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
@@ -46,7 +46,7 @@ async function Header() {
           {/* Buy subscription */}
           {!isNotAuthenticated && (
             <Link href="/pricing">
-              <Crown className="hover:stroke-[#ec5e2a] duration-300 dark:stroke-white" />
+              <Star className="hover:stroke-[#ec5e2a] duration-300 dark:stroke-white" />
             </Link>
           )}
 

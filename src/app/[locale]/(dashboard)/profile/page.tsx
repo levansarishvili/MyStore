@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Crown } from "lucide-react";
+import { Star } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
 import CancelSubscription from "../../../components/CancelSubscription";
@@ -41,7 +41,7 @@ export default async function ProfilePage() {
           {/* If user is a pro member */}
           {isProMember && (
             <div className="flex gap-6 items-center">
-              <Crown className="w-16 h-16 fill-[#ec5e2a] stroke-[#ec5e2a]" />
+              <Star className="w-16 h-16 fill-[#ec5e2a] stroke-[#ec5e2a]" />
               <p className="text-[1.4rem]">You are a pro member!</p>
             </div>
           )}
