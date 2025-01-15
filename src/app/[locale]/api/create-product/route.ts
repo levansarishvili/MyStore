@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { createClient } from "../../../../utils/supabase/server"; // adjust the path as necessary
-import GetUserData from "../../../components/GetUserData"; // adjust the path as necessary
+import { createClient } from "../../../../utils/supabase/server";
+import GetUserData from "../../../components/GetUserData";
 
 export async function POST(req: Request) {
   const { name, price, category, description, image } = await req.json();

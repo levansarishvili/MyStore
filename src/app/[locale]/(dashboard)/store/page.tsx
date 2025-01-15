@@ -3,7 +3,7 @@ import CreateProductForm from "../../../components/forms/CreateProductForm";
 import ProductItem from "./ProductItem";
 
 export interface ProductsType {
-  id: number;
+  id: string;
   name: string;
   price: number;
   category: string;
@@ -20,6 +20,7 @@ export default async function Store() {
   const supabase = await createClient();
   const { data, error } = await supabase.from("products").select("*");
   const products = data as ProductsType[];
+  const sortedProducts = products.sort((a, b) => Number(b.id) - Number(a.id));
   return (
     <section className="flex flex-col items-center gap-20 w-full">
       <h1 className="text-3xl font-semibold">Products</h1>

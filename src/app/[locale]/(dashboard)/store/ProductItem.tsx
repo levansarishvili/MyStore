@@ -1,9 +1,12 @@
+"use client";
+
 import { Link } from "../../../../i18n/routing";
 import Image from "next/image";
 import Button from "../../../components/buttons/Button";
+import { useRouter } from "next/navigation";
 
 interface Props {
-  id: number;
+  id: string;
   name: string;
   imageSrc: string;
   price: number;
@@ -11,13 +14,35 @@ interface Props {
 
 // Product card component
 export default function ProductItem({ id, name, imageSrc, price }: Props) {
+  const router = useRouter();
+
+  const handleDelete = async (productId: string) => {
+    try {
+      const res = await fetch(`/api/delete-product`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Failed to delete product:", data.message);
+        return;
+      }
+
+      console.log("Product deleted successfully");
+      router.refresh();
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   return (
     <div className="product-card dark:bg-[#313131] group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[28rem] h-[32rem] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a] rounded-2xl hover:shadow-md bg-[#f1f3f5]">
       <Link
         className="product__link flex flex-col justify-center items-center gap-8"
         href={`/store/${id}`}
       >
-        {/* <img className="product__img" src={imageSrc} alt="Product"></img> */}
         <div className="product__img-wrapper w-60 h-40 flex justify-center items-center overflow-hidden">
           <Image
             className="product__img object-contain w-40 h-40 opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
@@ -44,6 +69,9 @@ export default function ProductItem({ id, name, imageSrc, price }: Props) {
       </Link>
       <div className="buttons flex gap-4">
         <Button className="btn" name="Add to cart" />
+        <button className="btn" onClick={() => handleDelete(id)}>
+          Delete
+        </button>
       </div>
     </div>
   );
