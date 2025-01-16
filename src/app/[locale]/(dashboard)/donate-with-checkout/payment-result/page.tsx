@@ -2,7 +2,7 @@ import type { Stripe } from "stripe";
 
 import { stripe } from "../../../../../lib/stripe";
 import { createClient } from "../../../../../utils/supabase/server";
-import { metadata } from "../page";
+import Link from "next/link";
 
 export default async function ResultPage({
   searchParams,
@@ -48,28 +48,13 @@ export default async function ResultPage({
   }
 
   return (
-    <div className="flex flex-col gap-8 bg-[#f1f3f5] rounded-3xl p-12 justify-center items-center max-w-[50rem] text-center mx-auto shadow-xl dark:bg-[#313131]">
-      <h1 className="text-5xl font-extrabold text-[#ec5e2a] flex items-center gap-2">
+    <div className="flex flex-col gap-16 bg-[#f1f3f5] rounded-3xl p-12 justify-center items-center max-w-[50rem] text-center mx-auto shadow-xl dark:bg-[#313131]">
+      <h1 className="text-5xl font-semibold text-[#ec5e2a] flex items-center gap-2">
         🎉 Checkout Successful!
       </h1>
-      <p className="text-3xl mt-4">
-        Congratulations
-        <span className="font-semibold text-[#ec5e2a]">
-          {user?.user?.email}
-        </span>
-        , you are now a &nbsp;
-        <span className="text-yellow-400 font-bold">Pro Member</span>! 🚀
-      </p>
-      <p className="text-xl text-gray-600 mt-2 italic dark:text-white">
-        As a Pro member, you now have access to exclusive content, priority
-        support, and special offers!
-      </p>
-      <a
-        href="/"
-        className="inline-block px-8 py-4 bg-[#ec5e2a] rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-[#ec5e2a]/80 transition-all duration-300 ease-in-out text-white mt-6"
-      >
-        Go to Home
-      </a>
+      <Link href="/">
+        <button className="btn">Go to home</button>
+      </Link>
     </div>
   );
 }

@@ -11,10 +11,17 @@ interface Props {
   name: string;
   imageSrc: string;
   price: number;
+  isProMember?: boolean;
 }
 
 // Product card component
-export default function ProductItem({ id, name, imageSrc, price }: Props) {
+export default function ProductItem({
+  id,
+  name,
+  imageSrc,
+  price,
+  isProMember,
+}: Props) {
   const router = useRouter();
 
   // Function to handle product deletion
@@ -98,9 +105,14 @@ export default function ProductItem({ id, name, imageSrc, price }: Props) {
       </Link>
       <div className="buttons flex gap-4">
         <Button className="btn" name="Add to cart" />
-        <button className="btn" onClick={() => handleDelete(id)}>
-          <Trash2 className="w-6 h-6" />
-        </button>
+
+        {/* Show Detele button if user is a Pro member */}
+        {isProMember && (
+          <button className="btn" onClick={() => handleDelete(id)}>
+            <Trash2 className="w-6 h-6" />
+          </button>
+        )}
+
         <button className="btn" onClick={() => handleBuyProduct(id)}>
           Buy now
         </button>

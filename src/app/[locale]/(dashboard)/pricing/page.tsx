@@ -2,8 +2,6 @@
 
 import { Check } from "lucide-react";
 import { createCheckoutSession } from "../../../actions/stripe";
-import CheckSubscriptionStatusClient from "../../../components/CheckSubscriptionStatusClient";
-import Loading from "../../../loading";
 import { useState } from "react";
 
 interface Props {
@@ -12,17 +10,20 @@ interface Props {
 
 export default function Pricing({ params }: Props) {
   // Check if the user is already a Pro member
-  const { isProMember, loading } = CheckSubscriptionStatusClient();
-  const [showMessage, setShowMessage] = useState(false);
 
-  // Show a loading indicator while fetching the subscription status
-  if (loading) {
-    return <Loading />;
-  }
+  const [showMessage, setShowMessage] = useState(false);
 
   // Handle form submission
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    async function fetchSubscriptionStatus() {
+      const response = await fetch("/api/check-subscription");
+      const data = await response.json();
+      return data.isProMember;
+    }
+
+    const isProMember = await fetchSubscriptionStatus();
 
     // If user already has a subscription show a message and don't create a new checkout session
     if (isProMember) {
