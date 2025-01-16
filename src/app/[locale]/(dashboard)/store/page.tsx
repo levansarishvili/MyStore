@@ -28,8 +28,6 @@ export default async function Store() {
   const products = data as ProductsType[];
   const sortedProducts = products.sort((a, b) => Number(b.id) - Number(a.id));
   const isProMember = await CheckSubscriptionStatus();
-  console.log(isProMember);
-  console.log(sortedProducts);
 
   return (
     <section className="flex flex-col items-center gap-20 w-full">

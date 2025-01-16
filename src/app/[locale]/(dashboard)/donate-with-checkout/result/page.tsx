@@ -18,7 +18,6 @@ export default async function ResultPage({
 
   const subscription =
     checkoutSession.subscription as Stripe.Subscription | null;
-  console.log(subscription);
 
   // Assuming `customer_email` was passed when creating the Stripe session
   const email = checkoutSession.customer_details?.email;

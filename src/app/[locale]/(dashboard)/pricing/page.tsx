@@ -10,7 +10,6 @@ export default async function Pricing({ params }: Props) {
   // Check if the user is already a Pro member
 
   const isProMember = await CheckSubscriptionStatus();
-  console.log(isProMember);
 
   return (
     <div className="flex flex-col gap-8 rounded-2xl bg-[#f1f3f5] justify-center items-center max-w-[100rem] px-[4.8rem] py-[3.2rem] dark:bg-[#313131]">
