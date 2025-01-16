@@ -14,7 +14,7 @@ interface Props {
   price: number;
   isProMember?: boolean;
   products?: ProductsType[];
-  userId: string;
+  userId: string | undefined;
 }
 
 // Product card component
