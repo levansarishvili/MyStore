@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="">
+    <html lang="en" className="" suppressHydrationWarning>
       <head>
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>

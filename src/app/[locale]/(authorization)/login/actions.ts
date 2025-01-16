@@ -30,7 +30,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/profile");
 }
 
 // Signup user
@@ -51,7 +51,7 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/profile");
 }
 
 // Sign in with Github
@@ -88,8 +88,6 @@ export async function signInWithGoogle() {
       redirectTo: auth_callback_url,
     },
   });
-
-  console.log(data, error);
 
   if (error) {
     console.error(error);
