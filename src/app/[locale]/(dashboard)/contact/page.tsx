@@ -2,7 +2,7 @@ import Button from "../../../components/buttons/Button";
 
 function Contact() {
   return (
-    <section className="contact-wrapper  flex flex-col items-center gap-20">
+    <section className="flex flex-col items-center gap-20">
       {/* Contact Form */}
       <h1 className="section-header text-4xl font-semibold">Contact</h1>
       <div className="contact-content dark:bg-[#313131] grid grid-cols-2 h-full border rounded-2xl hover:shadow-lg bg-[#f1f3f5] transition-all duration-300">

@@ -44,6 +44,12 @@ export default function ProfileToggle({
           <button onClick={handleToggle}>My account</button>
         </Link>
         <Link
+          href="/orders"
+          className="w-full hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] dark:text-white duration-300 px-4 py-2 rounded-lg"
+        >
+          <button onClick={handleToggle}>My orders</button>
+        </Link>
+        <Link
           href="/login"
           className="w-full hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] dark:text-white duration-300 px-4 py-2 rounded-lg"
         >
