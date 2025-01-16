@@ -1,55 +1,22 @@
-"use client";
-
 import { Check } from "lucide-react";
-import { createCheckoutSession } from "../../../actions/stripe";
-import { useState } from "react";
+import BuySubscriptionButton from "./BuySubscriptionButton";
+import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 
 interface Props {
   params: { locale: string };
 }
 
-export default function Pricing({ params }: Props) {
+export default async function Pricing({ params }: Props) {
   // Check if the user is already a Pro member
 
-  const [showMessage, setShowMessage] = useState(false);
-
-  // Handle form submission
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    async function fetchSubscriptionStatus() {
-      const response = await fetch("/api/check-subscription");
-      const data = await response.json();
-      return data.isProMember;
-    }
-
-    const isProMember = await fetchSubscriptionStatus();
-
-    // If user already has a subscription show a message and don't create a new checkout session
-    if (isProMember) {
-      setShowMessage(() => true);
-      return;
-    }
-
-    const formData = new FormData(event.currentTarget);
-
-    try {
-      const { url } = await createCheckoutSession(formData);
-      if (url) {
-        window.location.href = url;
-      }
-    } catch (error) {
-      console.error("Failed to create checkout session:", error);
-    }
-  }
-
-  const locale = params.locale;
+  const isProMember = await CheckSubscriptionStatus();
+  console.log(isProMember);
 
   return (
     <div className="flex flex-col gap-8 rounded-2xl bg-[#f1f3f5] justify-center items-center max-w-[100rem] px-[4.8rem] py-[3.2rem] dark:bg-[#313131]">
       <h1 className="text-[2.2rem] font-semibold">Buy Subscription</h1>
 
-      {showMessage && (
+      {isProMember && (
         <p className="text-green-600 font-medium">
           You are a pro member already! 👑
         </p>
@@ -141,14 +108,7 @@ export default function Pricing({ params }: Props) {
             </div>
           </div>
           <div className="flex justify-center w-full flex-col items-center gap-6">
-            <form onSubmit={handleSubmit}>
-              <button
-                type="submit"
-                className="flex justify-center text-[1.6rem] items-center bg-[#ec5e2a] rounded-full text-[#F4F2FD] font-medium px-6 py-2 hover:bg-slate-200 hover:text-[#ec5e2a] duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
+            <BuySubscriptionButton isProMember={isProMember} />
           </div>
         </div>
       </div>

@@ -38,11 +38,15 @@ export default async function OrdersPage() {
     <section className="flex flex-col items-center gap-20 w-full px-16">
       <h1 className="text-3xl font-semibold">Orders</h1>
 
-      <ul className="flex flex-col gap-10 w-2/3 px-16 justify-center items-center">
+      <ul className="flex flex-col gap-10 w-full px-16 justify-center items-center">
         {sortedOrders && sortedOrders.length > 0 ? (
           sortedOrders.map((order) => (
-            <Link href={`/orders/${order.id}`} key={order.id}>
-              <li className="flex items-center gap-6 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out px-16 cursor-pointer">
+            <Link
+              href={`/orders/${order.id}`}
+              key={order.id}
+              className="w-full"
+            >
+              <li className="flex items-center gap-6 p-6 bg-white dark:bg-[#313131] rounded-lg shadow-md hover:shadow-md hover:shadow-[#ec5e2a] transition-all duration-300 ease-in-out px-16 cursor-pointer">
                 {/* Product Name and Order Date */}
                 <div className="flex-1 flex flex-col gap-6">
                   <h2 className="text-2xl font-semibold text-[#ec5e2a]">

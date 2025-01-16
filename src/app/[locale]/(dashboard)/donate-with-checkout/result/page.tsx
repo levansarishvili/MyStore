@@ -42,7 +42,7 @@ export default async function ResultPage({
         🎉 Checkout Successful!
       </h1>
       <p className="text-3xl mt-4">
-        Congratulations
+        Congratulations &nbsp;
         <span className="font-semibold text-[#ec5e2a]">
           {user?.user?.email}
         </span>
@@ -50,8 +50,9 @@ export default async function ResultPage({
         <span className="text-yellow-400 font-bold">Pro Member</span>! 🚀
       </p>
       <p className="text-xl text-gray-600 mt-2 italic dark:text-white">
-        As a Pro member, you now have access to exclusive content, priority
-        support, and special offers!
+        As a Pro member, you now have access to exclusive content. You can add
+        new products for sale and delete your own products! Soon, you’ll also be
+        able to do the same with posts.⌛
       </p>
       <a
         href="/"

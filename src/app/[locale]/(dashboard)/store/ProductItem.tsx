@@ -5,6 +5,7 @@ import Image from "next/image";
 import Button from "../../../components/buttons/Button";
 import { useRouter } from "next/navigation";
 import { Trash, Trash2 } from "lucide-react";
+import { ProductsType } from "./page";
 
 interface Props {
   id: string;
@@ -12,6 +13,8 @@ interface Props {
   imageSrc: string;
   price: number;
   isProMember?: boolean;
+  products?: ProductsType[];
+  userId: string;
 }
 
 // Product card component
@@ -21,8 +24,14 @@ export default function ProductItem({
   imageSrc,
   price,
   isProMember,
+  products,
+  userId,
 }: Props) {
   const router = useRouter();
+
+  // Check is user is author of the product
+  const isAuthor =
+    userId === products?.find((product) => product.id === id)?.user_id;
 
   // Function to handle product deletion
   const handleDelete = async (productId: string) => {
@@ -106,8 +115,8 @@ export default function ProductItem({
       <div className="buttons flex gap-4">
         <Button className="btn" name="Add to cart" />
 
-        {/* Show Detele button if user is a Pro member */}
-        {isProMember && (
+        {/* Show Detele button if user is a Pro member and user is the creator of the product */}
+        {isProMember && isAuthor && (
           <button className="btn" onClick={() => handleDelete(id)}>
             <Trash2 className="w-6 h-6" />
           </button>

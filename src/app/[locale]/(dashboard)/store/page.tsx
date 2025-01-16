@@ -1,6 +1,7 @@
 import { createClient } from "../../../../utils/supabase/server";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import CreateProductForm from "../../../components/forms/CreateProductForm";
+import GetUserData from "../../../components/GetUserData";
 import ProductItem from "./ProductItem";
 
 export interface ProductsType {
@@ -17,6 +18,10 @@ export interface ProductsType {
 }
 
 export default async function Store() {
+  // Get user data
+  const userData = await GetUserData();
+  const userId = userData?.id;
+
   // Fetch products
   const supabase = await createClient();
   const { data, error } = await supabase.from("products").select("*");
@@ -24,6 +29,7 @@ export default async function Store() {
   const sortedProducts = products.sort((a, b) => Number(b.id) - Number(a.id));
   const isProMember = await CheckSubscriptionStatus();
   console.log(isProMember);
+  console.log(sortedProducts);
 
   return (
     <section className="flex flex-col items-center gap-20 w-full">
@@ -43,6 +49,8 @@ export default async function Store() {
               imageSrc={product.image_url}
               price={product.price}
               isProMember={isProMember}
+              products={products}
+              userId={userId}
             />
           ))}
         </div>
