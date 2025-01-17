@@ -4,11 +4,11 @@ import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus
 import GetUserData from "../../../components/GetUserData";
 import AddCustomerOnStripe from "src/app/components/AddCustomerOnStripe";
 import { supabase } from "src/lib/supabaseClient";
+import DeleteAccount from "src/app/components/DeleteAccount";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
-  const userId = userData?.id;
-  console.log("User ID:", userId, userData);
+  const userId = userData?.id as string;
 
   // Get user name and email
   const email = userData?.email ?? "undefined";
@@ -83,6 +83,9 @@ export default async function ProfilePage() {
             <p className="profile-txt text-[1.4rem]">
               Email: {userData?.email}
             </p>
+
+            {/* Delete user */}
+            <DeleteAccount userId={userId} />
           </div>
         </div>
 
