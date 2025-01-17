@@ -117,7 +117,11 @@ export default function ProductItem({
 
         {/* Show Detele button if user is a Pro member and user is the creator of the product */}
         {isProMember && isAuthor && (
-          <button className="btn" onClick={() => handleDelete(id)}>
+          <button
+            className="btn"
+            onClick={() => handleDelete(id)}
+            data-cy="delete-product-button"
+          >
             <Trash2 className="w-6 h-6" />
           </button>
         )}

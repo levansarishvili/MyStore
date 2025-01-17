@@ -20,7 +20,6 @@ export default async function AddCustomerOnStripe(
       name: customerName,
     });
 
-    console.log("Created customer on Stripe:", stripeCustomer);
     return stripeCustomer;
   } catch (error) {
     console.error("Error creating customer on Stripe:", error);

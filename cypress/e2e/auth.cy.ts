@@ -1,4 +1,4 @@
-describe("Authentication", () => {
+describe("Auth", () => {
   beforeEach(() => {
     cy.visit("/login");
   });
@@ -26,7 +26,7 @@ describe("Authentication", () => {
     cy.logout();
   });
 
-  // Sign up user test
+  // Sign up user test (after sign up successfully delete user)
   it("Signs up successfully", () => {
     cy.get("[data-cy='email-input']").type("newtestuser@gmail.com");
 
@@ -35,5 +35,9 @@ describe("Authentication", () => {
     cy.get("[data-cy='signup-button']").click();
 
     cy.url().should("include", "/profile");
+
+    cy.get("[data-cy='delete-user-button']").click();
+
+    cy.url().should("include", "/login");
   });
 });

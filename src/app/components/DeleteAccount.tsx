@@ -46,6 +46,7 @@ export default function DeleteAccount({ userId }: { userId: string }) {
       <button
         onClick={handleUserDelete}
         disabled={isLoading}
+        data-cy="delete-user-button"
         className={`bg-red-700 rounded-lg px-4 py-2 hover:bg-white hover:text-gray-950 hover:shadow-lg transition-all font-medium duration-300 text-xl ${
           isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}

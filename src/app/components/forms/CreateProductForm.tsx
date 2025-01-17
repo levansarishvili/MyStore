@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Loading from "../../loading";
 
 export default function CreateProductForm() {
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
@@ -62,6 +61,7 @@ export default function CreateProductForm() {
             type="text"
             id="name"
             name="name"
+            data-cy="product-name-input"
             required
           />
         </div>
@@ -78,6 +78,7 @@ export default function CreateProductForm() {
             step="0.01"
             id="price"
             name="price"
+            data-cy="product-price-input"
             required
           />
         </div>
@@ -93,6 +94,7 @@ export default function CreateProductForm() {
             type="text"
             id="description"
             name="description"
+            data-cy="product-description-input"
             required
           />
         </div>
@@ -108,6 +110,7 @@ export default function CreateProductForm() {
             type="text"
             id="category"
             name="category"
+            data-cy="product-category-input"
             required
           />
         </div>
@@ -123,12 +126,14 @@ export default function CreateProductForm() {
             type="text"
             id="image"
             name="image"
+            data-cy="product-image-input"
             required
           />
         </div>
 
         <button
           type="submit"
+          data-cy="add-product-button"
           className="product-add-form-btn flex items-center justify-center p-3 bg-[#ec5e2a] text-white border-none rounded-md cursor-pointer text-[1.4rem] font-medium w-48 transition-all duration-300 hover:bg-white hover:text-[#ec5e2a] hover:shadow-md"
         >
           Add Product
