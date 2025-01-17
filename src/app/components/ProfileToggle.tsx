@@ -21,6 +21,7 @@ export default function ProfileToggle({
       <button
         onClick={handleToggle}
         className="account-wrapper w-14 h-14 rounded-full flex justify-center items-center text-2xl group"
+        data-cy="user-button"
       >
         <Image
           src={userImageUrl || "/assets/user-avatar.png"}
@@ -63,6 +64,7 @@ export default function ProfileToggle({
             onClick={handleToggle}
             type="submit"
             className="dark:text-white font-medium"
+            data-cy="sign-out-button"
           >
             Sign out
           </button>

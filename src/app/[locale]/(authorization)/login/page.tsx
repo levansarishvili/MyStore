@@ -46,6 +46,7 @@ export default function LoginPage() {
         <button
           formAction={signup}
           className="px-4 py-2 rounded-lg text-white bg-gray-400 hover:bg-gray-400/80 duration-300"
+          data-cy="signup-button"
         >
           {t("signup-button")}
         </button>

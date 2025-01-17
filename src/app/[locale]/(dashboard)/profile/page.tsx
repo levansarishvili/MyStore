@@ -8,6 +8,7 @@ import { supabase } from "src/lib/supabaseClient";
 export default async function ProfilePage() {
   const userData = await GetUserData();
   const userId = userData?.id;
+  console.log("User ID:", userId, userData);
 
   // Get user name and email
   const email = userData?.email ?? "undefined";

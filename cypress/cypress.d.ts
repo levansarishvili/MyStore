@@ -6,5 +6,6 @@ declare namespace Cypress {
      * @param password - The user's password.
      */
     login(email: string, password: string): Chainable<void>;
+    logout(): Chainable<void>;
   }
 }
