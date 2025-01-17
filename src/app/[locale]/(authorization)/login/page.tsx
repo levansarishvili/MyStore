@@ -17,6 +17,7 @@ export default function LoginPage() {
             id="email"
             name="email"
             type="email"
+            data-cy="email-input"
             // required
           />
         </div>
@@ -29,6 +30,7 @@ export default function LoginPage() {
             id="password"
             name="password"
             type="password"
+            data-cy="password-input"
             // required
           />
         </div>
@@ -45,7 +47,7 @@ export default function LoginPage() {
           formAction={signup}
           className="px-4 py-2 rounded-lg text-white bg-gray-400 hover:bg-gray-400/80 duration-300"
         >
-          {t("register-button")}
+          {t("signup-button")}
         </button>
       </div>
 
