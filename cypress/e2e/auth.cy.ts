@@ -4,12 +4,12 @@ describe("Auth", () => {
   });
 
   // Login user test
-  xit("Logs in successfully", () => {
+  it("Logs in successfully", () => {
     cy.login("testuser@gmail.com", "test123");
   });
 
   // Failed login test
-  xit("Fails to log in", () => {
+  it("Fails to log in", () => {
     cy.visit("/login");
 
     cy.get("[data-cy='email-input']").type("testuser@gmail.com");
@@ -22,7 +22,7 @@ describe("Auth", () => {
   });
 
   // Logout user test
-  xit("Logs out successfully", () => {
+  it("Logs out successfully", () => {
     cy.logout();
   });
 

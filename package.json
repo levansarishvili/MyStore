@@ -29,7 +29,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "cypress open"
+    "test": "cypress run"
   },
   "eslintConfig": {
     "extends": [
