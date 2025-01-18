@@ -2,6 +2,7 @@ import type { Stripe } from "stripe";
 
 import { stripe } from "../../../../../lib/stripe";
 import { createClient } from "../../../../../utils/supabase/server";
+import Link from "next/link";
 
 export default async function ResultPage({
   searchParams,
@@ -53,12 +54,12 @@ export default async function ResultPage({
         new products for sale and delete your own products! Soon, you’ll also be
         able to do the same with posts.⌛
       </p>
-      <a
+      <Link
         href="/"
         className="inline-block px-8 py-4 bg-[#ec5e2a] rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-[#ec5e2a]/80 transition-all duration-300 ease-in-out text-white mt-6"
       >
         Go to Home
-      </a>
+      </Link>
     </div>
   );
 }

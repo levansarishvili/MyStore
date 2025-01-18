@@ -14,7 +14,7 @@ function LanguageToggle() {
   useEffect(() => {
     // Update the language state whenever the URL path changes
     setLanguage(currentLang);
-  }, [pathname]);
+  }, [pathname, currentLang]);
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedLang: string = e.target.value;
