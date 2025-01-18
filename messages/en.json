@@ -18,8 +18,8 @@
     "login-header": "Login",
     "email": "Email",
     "password": "Password",
-    "login-button": "Login",
-    "register-button": "Register",
+    "login-button": "Sign in",
+    "signup-button": "Sign up",
     "sign-in-with": "or sign in with"
   }
 }

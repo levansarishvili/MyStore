@@ -23,5 +23,5 @@ Welcome to E-Shop, your go-to destination for all things sports! Whether you're 
 
 ## Author
 
-- Linkedin: [https://www.linkedin.com/in/levan-sarishvili-b87245b1/](https://www.linkedin.com/in/levan-sarishvili-b87245b1/)
+- Linkedin: [https://www.linkedin.com/in/levan-s-b87245b1/](https://www.linkedin.com/in/levan-s-b87245b1/)
 - Github: [https://github.com/levansarishvili](https://github.com/levansarishvili)

@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "../../../../utils/supabase/server";
-import { supabase } from "../../../../lib/supabaseClient";
 import { cookies } from "next/headers";
 
 // Get locale
@@ -26,11 +25,11 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect("/error");
+    redirect("/login");
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/profile");
 }
 
 // Signup user
@@ -47,11 +46,11 @@ export async function signup(formData: FormData) {
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
-    redirect("/error");
+    redirect("/login");
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/profile");
 }
 
 // Sign in with Github
@@ -88,8 +87,6 @@ export async function signInWithGoogle() {
       redirectTo: auth_callback_url,
     },
   });
-
-  console.log(data, error);
 
   if (error) {
     console.error(error);

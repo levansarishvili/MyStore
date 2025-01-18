@@ -32,7 +32,6 @@ export default async function OrdersPage() {
     (a, b) =>
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   );
-  console.log(sortedOrders);
 
   return (
     <section className="flex flex-col items-center gap-20 w-full px-16">

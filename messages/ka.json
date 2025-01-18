@@ -19,7 +19,7 @@
     "email": "ელ-ფოსტა",
     "password": "პაროლი",
     "login-button": "შესვლა",
-    "register-button": "რეგისტრაცია",
+    "signup-button": "რეგისტრაცია",
     "sign-in-with": "ან გაიარეთ ავტორიზაცია"
   }
 }
