@@ -49,7 +49,7 @@ export default function ProductItem({
       }
 
       console.log("Product deleted successfully");
-      router.refresh();
+      router.push("?deleted=true");
     } catch (error) {
       console.error("Error deleting product:", error);
     }
