@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 // Create Footer component
 function Footer() {
@@ -8,11 +9,13 @@ function Footer() {
     <footer className="footer dark:bg-[#313131] dark:text-white dark:shadow-td flex items-center text-gray-700 text-2xl bg-[#f1f3f5]">
       <div className="footer__wrapper max-w-[144rem] mx-auto my-0 w-full h-full flex justify-between items-center px-16 py-0">
         {/* Footer logo */}
-        <img
+        <Image
           src="/assets/logo.svg"
           alt="E-shop logo"
           className="footer__logo h-24"
-        ></img>
+          width={130}
+          height={40}
+        ></Image>
 
         <p className="copyright max-w-[30rem] text-center">{t("copyright")}</p>
 

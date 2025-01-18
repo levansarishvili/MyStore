@@ -6,6 +6,7 @@ import { Star } from "lucide-react";
 import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
+import Image from "next/image";
 
 // Create Header component
 async function Header() {
@@ -22,11 +23,13 @@ async function Header() {
     >
       <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
         <Link href="/">
-          <img
+          <Image
             src="/assets/logo.svg"
             alt="E-shop logo"
             className="header__logo h-16"
-          ></img>
+            width={130}
+            height={40}
+          ></Image>
         </Link>
 
         {!isNotAuthenticated && (

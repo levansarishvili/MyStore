@@ -11,11 +11,11 @@ function About() {
             <strong className="highlight-txt text-[#ec5e2a] font-bold">
               E-Shop
             </strong>
-            , your go-to destination for all things sports! Whether you're a
-            seasoned athlete or just starting your fitness journey, we've got
-            the gear you need to stay at the top of your game. Our passion for
-            sports drives us to provide the best products from leading brands,
-            ensuring you always have access to the
+            , your go-to destination for all things sports! Whether you&apos;re
+            a seasoned athlete or just starting your fitness journey, we&apos;ve
+            got the gear you need to stay at the top of your game. Our passion
+            for sports drives us to provide the best products from leading
+            brands, ensuring you always have access to the
             <span className="highlight-txt text-[#ec5e2a] font-medium">
               &nbsp;highest quality equipment and apparel.
             </span>
