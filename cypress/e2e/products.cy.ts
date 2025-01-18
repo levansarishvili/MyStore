@@ -22,6 +22,8 @@ describe("products", () => {
 
     cy.get("[data-cy='add-product-button']").click();
 
+    cy.wait(3000);
+
     cy.get("h2").contains("Test Product");
 
     // Delete product after successfully adding it and logout
