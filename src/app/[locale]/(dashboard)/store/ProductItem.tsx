@@ -126,7 +126,11 @@ export default function ProductItem({
           </button>
         )}
 
-        <button className="btn" onClick={() => handleBuyProduct(id)}>
+        <button
+          className="btn"
+          onClick={() => handleBuyProduct(id)}
+          data-cy="buy-product-button"
+        >
           Buy now
         </button>
       </div>

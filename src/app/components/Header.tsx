@@ -1,12 +1,12 @@
 import { Link } from "../../i18n/routing";
 import Navigation from "../[locale]/Navigation";
-import ColorTheme from "./ColorTheme";
 import LanguageToggle from "./LanguageToggle";
 import { Star } from "lucide-react";
 import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
 import Image from "next/image";
+import { ModeToggle } from "./ModeToggle";
 
 // Create Header component
 async function Header() {
@@ -44,7 +44,7 @@ async function Header() {
           <LanguageToggle />
 
           {/* Color Theme */}
-          <ColorTheme />
+          <ModeToggle />
 
           {/* Buy subscription */}
           {!isNotAuthenticated && (
