@@ -1,5 +1,7 @@
+import Header from "src/app/components/Header";
 import { createClient } from "../../../../utils/supabase/server";
 import { redirect } from "next/navigation";
+import Footer from "src/app/components/Footer";
 
 export default async function LoginlLayout({
   children,
@@ -12,5 +14,13 @@ export default async function LoginlLayout({
   if (data?.user) {
     redirect("/");
   }
-  return <div className="">{children}</div>;
+  return (
+    <>
+      <Header />
+      <main className="main flex flex-col justify-center items-center gap-40 w-full max-w-[144rem] my-0 mx-auto px-16 py-0">
+        {children}
+      </main>
+      <Footer />
+    </>
+  );
 }
