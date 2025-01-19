@@ -13,7 +13,7 @@ import {
 } from "../components/ui/dropdown-menu";
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   // Ensure the component is mounted before accessing `theme`
@@ -32,12 +32,10 @@ export function ModeToggle() {
           {/* Render fallback during SSR */}
           {mounted && (
             <>
-              {theme === "light" ? (
+              {theme === "light" || resolvedTheme === "light" ? (
                 <Sun className="size-9" />
-              ) : theme === "dark" ? (
-                <Moon className="size-9" />
               ) : (
-                <Monitor className="size-9" />
+                <Moon className="size-9" />
               )}
             </>
           )}
