@@ -17,10 +17,7 @@ async function Header() {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <header
-      className="header flex items-center bg-[#f1f3f5] dark:bg-[#313131]
-    shadow-md sticky top-0 z-10"
-    >
+    <header className="header flex items-center sticky top-0 z-10">
       <div className="header__wrapper max-w-[144rem] w-full h-full mx-auto my-0 flex justify-between items-center text-2xl text-gray-700 px-16 py-0">
         <Link href="/">
           <Image
