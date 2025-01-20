@@ -90,7 +90,7 @@ export default function ProductItem({
       >
         <div className="product__img-wrapper w-60 h-40 flex justify-center items-center overflow-hidden">
           <Image
-            className="product__img object-contain w-40 h-40 opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
+            className="object-contain opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
             src={imageSrc || "/assets/placeholder-img.png"}
             alt={name}
             width={100}
@@ -126,11 +126,7 @@ export default function ProductItem({
           </button>
         )}
 
-        <button
-          className="btn"
-          onClick={() => handleBuyProduct(id)}
-          data-cy="buy-product-button"
-        >
+        <button className="btn" onClick={() => handleBuyProduct(id)}>
           Buy now
         </button>
       </div>

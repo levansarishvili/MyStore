@@ -27,13 +27,17 @@ export function ModeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="w-12 h-12 text-foreground focus-visible:ring-0 hover:bg-transparent hover:text-primary"
+          className="w-16 h-16 text-foreground focus-visible:ring-0 rounded-lg"
         >
           {/* Render fallback during SSR */}
           {mounted && (
             <>
-              {theme === "light" || resolvedTheme === "light" ? (
+              {theme === "light" ? (
+                <Sun className="size-9 text-primary" />
+              ) : resolvedTheme === "light" ? (
                 <Sun className="size-9" />
+              ) : theme === "dark" ? (
+                <Moon className="size-9 text-primary" />
               ) : (
                 <Moon className="size-9" />
               )}
@@ -43,44 +47,44 @@ export function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
-        className="rounded-lg px-0 py-2 font-medium"
+        className="rounded-lg px-0 py-2 font-medium min-w-48"
       >
         <DropdownMenuItem
           onClick={() => setTheme("light")}
-          className="rounded-lg"
+          className="rounded-none"
         >
           <div
-            className={`flex items-center gap-4 cursor-pointer text-xl px-4 w-full ${
+            className={`flex items-center gap-4 cursor-pointer text-lg px-4 w-full ${
               theme === "light" ? "text-primary" : ""
             }`}
           >
-            <Sun className="size-9" />
+            <Sun className="size-8" />
             Light
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("dark")}
-          className="rounded-lg"
+          className="rounded-none"
         >
           <div
-            className={`flex items-center gap-4 cursor-pointer text-xl px-4 w-full ${
+            className={`flex items-center gap-4 cursor-pointer text-lg px-4 w-full ${
               theme === "dark" ? "text-primary" : ""
             }`}
           >
-            <Moon className="size-9" />
+            <Moon className="size-8" />
             Dark
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("system")}
-          className="rounded-lg"
+          className="rounded-none"
         >
           <div
-            className={`flex items-center gap-4 cursor-pointer text-xl px-4 w-full ${
+            className={`flex items-center gap-4 cursor-pointer text-lg px-4 w-full ${
               theme === "system" ? "text-primary" : ""
             }`}
           >
-            <Monitor className="size-9" />
+            <Monitor className="size-8" />
             System
           </div>
         </DropdownMenuItem>

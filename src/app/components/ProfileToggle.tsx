@@ -1,75 +1,105 @@
 "use client";
 
-import { ReactElement, ReactEventHandler, useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
 import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
+import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import {
+  Cloud,
+  CreditCard,
+  Github,
+  Keyboard,
+  LifeBuoy,
+  LogOut,
+  Mail,
+  MessageSquare,
+  Plus,
+  PlusCircle,
+  Settings,
+  User,
+  UserPlus,
+  Users,
+} from "lucide-react";
+
+import { Button } from "../components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
 
 export default function ProfileToggle({
   userImageUrl,
 }: {
   userImageUrl: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleToggle() {
-    setIsOpen(() => !isOpen);
-  }
-
   return (
-    <div className="relative">
-      <button
-        onClick={handleToggle}
-        className="account-wrapper w-14 h-14 rounded-full flex justify-center items-center text-2xl group"
-        data-cy="user-button"
-      >
-        <Image
-          src={userImageUrl || "/assets/user-avatar.png"}
-          alt={"User"}
-          className="rounded-full"
-          width={100}
-          height={100}
-        ></Image>
-      </button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className="w-16 h-16 rounded-full flex justify-center items-center text-2xl group"
+          data-cy="user-button"
+        >
+          <Avatar className="w-16 h-16">
+            <AvatarImage src={userImageUrl} alt="user" />
+            <AvatarFallback className="bg-transparent">
+              <User />
+            </AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
 
-      {/* Dropdown Menu */}
-      <div
-        className={`flex flex-col gap-2 absolute top-16 right-0  w-[14rem] bg-[#f1f3f5] dark:bg-[#313131] shadow-md rounded-lg p-6 border text-[1.4rem] ${
-          isOpen ? "block" : "hidden"
-        }`}
-      >
-        <Link
-          href="/profile"
-          className="w-full hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] dark:text-white duration-300 px-4 py-2 rounded-lg"
-        >
-          <button onClick={handleToggle}>My account</button>
-        </Link>
-        <Link
-          href="/orders"
-          className="w-full hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] dark:text-white duration-300 px-4 py-2 rounded-lg"
-        >
-          <button onClick={handleToggle}>My orders</button>
-        </Link>
-        <Link
-          href="/login"
-          className="w-full hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] dark:text-white duration-300 px-4 py-2 rounded-lg"
-        >
-          <button onClick={handleToggle}>Sign in</button>
-        </Link>
-        <form
-          action={logout}
-          className="w-full text-red-600 hover:bg-[#e5e7eb] dark:hover:bg-[#1b1b1b] duration-300 px-4 py-2 rounded-lg"
-        >
-          <button
-            onClick={handleToggle}
+      <DropdownMenuContent className="w-64 rounded-lg px-0 py-4 flex flex-col justify-between">
+        <DropdownMenuLabel className="px-4 text-xl">
+          My Account
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <Link href="/profile">
+            <DropdownMenuItem className="px-6 cursor-pointer focus:text-primary text-lg">
+              <User className="size-9" />
+              <span>Profile</span>
+            </DropdownMenuItem>
+          </Link>
+
+          <Link href="/orders">
+            <DropdownMenuItem className="px-6 cursor-pointer focus:text-primary text-lg">
+              <CreditCard />
+              <span>Billing</span>
+            </DropdownMenuItem>
+          </Link>
+
+          <DropdownMenuItem className="px-6 cursor-pointer focus:text-primary text-lg">
+            <Settings />
+            <span>Settings</span>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        <form action={logout} className="flex justify-center cursor-pointer">
+          <Button
+            variant={"destructive"}
+            className="w-28"
             type="submit"
-            className="dark:text-white font-medium"
             data-cy="sign-out-button"
           >
-            Sign out
-          </button>
+            <LogOut size="10" />
+            <span>Log out</span>
+          </Button>
         </form>
-      </div>
-    </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

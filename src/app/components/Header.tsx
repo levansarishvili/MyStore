@@ -37,11 +37,11 @@ async function Header() {
 
         {/* Profile and Shopping cart icons */}
         <div className="header__icons flex gap-6 cursor-pointer items-center justify-center">
-          {/* Language Toggle */}
-          <LanguageToggle />
-
           {/* Color Theme */}
           <ModeToggle />
+
+          {/* Language Toggle */}
+          <LanguageToggle />
 
           {/* Buy subscription */}
           {!isNotAuthenticated && (

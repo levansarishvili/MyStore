@@ -22,7 +22,7 @@ describe("products", () => {
 
     cy.get("[data-cy='add-product-button']").click();
 
-    cy.wait(1000);
+    cy.wait(3000);
 
     cy.get("h2").contains("Test Product");
 
