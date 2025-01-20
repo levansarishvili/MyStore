@@ -113,12 +113,12 @@ export default function ProductItem({
         </div>
       </Link>
       <div className="buttons flex gap-4">
-        <Button className="btn" name="Add to cart" />
+        <Button className="bg-red-500" name="Add to cart" />
 
         {/* Show Detele button if user is a Pro member and user is the creator of the product */}
         {isProMember && isAuthor && (
           <button
-            className="btn"
+            className="bg-orange-500"
             onClick={() => handleDelete(id)}
             data-cy="delete-product-button"
           >
@@ -126,7 +126,7 @@ export default function ProductItem({
           </button>
         )}
 
-        <button className="btn" onClick={() => handleBuyProduct(id)}>
+        <button className="bg-green-500" onClick={() => handleBuyProduct(id)}>
           Buy now
         </button>
       </div>
