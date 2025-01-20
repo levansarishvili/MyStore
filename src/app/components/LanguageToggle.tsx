@@ -38,18 +38,18 @@ export default function LanguageToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="w-16 h-16 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
+          className="w-12 h-12 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
         >
-          <Languages className="size-9" />
+          <Languages className="size-6" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
-        className="flex flex-col rounded-lg px-0 py-2 font-medium min-w-[8rem]"
+        className="flex flex-col rounded-lg px-0 py-2 font-medium min-w-[5rem]"
       >
         <DropdownMenuItem
           onClick={() => handleLanguageChange("ka")}
-          className={`flex justify-center cursor-pointer text-lg rounded-none w-full ${
+          className={`flex justify-center cursor-pointer text-sm rounded-none w-full focus:text-primary ${
             language === "ka" ? "text-primary focus:text-primary" : ""
           }`}
         >
@@ -58,7 +58,7 @@ export default function LanguageToggle() {
 
         <DropdownMenuItem
           onClick={() => handleLanguageChange("en")}
-          className={`flex justify-center cursor-pointer text-lg rounded-none ${
+          className={`flex justify-center cursor-pointer text-sm rounded-none w-full focus:text-primary ${
             language === "en" ? "text-primary focus:text-primary" : ""
           }`}
         >

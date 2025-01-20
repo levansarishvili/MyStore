@@ -11,7 +11,6 @@
 }
 
 html {
-  font-size: 62.5%;
   scroll-behavior: smooth;
   font-family: "Poppins", sans-serif;
 }
@@ -19,46 +18,7 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.6rem;
-}
-
-.wrapper {
-  display: grid;
-  grid-template-rows: 7rem auto 18rem;
-  row-gap: 5rem;
-}
-
-.section-header {
-  font-size: 2.8rem;
-  font-weight: 600;
-}
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  background-color: #ec5e2a;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 500;
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.5rem;
-  font-family: inherit;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease,
-    opacity 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.btn:hover {
-  background-color: #fff;
-  color: #000;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  opacity: 0.95;
-}
-
-a {
-  text-decoration: none;
+  font-size: 1rem;
 }
 
 /* Custom scrollbar */

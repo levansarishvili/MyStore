@@ -43,7 +43,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="wrapper min-h-screen">
+          <div className="grid grid-rows-[5rem_auto_10rem] gap-10 min-h-screen">
             <>{children}</>
           </div>
         </ThemeProvider>

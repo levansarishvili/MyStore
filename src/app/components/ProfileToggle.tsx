@@ -7,7 +7,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import {
   Cloud,
   CreditCard,
-  Github,
   Keyboard,
   LifeBuoy,
   LogOut,
@@ -19,6 +18,7 @@ import {
   User,
   UserPlus,
   Users,
+  ShoppingCart,
 } from "lucide-react";
 
 import { Button } from "../components/ui/button";
@@ -47,7 +47,7 @@ export default function ProfileToggle({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="w-16 h-16 rounded-full flex justify-center items-center text-2xl group"
+          className="w-12 h-12 rounded-full flex justify-center items-center text-2xl group"
           data-cy="user-button"
         >
           <Avatar className="w-16 h-16">
@@ -59,29 +59,34 @@ export default function ProfileToggle({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-64 rounded-lg px-0 py-4 flex flex-col justify-between">
-        <DropdownMenuLabel className="px-4 text-xl">
+      <DropdownMenuContent className="w-56 rounded-lg px-0 py-2 flex flex-col justify-between">
+        <DropdownMenuLabel className="px-4 text-lg font-medium">
           My Account
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuGroup>
+        <DropdownMenuGroup className="py-2">
           <Link href="/profile">
-            <DropdownMenuItem className="px-6 cursor-pointer focus:text-primary text-lg">
-              <User className="size-9" />
+            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base">
+              <User className="min-w-5 min-h-5" />
               <span>Profile</span>
             </DropdownMenuItem>
           </Link>
 
+          <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base">
+            <ShoppingCart className="min-w-5 min-h-5" />
+            <span>Cart</span>
+          </DropdownMenuItem>
+
           <Link href="/orders">
-            <DropdownMenuItem className="px-6 cursor-pointer focus:text-primary text-lg">
-              <CreditCard />
-              <span>Billing</span>
+            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base ">
+              <CreditCard className="min-w-5 min-h-5" />
+              <span>Orders</span>
             </DropdownMenuItem>
           </Link>
 
-          <DropdownMenuItem className="px-6 cursor-pointer focus:text-primary text-lg">
-            <Settings />
+          <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base">
+            <Settings className="min-w-5 min-h-5" />
             <span>Settings</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -91,11 +96,11 @@ export default function ProfileToggle({
         <form action={logout} className="flex justify-center cursor-pointer">
           <Button
             variant={"destructive"}
-            className="w-28"
+            className="w-28 font-medium rounded-lg"
             type="submit"
             data-cy="sign-out-button"
           >
-            <LogOut size="10" />
+            <LogOut className="size-5" />
             <span>Log out</span>
           </Button>
         </form>
