@@ -4,7 +4,6 @@ import LanguageToggle from "./LanguageToggle";
 import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
-import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
 import { BuildingStorefrontIcon } from "@heroicons/react/24/solid";
 

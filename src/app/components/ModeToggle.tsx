@@ -62,7 +62,7 @@ export function ModeToggle() {
               theme === "light" ? "text-primary" : ""
             }`}
           >
-            <SunIcon className="size-5" />
+            <SunIcon className="size-4" />
             Light
           </div>
         </DropdownMenuItem>
@@ -75,7 +75,7 @@ export function ModeToggle() {
               theme === "dark" ? "text-primary" : ""
             }`}
           >
-            <MoonIcon className="size-5" />
+            <MoonIcon className="size-4" />
             Dark
           </div>
         </DropdownMenuItem>
@@ -88,7 +88,7 @@ export function ModeToggle() {
               theme === "system" ? "text-primary" : ""
             }`}
           >
-            <ComputerDesktopIcon className="size-5" />
+            <ComputerDesktopIcon className="size-4" />
             System
           </div>
         </DropdownMenuItem>

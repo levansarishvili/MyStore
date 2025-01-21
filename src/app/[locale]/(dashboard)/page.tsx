@@ -1,16 +1,18 @@
+// "use client";
+
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import HeroSlider from "src/app/components/HeroSlider";
 
 export default function HomePage() {
   const t = useTranslations("HomePage");
 
   return (
-    <div className="flex flex-col items-center justify-center text-center">
-      <h1 className="section-header">
-        {t("title-part1")}&nbsp;
-        <strong className="highlight text-[#ec5e2a] font-bold">E-shop</strong>
-        &nbsp;{t("title-part2")} 👋
-      </h1>
-      <p className="home-txt text-3xl">{t("description")}</p>
-    </div>
+    <section className="grid grid-cols-[1fr_3fr] gap-12">
+      {/* Search Bar */}
+      <div className="grid grid-rows-2 gap-6 border rounded-2xl"></div>
+
+      <HeroSlider />
+    </section>
   );
 }

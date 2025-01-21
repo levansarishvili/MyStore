@@ -43,7 +43,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="grid grid-rows-[4rem_auto_10rem] gap-10 min-h-screen">
+          <div className="grid grid-rows-[4.5rem_auto_10rem] gap-10 min-h-screen">
             <>{children}</>
           </div>
         </ThemeProvider>

@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Swiper CSS */
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
 * {
   margin: 0;
   padding: 0;

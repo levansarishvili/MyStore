@@ -5,7 +5,7 @@ export default function Navigation() {
   const t = useTranslations("Navigation");
 
   return (
-    <ul className="flex items-center gap-10 list-none h-16">
+    <ul className="flex items-center gap-10 list-none h-[4.5rem]">
       <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm font-medium">
         <Link
           className="h-full flex items-center transition-all duration-300 hover:text-primary"
