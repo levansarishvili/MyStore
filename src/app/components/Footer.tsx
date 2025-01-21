@@ -1,3 +1,4 @@
+import { BuildingStorefrontIcon } from "@heroicons/react/24/solid";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -9,13 +10,7 @@ function Footer() {
     <footer className="footer dark:bg-[#313131] dark:text-white dark:shadow-td flex items-center text-gray-700 text-2xl bg-[#f1f3f5]">
       <div className="footer__wrapper max-w-[144rem] mx-auto my-0 w-full h-full flex justify-between items-center px-16 py-0">
         {/* Footer logo */}
-        <Image
-          src="/assets/logo.svg"
-          alt="E-shop logo"
-          className="footer__logo h-24"
-          width={130}
-          height={40}
-        ></Image>
+        <BuildingStorefrontIcon className="w-10 h-10" />
 
         <p className="copyright max-w-[30rem] text-center">{t("copyright")}</p>
 

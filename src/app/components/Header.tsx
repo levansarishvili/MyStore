@@ -1,12 +1,12 @@
 import { Link } from "../../i18n/routing";
 import Navigation from "../[locale]/Navigation";
 import LanguageToggle from "./LanguageToggle";
-import { Star, ShoppingCart } from "lucide-react";
 import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
 import Image from "next/image";
 import { ModeToggle } from "./ModeToggle";
+import { BuildingStorefrontIcon } from "@heroicons/react/24/solid";
 
 // Create Header component
 async function Header() {
@@ -19,14 +19,8 @@ async function Header() {
   return (
     <header className="flex items-center sticky top-0 z-10 border-b">
       <div className="max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between items-center px-16 py-0">
-        <Link href="/">
-          <Image
-            src="/assets/logo.svg"
-            alt="E-shop logo"
-            className="h-16"
-            width={130}
-            height={40}
-          ></Image>
+        <Link href="/" className="w-10 h-10">
+          <BuildingStorefrontIcon />
         </Link>
 
         {!isNotAuthenticated && (
@@ -37,23 +31,20 @@ async function Header() {
 
         {/* Profile and Shopping cart icons */}
         <div className="flex gap-4 cursor-pointer items-center justify-center">
-          {/* Color Theme */}
-          <ModeToggle />
+          <div className="flex gap-2">
+            {/* Color Theme */}
+            <ModeToggle />
 
-          {/* Language Toggle */}
-          <LanguageToggle />
+            {/* Language Toggle */}
+            <LanguageToggle />
+          </div>
 
-          {/* Buy subscription */}
-          {!isNotAuthenticated && (
-            <Link href="/pricing">
-              <Star className="hover:stroke-[#ec5e2a] duration-300 dark:stroke-white" />
-            </Link>
-          )}
+          <div className="bg-border rounded-lg h-10 w-[1px]"></div>
 
           {/* User Profile */}
           <div
             className={`${
-              isProMember && "border-2 border-[#ec5e2a] rounded-full"
+              isProMember && "border-2 border-primary rounded-full"
             }`}
           >
             <ProfileToggle userImageUrl={userImageUrl} />

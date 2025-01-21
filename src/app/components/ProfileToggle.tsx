@@ -1,25 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import {
-  Cloud,
-  CreditCard,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-  ShoppingCart,
-} from "lucide-react";
+  SparklesIcon,
+  ShoppingBagIcon,
+  UserIcon,
+  ShoppingCartIcon,
+  CreditCardIcon,
+  ArrowRightStartOnRectangleIcon,
+} from "@heroicons/react/24/solid";
 
 import { Button } from "../components/ui/button";
 import {
@@ -28,12 +19,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 
@@ -47,60 +33,58 @@ export default function ProfileToggle({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="w-12 h-12 rounded-full flex justify-center items-center text-2xl group"
+          className="w-10 h-10 rounded-full flex justify-center items-center text-2xl group"
           data-cy="user-button"
         >
           <Avatar className="w-16 h-16">
             <AvatarImage src={userImageUrl} alt="user" />
             <AvatarFallback className="bg-transparent">
-              <User />
+              <UserIcon className="size-6" />
             </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-56 rounded-lg px-0 py-2 flex flex-col justify-between">
-        <DropdownMenuLabel className="px-4 text-lg font-medium">
+      <DropdownMenuContent className="w-56 rounded-lg px-2 py-2 flex flex-col justify-between gap-2 mt-1">
+        <DropdownMenuLabel className="px-4 text-base font-medium">
           My Account
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
 
         <DropdownMenuGroup className="py-2">
           <Link href="/profile">
-            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base">
-              <User className="min-w-5 min-h-5" />
+            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
+              <UserIcon className="min-w-4 min-h-4" />
               <span>Profile</span>
             </DropdownMenuItem>
           </Link>
 
-          <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base">
-            <ShoppingCart className="min-w-5 min-h-5" />
+          <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
+            <ShoppingBagIcon className="min-w-4 min-h-4" />
             <span>Cart</span>
           </DropdownMenuItem>
 
           <Link href="/orders">
-            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base ">
-              <CreditCard className="min-w-5 min-h-5" />
+            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
+              <CreditCardIcon className="min-w-4 min-h-4" />
               <span>Orders</span>
             </DropdownMenuItem>
           </Link>
 
-          <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-base">
-            <Settings className="min-w-5 min-h-5" />
-            <span>Settings</span>
-          </DropdownMenuItem>
+          <Link href="/pricing">
+            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
+              <SparklesIcon className="min-w-4 min-h-4 fill-[#FFD700]" />
+              <span>Become a Pro</span>
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
-
-        <DropdownMenuSeparator />
-
         <form action={logout} className="flex justify-center cursor-pointer">
           <Button
             variant={"destructive"}
-            className="w-28 font-medium rounded-lg"
+            className="w-24 p-0 font-medium rounded-lg text-xs"
             type="submit"
             data-cy="sign-out-button"
           >
-            <LogOut className="size-5" />
+            <ArrowRightStartOnRectangleIcon className="size-5" />
             <span>Log out</span>
           </Button>
         </form>
