@@ -36,38 +36,57 @@ export default function HeroSlider() {
       >
         <SwiperSlide className="">
           <Image
-            src="/assets/slider-1.jpg"
-            width={400}
-            height={400}
+            src="/assets/slider-1.png"
+            width={1200}
+            height={600}
             alt="slider"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
           />
         </SwiperSlide>
         <SwiperSlide className="">
           <Image
             src="/assets/slider-2.jpg"
-            width={400}
-            height={400}
+            width={1200}
+            height={800}
             alt="slider"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
           />
         </SwiperSlide>
         <SwiperSlide className="">
           <Image
-            src="/assets/slider-3.jpg"
-            width={400}
-            height={400}
+            src="/assets/slider-3.png"
+            width={1200}
+            height={600}
             alt="slider"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
           />
         </SwiperSlide>
         <SwiperSlide className="">
           <Image
-            src="/assets/slider-4.png"
-            width={400}
-            height={400}
+            src="/assets/slider-4.jpg"
+            width={1200}
+            height={600}
             alt="slider"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="">
+          <Image
+            src="/assets/slider-5.jpg"
+            width={1200}
+            height={600}
+            alt="slider"
+            className="w-full h-full object-cover rounded-2xl"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="">
+          <Image
+            src="/assets/slider-6.jpg"
+            width={1200}
+            height={600}
+            quality={100}
+            alt="slider"
+            className="w-full h-full object-cover rounded-2xl"
           />
         </SwiperSlide>
         {/* Custom Navigation Buttons */}

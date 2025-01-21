@@ -83,7 +83,7 @@ export default function ProductItem({
   };
 
   return (
-    <div className="product-card dark:bg-[#313131] group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[28rem] h-[32rem] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a] rounded-2xl hover:shadow-md bg-[#f1f3f5]">
+    <div className="product-card dark:bg-[#313131] group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[20rem] h-[24rem] rounded-2xl hover:shadow-md bg-card border">
       <Link
         className="product__link flex flex-col justify-center items-center gap-8"
         href={`/store/${id}`}

@@ -5,8 +5,8 @@ export default function Navigation() {
   const t = useTranslations("Navigation");
 
   return (
-    <ul className="flex items-center gap-10 list-none h-[4.5rem]">
-      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm font-medium">
+    <ul className="flex items-center gap-10 list-none h-16">
+      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm">
         <Link
           className="h-full flex items-center transition-all duration-300 hover:text-primary"
           href="/"
@@ -15,7 +15,7 @@ export default function Navigation() {
         </Link>
       </li>
 
-      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm font-medium">
+      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm">
         <Link
           className="h-full flex items-center transition-all duration-300 hover:text-primary"
           href="/store"
@@ -23,7 +23,7 @@ export default function Navigation() {
           {t("products")}
         </Link>
       </li>
-      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm font-medium">
+      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm">
         <Link
           className="h-full flex items-center transition-all duration-300 hover:text-primary"
           href="/blog"
@@ -31,7 +31,7 @@ export default function Navigation() {
           {t("blogs")}
         </Link>
       </li>
-      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm font-medium">
+      <li className="cursor-pointer transition-all duration-300 relative h-full flex items-center text-sm">
         <Link
           className="h-full flex items-center transition-all duration-300 hover:text-primary"
           href="/contact"
