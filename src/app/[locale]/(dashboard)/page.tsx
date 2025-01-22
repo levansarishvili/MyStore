@@ -6,10 +6,11 @@ import { createClient } from "src/utils/supabase/server";
 import type { ProductsType } from "./store/page";
 import ProductItem from "./store/ProductItem";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
+import NewProductsSlider from "src/app/components/NewProductsSlider";
 
 export default async function HomePage() {
   const supabase = await createClient();
-  const { data, error } = await supabase.from("products").select("*").limit(1);
+  const { data, error } = await supabase.from("products").select("*").limit(8);
   if (error) {
     console.error(error);
     return;
@@ -50,19 +51,13 @@ export default async function HomePage() {
       <section className="flex flex-col gap-8 w-full">
         <h2 className="text-2xl font-semibold">New Arrivals</h2>
 
-        <div className="grid grid-cols-8 gap-4">
-          {products.map((product) => (
-            <ProductItem
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              imageSrc={product.image_url}
-              price={product.price}
-              isProMember={isProMember}
-              products={products}
-              userId={product.user_id}
-            />
-          ))}
+        <div className="flex gap-4 w-full overflow-hidden">
+          <NewProductsSlider
+            products={products}
+            slidesPerView={3}
+            spaceBetween={16}
+            speed={800}
+          />
         </div>
       </section>
     </>
