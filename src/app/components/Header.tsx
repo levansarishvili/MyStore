@@ -17,7 +17,7 @@ async function Header() {
 
   return (
     <header className="flex items-center sticky top-0 z-10 border-b backdrop-blur-lg">
-      <div className="max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between items-center px-24 py-0">
+      <div className="max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0">
         <Link href="/" className="w-10 h-10">
           <BuildingStorefrontIcon />
         </Link>

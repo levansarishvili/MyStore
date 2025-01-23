@@ -20,7 +20,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="grid grid-cols-[3fr_1fr] gap-12">
+      <section className="grid grid-cols-[3fr_1fr] gap-12 overflow-hidden">
         {/* Slider */}
         <HeroSlider />
 
@@ -48,17 +48,10 @@ export default async function HomePage() {
       </section>
 
       {/* New Products */}
-      <section className="flex flex-col gap-8 w-full">
-        <h2 className="text-2xl font-semibold">New Arrivals</h2>
+      <section className="w-full grid grid-cols-1 gap-12 overflow-hidden">
+        {/* <h2 className="text-2xl font-semibold">New Arrivals</h2> */}
 
-        <div className="flex gap-4 w-full overflow-hidden">
-          <NewProductsSlider
-            products={products}
-            slidesPerView={3}
-            spaceBetween={16}
-            speed={800}
-          />
-        </div>
+        <NewProductsSlider products={products} />
       </section>
     </>
   );

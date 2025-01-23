@@ -18,12 +18,12 @@ import Image from "next/image";
 
 export default function HeroSlider() {
   return (
-    <div className="max-w-[60rem] flex justify-center rounded-2xl overflow-hidden">
+    <div className="flex justify-center rounded-2xl overflow-hidden">
       <Swiper
         className="overflow-hidden p-2 h-[28rem]"
         modules={[Navigation, Keyboard, Autoplay, Pagination, EffectFade]}
         spaceBetween={25}
-        slidesPerView={2}
+        slidesPerView={1}
         keyboard={true}
         autoplay={{ delay: 4000 }}
         speed={1000}
@@ -31,8 +31,6 @@ export default function HeroSlider() {
           nextEl: ".custom-next",
           prevEl: ".custom-prev",
         }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
       >
         <SwiperSlide className="">
           <Image

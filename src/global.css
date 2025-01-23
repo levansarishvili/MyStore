@@ -9,10 +9,12 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -47,6 +49,11 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #0e8d41;
+}
+
+.swiper-slide {
+  display: flex !important;
+  justify-content: center !important;
 }
 
 @layer base {
