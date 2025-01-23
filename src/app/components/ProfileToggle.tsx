@@ -3,15 +3,7 @@
 import Link from "next/link";
 import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
-import {
-  SparklesIcon,
-  ShoppingBagIcon,
-  UserIcon,
-  ShoppingCartIcon,
-  CreditCardIcon,
-  ArrowRightStartOnRectangleIcon,
-} from "@heroicons/react/24/solid";
-
+import { Sparkles, CreditCard, ShoppingCart, User, LogOut } from "lucide-react";
 import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
@@ -39,7 +31,7 @@ export default function ProfileToggle({
           <Avatar className="w-16 h-16">
             <AvatarImage src={userImageUrl} alt="user" />
             <AvatarFallback className="bg-transparent">
-              <UserIcon className="size-6" />
+              <User className="size-6" />
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -53,26 +45,26 @@ export default function ProfileToggle({
         <DropdownMenuGroup className="py-2">
           <Link href="/profile">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
-              <UserIcon className="min-w-4 min-h-4" />
+              <User className="min-w-4 min-h-4" />
               <span>Profile</span>
             </DropdownMenuItem>
           </Link>
 
           <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
-            <ShoppingBagIcon className="min-w-4 min-h-4" />
+            <ShoppingCart className="min-w-4 min-h-4" />
             <span>Cart</span>
           </DropdownMenuItem>
 
           <Link href="/orders">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
-              <CreditCardIcon className="min-w-4 min-h-4" />
+              <CreditCard className="min-w-4 min-h-4" />
               <span>Orders</span>
             </DropdownMenuItem>
           </Link>
 
           <Link href="/pricing">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
-              <SparklesIcon className="min-w-4 min-h-4 fill-[#FFD700]" />
+              <Sparkles className="min-w-4 min-h-4 fill-[#FFD700]" />
               <span>Become a Pro</span>
             </DropdownMenuItem>
           </Link>
@@ -84,7 +76,7 @@ export default function ProfileToggle({
             type="submit"
             data-cy="sign-out-button"
           >
-            <ArrowRightStartOnRectangleIcon className="size-5" />
+            <LogOut className="size-5" />
             <span>Log out</span>
           </Button>
         </form>

@@ -53,7 +53,7 @@ body {
 
 .swiper-slide {
   display: flex !important;
-  justify-content: center !important;
+  justify-content: between !important;
 }
 
 @layer base {

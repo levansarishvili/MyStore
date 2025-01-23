@@ -7,8 +7,7 @@ import {
   Autoplay,
   EffectFade,
 } from "swiper/modules";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -88,11 +87,11 @@ export default function HeroSlider() {
           />
         </SwiperSlide>
         {/* Custom Navigation Buttons */}
-        <div className="custom-prev bg-muted w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute left-4 top-1/2 transform -translate-y-1/2 z-10 hover:text-primary duration-300">
-          <ChevronLeftIcon className="size-5" />
+        <div className="custom-prev max-md:hidden bg-muted w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute left-4 top-1/2 transform -translate-y-1/2 z-10 hover:text-primary duration-300">
+          <ChevronLeft className="size-5" />
         </div>
-        <div className="custom-next bg-muted w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 z-10 hover:text-primary duration-300">
-          <ChevronRightIcon className="size-5" />
+        <div className="custom-next max-md:hidden bg-muted w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 z-10 hover:text-primary duration-300">
+          <ChevronRight className="size-5" />
         </div>
       </Swiper>
     </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../components/ui/button";
-import { LanguageIcon } from "@heroicons/react/24/solid";
+import { Languages } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -39,7 +39,7 @@ export default function LanguageToggle() {
           size="icon"
           className="w-10 h-10 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
         >
-          <LanguageIcon className="size-6" />
+          <Languages className="size-6" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

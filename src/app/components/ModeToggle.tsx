@@ -3,12 +3,7 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 import { Button } from "../components/ui/button";
-import {
-  SunIcon,
-  MoonIcon,
-  ComputerDesktopIcon,
-} from "@heroicons/react/24/solid";
-
+import { Sun, SunMedium, Moon, MoonStar, Monitor } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,13 +32,13 @@ export function ModeToggle() {
           {mounted && (
             <>
               {theme === "light" ? (
-                <SunIcon className="size-6 text-primary" />
+                <SunMedium className="size-6 text-primary" />
               ) : resolvedTheme === "light" ? (
-                <SunIcon className="size-6" />
+                <SunMedium className="size-6" />
               ) : theme === "dark" ? (
-                <MoonIcon className="size-6 text-primary" />
+                <MoonStar className="size-6 text-primary" />
               ) : (
-                <MoonIcon className="size-6" />
+                <MoonStar className="size-6" />
               )}
             </>
           )}
@@ -62,7 +57,7 @@ export function ModeToggle() {
               theme === "light" ? "text-primary" : ""
             }`}
           >
-            <SunIcon className="size-4" />
+            <SunMedium className="size-4" />
             Light
           </div>
         </DropdownMenuItem>
@@ -75,7 +70,7 @@ export function ModeToggle() {
               theme === "dark" ? "text-primary" : ""
             }`}
           >
-            <MoonIcon className="size-4" />
+            <MoonStar className="size-4" />
             Dark
           </div>
         </DropdownMenuItem>
@@ -88,7 +83,7 @@ export function ModeToggle() {
               theme === "system" ? "text-primary" : ""
             }`}
           >
-            <ComputerDesktopIcon className="size-4" />
+            <Monitor className="size-4" />
             System
           </div>
         </DropdownMenuItem>
