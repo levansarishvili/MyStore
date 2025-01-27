@@ -83,14 +83,14 @@ export default function ProductItem({
   };
 
   return (
-    <div className="product-card dark:bg-[#313131] group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[28rem] h-[32rem] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a] rounded-2xl hover:shadow-md bg-[#f1f3f5]">
+    <div className="bg-card group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 max-w-[24rem] h-[24rem] rounded-2xl hover:shadow-md border">
       <Link
         className="product__link flex flex-col justify-center items-center gap-8"
         href={`/store/${id}`}
       >
         <div className="product__img-wrapper w-60 h-40 flex justify-center items-center overflow-hidden">
           <Image
-            className="product__img object-contain w-40 h-40 opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
+            className="object-contain opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
             src={imageSrc || "/assets/placeholder-img.png"}
             alt={name}
             width={100}
@@ -113,12 +113,12 @@ export default function ProductItem({
         </div>
       </Link>
       <div className="buttons flex gap-4">
-        <Button className="btn" name="Add to cart" />
+        <Button className="" name="Add to cart" />
 
         {/* Show Detele button if user is a Pro member and user is the creator of the product */}
         {isProMember && isAuthor && (
           <button
-            className="btn"
+            className="bg-orange-500"
             onClick={() => handleDelete(id)}
             data-cy="delete-product-button"
           >
@@ -126,7 +126,7 @@ export default function ProductItem({
           </button>
         )}
 
-        <button className="btn" onClick={() => handleBuyProduct(id)}>
+        <button className="bg-green-500" onClick={() => handleBuyProduct(id)}>
           Buy now
         </button>
       </div>

@@ -16,9 +16,11 @@ export default async function DashboardLayout({
   }
   return (
     <>
-      <main className="main flex flex-col justify-center items-center gap-40 w-full max-w-[144rem] my-0 mx-auto px-16 py-0">
+      <Header />
+      <main className="flex flex-col justify-center items-center gap-28 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         {children}
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,40 +1,69 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "../components/ui/button";
+import { Languages } from "lucide-react";
 
-function LanguageToggle() {
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
+
+export default function LanguageToggle() {
   const router = useRouter();
-  const pathname = usePathname();
+  const [language, setLanguage] = useState("ka");
 
-  // Extract the language from the URL and use it as the initial language
-  const currentLang = pathname.split("/")[1] || "en";
-  const [language, setLanguage] = useState(currentLang);
-
+  // Sync with localStorage on mount
   useEffect(() => {
-    // Update the language state whenever the URL path changes
-    setLanguage(currentLang);
-  }, [pathname, currentLang]);
+    const savedLanguage = localStorage.getItem("language");
+    if (savedLanguage) {
+      setLanguage(() => savedLanguage);
+    }
+  }, []);
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedLang: string = e.target.value;
-    setLanguage(selectedLang);
-    router.push(`/${selectedLang}${pathname.slice(3)}`);
-
-    // Save the selected language to localStorage
-    localStorage.setItem("selectedLanguage", selectedLang);
+  // Function to handle language change
+  const handleLanguageChange = (newLanguage: string) => {
+    setLanguage(() => newLanguage);
+    localStorage.setItem("language", newLanguage);
+    router.push(`/${newLanguage}`);
   };
 
   return (
-    <select
-      value={language}
-      onChange={handleLanguageChange}
-      className="bg-[#f1f3f5] dark:bg-[#313131] hover:bg-[#e5e7eb] dark:hover:bg-[#1c1c1c] dark:text-white  p-2 rounded-lg outline-none"
-    >
-      <option value="en">en</option>
-      <option value="ka">ka</option>
-    </select>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild className="border-none">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="w-10 h-10 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
+        >
+          <Languages className="size-6" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="center"
+        className="flex flex-col rounded-lg px-2 py-2 min-w-[5rem]"
+      >
+        <DropdownMenuItem
+          onClick={() => handleLanguageChange("ka")}
+          className={`flex justify-center cursor-pointer text-sm rounded-lg w-full focus:text-primary ${
+            language === "ka" ? "text-primary focus:text-primary" : ""
+          }`}
+        >
+          <span>GEO</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem
+          onClick={() => handleLanguageChange("en")}
+          className={`flex justify-center cursor-pointer text-sm rounded-lg w-full focus:text-primary ${
+            language === "en" ? "text-primary focus:text-primary" : ""
+          }`}
+        >
+          <span>ENG</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
-
-export default LanguageToggle;
