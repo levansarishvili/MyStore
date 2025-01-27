@@ -41,7 +41,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="grid grid-rows-[4rem_auto_10rem] gap-16 min-h-screen">
+          <div className="flex flex-col">
             <>{children}</>
           </div>
         </ThemeProvider>

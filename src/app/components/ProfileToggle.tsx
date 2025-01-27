@@ -28,8 +28,12 @@ export default function ProfileToggle({
           className="w-10 h-10 rounded-full flex justify-center items-center text-2xl group"
           data-cy="user-button"
         >
-          <Avatar className="w-16 h-16">
-            <AvatarImage src={userImageUrl} alt="user" />
+          <Avatar className="w-16 h-16 flex items-center justify-center">
+            <AvatarImage
+              src={userImageUrl}
+              alt="user"
+              className="w-10 h-10 rounded-full"
+            />
             <AvatarFallback className="bg-transparent">
               <User className="size-6" />
             </AvatarFallback>

@@ -1,5 +1,16 @@
 "use client";
 
+import { Card, CardContent } from "../components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../components/ui/carousel";
+
+// ============================
+
 import {
   Navigation,
   Pagination,
@@ -32,64 +43,34 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
   }, []);
 
   return (
-    <div className="flex justify-center rounded-2xl">
-      <Swiper
-        className="overflow-hidden p-2 w-full"
-        key={swiperKey}
-        modules={[Navigation, Keyboard, Autoplay, Pagination, EffectFade]}
-        spaceBetween={20}
-        slidesPerView={1}
-        keyboard={true}
-        autoplay={{ delay: 4000 }}
-        speed={1000}
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-            spaceBetween: 5,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 5,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-          },
-          1280: {
-            slidesPerView: 4,
-            spaceBetween: 5,
-          },
-        }}
-        navigation={{
-          nextEl: ".custom-next",
-          prevEl: ".custom-prev",
+    <div className="flex justify-center rounded-2xl w-full">
+      <Carousel
+        className="min-w-full max-w-xs"
+        opts={{
+          align: "start",
+          loop: true,
         }}
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id} className="">
-            <ProductItem
-              id={product.id}
-              name={product.name}
-              imageSrc={product.image_url}
-              price={product.price}
-              isProMember={true}
-              userId={product.user_id}
-            />
-          </SwiperSlide>
-        ))}
-
-        {/* Custom Navigation Buttons */}
-        <div className="custom-prev max-md:hidden bg-muted w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute left-4 top-1/2 transform -translate-y-1/2 z-10 hover:text-primary duration-300">
-          <ChevronLeft className="size-5" />
-        </div>
-        <div className="custom-next max-md:hidden bg-muted w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute right-4 top-1/2 transform -translate-y-1/2 z-10 hover:text-primary duration-300">
-          <ChevronRight className="size-5" />
-        </div>
-      </Swiper>
+        <CarouselContent className="-ml-10 -mr-6">
+          {products.map((product) => (
+            <CarouselItem
+              key={product.id}
+              className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 flex justify-center"
+            >
+              <ProductItem
+                id={product.id}
+                name={product.name}
+                imageSrc={product.image_url}
+                price={product.price}
+                isProMember={true}
+                userId={product.user_id}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="left-0" />
+        <CarouselNext className="right-0" />
+      </Carousel>
     </div>
   );
 }

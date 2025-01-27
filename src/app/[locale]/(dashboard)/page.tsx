@@ -13,6 +13,7 @@ import {
 import type { ProductsType } from "./store/page";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
 import NewProductsSlider from "src/app/components/NewProductsSlider";
+import { Button } from "src/app/components/ui/button";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -26,72 +27,41 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="grid grid-cols-[3fr_1fr] max-md:grid-cols-1 gap-12 overflow-hidden">
-        {/* Slider */}
-        <HeroSlider />
-
-        {/* Search Bar */}
-        <div className="grid grid-rows-2 max-md:grid-rows-1 max-md:grid-cols-2 gap-6 ">
-          <div className="border bg-card rounded-2xl shadow-md">
-            <Image
-              src="/assets/slider-1.png"
-              width={1200}
-              height={600}
-              alt="offer"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-          </div>
-          <div className="border bg-card rounded-2xl shadow-md">
-            <Image
-              src="/assets/slider-1.png"
-              width={1200}
-              height={600}
-              alt="offer"
-              className="w-full h-full object-cover rounded-2xl"
-            />
+      {/* Hero Section */}
+      <section className="flex max-sm:flex-col max-sm:justify-end pb-12 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('/assets/bg-img-small.png')] sm:bg-[url('/assets/bg-img.png')]">
+        <div className="bg-black/20 w-full h-full flex justify-center items-center max-sm:items-end">
+          <div className="w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+            <div className="flex flex-col max-sm:items-center max-sm:gap-6 gap-10 max-w-[32rem]">
+              <div className="rounded-2xl flex flex-col gap-4">
+                <h1 className="max-sm:text-center bg-text-gradient bg-clip-text max-w-[32rem] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[3rem] sm:leading-[3.5rem] md:leading-[4.5rem] lg:leading-[5rem] text-white">
+                  More than just a game. It&apos;s a lifestyle.
+                </h1>
+                <p className="max-sm:text-center text-base sm:text-xl text-white font-sans">
+                  Whether you&apos;re just starting out, have played your whole
+                  life or you&apos;re a Tour pro, your swing is like a
+                  fingerprint.
+                </p>
+              </div>
+              <Link href="/store" className="w-1/2">
+                <Button
+                  className="text-sm sm:text-lg font-sans font-medium h-12 w-full hover:bg-[#38CB89]/80 transition-all duration-300"
+                  variant="default"
+                >
+                  Shopping Now
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* New Products */}
-      <section className="w-full grid grid-cols-1 gap-12 overflow-hidden">
+      <section className="w-full grid grid-cols-1 gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         <h2 className="text-2xl font-semibold">New Arrivals</h2>
-
         <NewProductsSlider products={products} />
       </section>
 
       {/* Featured Categories */}
-      <section className="flex flex-col gap-12 w-full">
-        <h2 className="text-2xl font-semibold">Shop by Categories</h2>
-
-        <div className="flex flex-wrap gap-12 w-full justify-center">
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Smartphone className="size-8" />
-            <p>Smartphones</p>
-          </div>
-
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Tablet className="size-8" />
-            <p>Tablets</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Laptop className="size-8" />
-            <p>Laptops</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Tv className="size-8" />
-            <p>TV</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Headphones className="size-8" />
-            <p>Headphones</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Camera className="size-8" />
-            <p>Photo | Video</p>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
