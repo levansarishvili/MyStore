@@ -38,13 +38,14 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
         key={swiperKey}
         modules={[Navigation, Keyboard, Autoplay, Pagination, EffectFade]}
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={1}
         keyboard={true}
         autoplay={{ delay: 4000 }}
         speed={1000}
         breakpoints={{
           0: {
             slidesPerView: 1,
+            spaceBetween: 5,
           },
           640: {
             slidesPerView: 2,
@@ -60,7 +61,7 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
           },
           1280: {
             slidesPerView: 4,
-            spaceBetween: 20,
+            spaceBetween: 5,
           },
         }}
         navigation={{

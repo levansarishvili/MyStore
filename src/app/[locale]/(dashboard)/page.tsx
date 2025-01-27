@@ -62,7 +62,7 @@ export default async function HomePage() {
 
       {/* Featured Categories */}
       <section className="flex flex-col gap-12 w-full">
-        <h2 className="text-2xl font-semibold">Featured Categories</h2>
+        <h2 className="text-2xl font-semibold">Shop by Categories</h2>
 
         <div className="flex flex-wrap gap-12 w-full justify-center">
           <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">

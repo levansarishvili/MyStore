@@ -83,7 +83,7 @@ export default function ProductItem({
   };
 
   return (
-    <div className="dark:bg-card group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 w-[16rem] h-[24rem] rounded-2xl hover:shadow-md bg-card border">
+    <div className="bg-card group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 py-8 px-12 max-w-[24rem] h-[24rem] rounded-2xl hover:shadow-md border">
       <Link
         className="product__link flex flex-col justify-center items-center gap-8"
         href={`/store/${id}`}
@@ -113,7 +113,7 @@ export default function ProductItem({
         </div>
       </Link>
       <div className="buttons flex gap-4">
-        <Button className="bg-red-500" name="Add to cart" />
+        <Button className="" name="Add to cart" />
 
         {/* Show Detele button if user is a Pro member and user is the creator of the product */}
         {isProMember && isAuthor && (

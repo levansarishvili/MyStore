@@ -53,7 +53,7 @@ body {
 
 .swiper-slide {
   display: flex !important;
-  justify-content: between !important;
+  justify-content: center !important;
 }
 
 @layer base {
@@ -112,9 +112,10 @@ body {
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    /* --background: 20 14.3% 4.1%; */
+    --background: 240 5.9% 10%;
     --foreground: 0 0% 95%;
-    --card: 24 9.8% 10%;
+    --card: 240 3.7% 15.9%;
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;

@@ -5,7 +5,7 @@ import ProfileToggle from "./ProfileToggle";
 import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
 import { ModeToggle } from "./ModeToggle";
-import { Store } from "lucide-react";
+import Image from "next/image";
 // Create Header component
 async function Header() {
   const userData = await GetUserData();
@@ -15,10 +15,10 @@ async function Header() {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <header className="flex items-center sticky top-0 z-10 border-b backdrop-blur-lg">
-      <div className="max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0">
-        <Link href="/" className="w-10 h-10">
-          <Store />
+    <header className="flex items-center sticky top-0 z-10 backdrop-blur-lg border-b">
+      <div className="max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0 rounded-xl">
+        <Link href="/" className="w-10 h-10 flex gap-4">
+          <Image src="/assets/logo.svg" width={100} height={100} alt="logo" />
         </Link>
 
         {!isNotAuthenticated && (
