@@ -15,7 +15,7 @@
     "copyright": "© Levan Sarishvili, Tbilisi, Georgia, 2025."
   },
   "LoginPage": {
-    "login-header": "Login",
+    "login-header": "Sign In",
     "email": "Email",
     "password": "Password",
     "login-button": "Sign in",

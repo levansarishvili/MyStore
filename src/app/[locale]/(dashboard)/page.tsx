@@ -269,28 +269,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Newsletter */}
-      {/* <section className="flex justify-center items-center w-full bg-[url(/assets/newsletter-bg.png)] bg-cover bg-center h-23rem">
-        <div className="flex flex-col justify-center items-center gap-8 py-20">
-          <div className="max-w-[34rem] w-full text-white">
-            <h2 className="text-3xl md:text-4xl font-medium">
-              Join Our Newsletter
-            </h2>
-            <p className="text-sm md:text-lg">
-              Sign up for deals, new products and promotions
-            </p>
-          </div>
-
-          <div>
-            <Mail className="size-6" />
-            <form action="handleSubscribe">
-              <input type="mail" placeholder="Email address" />
-              <button type="submit">Signup</button>
-            </form>
-          </div>
-        </div>
-      </section> */}
     </>
   );
 }
