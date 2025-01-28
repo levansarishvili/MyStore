@@ -8,23 +8,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
-// ============================
-
-import {
-  Navigation,
-  Pagination,
-  Keyboard,
-  Autoplay,
-  EffectFade,
-} from "swiper/modules";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 import { ProductsType } from "../[locale]/(dashboard)/store/page";
 import ProductItem from "../[locale]/(dashboard)/store/ProductItem";
 import { useEffect, useState } from "react";
@@ -45,17 +30,22 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
   return (
     <div className="flex justify-center rounded-2xl w-full">
       <Carousel
+        plugins={[
+          Autoplay({
+            delay: 5000,
+          }),
+        ]}
         className="min-w-full max-w-xs"
         opts={{
           align: "start",
           loop: true,
         }}
       >
-        <CarouselContent className="-ml-10 -mr-6">
+        <CarouselContent className="flex gap-4 ">
           {products.map((product) => (
             <CarouselItem
               key={product.id}
-              className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 flex justify-center"
+              className=" basis-auto flex justify-center"
             >
               <ProductItem
                 id={product.id}

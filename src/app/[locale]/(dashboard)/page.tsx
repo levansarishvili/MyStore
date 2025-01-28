@@ -1,15 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroSlider from "src/app/components/HeroSlider";
 import { createClient } from "src/utils/supabase/server";
-import {
-  Smartphone,
-  Tablet,
-  Tv,
-  Laptop,
-  Headphones,
-  Camera,
-} from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import type { ProductsType } from "./store/page";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
 import NewProductsSlider from "src/app/components/NewProductsSlider";
@@ -56,13 +48,249 @@ export default async function HomePage() {
       </section>
 
       {/* New Products */}
-      <section className="w-full grid grid-cols-1 gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-4xl font-medium">Featured</h2>
+      <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+        <h2 className="text-3xl md:text-4xl font-medium">Featured</h2>
         <NewProductsSlider products={products} />
       </section>
 
-      {/* Featured Categories */}
-      <section>123</section>
+      {/* Shop by Categories */}
+      <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+        <h2 className="text-3xl md:text-4xl font-medium">Shop by Categories</h2>
+        <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+          <Link href="/store">
+            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="bg-secondary">
+                <Image
+                  src="/assets/golf-clubs.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="Golf Clubs"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xl font-medium">Golf Clubs</p>
+            </div>
+          </Link>
+
+          <Link href="/store">
+            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="bg-secondary">
+                <Image
+                  src="/assets/golf-balls.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="Golf Balls"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xl font-medium">Golf Balls</p>
+            </div>
+          </Link>
+
+          <Link href="/store">
+            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="bg-secondary">
+                <Image
+                  src="/assets/golf-bags.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="Golf Bags"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xl font-medium">Golf Bags</p>
+            </div>
+          </Link>
+
+          <Link href="/store">
+            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="bg-secondary">
+                <Image
+                  src="/assets/golf-clothing.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="Golf Clothing"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xl font-medium">Clothing & Rainwear</p>
+            </div>
+          </Link>
+
+          <Link href="/store">
+            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="bg-secondary">
+                <Image
+                  src="/assets/golf-footwear.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="Golf Footwear"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xl font-medium">Footwear</p>
+            </div>
+          </Link>
+
+          <Link href="/store">
+            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
+              <div className="bg-secondary">
+                <Image
+                  src="/assets/golf-accessories.png"
+                  width={500}
+                  height={500}
+                  quality={100}
+                  alt="Golf Accessories"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-xl font-medium">Accessories</p>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Limited Time Offer */}
+      <section className="w-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 bg-black">
+        <Image
+          src="/assets/offer-img.png"
+          width={1200}
+          height={600}
+          quality={100}
+          alt="Limited Time Offer"
+          className=""
+        />
+        <div className="pl-6 md:pl-10 lg:pl-16 flex flex-col gap-8 justify-center items-start">
+          <div className="flex flex-col gap-4 justify-start">
+            <p className="text-primary text-base font-semibold uppercase">
+              Limited Edition
+            </p>
+            <h2 className="text-3xl md:text-4xl font-medium text-white">
+              Hurry up! 30% OFF
+            </h2>
+            <p className="sm:text-sm md:text-base lg:text-xl text-white">
+              Find clubs that are right for your game
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-start">
+            <Link href="/store">
+              <Button
+                className="text-sm sm:text-base font-sans font-medium h-10 w-full hover:bg-[#38CB89]/80 transition-all duration-300"
+                variant="default"
+              >
+                Shop Now
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Articles */}
+      <section className="w-full flex flex-col gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+        <div className="w-full flex justify-between gap-16">
+          <h2 className="text-3xl md:text-4xl font-medium">Latest Articles</h2>
+          <Link
+            href="/blog"
+            className="flex gap-2 items-center hover:text-primary transition-all duration-300"
+          >
+            <p className="text-sm sm:text-base font-medium">View More</p>
+            <ArrowRight className="size-5" />
+          </Link>
+        </div>
+
+        <div className="flex gap-8 flex-wrap justify-center">
+          <div className="flex flex-col gap-4 items-start">
+            <Image
+              src="/assets/article-1.png"
+              width={500}
+              height={500}
+              quality={100}
+              alt="Latest Articles"
+              className="w-full h-full object-cover"
+            />
+            <p className="text-base md:text-xl font-medium">
+              Air Jordan x Travis Scott Event
+            </p>
+            <Link
+              href="/blog"
+              className="flex gap-2 items-center hover:text-primary transition-all duration-300"
+            >
+              <p className="text-sm md:text-base font-medium">Read More</p>
+              <ArrowRight className="size-5" />
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-4 items-start">
+            <Image
+              src="/assets/article-2.png"
+              width={500}
+              height={500}
+              quality={100}
+              alt="Latest Articles"
+              className="w-full h-full object-cover"
+            />
+            <p className="text-base md:text-xl font-medium">
+              The timeless classics on the green
+            </p>
+            <Link
+              href="/blog"
+              className="flex gap-2 items-center hover:text-primary transition-all duration-300"
+            >
+              <p className="text-sm md:text-base font-medium">Read More</p>
+              <ArrowRight className="size-5" />
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-4 items-start">
+            <Image
+              src="/assets/article-3.png"
+              width={500}
+              height={500}
+              quality={100}
+              alt="Latest Articles"
+              className="w-full h-full object-cover"
+            />
+            <p className="text-base md:text-xl font-medium">
+              The 2023 Ryder Cup
+            </p>
+            <Link
+              href="/blog"
+              className="flex gap-2 items-center hover:text-primary transition-all duration-300"
+            >
+              <p className="text-sm md:text-base font-medium">Read More</p>
+              <ArrowRight className="size-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      {/* <section className="flex justify-center items-center w-full bg-[url(/assets/newsletter-bg.png)] bg-cover bg-center h-23rem">
+        <div className="flex flex-col justify-center items-center gap-8 py-20">
+          <div className="max-w-[34rem] w-full text-white">
+            <h2 className="text-3xl md:text-4xl font-medium">
+              Join Our Newsletter
+            </h2>
+            <p className="text-sm md:text-lg">
+              Sign up for deals, new products and promotions
+            </p>
+          </div>
+
+          <div>
+            <Mail className="size-6" />
+            <form action="handleSubscribe">
+              <input type="mail" placeholder="Email address" />
+              <button type="submit">Signup</button>
+            </form>
+          </div>
+        </div>
+      </section> */}
     </>
   );
 }

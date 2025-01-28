@@ -104,7 +104,7 @@ export default function ProductItem({
 
           {/* Add to cart button */}
           <Button
-            className="rounded-xl opacity-0 group-hover:opacity-100  px-2 py-6 absolute bottom-4 text-foreground hover:bg-[#38CB89]/80 transition-all duration-300 w-[80%]"
+            className="rounded-lg opacity-0 group-hover:opacity-100  px-2 py-6 absolute bottom-4 text-foreground hover:bg-[#38CB89]/80 transition-all duration-300 w-[80%]"
             variant="default"
           >
             Add to cart
@@ -132,7 +132,7 @@ export default function ProductItem({
             <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
             <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
           </div>
-          <h2 className="text-basic font-semibold">{name}</h2>
+          <h2 className="text-base font-semibold">{name}</h2>
           <p className="text-sm font-semibold">{`${price / 100} $`}</p>
         </div>
       </Link>
