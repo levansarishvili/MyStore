@@ -28,7 +28,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="flex max-sm:flex-col max-sm:justify-end pb-12 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('/assets/bg-img-small.png')] sm:bg-[url('/assets/bg-img.png')]">
+      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('/assets/bg-img-small.png')] sm:bg-[url('/assets/bg-img.png')]">
         <div className="bg-black/20 w-full h-full flex justify-center items-center max-sm:items-end">
           <div className="w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
             <div className="flex flex-col max-sm:items-center max-sm:gap-6 gap-10 max-w-[32rem]">
@@ -57,11 +57,12 @@ export default async function HomePage() {
 
       {/* New Products */}
       <section className="w-full grid grid-cols-1 gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-2xl font-semibold">New Arrivals</h2>
+        <h2 className="text-4xl font-medium">Featured</h2>
         <NewProductsSlider products={products} />
       </section>
 
       {/* Featured Categories */}
+      <section>123</section>
     </>
   );
 }

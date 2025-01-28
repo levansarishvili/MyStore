@@ -64,6 +64,8 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
                 price={product.price}
                 isProMember={true}
                 userId={product.user_id}
+                isNewProductSlider={true}
+                sale={0.5}
               />
             </CarouselItem>
           ))}

@@ -4,6 +4,9 @@ module.exports = {
   darkMode: ["class", "class"],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ["Inter", "sans-serif"], // Add Inter as a custom font
+      },
       backgroundImage: {
         "text-gradient":
           "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFF 16.06%, #FFF 86.9%, rgba(255, 255, 255, 0) 106.25%)",

@@ -4,7 +4,7 @@ import { Link } from "../../../../i18n/routing";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import { useRouter } from "next/navigation";
-import { Trash, Trash2 } from "lucide-react";
+import { Star, Trash, Trash2 } from "lucide-react";
 import { ProductsType } from "./page";
 
 interface Props {
@@ -15,6 +15,8 @@ interface Props {
   isProMember?: boolean;
   products?: ProductsType[];
   userId: string | undefined;
+  isNewProductSlider?: boolean;
+  sale?: number;
 }
 
 // Product card component
@@ -26,6 +28,8 @@ export default function ProductItem({
   isProMember,
   products,
   userId,
+  isNewProductSlider,
+  sale,
 }: Props) {
   const router = useRouter();
 
@@ -83,53 +87,55 @@ export default function ProductItem({
   };
 
   return (
-    <div className="bg-card group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 w-64 h-[20rem] rounded-2xl hover:shadow-md border">
+    <div className="group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 w-64">
       <Link
-        className="flex flex-col justify-center items-center gap-4 w-full"
+        className="flex flex-col justify-center items-start gap-4 w-full"
         href={`/store/${id}`}
       >
-        <div className="w-full h-36 flex justify-center items-center overflow-hidden">
+        <div className="relative w-full flex justify-center items-center overflow-hidden bg-secondary h-[20rem]">
           <Image
             className="object-cover opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
             src={imageSrc || "/assets/placeholder-img.png"}
             alt={name}
-            width={100}
-            height={100}
+            width={200}
+            height={200}
             quality={100}
           />
+
+          {/* Add to cart button */}
+          <Button
+            className="rounded-xl opacity-0 group-hover:opacity-100  px-2 py-6 absolute bottom-4 text-foreground hover:bg-[#38CB89]/80 transition-all duration-300 w-[80%]"
+            variant="default"
+          >
+            Add to cart
+          </Button>
+
+          {isNewProductSlider && (
+            <div className="absolute top-4 left-4 bg-background text-foreground font-semibold text-sm px-4 py-1 rounded-lg">
+              HOT
+            </div>
+          )}
+
+          {/* Sale badge */}
+          {sale && (
+            <div className="absolute top-12 left-4 bg-primary text-white font-semibold text-sm px-3 py-1 rounded-lg">
+              -{sale * 100}%
+            </div>
+          )}
         </div>
 
-        <div className="flex flex-col gap-6 items-center">
-          <h2 className="text-lg font-semibold">{name}</h2>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-center gap-4 text-gray-600 text-xl"></div>
-            <p className="text-2xl font-medium text-gray-600 dark:text-gray-100">{`${
-              price / 100
-            } $`}</p>
+        <div className="flex flex-col gap-2 items-start font-inter">
+          <div className="flex gap-1">
+            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
           </div>
+          <h2 className="text-basic font-semibold">{name}</h2>
+          <p className="text-sm font-semibold">{`${price / 100} $`}</p>
         </div>
       </Link>
-      <div className="flex gap-4">
-        <Button className="" variant="default">
-          Add to cart
-        </Button>
-
-        {/* Show Detele button if user is a Pro member and user is the creator of the product */}
-        {isProMember && isAuthor && (
-          <Button
-            className=""
-            onClick={() => handleDelete(id)}
-            data-cy="delete-product-button"
-            variant={"destructive"}
-          >
-            <Trash2 className="w-6 h-6" />
-          </Button>
-        )}
-
-        <Button className="" onClick={() => handleBuyProduct(id)}>
-          Buy now
-        </Button>
-      </div>
     </div>
   );
 }

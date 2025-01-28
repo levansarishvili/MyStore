@@ -15,6 +15,7 @@ export interface ProductsType {
   user_id: string;
   stripe_product_id: string;
   stripe_price_id: string;
+  sale: number;
 }
 
 export default async function Store() {
