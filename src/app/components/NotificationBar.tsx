@@ -20,7 +20,7 @@ export default function NotificationBar() {
           </p>
           <Link
             href="/store"
-            className="flex gap-1 items-center text-center font-medium hover:text-white transition-all duration-300"
+            className="max-md:hidden flex gap-1 items-center text-center font-medium hover:text-white transition-all duration-300"
           >
             Shop now
             <ArrowRight className="size-4" />

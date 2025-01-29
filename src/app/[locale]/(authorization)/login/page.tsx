@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { login, signup, signInWithGithub, signInWithGoogle } from "./actions";
+import { login, signInWithGithub, signInWithGoogle } from "./actions";
 import { useTranslations } from "next-intl";
 import { Button } from "src/app/components/ui/button";
 
@@ -24,7 +24,7 @@ export default function LoginPage() {
               {t("email")}:
             </label>
             <input
-              className="border rounded-lg px-4 py-2 text-sm "
+              className="border rounded-lg px-4 py-2 text-sm"
               id="email"
               name="email"
               type="email"

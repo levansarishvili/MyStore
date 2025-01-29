@@ -6,7 +6,6 @@
   },
   "Navigation": {
     "home": "Home",
-    "about": "About",
     "products": "Products",
     "blogs": "Blogs",
     "contact": "Contact"
@@ -16,6 +15,7 @@
   },
   "LoginPage": {
     "login-header": "Sign In",
+    "SignUp-header": "Sign Up",
     "email": "Email",
     "password": "Password",
     "login-button": "Sign in",

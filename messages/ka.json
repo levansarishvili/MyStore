@@ -6,7 +6,6 @@
   },
   "Navigation": {
     "home": "მთავარი",
-    "about": "ჩვენს შესახებ",
     "products": "პროდუქტები",
     "blogs": "ბლოგები",
     "contact": "კონტაქტი"
@@ -16,6 +15,7 @@
   },
   "LoginPage": {
     "login-header": "ავტორიზაცია",
+    "SignUp-header": "რეგისტრაცია",
     "email": "ელ-ფოსტა",
     "password": "პაროლი",
     "login-button": "შესვლა",

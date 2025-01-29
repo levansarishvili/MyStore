@@ -6,6 +6,8 @@ import GetUserData from "./GetUserData";
 import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
 import { ModeToggle } from "./ModeToggle";
 import NotificationBar from "./NotificationBar";
+import BurgerMenu from "../[locale]/BurgerMenu";
+
 // Create Header component
 async function Header() {
   const userData = await GetUserData();
@@ -15,13 +17,14 @@ async function Header() {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <header className="flex flex-col items-center sticky top-0 z-10 shadow-md bg-muted">
+    <header className="flex flex-col items-center sticky top-0 z-10 shadow-md bg-secondary">
       {!isNotAuthenticated && <NotificationBar />}
-      <div className="max-w-[90rem] w-full h-16 mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0 rounded-xl">
-        <Link href="/" className="w-10 h-10 flex gap-4">
+      <div className="max-w-[90rem] w-full h-16 mx-auto my-0 flex justify-between items-center px-6 pr-0 md:px-12 lg:px-20 py-0 rounded-xl">
+        <Link href="/" className="h-10 flex gap-4 items-center">
           <p className="text-lg md:text-2xl font-medium">3legant.</p>
         </Link>
 
+        {/* Navigation for larger screens */}
         {!isNotAuthenticated && (
           <nav className="">
             <Navigation />
@@ -38,17 +41,25 @@ async function Header() {
             <LanguageToggle />
           </div>
 
-          <div className="bg-border rounded-lg h-10 w-[1px]"></div>
+          {!isNotAuthenticated && (
+            <>
+              {/* Divider */}
+              <div className="bg-border rounded-lg h-10 w-[1px]"></div>
 
-          {/* User Profile */}
-          <div
-            className={`${
-              isProMember && "border-2 border-primary rounded-full"
-            }`}
-          >
-            <ProfileToggle userImageUrl={userImageUrl} />
-          </div>
+              {/* User Profile */}
+              <div
+                className={`${
+                  isProMember ? "border-2 border-primary rounded-full" : ""
+                }`}
+              >
+                <ProfileToggle userImageUrl={userImageUrl} />
+              </div>
+            </>
+          )}
         </div>
+
+        {/* Navigation for smaller screens */}
+        {!isNotAuthenticated && <BurgerMenu />}
       </div>
     </header>
   );
