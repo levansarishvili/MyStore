@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 export default function DeleteAccount({ userId }: { userId: string }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -43,16 +44,17 @@ export default function DeleteAccount({ userId }: { userId: string }) {
     <div>
       {error && <p className="text-red-500">{error}</p>}
       {successMessage && <p className="text-green-500">{successMessage}</p>}
-      <button
+      <Button
+        variant={"destructive"}
         onClick={handleUserDelete}
         disabled={isLoading}
         data-cy="delete-user-button"
-        className={`bg-red-700 rounded-lg px-4 py-2 hover:bg-white hover:text-gray-950 hover:shadow-lg transition-all font-medium duration-300 text-xl ${
+        className={`rounded-lg px-4 py-2 transition-all font-medium duration-300 text-sm ${
           isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
         {isLoading ? "Deleting..." : "Delete Account"}
-      </button>
+      </Button>
     </div>
   );
 }

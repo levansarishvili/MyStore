@@ -36,6 +36,7 @@ const Sidebar = () => {
   return (
     <div className="md:hidden">
       <Menu
+        aria-hidden="false"
         right
         className="bg-background flex flex-col p-6 items-center"
         isOpen={isOpen}
@@ -47,7 +48,6 @@ const Sidebar = () => {
           bmBurgerButton: {
             width: "36px",
             height: "30px",
-            marginRight: "24px",
             position: "relative",
           },
 

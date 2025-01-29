@@ -1,14 +1,20 @@
-import Image from "next/image";
-import { Star } from "lucide-react";
+import { Star, User } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
 import AddCustomerOnStripe from "src/app/components/AddCustomerOnStripe";
 import { supabase } from "src/lib/supabaseClient";
 import DeleteAccount from "src/app/components/DeleteAccount";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "src/app/components/ui/avatar";
+import { Button } from "src/app/components/ui/button";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
   const userId = userData?.id as string;
+  console.log("userData", userData);
 
   // Get user name and email
   const email = userData?.email ?? "undefined";
@@ -35,119 +41,91 @@ export default async function ProfilePage() {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <section className="profile-wrapper flex flex-col items-center gap-20">
-      <h1 className="section-header text-4xl font-semibold">My Account</h1>
+    <section className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 w-full">
+      <h1 className="text-3xl lg:text-4xl font-semibold text-center mb-10">
+        My Account
+      </h1>
 
-      {/* Profile content */}
-      <div className="profile-content dark:bg-[#313131] dark:text-[#f8f9fa] grid grid-cols-2 gap-x-40 w-full border rounded-2xl bg-[#f1f3f5] p-16">
-        <div className="profile-media-wrapper flex flex-col items-center gap-16">
-          <div className="profile__img-wrapper flex flex-col items-center gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-20 w-full border shadow-lg rounded-2xl p-10 bg-card">
+        {/* Left Side - Profile Info */}
+        <div className="flex flex-col items-center gap-10">
+          <div className="relative">
             <div
-              className={`profile__img-box flex items-center justify-center w-40 h-40 rounded-full ${
-                isProMember && "border-2 border-[#ec5e2a]"
-              }`}
+              className={`w-28 h-28 rounded-full border-4 ${
+                isProMember ? "border-primary" : "border"
+              } flex items-center justify-center overflow-hidden shadow-md`}
             >
-              <Image
-                className="profile__img rounded-full w-11/12"
-                src={`${
-                  userData?.user_metadata.avatar_url
-                    ? userData?.user_metadata.avatar_url
-                    : "/assets/user-avatar.png"
-                }`}
-                alt="User"
-                width={100}
-                height={100}
-                quality={100}
-              ></Image>
+              <Avatar className="w-full h-full">
+                <AvatarImage
+                  src={
+                    userData?.user_metadata?.avatar_url ||
+                    "https://github.com/shadcn.png"
+                  }
+                  alt="user"
+                  className="w-full h-full object-cover rounded-full"
+                />
+                <AvatarFallback className="">
+                  <User className="size-10" />
+                </AvatarFallback>
+              </Avatar>
             </div>
+            {isProMember && (
+              <div className="absolute -bottom-6 -right-4 flex items-center gap-2 bg-primary text-white w-36  px-3 py-1 text-sm rounded-full shadow-md">
+                <Star className="w-5 h-5 fill-white" />
+                Pro Member
+              </div>
+            )}
           </div>
 
-          {/* If user is a pro member */}
-          {isProMember && (
-            <div className="flex gap-6 items-center">
-              <Star className="w-16 h-16 fill-[#ec5e2a] stroke-[#ec5e2a]" />
-              <p className="text-[1.4rem]">You are a pro member!</p>
-            </div>
-          )}
-
-          {/* Cancel subscription */}
-
-          <div className="profile-txt-wrapper flex flex-col gap-12 items-start">
-            {/* <p className="profile-txt text-[1.4rem]">Name: {user.name}</p> */}
+          <div className="text-center flex flex-col gap-4">
             {userData?.user_metadata?.user_name && (
-              <p className="profile-txt text-[1.4rem]">
+              <p className="text-base">
                 Username: {userData?.user_metadata?.user_name}
               </p>
             )}
+            <p className="text-base">Email: {userData?.email}</p>
+          </div>
 
-            <p className="profile-txt text-[1.4rem]">
-              Email: {userData?.email}
-            </p>
-
-            {/* Delete user */}
+          {/* Cancel Subscription & Delete Account */}
+          <div className="flex flex-col gap-6">
+            <Button
+              variant={"destructive"}
+              className="w-full text-sm font-medium py-2 px-6 rounded-lg transition"
+            >
+              Cancel Subscription
+            </Button>
             <DeleteAccount userId={userId} />
           </div>
         </div>
 
-        <div className="profile__info flex flex-col gap-12 items-center w-[50rem]">
-          <h2 className="profile-info-header text-[2.2rem] font-semibold">
-            Account Details
-          </h2>
-          <form className="profile__form flex flex-col justify-center items-center gap-8 w-3/4">
-            <div className="input-box flex flex-col justify-between items-start gap-2 w-full">
-              <label
-                className="input-label text-[1.4rem] text-gray-400 cursor-pointer"
-                htmlFor="fname"
-              >
-                First Name*
-              </label>
-              <input
-                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
-                type="text"
-                id="fname"
-              />
-            </div>
-            <div className="input-box flex flex-col justify-between items-start gap-2 w-full">
-              <label
-                className="input-label text-[1.4rem] text-gray-400 cursor-pointer"
-                htmlFor="lname"
-              >
-                Last Name*
-              </label>
-              <input
-                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
-                type="text"
-                id="lname"
-              />
-            </div>
-            <div className="input-box flex flex-col justify-between items-start gap-2 w-full">
-              <label
-                className="input-label text-[1.4rem] text-gray-400 cursor-pointer"
-                htmlFor="phone"
-              >
-                Phone*
-              </label>
-              <input
-                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
-                type="tel"
-                id="phone"
-              />
-            </div>
-            <div className="input-box flex flex-col justify-between items-start gap-2 w-full">
-              <label
-                className="input-label text-[1.4rem] text-gray-400 cursor-pointer"
-                htmlFor="email"
-              >
-                Email*
-              </label>
-              <input
-                className="profile__input dark:bg-[#4a4a4a] dark:text-white rounded-lg h-12 border border-gray-300 w-full px-4 py-6 text-[1.4rem] text-gray-700 outline-none transition-all duration-300 focus:border-[#ec5e2a]"
-                type="email"
-                id="email"
-              />
-            </div>
-
-            <button className="btn w-40">Save changes</button>
+        {/* Right Side - Account Details Form */}
+        <div className="flex flex-col gap-8 items-center w-full">
+          <h2 className="text-2xl font-medium">Account Details</h2>
+          <form className="flex flex-col justify-center items-center gap-6 w-full max-w-lg">
+            {[
+              { label: "Full Name", id: "full_name", type: "text" },
+              { label: "Username", id: "user_name", type: "text" },
+              { label: "Phone", id: "phone", type: "tel" },
+              { label: "Email", id: "email", type: "email" },
+            ].map(({ label, id, type }) => (
+              <div key={id} className="flex flex-col w-full">
+                <label className="text-base mb-1" htmlFor={id}>
+                  {label}*
+                </label>
+                <input
+                  className="w-full h-12 rounded-lg px-4 text-base text-muted-foreground bg-background  border transition-all duration-300"
+                  type={type}
+                  id={id}
+                  defaultValue={userData?.user_metadata[id] ?? ""}
+                />
+              </div>
+            ))}
+            <Button
+              variant={"default"}
+              className="w-40 hover:bg-[#38cb89]/80 text-base font-medium text-white py-2 px-6 rounded-lg transition-all duration-300"
+            >
+              Save Changes
+            </Button>
           </form>
         </div>
       </div>
