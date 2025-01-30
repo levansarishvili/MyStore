@@ -10,11 +10,12 @@ import {
   AvatarImage,
 } from "src/app/components/ui/avatar";
 import { Button } from "src/app/components/ui/button";
+import CreateProductForm from "src/app/components/forms/CreateProductForm";
+import ProductItem from "../store/ProductItem";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
   const userId = userData?.id as string;
-  console.log("userData", userData);
 
   // Get user name and email
   const email = userData?.email ?? "undefined";
@@ -42,11 +43,11 @@ export default async function ProfilePage() {
 
   return (
     <section className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 w-full">
-      <h1 className="text-3xl lg:text-4xl font-semibold text-center mb-10">
+      <h1 className="text-3xl lg:text-4xl font-medium text-center mb-10">
         My Account
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-20 w-full border shadow-lg rounded-2xl p-10 bg-card">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-20 w-full border shadow-lg rounded-2xl p-10">
         {/* Left Side - Profile Info */}
         <div className="flex flex-col items-center gap-10">
           <div className="relative">
@@ -109,11 +110,11 @@ export default async function ProfilePage() {
               { label: "Email", id: "email", type: "email" },
             ].map(({ label, id, type }) => (
               <div key={id} className="flex flex-col w-full">
-                <label className="text-base mb-1" htmlFor={id}>
+                <label className="text-base mb-2" htmlFor={id}>
                   {label}*
                 </label>
                 <input
-                  className="w-full h-12 rounded-lg px-4 text-base text-muted-foreground bg-background  border transition-all duration-300"
+                  className="w-full rounded-lg px-4 py-2 text-base text-muted-foreground border focus:outline-primary dark:focus:outline-primary transition-all duration-300"
                   type={type}
                   id={id}
                   defaultValue={userData?.user_metadata[id] ?? ""}
@@ -122,12 +123,18 @@ export default async function ProfilePage() {
             ))}
             <Button
               variant={"default"}
-              className="w-40 hover:bg-[#38cb89]/80 text-base font-medium text-white py-2 px-6 rounded-lg transition-all duration-300"
+              className="w-40 hover:bg-[#38cb89]/80 text-sm font-medium text-foreground py-2 px-6 rounded-lg transition-all duration-300"
             >
               Save Changes
             </Button>
           </form>
         </div>
+
+        {/* Show create product form if user is a Pro member */}
+        {isProMember && <CreateProductForm />}
+
+        {/* Get products that user created */}
+        <div className="flex flex-wrap gap-8"></div>
       </div>
     </section>
   );

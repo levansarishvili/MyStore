@@ -16,7 +16,6 @@ interface Props {
   products?: ProductsType[];
   userId: string | undefined;
   isNewProductSlider?: boolean;
-  sale?: number;
 }
 
 // Product card component
@@ -29,7 +28,6 @@ export default function ProductItem({
   products,
   userId,
   isNewProductSlider,
-  sale,
 }: Props) {
   const router = useRouter();
 
@@ -95,7 +93,7 @@ export default function ProductItem({
         <div className="relative w-full flex justify-center items-center overflow-hidden bg-secondary h-[20rem]">
           <Image
             className="object-cover opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
-            src={imageSrc || "/assets/placeholder-img.png"}
+            src={imageSrc || ""}
             alt={name}
             width={200}
             height={200}
@@ -110,16 +108,21 @@ export default function ProductItem({
             Add to cart
           </Button>
 
-          {isNewProductSlider && (
-            <div className="absolute top-4 left-4 bg-background text-foreground font-semibold text-sm px-4 py-1 rounded-lg">
-              HOT
+          {/* Delete product */}
+          {isProMember && isAuthor && (
+            <div className="absolute top-4 right-4">
+              <Button
+                className="bg-red-700 text-white text-sm px-4 py-1 rounded-lg font-medium transition-all duration-300 hover:bg-white hover:text-gray-950 hover:shadow-lg"
+                onClick={() => handleDelete(id)}
+              >
+                <Trash2 className="size-4" />
+              </Button>
             </div>
           )}
 
-          {/* Sale badge */}
-          {sale && (
-            <div className="absolute top-12 left-4 bg-primary text-white font-semibold text-sm px-3 py-1 rounded-lg">
-              -{sale * 100}%
+          {isNewProductSlider && (
+            <div className="absolute top-4 left-4 bg-background text-foreground font-semibold text-sm px-4 py-1 rounded-lg">
+              HOT
             </div>
           )}
         </div>

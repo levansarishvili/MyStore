@@ -3,6 +3,7 @@ import PageNotFound from "../../../../components/PageNotFound";
 import React from "react";
 import { supabase } from "../../../../../lib/supabaseClient";
 import { ProductsType } from "../page";
+import ImageUpload from "src/app/components/ImageUpload";
 
 interface paramsType {
   id: string;
@@ -29,5 +30,13 @@ export default async function ProductDetailsPage({
     console.error(err);
     return <PageNotFound />;
   }
-  return <ProductDetails product={product} />;
+  return (
+    <section className="w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+      <ProductDetails product={product} />
+      <div>
+        <h2>Upload Product Image</h2>
+        <ImageUpload />
+      </div>
+    </section>
+  );
 }

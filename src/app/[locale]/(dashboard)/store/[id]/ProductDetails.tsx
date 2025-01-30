@@ -1,20 +1,20 @@
 "use client";
 
-import Button from "../../../../components/buttons/Button";
 import Image from "next/image";
 import { ProductsType } from "../page";
+import { Button } from "src/app/components/ui/button";
 
 export default function ProductDetails({ product }: { product: ProductsType }) {
   return (
-    <div className="product-details__wrapper flex flex-col items-center gap-20">
-      <h1 className="section-header text-4xl font-semibold">Product Details</h1>
-      <div className="product-details__content flex justify-center items-center gap-32 rounded-2xl p-16 transition-all duration-300 hover:shadow-lg bg-[#f1f3f5] dark:bg-[#313131] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a]">
+    <div className="flex flex-col items-center gap-20 mt:10 lg:mt-16">
+      <h1 className="text-3xl lg:text-4xl font-medium">Product Details</h1>
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-16 rounded-2xl p-10 transition-all duration-300 border shadow-lg">
         {/* Product Details */}
 
-        <div className="product-img-wrapper flex justify-center items-center w-[35rem] overflow-hidden h-[30rem] transition-all duration-300">
+        <div className="flex justify-center items-center w-full overflow-hidden h-[30rem] transition-all duration-300">
           <Image
-            className="product-details__img w-96 h-96 object-contain"
-            src={product?.image_url || "/assets/placeholder-img.png"}
+            className="w-96 h-96 object-contain"
+            src={product?.image_urls?.[1] || "/assets/placeholder-img.png"}
             alt={product?.name}
             width={250}
             height={250}
@@ -24,24 +24,30 @@ export default function ProductDetails({ product }: { product: ProductsType }) {
         </div>
 
         {/* Product Settings */}
-        <div className="product-details flex flex-col items-start justify-center gap-8 w-[40rem] h-full">
-          <div className="product-desc-wrapper flex flex-col items-start justify-center gap-8">
-            <h2 className="product-details__title text-4xl font-semibold text-gray-600">
-              {product?.name}
-            </h2>
-            <p className="product-details__category text-3xl text-[#ec5e2a] font-semibold">
+        <div className="flex flex-col items-start justify-center gap-8 max-w-[40rem] p-6">
+          <div className="flex flex-col items-start justify-center gap-6">
+            <h2 className="text-2xl font-medium">{product?.name}</h2>
+            <p className="text-lg text-primary font-medium">
               {product?.category}
             </p>
-            <p className="product-details__desc text-2xl">
-              {product?.description}
-            </p>
+            <p className="text-base">{product?.description}</p>
           </div>
-          <p className="product-details__price text-2xl font-medium">
+          <p className="text-base font-medium">
             Price: {product?.price / 100} $
           </p>
-          <div className="btn-wrapper flex gap-12">
-            <Button className="btn" name="&#10084; Wishlist" />
-            <Button className="btn" name="Add to cart" />
+          <div className="flex gap-12">
+            <Button
+              variant={"default"}
+              className="hover:bg-[#38cb89]/80 transition all duration-300 text-foreground"
+            >
+              Wishlist
+            </Button>
+            <Button
+              variant={"default"}
+              className="hover:bg-[#38cb89]/80 transition all duration-300 text-foreground"
+            >
+              Add to cart
+            </Button>
           </div>
         </div>
       </div>
