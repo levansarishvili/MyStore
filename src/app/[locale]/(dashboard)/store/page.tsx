@@ -41,7 +41,7 @@ export default async function Store() {
             key={product.id}
             id={product.id}
             name={product.name}
-            imageSrc={product.image_urls?.[0] || "/assets/placeholder-img.png"}
+            imageSrc={product.image_urls?.[1] || "/assets/placeholder-img.png"}
             price={product.price}
             isProMember={isProMember}
             products={products}

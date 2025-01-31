@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "../components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -50,12 +49,13 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
               <ProductItem
                 id={product.id}
                 name={product.name}
-                imageSrc={product.image_url}
+                imageSrc={
+                  product.image_urls?.[1] || "/assets/placeholder-img.png"
+                }
                 price={product.price}
                 isProMember={true}
                 userId={product.user_id}
                 isNewProductSlider={true}
-                sale={0.5}
               />
             </CarouselItem>
           ))}

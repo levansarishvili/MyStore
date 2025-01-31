@@ -55,6 +55,7 @@ export default function CreateProductForm() {
       price: formData.get("price"),
       category: formData.get("category"),
       description: formData.get("description"),
+      brand: formData.get("brand"),
       images: uploadedImageUrls,
     };
 
@@ -87,7 +88,7 @@ export default function CreateProductForm() {
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center gap-6 p-8 rounded-2xl w-full"
       >
-        {["name", "price", "description", "category"].map((id) => (
+        {["name", "description", "category", "brand", "price"].map((id) => (
           <div key={id} className="flex flex-col items-start gap-2 w-full">
             <label className="text-base" htmlFor={id}>
               {id.charAt(0).toUpperCase() + id.slice(1)}
@@ -118,7 +119,10 @@ export default function CreateProductForm() {
           />
         </div>
 
-        <Button type="submit" className="w-40">
+        <Button
+          type="submit"
+          className="w-40 hover:bg-[#38cb89]/80 transition-all duration-300"
+        >
           Add Product
         </Button>
       </form>

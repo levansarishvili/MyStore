@@ -4,12 +4,14 @@ import { createClient } from "../../../../utils/supabase/server";
 import GetUserData from "../../../components/GetUserData";
 
 export async function POST(req: Request) {
-  const { name, price, category, description, images } = await req.json();
+  const { name, price, category, description, images, brand } =
+    await req.json();
 
   if (
     !name ||
     !price ||
     !category ||
+    !brand ||
     !description ||
     !images ||
     images.length === 0
@@ -53,7 +55,8 @@ export async function POST(req: Request) {
       price: Math.round(price * 100),
       category,
       description,
-      image_urls: images, // Store as an array
+      brand,
+      image_urls: images,
       user_id: userId,
       stripe_product_id: stripeProduct.id,
       stripe_price_id: stripePrice.id,
