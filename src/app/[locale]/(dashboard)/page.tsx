@@ -49,13 +49,13 @@ export default async function HomePage() {
 
       {/* New Products */}
       <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-3xl md:text-4xl font-medium">Featured</h2>
+        <h2 className="text-2xl md:text-3xl font-medium">Featured</h2>
         <NewProductsSlider products={products} />
       </section>
 
       {/* Shop by Categories */}
       <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-3xl md:text-4xl font-medium">Shop by Categories</h2>
+        <h2 className="text-2xl md:text-3xl font-medium">Shop by Categories</h2>
         <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           <Link href="/store">
             <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
@@ -170,7 +170,7 @@ export default async function HomePage() {
             <p className="text-primary text-base font-semibold uppercase">
               Limited Edition
             </p>
-            <h2 className="text-3xl md:text-4xl font-medium text-white">
+            <h2 className="text-2xl md:text-3xl font-medium text-white">
               Hurry up! 30% OFF
             </h2>
             <p className="sm:text-sm md:text-base lg:text-xl text-white">
@@ -194,7 +194,9 @@ export default async function HomePage() {
       {/* Latest Articles */}
       <section className="w-full flex flex-col gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         <div className="w-full flex justify-between gap-16">
-          <h2 className="text-3xl md:text-4xl font-medium">Latest Articles</h2>
+          <h2 className="text-2xl md:text-433xl font-medium">
+            Latest Articles
+          </h2>
           <Link
             href="/blog"
             className="flex gap-2 items-center hover:text-primary transition-all duration-300"

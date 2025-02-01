@@ -54,10 +54,12 @@ export default function ProfileToggle({
             </DropdownMenuItem>
           </Link>
 
-          <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
-            <ShoppingCart className="min-w-4 min-h-4" />
-            <span>Cart</span>
-          </DropdownMenuItem>
+          <Link href="/cart">
+            <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
+              <ShoppingCart className="min-w-4 min-h-4" />
+              <span>Cart</span>
+            </DropdownMenuItem>
+          </Link>
 
           <Link href="/orders">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">

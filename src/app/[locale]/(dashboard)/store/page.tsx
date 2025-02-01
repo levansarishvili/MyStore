@@ -33,7 +33,7 @@ export default async function Store() {
 
   return (
     <section className="mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-3xl lg:text-4xl font-medium">Products</h1>
+      <h1 className="text-2xl lg:text-3xl font-medium">Products</h1>
 
       <div className="flex flex-wrap justify-center gap-20 w-full">
         {products?.map((product) => (

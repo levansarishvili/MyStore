@@ -4,7 +4,7 @@ import { Link } from "../../../../i18n/routing";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import { useRouter } from "next/navigation";
-import { Star, Trash, Trash2 } from "lucide-react";
+import { Star, Trash, Trash2, ShoppingCart } from "lucide-react";
 import { ProductsType } from "./page";
 
 interface Props {
@@ -84,6 +84,27 @@ export default function ProductItem({
     }
   };
 
+  // Function to handle add to cart button click
+  const handleAddToCart = async (productId: string) => {
+    try {
+      const res = await fetch(`/api/add-to-cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Failed to add product to cart:", data.message);
+        return;
+      }
+
+      console.log("Product added to cart successfully");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
+
   return (
     <div className="group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 w-64">
       <Link
@@ -102,9 +123,11 @@ export default function ProductItem({
 
           {/* Add to cart button */}
           <Button
-            className="rounded-lg opacity-0 group-hover:opacity-100  px-2 py-6 absolute bottom-4 text-foreground hover:bg-[#38CB89]/80 transition-all duration-300 w-[80%]"
+            className="rounded-lg opacity-0 group-hover:opacity-100  px-2 py-5 absolute bottom-4 text-white hover:bg-[#38CB89]/80 transition-all duration-300 w-[70%]"
             variant="default"
+            onClick={() => handleAddToCart(id)}
           >
+            <ShoppingCart className="size-4 fill-primary stroke-white" />
             Add to cart
           </Button>
 
