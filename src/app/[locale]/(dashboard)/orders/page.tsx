@@ -68,7 +68,7 @@ export default async function OrdersPage() {
               key={order.id}
               className={index % 2 === 0 ? "bg-muted/50" : "bg-background"}
             >
-              <TableCell className="max-md:px-2 *:px-4 py-3 font-medium">
+              <TableCell className="max-md:px-2 px-4 py-3 font-medium">
                 #{order.id}
               </TableCell>
               <TableCell className="max-md:px-2 px-4 py-3">

@@ -6,6 +6,16 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../components/ui/table";
 
 interface ProductType {
   id: number;
@@ -121,7 +131,7 @@ export default function ProductCartList({
   };
 
   return (
-    <div className="flex flex-col gap-10 items-start">
+    <div className="flex flex-col justify-center items-center gap-10 items-start w-full">
       {/* If cart is empty */}
       {products.length === 0 && (
         <div className="flex flex-col items-center gap-4">
@@ -136,47 +146,86 @@ export default function ProductCartList({
         </div>
       )}
 
-      {products?.map((product) => (
-        <div className="flex items-center space-x-4" key={product.id}>
-          <Image
-            src={product.image_url}
-            alt={product.name}
-            className="w-16 h-16 object-cover"
-            width={1200}
-            height={600}
-          />
-
-          <h2 className="text-lg font-semibold">{product.name}</h2>
-          <Button
-            variant={"destructive"}
-            className=""
-            onClick={() => handleDeleteFromCart(product.product_id)}
-          >
-            <Trash2 className="size-4" />
-          </Button>
-          <p className="">${product.price / 100}</p>
-          <p className="">
-            Subtotal: ${(product.price / 100) * product.quantity}
-          </p>
-          <div className="flex items-center gap-4 border rounded-lg px-2 py-1">
-            <button onClick={() => handleQuantityDecrease(product.product_id)}>
-              <Minus className="size-3.5 cursor-pointer" />
-            </button>
-            <p className="">{product.quantity}</p>
-            <button onClick={() => handleQuantityIncrease(product.product_id)}>
-              <Plus className="size-3.5 cursor-pointer" />
-            </button>
-          </div>
-        </div>
-      ))}
-
-      {/* Display total price */}
       {products.length > 0 && (
-        <div className="w-full text-right">
-          <p className="text-lg font-semibold">
-            Total: ${totalPrice.toFixed(2)}
-          </p>
-        </div>
+        <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
+          <TableCaption className="text-muted-foreground text-sm py-2">
+            A list of all products in your cart
+          </TableCaption>
+          <TableHeader className="bg-primary max-md:text-xs">
+            <TableRow className="hover:bg-primary">
+              <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
+                Product
+              </TableHead>
+              <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
+                Price
+              </TableHead>
+              <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
+                Quantity
+              </TableHead>
+              <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
+                Action
+              </TableHead>
+              <TableHead className="text-right px-2 md:px-4 py-3 font-medium text-white">
+                Subtotal
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody className="text-xs md:text-sm">
+            {products.map((product) => (
+              <TableRow key={product.id}>
+                <TableCell className="font-medium flex max-md:items-start items-center max-md:flex-col gap-2">
+                  <Image
+                    src={product.image_url}
+                    alt={product.name}
+                    className="w-10 md:w-16 h-10 md:h-16 object-cover"
+                    width={600}
+                    height={400}
+                  />
+                  <h2 className="text-xs md:text-sm font-medium">
+                    {product.name}
+                  </h2>
+                </TableCell>
+
+                <TableCell>${product.price / 100}</TableCell>
+
+                <TableCell>
+                  <div className="flex justify-center items-center gap-2 md:gap-4 border rounded-lg px-1 md:px-2 py-1 max-w-20">
+                    <button
+                      onClick={() => handleQuantityDecrease(product.product_id)}
+                    >
+                      <Minus className="size-3 cursor-pointer" />
+                    </button>
+                    <p className="">{product.quantity}</p>
+                    <button
+                      onClick={() => handleQuantityIncrease(product.product_id)}
+                    >
+                      <Plus className="size-3 cursor-pointer" />
+                    </button>
+                  </div>
+                </TableCell>
+
+                <TableCell className="">
+                  <button
+                    className=""
+                    onClick={() => handleDeleteFromCart(product.product_id)}
+                  >
+                    <Trash2 className="size-3 md:size-4 stroke-red-700" />
+                  </button>
+                </TableCell>
+
+                <TableCell className="text-right ">
+                  ${(product.price / 100) * product.quantity}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter className="md:text-lg">
+            <TableRow>
+              <TableCell colSpan={4}>Total</TableCell>
+              <TableCell className="text-right">${totalPrice}</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
       )}
 
       {/* Checkout button */}
