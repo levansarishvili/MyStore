@@ -83,8 +83,34 @@ export default function ProductCartList({
     }
   };
 
+  // Function to handle buy product button click
+  const handleBuyProduct = async () => {
+    try {
+      const res = await fetch(`/api/buy-product`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Failed to buy product:", data.message);
+        return;
+      }
+
+      const data = await res.json();
+
+      console.log("Product bought successfully");
+      if (data.success && data.url) {
+        // Redirect to Stripe checkout page
+        router.push(data.url);
+      }
+    } catch (error) {
+      console.error("Error buying product:", error);
+    }
+  };
+
   return (
-    <div className="">
+    <div className="flex flex-col gap-10 items-start">
       {/* If cart is empty */}
       {products.length === 0 && (
         <div className="flex flex-col items-center gap-4">
@@ -132,6 +158,19 @@ export default function ProductCartList({
           </div>
         </div>
       ))}
+
+      {/* Checkout button */}
+      {products.length > 0 && (
+        <div className="flex justify-center w-full">
+          <Button
+            className="hover:bg-[#38CB89]/80 transition-all duration-300 w-56"
+            variant="default"
+            onClick={handleBuyProduct}
+          >
+            Checkout
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

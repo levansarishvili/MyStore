@@ -57,33 +57,6 @@ export default function ProductItem({
     }
   };
 
-  // Function to handle buy product button click
-  const handleBuyProduct = async (productId: string) => {
-    try {
-      const res = await fetch(`/api/buy-product`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        console.error("Failed to buy product:", data.message);
-        return;
-      }
-
-      const data = await res.json();
-
-      console.log("Product bought successfully");
-      if (data.success && data.url) {
-        // Redirect to Stripe checkout page
-        router.push(data.url);
-      }
-    } catch (error) {
-      console.error("Error buying product:", error);
-    }
-  };
-
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
     try {

@@ -17,51 +17,61 @@ export async function POST(req: Request) {
     );
   }
 
+  // Fetch products from cart
+  const { data: cartItems, error: fetchError } = await supabase
+    .from("cart")
+    .select("*")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (fetchError) {
+    return NextResponse.json(
+      { success: false, message: fetchError.message },
+      { status: 500 }
+    );
+  }
+
+  // If no items in cart, return an error
+  if (cartItems.length === 0) {
+    return NextResponse.json(
+      { success: false, message: "No items in cart" },
+      { status: 400 }
+    );
+  }
+
   try {
-    // Parse request body for product ID
-    const { productId } = (await req.json()) as { productId: string };
+    // Create an array to hold line items for Stripe
+    const lineItems = await Promise.all(
+      cartItems.map(async (item) => {
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .eq("id", item.product_id)
+          .single();
 
-    if (!productId) {
-      return NextResponse.json(
-        { success: false, message: "Product ID is required" },
-        { status: 400 }
-      );
-    }
+        if (error || !data) {
+          throw new Error("Product not found or unauthorized");
+        }
 
-    // Retrieve product from Supabase
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .eq("id", productId)
-      .single();
+        return {
+          price: data.stripe_price_id,
+          quantity: item.quantity,
+        };
+      })
+    );
 
-    if (error || !data) {
-      return NextResponse.json(
-        { success: false, message: "Product not found or unauthorized" },
-        { status: 404 }
-      );
-    }
-
-    // Create Stripe checkout session
+    // Create Stripe checkout session with multiple line items
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
-      line_items: [
-        {
-          price: data.stripe_price_id,
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       success_url: `${req.headers.get(
         "origin"
       )}/donate-with-checkout/payment-result?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/?canceled=true`,
       metadata: {
         user_id: userId,
-        product_id: productId,
-        product_name: data?.name || ("Unknown Product" as string),
-        stripe_price_id: data?.stripe_price_id || "N/A as string",
-        stripe_product_id: data?.stripe_product_id || "N/A as string",
+        products: cartItems.map((item) => item.product_id).join(", "),
       },
     });
 
