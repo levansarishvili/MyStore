@@ -40,7 +40,29 @@ export async function POST(req: Request) {
   }
 
   try {
-    // Add product in cart
+    // Check if the product already exists in the user's cart
+    const { data: cartItem, error: fetchError } = await supabase
+      .from("cart")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("product_id", productId)
+      .single();
+
+    if (fetchError) {
+      return NextResponse.json(
+        { success: false, message: fetchError.message },
+        { status: 500 }
+      );
+    }
+
+    if (cartItem) {
+      return NextResponse.json(
+        { success: false, message: "Product already in cart" },
+        { status: 400 }
+      );
+    }
+
+    // Add product in cart if it doesn't exist
     const { data, error } = await supabase.from("cart").insert({
       user_id: userId,
       product_id: productId,

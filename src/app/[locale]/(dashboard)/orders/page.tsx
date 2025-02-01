@@ -30,6 +30,7 @@ export default async function OrdersPage() {
     .select("*")
     .eq("user_id", userData?.id)) as { data: OrdersType[] | null; error: any };
 
+  console.log(orders);
   const sortedOrders = orders?.sort(
     (a, b) =>
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -46,61 +47,68 @@ export default async function OrdersPage() {
         Orders
       </h1>
 
-      <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
-        <TableCaption className="text-muted-foreground text-sm py-2">
-          A list of your recent payments.
-        </TableCaption>
-        <TableHeader className="bg-primary max-md:text-xs">
-          <TableRow className="hover:bg-primary">
-            <TableHead className="px-4 py-3 font-semibold text-white">
-              #
-            </TableHead>
-            <TableHead className="px-4 py-3 text-white">Date</TableHead>
-            <TableHead className="px-4 py-3 text-white">Details</TableHead>
-            <TableHead className="px-4 py-3 text-white text-right">
-              Amount
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="max-md:text-xs">
-          {sortedOrders?.map((order, index) => (
-            <TableRow
-              key={order.id}
-              className={index % 2 === 0 ? "bg-muted/50" : "bg-background"}
-            >
-              <TableCell className="max-md:px-2 px-4 py-3 font-medium">
-                #{order.id}
+      {orders?.length !== 0 && (
+        <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
+          <TableCaption className="text-muted-foreground text-sm py-2">
+            A list of your recent payments.
+          </TableCaption>
+          <TableHeader className="bg-primary max-md:text-xs">
+            <TableRow className="hover:bg-primary">
+              <TableHead className="px-4 py-3 font-semibold text-white">
+                #
+              </TableHead>
+              <TableHead className="px-4 py-3 text-white">Date</TableHead>
+              <TableHead className="px-4 py-3 text-white">Details</TableHead>
+              <TableHead className="px-4 py-3 text-white text-right">
+                Amount
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody className="max-md:text-xs">
+            {sortedOrders?.map((order, index) => (
+              <TableRow
+                key={order.id}
+                className={index % 2 === 0 ? "bg-muted/50" : "bg-background"}
+              >
+                <TableCell className="max-md:px-2 px-4 py-3 font-medium">
+                  #{order.id}
+                </TableCell>
+                <TableCell className="max-md:px-2 px-4 py-3">
+                  {new Date(order.created_at)
+                    .toLocaleDateString("en-GB")
+                    .replace(/\//g, ".")}
+                </TableCell>
+                <TableCell className="max-md:px-2 px-4 py-3">
+                  <Link
+                    href={`/orders/${order.id}`}
+                    className="hover:text-primary transition-all duration-300 underline"
+                  >
+                    Details
+                  </Link>
+                </TableCell>
+                <TableCell className="max-md:px-2 px-4 py-3 text-right">
+                  {`$${(order.total_price / 100).toFixed(2)}`}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter className="max-md:text-xs">
+            <TableRow className="bg-muted font-semibold">
+              <TableCell colSpan={3} className="px-4 py-3">
+                Total
               </TableCell>
-              <TableCell className="max-md:px-2 px-4 py-3">
-                {new Date(order.created_at)
-                  .toLocaleDateString("en-GB")
-                  .replace(/\//g, ".")}
-              </TableCell>
-              <TableCell className="max-md:px-2 px-4 py-3">
-                <Link
-                  href={`/orders/${order.id}`}
-                  className="hover:text-primary transition-all duration-300 underline"
-                >
-                  Details
-                </Link>
-              </TableCell>
-              <TableCell className="max-md:px-2 px-4 py-3 text-right">
-                {`$${(order.total_price / 100).toFixed(2)}`}
+              <TableCell className="max-md:px-2 px-4 py-3 text-right text-primary">
+                {totalPrice ? `$${(totalPrice / 100).toFixed(2)}` : "$0.00"}
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter className="max-md:text-xs">
-          <TableRow className="bg-muted font-semibold">
-            <TableCell colSpan={3} className="px-4 py-3">
-              Total
-            </TableCell>
-            <TableCell className="max-md:px-2 px-4 py-3 text-right text-primary">
-              {totalPrice ? `$${(totalPrice / 100).toFixed(2)}` : "$0.00"}
-            </TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableFooter>
+        </Table>
+      )}
+
+      {/* When orders is empty */}
+      {orders?.length === 0 && (
+        <p className="text-lg">Your order history is empty!</p>
+      )}
     </section>
   );
 }

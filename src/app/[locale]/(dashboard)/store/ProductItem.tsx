@@ -68,6 +68,10 @@ export default function ProductItem({
 
       if (!res.ok) {
         const data = await res.json();
+        if (data.message === "Product already in cart") {
+          console.log("Product already in cart");
+          return;
+        }
         console.error("Failed to add product to cart:", data.message);
         return;
       }
@@ -79,24 +83,47 @@ export default function ProductItem({
   };
 
   return (
-    <div className="group flex flex-col items-center justify-between gap-8 cursor-pointer text-center transition-all duration-300 w-64">
-      <Link
-        className="flex flex-col justify-center items-start gap-4 w-full"
-        href={`/store/${id}`}
-      >
-        <div className="relative w-full flex justify-center items-center overflow-hidden bg-secondary h-[20rem]">
+    <div className="bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-6 cursor-pointer text-center transition-all duration-300 w-64">
+      <div className="w-full flex justify-center items-center overflow-hidden h-[12rem] rounded-xl">
+        <Link href={`/store/${id}`}>
           <Image
-            className="object-cover opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105"
+            className="object-cover opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-95"
             src={imageSrc || ""}
             alt={name}
             width={200}
             height={200}
             quality={100}
           />
+        </Link>
 
+        {isNewProductSlider && (
+          <div className="absolute top-4 left-6 bg-primary text-white font-medium text-xs px-3 py-1 rounded-lg">
+            New
+          </div>
+        )}
+      </div>
+
+      {/* Card Content */}
+      <div className="flex flex-col gap-4 w-full px-2 pb-6">
+        <div className="flex flex-col gap-2 items-center w-full font-inter">
+          <div className="flex gap-1">
+            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
+            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
+          </div>
+          <h2 className="text-sm font-medium">{name}</h2>
+          <p className="text-sm text-muted-foreground font-medium">{`${
+            price / 100
+          } $`}</p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-4 w-full justify-center items-center">
           {/* Add to cart button */}
           <Button
-            className="rounded-lg opacity-0 group-hover:opacity-100  px-2 py-5 absolute bottom-4 text-white hover:bg-[#38CB89]/80 transition-all duration-300 w-[70%]"
+            className="rounded-lg  px-2 py-5 text-white hover:bg-[#38CB89]/80 transition-all duration-300 w-[70%]"
             variant="default"
             onClick={() => handleAddToCart(id)}
           >
@@ -115,26 +142,8 @@ export default function ProductItem({
               </Button>
             </div>
           )}
-
-          {isNewProductSlider && (
-            <div className="absolute top-4 left-4 bg-background text-foreground font-semibold text-sm px-4 py-1 rounded-lg">
-              HOT
-            </div>
-          )}
         </div>
-
-        <div className="flex flex-col gap-2 items-start font-inter">
-          <div className="flex gap-1">
-            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-4 fill-yellow-500 stroke-yellow-500" />
-          </div>
-          <h2 className="text-base font-semibold">{name}</h2>
-          <p className="text-sm font-semibold">{`${price / 100} $`}</p>
-        </div>
-      </Link>
+      </div>
     </div>
   );
 }

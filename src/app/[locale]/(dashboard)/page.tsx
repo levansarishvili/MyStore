@@ -49,7 +49,7 @@ export default async function HomePage() {
 
       {/* New Products */}
       <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-2xl md:text-3xl font-medium">Featured</h2>
+        <h2 className="text-2xl md:text-3xl font-medium">New Products</h2>
         <NewProductsSlider products={products} />
       </section>
 

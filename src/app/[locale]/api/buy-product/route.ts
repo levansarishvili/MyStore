@@ -71,8 +71,12 @@ export async function POST(req: Request) {
       cancel_url: `${req.headers.get("origin")}/?canceled=true`,
       metadata: {
         user_id: userId,
-        products: cartItems.map((item) => item.product_id).join(", "),
-        quantity: cartItems.map((item) => item.quantity).join(", "),
+        products: JSON.stringify(
+          cartItems.map((item) => ({
+            id: item.product_id,
+            quantity: item.quantity,
+          }))
+        ),
       },
     });
 
