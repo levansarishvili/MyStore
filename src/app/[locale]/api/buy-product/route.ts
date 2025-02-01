@@ -72,8 +72,16 @@ export async function POST(req: Request) {
       metadata: {
         user_id: userId,
         products: cartItems.map((item) => item.product_id).join(", "),
+        quantity: cartItems.map((item) => item.quantity).join(", "),
       },
     });
+
+    // Clean up cart items
+    await Promise.all(
+      cartItems.map(async (item) => {
+        await supabase.from("cart").delete().eq("id", item.id);
+      })
+    );
 
     return NextResponse.json(
       { success: true, sessionId: session.id, url: session.url },

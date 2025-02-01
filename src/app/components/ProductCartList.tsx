@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 interface ProductType {
   id: number;
@@ -21,7 +22,17 @@ export default function ProductCartList({
 }: {
   products: ProductType[];
 }) {
+  const [totalPrice, setTotalPrice] = useState(0);
   const router = useRouter();
+
+  // Calculate total price whenever products change
+  useEffect(() => {
+    const total = products.reduce(
+      (acc, product) => acc + (product.price / 100) * product.quantity,
+      0
+    );
+    setTotalPrice(total);
+  }, [products]);
 
   // Handle product quantity increase
   const handleQuantityIncrease = async (productId: number) => {
@@ -158,6 +169,15 @@ export default function ProductCartList({
           </div>
         </div>
       ))}
+
+      {/* Display total price */}
+      {products.length > 0 && (
+        <div className="w-full text-right">
+          <p className="text-lg font-semibold">
+            Total: ${totalPrice.toFixed(2)}
+          </p>
+        </div>
+      )}
 
       {/* Checkout button */}
       {products.length > 0 && (

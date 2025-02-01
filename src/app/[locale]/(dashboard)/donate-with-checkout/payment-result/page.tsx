@@ -20,6 +20,7 @@ export default async function ResultPage({
       expand: ["line_items", "payment_intent", "subscription"],
     });
   const orderData = checkoutSession;
+  console.log(orderData);
 
   const payment_intent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 
@@ -35,11 +36,8 @@ export default async function ResultPage({
   } else {
     const { data, error } = await supabase.from("orders").insert({
       user_id: orderData.metadata?.user_id,
-      product_id: orderData.metadata?.product_id,
-      stripe_product_id: orderData.metadata?.stripe_product_id,
-      stripe_price_id: orderData.metadata?.stripe_price_id,
+      total_price: orderData.amount_total,
       stripe_purchase_id: orderData.id,
-      price: orderData.amount_total,
     });
 
     if (error) {
