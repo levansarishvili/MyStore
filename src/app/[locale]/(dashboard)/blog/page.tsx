@@ -6,6 +6,7 @@ export interface blogType {
   title: string;
   body: string;
   image_url?: string;
+  created_at?: string;
 }
 
 export default async function BlogPage() {

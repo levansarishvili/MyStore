@@ -1,6 +1,7 @@
+import { createClient } from "src/utils/supabase/server";
 import PageNotFound from "../../../../components/PageNotFound";
 import PostDetails from "./PostDetails";
-import { supabase } from "../../../../../lib/supabaseClient";
+import { blogType } from "../page";
 
 interface ParamsType {
   id: string;
@@ -14,19 +15,17 @@ export default async function PostsDetailsPage({
 }) {
   const { id } = params;
 
-  try {
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .eq("id", id)
-      .single();
+  const supabase = await createClient();
 
-    if (error) {
-      console.error(error);
-      return <PageNotFound />;
-    }
-  } catch (err) {
-    console.error(err);
+  const { data: post, error } = (await supabase
+    .from("posts")
+    .select("*")
+    .eq("id", id)
+    .single()) as { data: blogType; error: any };
+
+  if (error) {
+    console.error(error);
+    return <PageNotFound />;
   }
 
   return <PostDetails post={post} />;
