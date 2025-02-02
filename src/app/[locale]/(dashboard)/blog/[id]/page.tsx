@@ -2,8 +2,6 @@ import PageNotFound from "../../../../components/PageNotFound";
 import PostDetails from "./PostDetails";
 import { supabase } from "../../../../../lib/supabaseClient";
 
-import type { Post } from "../../../../hooks/useFetchPosts";
-
 interface ParamsType {
   id: string;
 }
@@ -15,7 +13,6 @@ export default async function PostsDetailsPage({
   params: ParamsType;
 }) {
   const { id } = params;
-  let postDetailsData: Post | null = null;
 
   try {
     const { data, error } = await supabase
@@ -28,16 +25,9 @@ export default async function PostsDetailsPage({
       console.error(error);
       return <PageNotFound />;
     }
-
-    postDetailsData = data;
   } catch (err) {
     console.error(err);
   }
 
-  if (!postDetailsData) {
-    // If no data, return not found
-    return <PageNotFound />;
-  }
-
-  return <PostDetails post={postDetailsData} />;
+  return <PostDetails post={post} />;
 }

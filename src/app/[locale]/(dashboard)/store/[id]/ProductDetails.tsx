@@ -121,10 +121,10 @@ export default function ProductDetails({ product }: { product: ProductsType }) {
           <div className="flex">
             <Button
               variant={"default"}
-              className="hover:bg-[#38cb89]/80 transition all duration-300 text-white text-sm w-[10rem]"
+              className="hover:bg-[#2ca76e] transition all duration-300 text-white text-sm w-[10rem]"
               onClick={() => handleAddToCart(product.id)}
             >
-              <ShoppingCart className="size-4 fill-primary stroke-white" />
+              <ShoppingCart className="size-4 fill-transparent stroke-white" />
               {`${inBag ? "In cart" : "Add to cart"}`}
             </Button>
           </div>

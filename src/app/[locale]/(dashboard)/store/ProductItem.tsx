@@ -104,7 +104,7 @@ export default function ProductItem({
   };
 
   return (
-    <div className="bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 w-56 md:w-64">
+    <div className="pt-2 md:pt-4 bg-muted border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 w-56 md:w-64">
       <div className="md:w-2/3 w-1/2 h-[8rem] md:h-[10rem] flex justify-center items-center overflow-hidden rounded-xl">
         <Link href={`/store/${id}`}>
           <Image
@@ -144,11 +144,11 @@ export default function ProductItem({
         <div className="flex gap-4 w-full justify-center items-center">
           {/* Add to cart button */}
           <Button
-            className="rounded-lg text-xs md:text-sm  px-2 py-4 text-white hover:bg-[#38CB89]/80 transition-all duration-300 w-[70%]"
+            className="rounded-lg text-xs md:text-sm  px-2 py-4 text-white hover:bg-[#2ca76e] transition-all duration-300 w-36"
             variant="default"
             onClick={() => handleAddToCart(id)}
           >
-            <ShoppingCart className="size-4 fill-primary stroke-white" />
+            <ShoppingCart className="size-4 fill-transparent stroke-white" />
             {`${
               products?.find((product) => product.id === id)?.in_cart || inCart
                 ? "In cart"
@@ -185,7 +185,7 @@ export default function ProductItem({
           </DialogHeader>
           <DialogFooter>
             <Link href="/cart">
-              <Button className="text-xs md:text-sm text-white hover:bg-[#38CB89]/80 transition-all duration-300">
+              <Button className="text-xs md:text-sm text-white hover:bg-[#2ca76e] transition-all duration-300">
                 Go to cart
               </Button>
             </Link>

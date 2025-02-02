@@ -57,8 +57,8 @@ export default async function OrderDetailsPage({
   console.log(orderItems);
 
   return (
-    <section className="flex flex-col items-center gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-10">
-      <h1 className="text-2xl lg:text-3xl font-medium mt-10 lg:mt-16">
+    <section className="flex flex-col items-center gap-16 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
+      <h1 className="text-2xl lg:text-3xl font-medium text-foreground mt-10 lg:mt-16">
         Order Details
       </h1>
 
@@ -66,39 +66,53 @@ export default async function OrderDetailsPage({
         {orderItems?.map((orderItem, index) => (
           <li
             key={orderItem.id}
-            className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 p-6 bg-muted rounded-lg shadow w-full"
+            className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 md:gap-10 p-4 sm:p-6 bg-muted border border-border rounded-xl shadow-md w-full"
           >
-            <Image
-              src={
-                filteredProducts[index].image_urls?.[1] ||
-                "/assets/placeholder-img.png"
-              }
-              alt={filteredProducts[index].name || "Product Image"}
-              width={1000}
-              height={600}
-              quality={100}
-              className="w-32 h-32 object-cover rounded-lg border"
-            />
+            {/* Product Image */}
+            <div className="w-28 h-28 md:w-32 md:h-32 overflow-hidden rounded-lg">
+              <Image
+                src={
+                  filteredProducts[index].image_urls?.[1] ||
+                  "/assets/placeholder-img.png"
+                }
+                alt={filteredProducts[index].name || "Product Image"}
+                width={1000}
+                height={600}
+                quality={100}
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-            <div className="flex flex-col gap-2 flex-1 text-center md:text-left">
-              <h2 className="text-lg font-medium text-foreground">
-                {filteredProducts[index].name}
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Price: ${filteredProducts[index].price / 100}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Quantity: {orderItem.quantity}
-              </p>
-              <p className="text-sm font-semibold text-primary">
-                Subtotal: $
-                {(filteredProducts[index].price * orderItem.quantity) / 100}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {new Date(orderItem.created_at)
-                  .toLocaleDateString("en-GB")
-                  .replace(/\//g, ".")}
-              </p>
+            {/* Product Details */}
+            <div className="flex items-center sm:items-start justify-between w-full gap-6">
+              <div className="flex flex-col gap-2">
+                <h2 className="text-sm md:text-lg font-semibold text-foreground">
+                  {filteredProducts[index].name}
+                </h2>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Price:&nbsp;
+                  <span className="font-medium text-primary">
+                    ${filteredProducts[index].price / 100}
+                  </span>
+                </p>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Quantity:{" "}
+                  <span className="font-medium">{orderItem.quantity}</span>
+                </p>
+              </div>
+
+              {/* Order Summary */}
+              <div className="flex flex-col items-center sm:items-end gap-2">
+                <p className="text-xs sm:text-sm lg:text-base font-semibold text-primary">
+                  Subtotal: $
+                  {(filteredProducts[index].price * orderItem.quantity) / 100}
+                </p>
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  {new Date(orderItem.created_at)
+                    .toLocaleDateString("en-GB")
+                    .replace(/\//g, ".")}
+                </p>
+              </div>
             </div>
           </li>
         ))}

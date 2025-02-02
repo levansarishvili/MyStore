@@ -1,12 +1,7 @@
-import { useSearchParams } from "next/navigation";
 import BlogItem from "./BlogItem";
-import BlogFilter from "../../../components/filters/BlogFilter";
-import { useState } from "react";
-import BlogAddForm from "../../../components/forms/CreateBlogForm";
-import PostEditForm from "../../../components/forms/PostEditForm";
 import { createClient } from "src/utils/supabase/server";
 
-interface blogType {
+export interface blogType {
   id: number;
   title: string;
   body: string;
@@ -20,6 +15,7 @@ export default async function BlogPage() {
     data: blogType[];
     error: any;
   };
+  console.log(posts);
   if (error) {
     console.error(error);
     return null;
@@ -36,11 +32,14 @@ export default async function BlogPage() {
             id={post.id}
             title={post.title}
             content={post.body}
+            image_url={post.image_url}
           />
         ))}
       </ul>
 
-      {posts && <p className="text-base">Currently there are not any posts!</p>}
+      {posts.length === 0 && (
+        <p className="text-base">Currently there are not any posts!</p>
+      )}
     </section>
   );
 }

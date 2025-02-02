@@ -66,9 +66,8 @@ export default function CreateBlogForm() {
       const result = await response.json();
 
       if (result.success) {
+        console.log("Blog created successfully");
         router.refresh();
-      } else {
-        console.error("Failed to create blog:", result.message);
       }
     } catch (error) {
       console.error("Error creating blog:", error);

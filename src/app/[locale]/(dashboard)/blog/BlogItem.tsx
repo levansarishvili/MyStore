@@ -1,26 +1,46 @@
 // Blog item component
 import { Button } from "../../../components/ui/button";
 import { Link } from "../../../../i18n/routing";
+import Image from "next/image";
 
 interface Props {
   id: number;
   title: string;
   content: string;
+  image_url?: string;
 }
-export default function BlogItem({ id, title, content }: Props) {
+export default function BlogItem({ id, title, content, image_url }: Props) {
+  console.log(image_url);
   return (
-    <li className="relative max-w-[45rem] flex flex-col items-start gap-8 p-8 rounded-2xl transition-all duration-300 cursor-pointer h-[30rem] hover:shadow-md">
-      <div className="w-full p-x-8 py-0 flex flex-col justify-between items-center gap-12 h-full">
-        <h2 className="text-3xlfont-semibold">{title}</h2>
-        <p className="text-[1.4rem] line-clamp-3 text-start">{content}</p>
-        <div className="flex gap-4">
-          <Link className="max-w-60" href={`/blog/${id}`}>
-            <Button
-              variant="default"
-              className="w-full flex justify-center"
-              name="Read more"
-            />
-          </Link>
+    <li className="relative max-w-[25rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-muted shadow-sm border hover:shadow-md">
+      <div className="w-full flex flex-col items-center gap-6 h-full">
+        {/* Image with fallback */}
+        <div className="w-full h-40 mg:h-52 overflow-hidden rounded-lg">
+          <Image
+            src={image_url || "/placeholder.png"}
+            alt={title}
+            width={400}
+            height={224}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="w-full flex flex-col gap-4 px-4 md:px-6 py-4 justify-between h-52md:h-60">
+          <h2 className="text-base lg:text-lg font-medium">{title}</h2>
+          <p className="text-sm text-muted-foreground line-clamp-3 text-start">
+            {content}
+          </p>
+
+          <div className="w-full flex justify-center">
+            <Link href={`/blog/${id}`}>
+              <Button
+                variant="default"
+                className="w-32 bg-[#38cb89] text-white hover:bg-[#2ca76e] transition-all duration-300"
+              >
+                Read more
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </li>

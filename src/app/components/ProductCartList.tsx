@@ -139,7 +139,7 @@ export default function ProductCartList({
             Your cart is empty
           </h2>
           <Link href="/store">
-            <Button className="hover:bg-[#38CB89]/80 transition-all duration-300">
+            <Button className="hover:bg-[#2ca76e] transition-all duration-300">
               Go to shop
             </Button>
           </Link>
