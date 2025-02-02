@@ -131,10 +131,10 @@ export default function ProductCartList({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10 items-start w-full">
+    <div className="flex flex-col justify-center gap-10 items-center w-full">
       {/* If cart is empty */}
       {products.length === 0 && (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 mt-16">
           <h2 className="text-xl lg:text-2xl font-medium">
             Your cart is empty
           </h2>
@@ -209,7 +209,7 @@ export default function ProductCartList({
                     className=""
                     onClick={() => handleDeleteFromCart(product.product_id)}
                   >
-                    <Trash2 className="size-3 md:size-4 stroke-red-700" />
+                    <Trash2 className="size-3 md:size-4 stroke-red-600" />
                   </button>
                 </TableCell>
 

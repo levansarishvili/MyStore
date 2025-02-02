@@ -25,17 +25,17 @@ export default function ProfileToggle({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="w-10 h-10 rounded-full flex justify-center items-center text-2xl group"
+          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center text-2xl group"
           data-cy="user-button"
         >
           <Avatar className="w-16 h-16 flex items-center justify-center">
             <AvatarImage
               src={userImageUrl || "https://github.com/shadcn.png"}
               alt="user"
-              className="w-10 h-10 rounded-full"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
             />
             <AvatarFallback className="bg-transparent">
-              <User className="size-6" />
+              <User className="size-5 sm:size-6" />
             </AvatarFallback>
           </Avatar>
         </Button>

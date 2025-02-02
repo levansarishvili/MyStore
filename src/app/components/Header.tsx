@@ -7,6 +7,7 @@ import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
 import { ModeToggle } from "./ModeToggle";
 import NotificationBar from "./NotificationBar";
 import BurgerMenu from "../[locale]/BurgerMenu";
+import { ShoppingCart } from "lucide-react";
 
 // Create Header component
 async function Header() {
@@ -32,7 +33,7 @@ async function Header() {
         )}
 
         {/* Profile and Shopping cart icons */}
-        <div className="flex gap-4 cursor-pointer items-center justify-center">
+        <div className="flex gap-2 sm:gap-4 cursor-pointer items-center justify-center">
           <div className="flex gap-2">
             {/* Color Theme */}
             <ModeToggle />
@@ -54,6 +55,13 @@ async function Header() {
               >
                 <ProfileToggle userImageUrl={userImageUrl} />
               </div>
+
+              {/* Cart Icon */}
+              <Link href="/cart">
+                <div className="flex gap-4 px-4 cursor-pointer hover:text-primary text-sm rounded-lg transition-all duration-300">
+                  <ShoppingCart className="size-5 sm:size-6" />
+                </div>
+              </Link>
             </>
           )}
         </div>

@@ -42,7 +42,7 @@ export default async function OrdersPage() {
   );
 
   return (
-    <section className="flex flex-col items-center gap-20 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="flex flex-col items-center min-h-screen gap-10 lg:gap-20 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-2xl lg:text-3xl font-medium mt-10 lg:mt-16">
         Orders
       </h1>

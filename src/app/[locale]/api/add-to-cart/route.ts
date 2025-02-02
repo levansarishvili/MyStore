@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "../../../../utils/supabase/server";
 import GetUserData from "../../../components/GetUserData";
-import { ProductsType } from "../../(dashboard)/store/page";
 
 export async function POST(req: Request) {
   const supabase = await createClient();
@@ -48,10 +47,10 @@ export async function POST(req: Request) {
       .eq("product_id", productId)
       .single();
 
-    if (fetchError) {
+    if (cartItem) {
       return NextResponse.json(
-        { success: false, message: fetchError.message },
-        { status: 500 }
+        { success: false, message: "Product already in cart" },
+        { status: 400 }
       );
     }
 

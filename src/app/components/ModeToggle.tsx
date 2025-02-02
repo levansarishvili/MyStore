@@ -32,13 +32,13 @@ export function ModeToggle() {
           {mounted && (
             <>
               {theme === "light" ? (
-                <SunMedium className="size-6 text-primary" />
+                <SunMedium className="size-5 sm:size-6 text-primary" />
               ) : resolvedTheme === "light" ? (
-                <SunMedium className="size-6" />
+                <SunMedium className="size-5 sm:size-6" />
               ) : theme === "dark" ? (
-                <MoonStar className="size-6 text-primary" />
+                <MoonStar className="size-5 sm:size-6 text-primary" />
               ) : (
-                <MoonStar className="size-6" />
+                <MoonStar className="size-5 sm:size-6" />
               )}
             </>
           )}

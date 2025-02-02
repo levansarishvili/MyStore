@@ -6,6 +6,16 @@ import { Button } from "../../../components/ui/button";
 import { useRouter } from "next/navigation";
 import { Star, Trash, Trash2, ShoppingCart } from "lucide-react";
 import { ProductsType } from "./page";
+import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../../components/ui/dialog";
 
 interface Props {
   id: string;
@@ -29,11 +39,29 @@ export default function ProductItem({
   userId,
   isNewProductSlider,
 }: Props) {
+  const [inBag, setInBag] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   // Check is user is author of the product
   const isAuthor =
     userId === products?.find((product) => product.id === id)?.user_id;
+
+  useEffect(() => {
+    // Check if product is in the cart
+    const checkCart = async () => {
+      try {
+        const res = await fetch(`/api/check-in-cart?productId=${id}`);
+        const data = await res.json();
+        if (data.success) {
+          setInBag(data.inCart);
+        }
+      } catch (error) {
+        console.error("Error checking cart:", error);
+      }
+    };
+    checkCart();
+  }, [id]);
 
   // Function to handle product deletion
   const handleDelete = async (productId: string) => {
@@ -59,6 +87,10 @@ export default function ProductItem({
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
+    if (inBag) {
+      setIsModalOpen(() => true);
+      return;
+    }
     try {
       const res = await fetch(`/api/add-to-cart`, {
         method: "POST",
@@ -75,7 +107,7 @@ export default function ProductItem({
         console.error("Failed to add product to cart:", data.message);
         return;
       }
-
+      setInBag(() => true);
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -83,11 +115,11 @@ export default function ProductItem({
   };
 
   return (
-    <div className="bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-6 cursor-pointer text-center transition-all duration-300 w-64">
-      <div className="w-full flex justify-center items-center overflow-hidden h-[12rem] rounded-xl">
+    <div className="bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 w-56 md:w-64">
+      <div className="md:w-2/3 w-1/2 h-[8rem] md:h-[10rem] flex justify-center items-center overflow-hidden rounded-xl">
         <Link href={`/store/${id}`}>
           <Image
-            className="object-cover opacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-95"
+            className="object-coveropacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-95"
             src={imageSrc || ""}
             alt={name}
             width={200}
@@ -123,12 +155,12 @@ export default function ProductItem({
         <div className="flex gap-4 w-full justify-center items-center">
           {/* Add to cart button */}
           <Button
-            className="rounded-lg  px-2 py-5 text-white hover:bg-[#38CB89]/80 transition-all duration-300 w-[70%]"
+            className="rounded-lg text-xs md:text-sm  px-2 py-4 text-white hover:bg-[#38CB89]/80 transition-all duration-300 w-[70%]"
             variant="default"
             onClick={() => handleAddToCart(id)}
           >
             <ShoppingCart className="size-4 fill-primary stroke-white" />
-            Add to cart
+            {`${inBag ? "In cart" : "Add to cart"}`}
           </Button>
 
           {/* Delete product */}
@@ -144,6 +176,28 @@ export default function ProductItem({
           )}
         </div>
       </div>
+
+      {/* Modal window for product is already in cart */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-sm:w-[16rem] max-w-[24rem] rounded-lg">
+          <DialogHeader className="text-center flex flex-col gap-4">
+            <DialogTitle className="text-sm md:text-base font-medium">
+              Product Already in Cart
+            </DialogTitle>
+            <DialogDescription className="text-xs md:text-sm">
+              This product is already in your cart. You can update the quantity
+              in the cart.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Link href="/cart">
+              <Button className="text-xs md:text-sm text-white hover:bg-[#38CB89]/80 transition-all duration-300">
+                Go to cart
+              </Button>
+            </Link>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

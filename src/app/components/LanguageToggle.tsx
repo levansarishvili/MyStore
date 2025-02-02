@@ -39,7 +39,7 @@ export default function LanguageToggle() {
           size="icon"
           className="w-10 h-10 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
         >
-          <Languages className="size-6" />
+          <Languages className="size-5 sm:size-6" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -48,7 +48,7 @@ export default function LanguageToggle() {
       >
         <DropdownMenuItem
           onClick={() => handleLanguageChange("ka")}
-          className={`flex justify-center cursor-pointer text-sm rounded-lg w-full focus:text-primary ${
+          className={`flex justify-center cursor-pointer text-xs md:text-sm rounded-lg w-full focus:text-primary ${
             language === "ka" ? "text-primary focus:text-primary" : ""
           }`}
         >

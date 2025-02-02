@@ -46,14 +46,14 @@ const Sidebar = () => {
         customCrossIcon={<X className="cursor-pointer" />}
         styles={{
           bmBurgerButton: {
-            width: "36px",
-            height: "30px",
+            width: "24px",
+            height: "24px",
             position: "relative",
           },
 
           bmCrossButton: {
-            height: "24px",
-            width: "24px",
+            height: "20px",
+            width: "20px",
             margin: "15px",
           },
           bmMenuWrap: {
@@ -66,7 +66,7 @@ const Sidebar = () => {
           },
           bmMenu: {
             padding: "2.5em 1.5em 0",
-            fontSize: "18px",
+            fontSize: "16px",
           },
           bmMorphShape: {},
           bmItemList: {
