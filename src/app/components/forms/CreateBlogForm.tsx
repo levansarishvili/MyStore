@@ -54,14 +54,25 @@ export default function CreateBlogForm() {
       image_url: imageUrl,
     };
 
+    const data_ka = {
+      title_ka: formData.get("title_ka"),
+      body_ka: formData.get("body_ka"),
+      image_url: imageUrl,
+    };
+    console.log(data, data_ka);
+
     try {
       const response = await fetch("/api/create-blog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ data, data_ka }),
       });
+
+      if (!response.ok) {
+        console.error("Failed to create blog");
+      }
 
       const result = await response.json();
 
@@ -79,18 +90,58 @@ export default function CreateBlogForm() {
       className="flex flex-col gap-6 items-center mb-12 p-8 rounded-lg w-full mt-1"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-start gap-2 w-full">
-        <label className="text-xl font-semibold" htmlFor="title">
-          Post Title
-        </label>
-        <Input name="title" type="text" id="title" placeholder="Enter title" />
-      </div>
+      <div className="w-full max-md:flex-col flex gap-6">
+        <div className="max-md:w-full w-1/2 flex flex-col gap-4">
+          <div className="flex flex-col items-start gap-2 w-full">
+            <label className="text-xl font-semibold" htmlFor="title">
+              Post Title
+            </label>
+            <Input
+              name="title"
+              type="text"
+              id="title"
+              placeholder="Enter title in english"
+            />
+          </div>
 
-      <div className="flex flex-col items-start gap-2 w-full">
-        <label className="text-xl font-semibold" htmlFor="body">
-          Post Content
-        </label>
-        <Textarea name="body" id="body" placeholder="Write your content..." />
+          <div className="flex flex-col items-start gap-2 w-full">
+            <label className="text-xl font-semibold" htmlFor="body">
+              Post Content
+            </label>
+            <Textarea
+              name="body"
+              id="body"
+              placeholder="Write your content in english..."
+            />
+          </div>
+        </div>
+
+        <div className="max-md:w-full w-1/2 flex flex-col gap-4">
+          {/* For georgian */}
+          <div className="flex flex-col items-start gap-2 w-full">
+            <label className="text-xl font-semibold" htmlFor="title_ka">
+              Post Title
+            </label>
+            <Input
+              name="title_ka"
+              type="text"
+              id="title_ka"
+              placeholder="Enter title in georgian"
+            />
+          </div>
+
+          {/* For georgian */}
+          <div className="flex flex-col items-start gap-2 w-full">
+            <label className="text-xl font-semibold" htmlFor="body_ka">
+              Post Content
+            </label>
+            <Textarea
+              name="body_ka"
+              id="body_ka"
+              placeholder="Write your content in georgian..."
+            />
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col items-start gap-2 w-full">
@@ -107,7 +158,7 @@ export default function CreateBlogForm() {
 
       <Button
         variant={"default"}
-        className="font-medium p-3 text-white rounded-lg text-sm cursor-pointer w-40 transition-all duration-300 hover:bg-[#38cb89]/80"
+        className="font-medium p-3 text-white rounded-lg text-sm cursor-pointer w-40 transition-all duration-300 hover:bg-[#2ca76e]"
         type="submit"
       >
         Add Post

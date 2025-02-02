@@ -1,3 +1,4 @@
+import { data } from "cypress/types/jquery";
 import BlogItem from "./BlogItem";
 import { createClient } from "src/utils/supabase/server";
 
@@ -7,19 +8,40 @@ export interface blogType {
   body: string;
   image_url?: string;
   created_at?: string;
+  translated_title?: string | null;
+  translated_body?: string | null;
+  language_code?: string;
 }
 
-export default async function BlogPage() {
-  const supabase = await createClient();
+interface ParamsType {
+  params: { locale: string };
+}
 
-  const { data: posts, error } = (await supabase.from("posts").select("*")) as {
-    data: blogType[];
-    error: any;
-  };
-  console.log(posts);
-  if (error) {
-    console.error(error);
+export default async function BlogPage({ params }: ParamsType) {
+  const supabase = await createClient();
+  const locale = params.locale;
+  console.log(locale);
+
+  if (!locale) {
     return null;
+  }
+
+  // Fetch post data according to locale
+  let { data: posts } = await supabase
+    .from("post_translations")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (!posts) {
+    console.log("No posts found");
+    return;
+  }
+
+  // Find post data according to locale
+  if (locale === "ka") {
+    posts = posts.filter((post: blogType) => post.language_code === "ka");
+  } else {
+    posts = posts.filter((post: blogType) => post.language_code === "en");
   }
 
   return (
@@ -31,9 +53,10 @@ export default async function BlogPage() {
           <BlogItem
             key={post.id}
             id={post.id}
-            title={post.title}
-            content={post.body}
+            title={post.translated_title}
+            content={post.translated_body}
             image_url={post.image_url}
+            locale={locale}
           />
         ))}
       </ul>

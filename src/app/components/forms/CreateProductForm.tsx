@@ -121,7 +121,7 @@ export default function CreateProductForm() {
 
         <Button
           type="submit"
-          className="w-40 hover:bg-[#38cb89]/80 transition-all duration-300"
+          className="w-40 hover:bg-[#2ca76e] transition-all duration-300"
         >
           Add Product
         </Button>

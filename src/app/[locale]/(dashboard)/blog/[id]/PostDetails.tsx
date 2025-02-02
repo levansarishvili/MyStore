@@ -7,7 +7,7 @@ export default function PostDetails({ post }: { post: blogType }) {
       <h1 className="text-2xl lg:text-3xl font-medium">Blog Details</h1>
       <div className="w-full max-w-4xl bg-muted p-4 md:p-8 rounded-2xl shadow-md">
         <h2 className="text-base lg:text-2xl font-medium mt-6 text-foreground">
-          {post.title}
+          {post.translated_title}
         </h2>
 
         <span className="text-xs md:text-sm text-primary font-medium block mt-2">
@@ -18,7 +18,7 @@ export default function PostDetails({ post }: { post: blogType }) {
         <div className="w-full max-w-3xl mx-auto mt-6">
           <Image
             src={post.image_url || "/placeholder-img.png"}
-            alt={post.title}
+            alt={post.translated_title || "Blog Image"}
             width={700}
             height={400}
             className="rounded-lg w-full object-cover"
@@ -27,7 +27,7 @@ export default function PostDetails({ post }: { post: blogType }) {
 
         {/* Blog content */}
         <p className="text-sm lg:text-base text-muted-foreground mt-6 leading-relaxed">
-          {post.body}
+          {post.translated_body}
         </p>
       </div>
     </section>
