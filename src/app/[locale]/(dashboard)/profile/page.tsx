@@ -12,6 +12,7 @@ import {
 import { Button } from "src/app/components/ui/button";
 import CreateProductForm from "src/app/components/forms/CreateProductForm";
 import ProductItem from "../store/ProductItem";
+import CreateBlogForm from "src/app/components/forms/CreateBlogForm";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
@@ -131,7 +132,11 @@ export default async function ProfilePage() {
         </div>
 
         {/* Show create product form if user is a Pro member */}
-        {isProMember && <CreateProductForm />}
+        {isProMember && (
+          <div>
+            <CreateProductForm /> <CreateBlogForm />
+          </div>
+        )}
 
         {/* Get products that user created */}
         <div className="flex flex-wrap gap-8"></div>

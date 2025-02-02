@@ -37,6 +37,7 @@ export async function POST(req: Request) {
     );
   }
 
+  // Create product on Stripe
   try {
     const stripeProduct = await stripe.products.create({
       name,
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
       product: stripeProduct.id,
     });
 
+    // Insert product into Supabase
     const { error } = await supabase.from("products").insert({
       name,
       price: Math.round(price * 100),

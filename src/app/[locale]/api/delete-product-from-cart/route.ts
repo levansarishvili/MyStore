@@ -28,6 +28,20 @@ export async function DELETE(req: Request) {
         { status: 500 }
       );
     }
+
+    // Change in_cart status to false in products table for the deleted product
+    const { error: updateError } = await supabase
+      .from("products")
+      .update({ in_cart: false })
+      .eq("id", productId);
+
+    if (updateError) {
+      return NextResponse.json(
+        { success: false, message: updateError.message },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
       { success: true, message: "Product removed from cart." },
       { status: 200 }

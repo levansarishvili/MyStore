@@ -14,8 +14,7 @@ export interface ProductsType {
   user_id: string;
   stripe_product_id: string;
   stripe_price_id: string;
-  sale: number;
-  sale_price: number;
+  in_cart: boolean;
 }
 
 export default async function Store() {

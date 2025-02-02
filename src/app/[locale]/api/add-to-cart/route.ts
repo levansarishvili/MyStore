@@ -54,13 +54,6 @@ export async function POST(req: Request) {
       );
     }
 
-    if (cartItem) {
-      return NextResponse.json(
-        { success: false, message: "Product already in cart" },
-        { status: 400 }
-      );
-    }
-
     // Add product in cart if it doesn't exist
     const { data, error } = await supabase.from("cart").insert({
       user_id: userId,
@@ -73,6 +66,20 @@ export async function POST(req: Request) {
     if (error) {
       return NextResponse.json(
         { success: false, message: error.message },
+        { status: 500 }
+      );
+    }
+
+    // Set inCart to true in products table
+    const { error: updateError } = await supabase
+      .from("products")
+      .update({ in_cart: true })
+      .eq("id", productId);
+
+    if (updateError) {
+      console.error(updateError);
+      return NextResponse.json(
+        { success: false, message: updateError?.message },
         { status: 500 }
       );
     }

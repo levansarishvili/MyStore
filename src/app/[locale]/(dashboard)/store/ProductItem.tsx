@@ -26,6 +26,7 @@ interface Props {
   products?: ProductsType[];
   userId: string | undefined;
   isNewProductSlider?: boolean;
+  in_cart?: boolean;
 }
 
 // Product card component
@@ -38,30 +39,15 @@ export default function ProductItem({
   products,
   userId,
   isNewProductSlider,
+  in_cart,
 }: Props) {
-  const [inBag, setInBag] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [inCart, setInCart] = useState(false);
   const router = useRouter();
 
   // Check is user is author of the product
   const isAuthor =
     userId === products?.find((product) => product.id === id)?.user_id;
-
-  useEffect(() => {
-    // Check if product is in the cart
-    const checkCart = async () => {
-      try {
-        const res = await fetch(`/api/check-in-cart?productId=${id}`);
-        const data = await res.json();
-        if (data.success) {
-          setInBag(data.inCart);
-        }
-      } catch (error) {
-        console.error("Error checking cart:", error);
-      }
-    };
-    checkCart();
-  }, [id]);
 
   // Function to handle product deletion
   const handleDelete = async (productId: string) => {
@@ -87,7 +73,10 @@ export default function ProductItem({
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
-    if (inBag) {
+    if (
+      products?.find((product) => product.id === productId)?.in_cart ||
+      inCart
+    ) {
       setIsModalOpen(() => true);
       return;
     }
@@ -107,7 +96,7 @@ export default function ProductItem({
         console.error("Failed to add product to cart:", data.message);
         return;
       }
-      setInBag(() => true);
+      setInCart(() => true);
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -160,13 +149,18 @@ export default function ProductItem({
             onClick={() => handleAddToCart(id)}
           >
             <ShoppingCart className="size-4 fill-primary stroke-white" />
-            {`${inBag ? "In cart" : "Add to cart"}`}
+            {`${
+              products?.find((product) => product.id === id)?.in_cart || inCart
+                ? "In cart"
+                : "Add to cart"
+            }`}
           </Button>
 
           {/* Delete product */}
           {isProMember && isAuthor && (
-            <div className="absolute top-4 right-4">
+            <div className="">
               <Button
+                variant={"destructive"}
                 className="bg-red-700 text-white text-sm px-4 py-1 rounded-lg font-medium transition-all duration-300 hover:bg-white hover:text-gray-950 hover:shadow-lg"
                 onClick={() => handleDelete(id)}
               >
