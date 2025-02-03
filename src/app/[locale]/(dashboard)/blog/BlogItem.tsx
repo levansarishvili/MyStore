@@ -18,8 +18,6 @@ export default function BlogItem({
   image_url,
   locale,
 }: Props) {
-  console.log(image_url);
-  console.log(locale);
   return (
     <li className="relative max-w-[25rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-muted shadow-sm border hover:shadow-md">
       <div className="w-full flex flex-col items-center gap-4 h-full">

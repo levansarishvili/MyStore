@@ -138,6 +138,7 @@ export default function ProductCartList({
           <h2 className="text-xl lg:text-2xl font-medium">
             Your cart is empty
           </h2>
+
           <Link href="/store">
             <Button className="hover:bg-[#2ca76e] transition-all duration-300">
               Go to shop

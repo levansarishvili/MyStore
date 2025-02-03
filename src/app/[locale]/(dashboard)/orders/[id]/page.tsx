@@ -52,9 +52,6 @@ export default async function OrderDetailsPage({
   const filteredProducts = products?.filter((product) =>
     orderItems.some((orderItem) => orderItem.product_id === product.id)
   );
-  console.log(filteredProducts);
-
-  console.log(orderItems);
 
   return (
     <section className="flex flex-col items-center gap-16 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">

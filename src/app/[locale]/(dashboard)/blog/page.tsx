@@ -20,7 +20,6 @@ interface ParamsType {
 export default async function BlogPage({ params }: ParamsType) {
   const supabase = await createClient();
   const locale = params.locale;
-  console.log(locale);
 
   if (!locale) {
     return null;

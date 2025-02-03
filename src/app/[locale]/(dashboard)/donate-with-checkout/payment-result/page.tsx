@@ -26,7 +26,7 @@ export default async function ResultPage({
       expand: ["line_items", "payment_intent", "subscription"],
     });
   const orderData = checkoutSession;
-  console.log(orderData);
+  
 
   const payment_intent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 
