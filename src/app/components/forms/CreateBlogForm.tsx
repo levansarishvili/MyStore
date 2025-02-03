@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { marked } from "marked";
 
 // Validation schema with Zod
 const blogSchema = z.object({
@@ -83,13 +84,13 @@ export default function CreateBlogForm() {
 
     const blogData = {
       title: data.title,
-      body: data.body,
+      body: data.body, // Convert Markdown to HTML before submission
       image_url: imageUrl,
     };
 
     const blogData_ka = {
       title_ka: data.title_ka,
-      body_ka: data.body_ka,
+      body_ka: data.body_ka, // Convert Markdown to HTML for Georgian content
       image_url: imageUrl,
     };
 
@@ -161,7 +162,7 @@ export default function CreateBlogForm() {
                 <Textarea
                   {...field}
                   id="body"
-                  placeholder="Write your content in english..."
+                  placeholder="Write your content in markdown..."
                   className={`border ${errors.body ? "border-red-500" : ""}`}
                 />
               )}
@@ -210,7 +211,7 @@ export default function CreateBlogForm() {
                 <Textarea
                   {...field}
                   id="body_ka"
-                  placeholder="Write your content in georgian..."
+                  placeholder="Write your content in markdown..."
                   className={`border ${errors.body_ka ? "border-red-500" : ""}`}
                 />
               )}

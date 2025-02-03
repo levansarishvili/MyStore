@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { blogType } from "../../blog/page";
+import ReactMarkdown from "react-markdown";
 
 export default function PostDetails({ post }: { post: blogType }) {
   return (
@@ -25,10 +26,12 @@ export default function PostDetails({ post }: { post: blogType }) {
           />
         </div>
 
-        {/* Blog content */}
-        <p className="text-sm lg:text-base text-muted-foreground mt-6 leading-relaxed">
-          {post.translated_body}
-        </p>
+        {/* Blog content rendered from markdown */}
+        <div className="text-sm lg:text-base text-muted-foreground mt-6 leading-relaxed flex flex-col gap-4">
+          <ReactMarkdown className={"markdown"}>
+            {post.translated_body}
+          </ReactMarkdown>
+        </div>
       </div>
     </section>
   );

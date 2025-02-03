@@ -51,6 +51,21 @@ body {
   justify-content: center !important;
 }
 
+.markdown h2 {
+  font-weight: 600;
+}
+.markdown li {
+  font-weight: 500;
+  list-style: disc;
+  margin-left: 30px;
+}
+
+.markdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
