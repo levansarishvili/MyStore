@@ -13,7 +13,11 @@ import { ProductsType } from "../[locale]/(dashboard)/store/page";
 import ProductItem from "../[locale]/(dashboard)/store/ProductItem";
 import { useEffect, useState } from "react";
 
-export default function HeroSlider({ products }: { products: ProductsType[] }) {
+export default function HeroSlider({
+  newProducts,
+}: {
+  newProducts: ProductsType[];
+}) {
   const [swiperKey, setSwiperKey] = useState(0);
 
   // Handle Swiper reinitialization on resize
@@ -41,11 +45,14 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
         }}
       >
         <CarouselContent className="flex gap-4 py-4">
-          {products.map((product) => (
+          {newProducts.map((product) => (
             <CarouselItem
               key={product.id}
-              className=" basis-auto flex justify-center"
+              className=" basis-auto flex justify-center relative"
             >
+              <div className="absolute top-4 left-6 bg-primary text-white font-medium text-xs px-3 py-1 rounded-lg">
+                New
+              </div>
               <ProductItem
                 id={product.id}
                 name={product.name}
@@ -55,7 +62,6 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
                 price={product.price}
                 isProMember={true}
                 userId={product.user_id}
-                isNewProductSlider={true}
               />
             </CarouselItem>
           ))}

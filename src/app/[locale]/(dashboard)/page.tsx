@@ -1,22 +1,45 @@
-import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "src/utils/supabase/server";
-import { ArrowRight, Mail } from "lucide-react";
 import type { ProductsType } from "./store/page";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
 import NewProductsSlider from "src/app/components/NewProductsSlider";
 import { Button } from "src/app/components/ui/button";
 import ShopByCategory from "src/app/components/ShopByCategory";
 import MostPopularProducts from "src/app/components/MostPopularProducts";
+import LatestArticles from "src/app/components/LatestArticles";
 
-export default async function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
   const supabase = await createClient();
-  const { data, error } = await supabase.from("products").select("*").limit(8);
+  const locale = params.locale;
+
+  // Get top 8 most popular products
+  const { data: topProducts, error } = (await supabase
+    .from("products")
+    .select("*")
+    .order("solded_quantity", { ascending: false })
+    .limit(8)) as { data: ProductsType[]; error: any };
+
   if (error) {
     console.error(error);
     return;
   }
-  const products = data as ProductsType[];
+
+  // Get top 8 most new products
+  const { data: newProducts, error: newProductsError } = (await supabase
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(8)) as { data: ProductsType[]; error: any };
+
+  if (newProductsError) {
+    console.error(newProductsError);
+    return;
+  }
+
   const isProMember = await CheckSubscriptionStatus();
 
   return (
@@ -51,92 +74,16 @@ export default async function HomePage() {
       {/* New Products */}
       <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         <h2 className="text-2xl md:text-3xl font-medium">New Products</h2>
-        <NewProductsSlider products={products} />
+        <NewProductsSlider newProducts={newProducts} />
       </section>
 
       {/* Shop by Categories */}
       <ShopByCategory />
       {/* Most Popular Products */}
-      <MostPopularProducts />
+      <MostPopularProducts topProducts={topProducts} />
 
       {/* Latest Articles */}
-      <section className="w-full flex flex-col gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <div className="w-full flex justify-between gap-16">
-          <h2 className="text-2xl md:text-3xl font-medium">Latest Articles</h2>
-          <Link
-            href="/blog"
-            className="flex gap-2 items-center hover:text-primary transition-all duration-300"
-          >
-            <p className="text-sm sm:text-base font-medium">View More</p>
-            <ArrowRight className="size-5" />
-          </Link>
-        </div>
-
-        <div className="flex gap-8 flex-wrap justify-center">
-          <div className="flex flex-col gap-4 items-start">
-            <Image
-              src="/assets/article-1.png"
-              width={500}
-              height={500}
-              quality={100}
-              alt="Latest Articles"
-              className="w-full h-full object-cover"
-            />
-            <p className="text-base md:text-xl font-medium">
-              Air Jordan x Travis Scott Event
-            </p>
-            <Link
-              href="/blog"
-              className="flex gap-2 items-center hover:text-primary transition-all duration-300"
-            >
-              <p className="text-sm md:text-base font-medium">Read More</p>
-              <ArrowRight className="size-5" />
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-4 items-start">
-            <Image
-              src="/assets/article-2.png"
-              width={500}
-              height={500}
-              quality={100}
-              alt="Latest Articles"
-              className="w-full h-full object-cover"
-            />
-            <p className="text-base md:text-xl font-medium">
-              The timeless classics on the green
-            </p>
-            <Link
-              href="/blog"
-              className="flex gap-2 items-center hover:text-primary transition-all duration-300"
-            >
-              <p className="text-sm md:text-base font-medium">Read More</p>
-              <ArrowRight className="size-5" />
-            </Link>
-          </div>
-
-          <div className="flex flex-col gap-4 items-start">
-            <Image
-              src="/assets/article-3.png"
-              width={500}
-              height={500}
-              quality={100}
-              alt="Latest Articles"
-              className="w-full h-full object-cover"
-            />
-            <p className="text-base md:text-xl font-medium">
-              The 2023 Ryder Cup
-            </p>
-            <Link
-              href="/blog"
-              className="flex gap-2 items-center hover:text-primary transition-all duration-300"
-            >
-              <p className="text-sm md:text-base font-medium">Read More</p>
-              <ArrowRight className="size-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <LatestArticles locale={locale} />
     </>
   );
 }

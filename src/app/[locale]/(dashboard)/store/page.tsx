@@ -16,6 +16,7 @@ export interface ProductsType {
   stripe_product_id: string;
   stripe_price_id: string;
   in_cart: boolean;
+  solded_quantity: number;
 }
 
 interface Props {

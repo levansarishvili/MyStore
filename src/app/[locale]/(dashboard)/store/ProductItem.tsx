@@ -24,7 +24,6 @@ interface Props {
   isProMember?: boolean;
   products?: ProductsType[];
   userId: string | undefined;
-  isNewProductSlider?: boolean;
   in_cart?: boolean;
 }
 
@@ -37,7 +36,6 @@ export default function ProductItem({
   isProMember,
   products,
   userId,
-  isNewProductSlider,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inCart, setInCart] = useState(false);
@@ -114,12 +112,6 @@ export default function ProductItem({
             quality={100}
           />
         </Link>
-
-        {isNewProductSlider && (
-          <div className="absolute top-4 left-6 bg-primary text-white font-medium text-xs px-3 py-1 rounded-lg">
-            New
-          </div>
-        )}
       </div>
 
       {/* Card Content */}
