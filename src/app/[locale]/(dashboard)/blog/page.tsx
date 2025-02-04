@@ -62,7 +62,7 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
     <section className="min-h-screen mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-2xl lg:text-3xl font-medium">Blogs</h1>
 
-      <ul className="flex flex-wrap justify-center gap-8">
+      <ul className="w-full grid grid-cols-1 gap-6 custom-sm:grid-cols-2 lg:grid-cols-3">
         {posts?.map((post) => (
           <BlogItem
             key={post.id}

@@ -19,20 +19,20 @@ export default function BlogItem({
   locale,
 }: Props) {
   return (
-    <li className="relative max-w-[25rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-muted shadow-sm border hover:shadow-md">
-      <div className="w-full flex flex-col items-center gap-4 h-full">
+    <li className="relative min-w-[16rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-muted shadow-sm border hover:shadow-md">
+      <div className="w-full flex flex-col items-center justify-between gap-4 h-full">
         {/* Image with fallback */}
-        <div className="w-full max-h-52 overflow-hidden rounded-lg">
+        <div className="w-full h-40 lg:h-52 overflow-hidden rounded-lg">
           <Image
             src={image_url || "/placeholder.png"}
             alt={title}
-            width={400}
-            height={224}
-            className="object-cover"
+            width={1200}
+            height={600}
+            className="object-cover w-full h-full"
           />
         </div>
 
-        <div className="w-full flex flex-col gap-4 px-4 md:px-6 py-4 justify-between h-52md:h-60">
+        <div className="w-full flex flex-col gap-4 px-4 md:px-6 py-4 justify-between h-52 md:h-60">
           <h2 className="text-base lg:text-lg font-medium">{title}</h2>
           <div className="text-sm text-muted-foreground line-clamp-3 text-start">
             <ReactMarkdown>{content}</ReactMarkdown>

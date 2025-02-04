@@ -1,6 +1,7 @@
 import "../global.css";
 import { Poppins } from "next/font/google";
 import { Inter } from "next/font/google";
+import { Noto_Sans_Georgian } from "next/font/google";
 import { ThemeProvider } from "./components/theme-provider";
 
 export const metadata = {
@@ -26,6 +27,14 @@ const inter = Inter({
   fallback: ["sans-serif"],
 });
 
+const notoSansGeorgian = Noto_Sans_Georgian({
+  subsets: ["georgian"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-georgian",
+  fallback: ["sans-serif"],
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -34,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="" suppressHydrationWarning>
       <head></head>
-      <body className={`${poppins.className}`}>
+      <body className={`${poppins.className} ${notoSansGeorgian.className}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

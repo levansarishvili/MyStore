@@ -80,6 +80,30 @@ export async function POST(req: Request) {
       },
     });
 
+    // Increase solded quantity in products table for each product in cart
+    await Promise.all(
+      cartItems.map(async (item) => {
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .eq("id", item.product_id)
+          .single();
+
+        if (error || !data) {
+          throw new Error("Product not found or unauthorized");
+        }
+
+        const { error: updateError } = await supabase
+          .from("products")
+          .update({ solded_quantity: data.solded_quantity + item.quantity })
+          .eq("id", item.product_id);
+
+        if (updateError) {
+          console.error("Error updating solded quantity:", updateError);
+        }
+      })
+    );
+
     // Clean up cart items
     await Promise.all(
       cartItems.map(async (item) => {

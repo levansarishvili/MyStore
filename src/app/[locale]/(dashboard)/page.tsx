@@ -7,6 +7,7 @@ import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus"
 import NewProductsSlider from "src/app/components/NewProductsSlider";
 import { Button } from "src/app/components/ui/button";
 import ShopByCategory from "src/app/components/ShopByCategory";
+import MostPopularProducts from "src/app/components/MostPopularProducts";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -27,12 +28,11 @@ export default async function HomePage() {
             <div className="flex flex-col max-sm:items-center max-sm:gap-6 gap-10 max-w-[32rem]">
               <div className="rounded-2xl flex flex-col gap-4">
                 <h1 className="max-sm:text-center bg-text-gradient bg-clip-text max-w-[32rem] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[3rem] sm:leading-[3.5rem] md:leading-[4.5rem] lg:leading-[5rem] text-white">
-                  More than just a game. It&apos;s a lifestyle.
+                  Power Your Life with the Best in Tech.
                 </h1>
                 <p className="max-sm:text-center text-base sm:text-xl text-white font-sans">
-                  Whether you&apos;re just starting out, have played your whole
-                  life or you&apos;re a Tour pro, your swing is like a
-                  fingerprint.
+                  Whether you&apos;re just getting started, upgrading your
+                  setup, or a tech pro, your device is as unique as you.
                 </p>
               </div>
               <Link href="/store" className="w-1/2">
@@ -56,48 +56,13 @@ export default async function HomePage() {
 
       {/* Shop by Categories */}
       <ShopByCategory />
-      {/* Limited Time Offer */}
-      <section className="w-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 bg-black">
-        <Image
-          src="/assets/offer-img.png"
-          width={1200}
-          height={600}
-          quality={100}
-          alt="Limited Time Offer"
-          className=""
-        />
-        <div className="pl-6 md:pl-10 lg:pl-16 flex flex-col gap-8 justify-center items-start">
-          <div className="flex flex-col gap-4 justify-start">
-            <p className="text-primary text-base font-semibold uppercase">
-              Limited Edition
-            </p>
-            <h2 className="text-2xl md:text-3xl font-medium text-white">
-              Hurry up! 30% OFF
-            </h2>
-            <p className="sm:text-sm md:text-base lg:text-xl text-white">
-              Find clubs that are right for your game
-            </p>
-          </div>
-
-          <div className="flex flex-col justify-start">
-            <Link href="/store">
-              <Button
-                className="text-sm sm:text-base font-sans font-medium h-10 w-full hover:bg-[#38CB89]/80 transition-all duration-300"
-                variant="default"
-              >
-                Shop Now
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Most Popular Products */}
+      <MostPopularProducts />
 
       {/* Latest Articles */}
       <section className="w-full flex flex-col gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         <div className="w-full flex justify-between gap-16">
-          <h2 className="text-2xl md:text-433xl font-medium">
-            Latest Articles
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-medium">Latest Articles</h2>
           <Link
             href="/blog"
             className="flex gap-2 items-center hover:text-primary transition-all duration-300"

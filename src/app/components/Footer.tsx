@@ -25,7 +25,7 @@ function Footer() {
         <div className="flex flex-col gap-8">
           <p className="text-2xl font-medium">3legant.</p>
           <p className="text-base font-normal md:font-medium md:text-xl max-w-[16.5rem]">
-            More than just a game. It&apos;s a lifestyle.
+            Power Your Life with the Best in Tech.
           </p>
           <div className="flex gap-6">
             <Facebook className="hover:stroke-primary transition-all duration-300 cursor-pointer" />
