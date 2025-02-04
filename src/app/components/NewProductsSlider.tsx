@@ -40,7 +40,7 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
           loop: true,
         }}
       >
-        <CarouselContent className="flex gap-4 ">
+        <CarouselContent className="flex gap-4 py-4">
           {products.map((product) => (
             <CarouselItem
               key={product.id}
@@ -60,8 +60,8 @@ export default function HeroSlider({ products }: { products: ProductsType[] }) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="left-0" />
-        <CarouselNext className="right-0" />
+        <CarouselPrevious className="left-0 max-md:hidden" />
+        <CarouselNext className="right-0 max-md:hidden" />
       </Carousel>
     </div>
   );

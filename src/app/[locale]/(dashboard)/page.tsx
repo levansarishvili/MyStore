@@ -6,6 +6,7 @@ import type { ProductsType } from "./store/page";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
 import NewProductsSlider from "src/app/components/NewProductsSlider";
 import { Button } from "src/app/components/ui/button";
+import ShopByCategory from "src/app/components/ShopByCategory";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -54,107 +55,7 @@ export default async function HomePage() {
       </section>
 
       {/* Shop by Categories */}
-      <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-2xl md:text-3xl font-medium">Shop by Categories</h2>
-        <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-          <Link href="/store">
-            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
-              <div className="bg-secondary">
-                <Image
-                  src="/assets/golf-clubs.png"
-                  width={500}
-                  height={500}
-                  quality={100}
-                  alt="Golf Clubs"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-xl font-medium">Golf Clubs</p>
-            </div>
-          </Link>
-
-          <Link href="/store">
-            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
-              <div className="bg-secondary">
-                <Image
-                  src="/assets/golf-balls.png"
-                  width={500}
-                  height={500}
-                  quality={100}
-                  alt="Golf Balls"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-xl font-medium">Golf Balls</p>
-            </div>
-          </Link>
-
-          <Link href="/store">
-            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
-              <div className="bg-secondary">
-                <Image
-                  src="/assets/golf-bags.png"
-                  width={500}
-                  height={500}
-                  quality={100}
-                  alt="Golf Bags"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-xl font-medium">Golf Bags</p>
-            </div>
-          </Link>
-
-          <Link href="/store">
-            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
-              <div className="bg-secondary">
-                <Image
-                  src="/assets/golf-clothing.png"
-                  width={500}
-                  height={500}
-                  quality={100}
-                  alt="Golf Clothing"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-xl font-medium">Clothing & Rainwear</p>
-            </div>
-          </Link>
-
-          <Link href="/store">
-            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
-              <div className="bg-secondary">
-                <Image
-                  src="/assets/golf-footwear.png"
-                  width={500}
-                  height={500}
-                  quality={100}
-                  alt="Golf Footwear"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-xl font-medium">Footwear</p>
-            </div>
-          </Link>
-
-          <Link href="/store">
-            <div className="flex flex-col gap-6 items-center opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer">
-              <div className="bg-secondary">
-                <Image
-                  src="/assets/golf-accessories.png"
-                  width={500}
-                  height={500}
-                  quality={100}
-                  alt="Golf Accessories"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="text-xl font-medium">Accessories</p>
-            </div>
-          </Link>
-        </div>
-      </section>
-
+      <ShopByCategory />
       {/* Limited Time Offer */}
       <section className="w-full grid grid-cols-1 grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 bg-black">
         <Image
