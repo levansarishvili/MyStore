@@ -122,14 +122,20 @@ export default function CreateBlogForm() {
 
   return (
     <form
-      className="flex flex-col gap-6 items-center mb-12 p-8 rounded-lg w-full mt-1"
       onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-6 bg-muted p-6 w-full"
     >
-      <div className="w-full max-md:flex-col flex gap-6">
-        <div className="max-md:w-full w-1/2 flex flex-col gap-4">
-          <div className="flex flex-col items-start gap-2 w-full">
-            <label className="text-xl font-semibold" htmlFor="title">
+      {/* Post Titles and Content */}
+      <div className="w-full flex flex-col md:flex-row gap-6">
+        {/* English Content */}
+        <div className="flex flex-col w-full md:w-1/2 gap-4">
+          <div className="flex flex-col gap-2">
+            <label
+              className="text-sm font-medium text-muted-foreground"
+              htmlFor="title"
+            >
               Post Title
+              <span className="text-destructive">*</span>
             </label>
             <Controller
               control={control}
@@ -140,19 +146,25 @@ export default function CreateBlogForm() {
                   {...field}
                   type="text"
                   id="title"
-                  placeholder="Enter title in english"
-                  className={`border ${errors.title ? "border-red-500" : ""}`}
+                  placeholder="Enter title in English"
+                  className={`border ${
+                    errors.title ? "border-destructive" : ""
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300`}
                 />
               )}
             />
             {errors.title && (
-              <p className="text-red-500">{errors.title.message}</p>
+              <p className="text-destructive text-xs">{errors.title.message}</p>
             )}
           </div>
 
-          <div className="flex flex-col items-start gap-2 w-full">
-            <label className="text-xl font-semibold" htmlFor="body">
+          <div className="flex flex-col gap-2">
+            <label
+              className="text-sm font-medium text-muted-foreground"
+              htmlFor="body"
+            >
               Post Content
+              <span className="text-destructive">*</span>
             </label>
             <Controller
               control={control}
@@ -163,20 +175,27 @@ export default function CreateBlogForm() {
                   {...field}
                   id="body"
                   placeholder="Write your content in markdown..."
-                  className={`border ${errors.body ? "border-red-500" : ""}`}
+                  className={`border ${
+                    errors.body ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
                 />
               )}
             />
             {errors.body && (
-              <p className="text-red-500">{errors.body.message}</p>
+              <p className="text-destructive text-xs">{errors.body.message}</p>
             )}
           </div>
         </div>
 
-        <div className="max-md:w-full w-1/2 flex flex-col gap-4">
-          <div className="flex flex-col items-start gap-2 w-full">
-            <label className="text-xl font-semibold" htmlFor="title_ka">
+        {/* Georgian Content */}
+        <div className="flex flex-col w-full md:w-1/2 gap-4">
+          <div className="flex flex-col gap-2">
+            <label
+              className="text-sm font-medium text-muted-foreground"
+              htmlFor="title_ka"
+            >
               Post Title (Georgian)
+              <span className="text-destructive">*</span>
             </label>
             <Controller
               control={control}
@@ -187,21 +206,27 @@ export default function CreateBlogForm() {
                   {...field}
                   type="text"
                   id="title_ka"
-                  placeholder="Enter title in georgian"
+                  placeholder="Enter title in Georgian"
                   className={`border ${
-                    errors.title_ka ? "border-red-500" : ""
-                  }`}
+                    errors.title_ka ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
                 />
               )}
             />
             {errors.title_ka && (
-              <p className="text-red-500">{errors.title_ka.message}</p>
+              <p className="text-destructive text-xs">
+                {errors.title_ka.message}
+              </p>
             )}
           </div>
 
-          <div className="flex flex-col items-start gap-2 w-full">
-            <label className="text-xl font-semibold" htmlFor="body_ka">
+          <div className="flex flex-col gap-2">
+            <label
+              className="text-sm font-medium text-muted-foreground"
+              htmlFor="body_ka"
+            >
               Post Content (Georgian)
+              <span className="text-destructive">*</span>
             </label>
             <Controller
               control={control}
@@ -212,38 +237,54 @@ export default function CreateBlogForm() {
                   {...field}
                   id="body_ka"
                   placeholder="Write your content in markdown..."
-                  className={`border ${errors.body_ka ? "border-red-500" : ""}`}
+                  className={`border ${
+                    errors.body_ka ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
                 />
               )}
             />
             {errors.body_ka && (
-              <p className="text-red-500">{errors.body_ka.message}</p>
+              <p className="text-destructive text-xs">
+                {errors.body_ka.message}
+              </p>
             )}
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col items-start gap-2 w-full">
-        <label className="text-xl font-semibold" htmlFor="image">
+      {/* Image Upload */}
+      <div className="flex flex-col gap-2 w-full">
+        <label
+          className="text-sm font-medium text-muted-foreground"
+          htmlFor="image"
+        >
           Upload Image
+          <span className="text-destructive">*</span>
         </label>
         <Input
           name="image"
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files![0])}
-          className={`border ${errors.image ? "border-red-500" : ""}`}
+          className={`border ${
+            errors.image ? "border-destructive" : "border-muted"
+          } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
         />
-        {errors.image && <p className="text-red-500">{errors.image.message}</p>}
+        {errors.image && (
+          <p className="text-destructive text-xs">{errors.image.message}</p>
+        )}
       </div>
 
-      <Button
-        variant={"default"}
-        className="font-medium p-3 text-white rounded-lg text-sm cursor-pointer w-40 transition-all duration-300 hover:bg-[#2ca76e]"
-        type="submit"
-      >
-        Add Post
-      </Button>
+      {/* Submit Button */}
+      <div className="w-full flex justify-center">
+        <Button
+          variant={"default"}
+          type="submit"
+          className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
+        >
+          Add Post
+        </Button>
+      </div>
     </form>
   );
 }

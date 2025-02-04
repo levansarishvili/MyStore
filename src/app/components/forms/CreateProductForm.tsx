@@ -86,15 +86,19 @@ export default function CreateProductForm() {
       )}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-6 p-8 rounded-2xl w-full"
+        className="flex flex-col items-center justify-center gap-6 bg-muted p-6 w-full"
       >
         {["name", "description", "category", "brand", "price"].map((id) => (
-          <div key={id} className="flex flex-col items-start gap-2 w-full">
-            <label className="text-base" htmlFor={id}>
+          <div key={id} className="flex flex-col w-full">
+            <label
+              className="text-sm font-medium text-muted-foreground mb-1"
+              htmlFor={id}
+            >
               {id.charAt(0).toUpperCase() + id.slice(1)}
+              <span className="text-destructive">*</span>
             </label>
             <input
-              className="w-full rounded-lg px-4 py-2 text-base border focus:outline-primary"
+              className="w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300"
               type={id === "price" ? "number" : "text"}
               id={id}
               name={id}
@@ -103,9 +107,14 @@ export default function CreateProductForm() {
           </div>
         ))}
 
-        <div className="flex flex-col items-start gap-2 w-full">
-          <label className="text-base" htmlFor="images">
+        {/* File Upload */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="images"
+          >
             Upload Images
+            <span className="text-destructive">*</span>
           </label>
           <input
             type="file"
@@ -114,14 +123,15 @@ export default function CreateProductForm() {
             multiple
             accept="image/*"
             onChange={(e) => setImages(e.target.files)}
-            className="w-full rounded-lg px-4 py-2 text-base border"
+            className="w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300"
             required
           />
         </div>
 
+        {/* Submit Button */}
         <Button
           type="submit"
-          className="w-40 hover:bg-[#2ca76e] transition-all duration-300"
+          className="mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
         >
           Add Product
         </Button>

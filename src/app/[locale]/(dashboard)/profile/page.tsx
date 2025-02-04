@@ -1,4 +1,4 @@
-import { Star, User } from "lucide-react";
+import { Mail, Star, User } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
 import DeleteAccount from "src/app/components/DeleteAccount";
@@ -10,6 +10,14 @@ import {
 import { Button } from "src/app/components/ui/button";
 import CreateProductForm from "src/app/components/forms/CreateProductForm";
 import CreateBlogForm from "src/app/components/forms/CreateBlogForm";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../../components/ui/tabs";
+import UserDetails from "src/app/components/UserDetails";
+import { is } from "cypress/types/bluebird";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
@@ -24,14 +32,15 @@ export default async function ProfilePage() {
         My Account
       </h1>
 
-      <div className="flex flex-col gap-12 md:gap-x-20 w-full border shadow-lg rounded-2xl p-4">
+      <div className="grid grid-cols-[1fr_3fr] max-lg:grid-cols-1 gap-10 md:gap-x-16 w-full rounded-2xl">
         {/* User details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
-          <div className="flex flex-col items-center gap-8">
-            <div className="relative">
+        <div className="w-full flex justify-center">
+          <div className="w-full min-w-[18rem] rounded-xl p-6 bg-muted shadow-md">
+            {/* Avatar Section */}
+            <div className="relative flex flex-col items-center gap-4">
               <div
-                className={`w-24 h-24 md:w-28 md:h-28 rounded-full border-4 ${
-                  isProMember ? "border-primary" : "border"
+                className={`w-16 h-16 rounded-full border-2 ${
+                  isProMember ? "border-primary" : "border-muted-foreground"
                 } flex items-center justify-center overflow-hidden shadow-md`}
               >
                 <Avatar className="w-full h-full">
@@ -43,77 +52,89 @@ export default async function ProfilePage() {
                     alt="user"
                     className="w-full h-full object-cover rounded-full"
                   />
-                  <AvatarFallback className="">
-                    <User className="size-10" />
+                  <AvatarFallback>
+                    <User className="size-6 text-muted-foreground" />
                   </AvatarFallback>
                 </Avatar>
               </div>
+
               {isProMember && (
-                <div className="absolute -bottom-6 -right-5 md:-right-4 flex items-center gap-2 bg-primary text-white w-36  px-3 py-1 text-sm rounded-full shadow-md">
-                  <Star className="w-5 h-5 fill-white" />
-                  Pro Member
+                <div className="flex items-center gap-2  text-primary px-3 py-1 text-sm">
+                  <Star className="size-6 fill-primary" />
+                  <span className="text-base font-medium">Pro Member</span>
                 </div>
               )}
             </div>
 
-            <div className="text-center flex flex-col gap-4">
+            {/* User Info */}
+            <div className="text-center mt-6 space-y-2">
               {userData?.user_metadata?.user_name && (
-                <p className="text-base">
-                  Username: {userData?.user_metadata?.user_name}
+                <p className="text-sm font-medium text-foreground">
+                  <span className="text-muted-foreground">Username:</span>{" "}
+                  {userData?.user_metadata?.user_name}
                 </p>
               )}
-              <p className="text-base">Email: {userData?.email}</p>
+              <p className="text-sm font-medium text-foreground">
+                {userData?.email}
+              </p>
             </div>
 
-            {/* Cancel Subscription & Delete Account */}
-            <div className="flex flex-col gap-6">
-              <Button
-                variant={"destructive"}
-                className="w-full text-sm font-medium py-2 px-6 rounded-lg transition"
+            {/* Actions */}
+            <div className="mt-6 flex justify-center w-full">
+              {/* <Button
+                variant="destructive"
+                className="text-sm font-medium rounded-lg transition"
               >
                 Cancel Subscription
-              </Button>
+              </Button> */}
               <DeleteAccount userId={userId} />
             </div>
-          </div>
-
-          <div className="flex flex-col gap-8 items-center w-full">
-            <h2 className="text-2xl font-medium">Account Details</h2>
-            <form className="flex flex-col justify-center items-center gap-6 w-full max-w-lg">
-              {[
-                { label: "Full Name", id: "full_name", type: "text" },
-                { label: "Username", id: "user_name", type: "text" },
-                { label: "Phone", id: "phone", type: "tel" },
-                { label: "Email", id: "email", type: "email" },
-              ].map(({ label, id, type }) => (
-                <div key={id} className="flex flex-col w-full">
-                  <label className="text-base mb-2" htmlFor={id}>
-                    {label}*
-                  </label>
-                  <input
-                    className="w-full rounded-lg px-4 py-2 text-base text-muted-foreground border focus:outline-primary dark:focus:outline-primary transition-all duration-300"
-                    type={type}
-                    id={id}
-                    defaultValue={userData?.user_metadata[id] ?? ""}
-                  />
-                </div>
-              ))}
-              <Button
-                variant={"default"}
-                className="w-40 hover:bg-[#2ca76e] text-white text-sm font-medium text-foreground py-2 px-6 rounded-lg transition-all duration-300"
-              >
-                Save Changes
-              </Button>
-            </form>
           </div>
         </div>
 
         {/* Show create product form if user is a Pro member */}
-        {isProMember && (
-          <div>
-            <CreateProductForm /> <CreateBlogForm />
+        {/* Tabs */}
+        <Tabs defaultValue="account" className="w-full">
+          {isProMember && (
+            <TabsList className="w-full flex justify-center gap-2 bg-muted rounded-lg mb-6 h-10">
+              <TabsTrigger
+                value="account"
+                className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+              >
+                Account Details
+              </TabsTrigger>
+
+              <TabsTrigger
+                value="product"
+                className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+              >
+                Add Product
+              </TabsTrigger>
+              <TabsTrigger
+                value="blog"
+                className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+              >
+                Add Blog
+              </TabsTrigger>
+            </TabsList>
+          )}
+
+          <div className="p-4 bg-muted rounded-xl shadow-md">
+            <TabsContent value="account">
+              <UserDetails />
+            </TabsContent>
+            {isProMember && (
+              <>
+                <TabsContent value="product">
+                  <CreateProductForm />
+                </TabsContent>
+                <TabsContent value="blog">
+                  <CreateBlogForm />
+                </TabsContent>
+              </>
+            )}
           </div>
-        )}
+        </Tabs>
 
         {/* Get products that user created */}
         <div className="flex flex-wrap gap-8"></div>
