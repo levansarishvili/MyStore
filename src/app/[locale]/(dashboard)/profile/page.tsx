@@ -1,8 +1,6 @@
 import { Star, User } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
-import AddCustomerOnStripe from "src/app/components/AddCustomerOnStripe";
-import { supabase } from "src/lib/supabaseClient";
 import DeleteAccount from "src/app/components/DeleteAccount";
 import {
   Avatar,
@@ -11,33 +9,11 @@ import {
 } from "src/app/components/ui/avatar";
 import { Button } from "src/app/components/ui/button";
 import CreateProductForm from "src/app/components/forms/CreateProductForm";
-import ProductItem from "../store/ProductItem";
 import CreateBlogForm from "src/app/components/forms/CreateBlogForm";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
   const userId = userData?.id as string;
-
-  // Get user name and email
-  const email = userData?.email ?? "undefined";
-  const name = userData?.user_metadata.full_name ?? "test_user";
-
-  if (userData) {
-    // After successful login/signup add user to Stripe if it doesn't exist
-    const stripeCustomer = await AddCustomerOnStripe(email, name);
-    const stripeCustomerId = stripeCustomer?.id;
-
-    // Add user to supabase in user_profiles table with customer ID from Stripe
-    await supabase.from("user_profiles").insert([
-      {
-        user_id: userId,
-        email: email,
-        subscription_id: null,
-        stripe_customer_id: stripeCustomerId,
-        subscription_status: null,
-      },
-    ]);
-  }
 
   // Get subscription status
   const isProMember = await CheckSubscriptionStatus();

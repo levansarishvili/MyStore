@@ -36,7 +36,6 @@ export async function POST(req: NextRequest) {
       image_url: image_url,
     })
     .select("*");
-  console.log(blog);
 
   if (insertError) {
     return NextResponse.json(
