@@ -13,6 +13,7 @@ export interface blogType {
   translated_title?: string | null;
   translated_body?: string | null;
   language_code?: string;
+  blog_id?: string;
 }
 
 interface ParamsType {
@@ -44,12 +45,12 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
   const totalPages = Math.ceil(postsCount / itemsPerPage);
 
   // Fetch posts from Supabase according to pagination
-  const { data: posts, error } = await supabase
+  const { data: posts, error } = (await supabase
     .from("post_translations")
     .select("*")
     .order("id", { ascending: false })
     .eq("language_code", locale)
-    .range(startIndex, endIndex);
+    .range(startIndex, endIndex)) as { data: blogType[]; error: any };
 
   if (error) {
     console.error(error);
@@ -68,8 +69,8 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
           <BlogItem
             key={post.id}
             id={post.id}
-            title={post.translated_title}
-            content={post.translated_body}
+            title={post.translated_title || ""}
+            content={post.translated_body || ""}
             image_url={post.image_url}
             locale={locale}
           />

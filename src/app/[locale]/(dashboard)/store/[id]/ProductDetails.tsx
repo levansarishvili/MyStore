@@ -24,26 +24,16 @@ import {
   DialogTrigger,
 } from "../../../../components/ui/dialog";
 
-export default function ProductDetails({ product }: { product: ProductsType }) {
-  const [inBag, setInBag] = useState(false);
+interface Props {
+  product: ProductsType;
+  isInCart: boolean;
+}
+
+export default function ProductDetails({ product, isInCart }: Props) {
+  const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    // Check if product is in the cart
-    const checkCart = async () => {
-      try {
-        const res = await fetch(`/api/check-in-cart?productId=${product.id}`);
-        const data = await res.json();
-        if (data.success) {
-          setInBag(data.inCart);
-        }
-      } catch (error) {
-        console.error("Error checking cart:", error);
-      }
-    };
-    checkCart();
-  }, [product.id]);
+  console.log(isInCart);
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {

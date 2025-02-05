@@ -36,21 +36,15 @@ export default function ProductItem({
   isProMember,
   products,
   userId,
+  in_cart,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [inCart, setInCart] = useState(false);
+  const [inCart, setInCart] = useState(in_cart);
   const router = useRouter();
-
-  // Check is user is author of the product
-  const isAuthor =
-    userId === products?.find((product) => product.id === id)?.user_id;
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
-    if (
-      products?.find((product) => product.id === productId)?.in_cart ||
-      inCart
-    ) {
+    if (inCart) {
       setIsModalOpen(() => true);
       return;
     }
@@ -117,11 +111,7 @@ export default function ProductItem({
             onClick={() => handleAddToCart(id)}
           >
             <ShoppingCart className="size-4 fill-transparent stroke-white" />
-            {`${
-              products?.find((product) => product.id === id)?.in_cart || inCart
-                ? "In cart"
-                : "Add to cart"
-            }`}
+            {`${inCart ? "In cart" : "Add to cart"}`}
           </Button>
         </div>
       </div>

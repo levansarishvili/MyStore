@@ -15,7 +15,6 @@ export interface ProductsType {
   user_id: string;
   stripe_product_id: string;
   stripe_price_id: string;
-  in_cart: boolean;
   solded_quantity: number;
 }
 
@@ -26,6 +25,15 @@ interface Props {
 
 export default async function Store({ params, searchParams }: Props) {
   const supabase = await createClient();
+
+  // Get user data
+  const userData = await GetUserData();
+  const userId = userData?.id;
+  if (!userId) {
+    console.error("User ID not found");
+    return null;
+  }
+
   // Fetch all products
   const { data: allProducts, error: allProductsError } = await supabase
     .from("products")
@@ -36,6 +44,12 @@ export default async function Store({ params, searchParams }: Props) {
     return null;
   }
 
+  // Fetch products from cart
+  const { data: cartItems, error: fetchError } = await supabase
+    .from("cart")
+    .select("product_id")
+    .eq("user_id", userId);
+
   const productsCount = allProducts?.length || 0;
 
   const page = Number(searchParams?.page) || 1;
@@ -44,10 +58,6 @@ export default async function Store({ params, searchParams }: Props) {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage - 1;
   const totalPages = Math.ceil(productsCount / itemsPerPage);
-
-  // Get user data
-  const userData = await GetUserData();
-  const userId = userData?.id;
 
   // Fetch products from Supabase according to pagination
   const { data, error } = await supabase
@@ -75,6 +85,7 @@ export default async function Store({ params, searchParams }: Props) {
             isProMember={isProMember}
             products={products}
             userId={userId}
+            in_cart={cartItems?.some((item) => item.product_id === product.id)}
           />
         ))}
       </div>

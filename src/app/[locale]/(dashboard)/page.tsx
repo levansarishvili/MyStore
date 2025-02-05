@@ -7,6 +7,12 @@ import { Button } from "src/app/components/ui/button";
 import ShopByCategory from "src/app/components/home/ShopByCategory";
 import MostPopularProducts from "../../components/home/MostPopularProducts";
 import LatestArticles from "../../components/home/LatestArticles";
+import GetUserData from "src/app/components/GetUserData";
+import { boolean } from "zod";
+
+interface cartItemsType {
+  product_id: string;
+}
 
 export default async function HomePage({
   params,
@@ -15,6 +21,23 @@ export default async function HomePage({
 }) {
   const supabase = await createClient();
   const locale = params.locale;
+  const userData = await GetUserData();
+  const userId = userData?.id;
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
+
+  // fetch products from cart
+  const { data: cartItems, error: fetchError } = (await supabase
+    .from("cart")
+    .select("product_id")
+    .eq("user_id", userId)) as { data: cartItemsType[]; error: any };
+
+  if (fetchError) {
+    console.error(fetchError);
+    return;
+  }
 
   // Get top 8 most popular products
   const { data: topProducts, error } = (await supabase
@@ -28,6 +51,12 @@ export default async function HomePage({
     return;
   }
 
+  // Check if any popular product is in cart
+  const cartTopProductIds = new Set(cartItems?.map((item) => item.product_id));
+  const inCartArrTop = topProducts.map((product) =>
+    cartTopProductIds.has(product.id)
+  );
+
   // Get top 8 most new products
   const { data: newProducts, error: newProductsError } = (await supabase
     .from("products")
@@ -39,6 +68,12 @@ export default async function HomePage({
     console.error(newProductsError);
     return;
   }
+
+  // Check if any popular product is in cart
+  const cartNewProductIds = new Set(cartItems?.map((item) => item.product_id));
+  const inCartArrNew = newProducts.map((product) =>
+    cartNewProductIds.has(product.id)
+  );
 
   const isProMember = await CheckSubscriptionStatus();
 
@@ -74,13 +109,19 @@ export default async function HomePage({
       {/* New Products */}
       <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         <h2 className="text-2xl md:text-3xl font-medium">New Products</h2>
-        <NewProductsSlider newProducts={newProducts} />
+        <NewProductsSlider
+          newProducts={newProducts}
+          inCartArrNew={inCartArrNew}
+        />
       </section>
 
       {/* Shop by Categories */}
       <ShopByCategory />
       {/* Most Popular Products */}
-      <MostPopularProducts topProducts={topProducts} />
+      <MostPopularProducts
+        topProducts={topProducts}
+        inCartArrTop={inCartArrTop}
+      />
 
       {/* Latest Articles */}
       <LatestArticles locale={locale} />

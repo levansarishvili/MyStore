@@ -15,8 +15,6 @@ export default async function LatestArticles({ locale }: { locale: string }) {
     .order("id", { ascending: false })
     .limit(3)) as { data: blogType[]; error: any };
 
-  console.log(latestPosts);
-
   if (error) {
     console.error(error);
     return null;

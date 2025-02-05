@@ -16,7 +16,7 @@ export async function DELETE(req: Request) {
 
   try {
     const { productId } = (await req.json()) as { productId: number };
-    console.log("productId", productId, userId);
+
     const { error } = await supabase
       .from("cart")
       .delete()
@@ -25,19 +25,6 @@ export async function DELETE(req: Request) {
     if (error) {
       return NextResponse.json(
         { success: false, message: error.message },
-        { status: 500 }
-      );
-    }
-
-    // Change in_cart status to false in products table for the deleted product
-    const { error: updateError } = await supabase
-      .from("products")
-      .update({ in_cart: false })
-      .eq("id", productId);
-
-    if (updateError) {
-      return NextResponse.json(
-        { success: false, message: updateError.message },
         { status: 500 }
       );
     }

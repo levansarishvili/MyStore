@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser();
 
   const email = user?.email;
-  console.log("Email:", email);
+ 
 
   if (email) {
     // Add user to Stripe

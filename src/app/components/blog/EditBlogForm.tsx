@@ -9,7 +9,12 @@ import { Input } from "../ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { marked } from "marked";
+import { blogType } from "src/app/[locale]/(dashboard)/blog/page";
+
+interface EditBlogFormProps {
+  myBlogs: blogType[];
+  id: string;
+}
 
 // Validation schema with Zod
 const blogSchema = z.object({
@@ -27,7 +32,7 @@ const blogSchema = z.object({
     .min(10, "Content in Georgian should be at least 10 characters"),
 });
 
-export default function CreateBlogForm() {
+export default function EditBlogForm({ myBlogs, id }: EditBlogFormProps) {
   const [image, setImage] = useState<File | null>(null);
   const router = useRouter();
   const supabase = createClient();
@@ -130,7 +135,7 @@ export default function CreateBlogForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
+      className="flex flex-col gap-6 bg-muted sm:p-2 w-full"
     >
       {/* Post Titles and Content */}
       <div className="w-full flex flex-col md:flex-row gap-6">

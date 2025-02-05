@@ -8,16 +8,19 @@ import {
   CarouselPrevious,
 } from "../../components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-
 import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import ProductItem from "../../[locale]/(dashboard)/store/ProductItem";
 import { useEffect, useState } from "react";
 
-export default function HeroSlider({
-  newProducts,
-}: {
+interface Props {
   newProducts: ProductsType[];
-}) {
+  inCartArrNew: boolean[];
+}
+
+export default function NewProductsSlider({
+  newProducts,
+  inCartArrNew,
+}: Props) {
   const [swiperKey, setSwiperKey] = useState(0);
 
   // Handle Swiper reinitialization on resize
@@ -45,7 +48,7 @@ export default function HeroSlider({
         }}
       >
         <CarouselContent className="flex gap-4 py-4">
-          {newProducts.map((product) => (
+          {newProducts.map((product, index) => (
             <CarouselItem
               key={product.id}
               className=" basis-auto flex justify-center relative"
@@ -62,6 +65,7 @@ export default function HeroSlider({
                 price={product.price}
                 isProMember={true}
                 userId={product.user_id}
+                in_cart={inCartArrNew[index]}
               />
             </CarouselItem>
           ))}

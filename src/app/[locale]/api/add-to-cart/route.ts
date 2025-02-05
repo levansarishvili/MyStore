@@ -70,20 +70,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Set inCart to true in products table
-    const { error: updateError } = await supabase
-      .from("products")
-      .update({ in_cart: true })
-      .eq("id", productId);
-
-    if (updateError) {
-      console.error(updateError);
-      return NextResponse.json(
-        { success: false, message: updateError?.message },
-        { status: 500 }
-      );
-    }
-
     return NextResponse.json({ success: true, data }, { status: 200 });
   } catch (error) {
     return NextResponse.json(

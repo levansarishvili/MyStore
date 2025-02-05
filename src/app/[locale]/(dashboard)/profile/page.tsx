@@ -109,40 +109,40 @@ export default async function ProfilePage({
           </div>
 
           {/* Show create product form if user is a Pro member */}
-          {/* Tabs */}
           <Tabs defaultValue="account" className="w-full">
             {isProMember && (
-              <TabsList className="w-full grid grid-cols-5 gap-1 bg-muted rounded-lg mb-6 h-10">
+              <TabsList className="w-full flex flex-wrap justify-start gap-1 bg-muted rounded-lg mb-6 h-auto">
                 <TabsTrigger
                   value="account"
-                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
-                  Account Details
+                  Account
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my products"
-                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   My products
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my blogs"
-                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   My blogs
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="add product"
-                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   Add Product
                 </TabsTrigger>
+
                 <TabsTrigger
                   value="blog"
-                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   Add Blog
                 </TabsTrigger>

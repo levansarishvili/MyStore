@@ -2,17 +2,20 @@ import { createClient } from "src/utils/supabase/server";
 import GetUserData from "../GetUserData";
 import Image from "next/image";
 import DeleteBlog from "./DeleteBlog";
+import type { blogType } from "../../[locale]/(dashboard)/blog/page";
+import { SquarePen } from "lucide-react";
+import Link from "next/link";
 
 export default async function MyBlogs({ locale }: { locale: string }) {
   const supabase = await createClient();
   const userdata = await GetUserData();
 
-  const { data: myBlogs, error } = await supabase
+  const { data: myBlogs, error } = (await supabase
     .from("post_translations")
     .select("*")
     .order("id", { ascending: false })
     .eq("language_code", locale)
-    .eq("user_id", userdata?.id);
+    .eq("user_id", userdata?.id)) as { data: blogType[]; error: any };
 
   if (error) {
     console.error("Error fetching products:", error);
@@ -37,11 +40,16 @@ export default async function MyBlogs({ locale }: { locale: string }) {
             {blog.translated_title}
           </p>
           <span className="text-xs md:text-sm">
-            {new Date(blog.created_at)
+            {new Date(blog.created_at || "")
               .toLocaleDateString("en-GB")
               .replace(/\//g, ".")}
           </span>
-          <DeleteBlog id={blog.blog_id} />
+          <DeleteBlog id={blog.blog_id || ""} />
+          <Link href={`/blog/${blog.id}`}>
+            <button className="p-1 hover:bg-primary rounded-lg bg-background hover:text-white transition-all duration-200">
+              <SquarePen className="size-4 cursor-pointer " />
+            </button>
+          </Link>
         </div>
       ))}
     </section>
