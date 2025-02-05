@@ -1,12 +1,12 @@
-import { Link } from "../../i18n/routing";
-import Navigation from "../[locale]/Navigation";
+import { Link } from "../../../i18n/routing";
+import Navigation from "../../[locale]/Navigation";
 import LanguageToggle from "./LanguageToggle";
-import ProfileToggle from "./ProfileToggle";
-import GetUserData from "./GetUserData";
-import CheckSubscriptionStatus from "./CheckSubscriptionStatus";
+import ProfileToggle from "../profile/ProfileToggle";
+import GetUserData from "../GetUserData";
+import CheckSubscriptionStatus from "../CheckSubscriptionStatus";
 import { ModeToggle } from "./ModeToggle";
 import NotificationBar from "./NotificationBar";
-import BurgerMenu from "../[locale]/BurgerMenu";
+import BurgerMenu from "../../[locale]/BurgerMenu";
 import { ShoppingCart } from "lucide-react";
 
 // Create Header component

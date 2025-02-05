@@ -26,7 +26,6 @@ export default async function ResultPage({
       expand: ["line_items", "payment_intent", "subscription"],
     });
   const orderData = checkoutSession;
-  
 
   const payment_intent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 
@@ -89,7 +88,7 @@ export default async function ResultPage({
   return (
     <section className="flex flex-col w-full min-h-screen items-center mt-12 lg:mt-20 max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
       <div className="flex flex-col gap-10 bg-card rounded-lg p-8 justify-center items-center max-w-[40rem] text-center mx-auto shadow">
-        <h1 className="text-3xl lg:text-4xl font-semibold text-primary flex items-center gap-2 mb-6">
+        <h1 className="text-2xl lg:text-3xl font-semibold text-primary flex items-center gap-2 mb-6">
           🎉 Checkout Successful!
         </h1>
         <p className="text-base md:text-lg text-muted-foreground mb-8">

@@ -1,5 +1,5 @@
-import { ProductsType } from "../[locale]/(dashboard)/store/page";
-import ProductItem from "../[locale]/(dashboard)/store/ProductItem";
+import { ProductsType } from "../../[locale]/(dashboard)/store/page";
+import ProductItem from "../../[locale]/(dashboard)/store/ProductItem";
 
 export default async function MostPopularProducts({
   topProducts,

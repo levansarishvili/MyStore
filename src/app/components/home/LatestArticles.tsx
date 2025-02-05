@@ -2,8 +2,8 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "src/utils/supabase/server";
-import type { blogType } from "../[locale]/(dashboard)/blog/page";
-import BlogItem from "../[locale]/(dashboard)/blog/BlogItem";
+import type { blogType } from "../../[locale]/(dashboard)/blog/page";
+import BlogItem from "../../[locale]/(dashboard)/blog/BlogItem";
 
 export default async function LatestArticles({ locale }: { locale: string }) {
   const supabase = await createClient();

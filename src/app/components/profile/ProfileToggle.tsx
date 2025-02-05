@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { logout } from "../../app/[locale]/(dashboard)/logout/actions";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { logout } from "../../../app/[locale]/(dashboard)/logout/actions";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../../components/ui/avatar";
 import { Sparkles, CreditCard, ShoppingCart, User, LogOut } from "lucide-react";
-import { Button } from "../components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +17,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
+import Image from "next/image";
 
 export default function ProfileToggle({
   userImageUrl,
@@ -25,7 +30,7 @@ export default function ProfileToggle({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="w-8 h-8 rounded-full flex justify-center items-center text-2xl group"
+          className="w-8 h-8 rounded-full flex justify-center items-center text-2xl group focus-visible:ring-0"
           data-cy="user-button"
         >
           <Avatar className="w-10 h-10 flex items-center justify-center">
@@ -35,7 +40,13 @@ export default function ProfileToggle({
               className="w-8 h-8 rounded-full"
             />
             <AvatarFallback className="bg-transparent">
-              <User className="size-5" />
+              <Image
+                src="/assets/user.svg"
+                width={200}
+                height={200}
+                alt="user"
+                className="w-8 h-8 rounded-full"
+              />
             </AvatarFallback>
           </Avatar>
         </Button>

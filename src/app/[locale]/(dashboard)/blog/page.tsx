@@ -47,6 +47,7 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
   const { data: posts, error } = await supabase
     .from("post_translations")
     .select("*")
+    .order("id", { ascending: false })
     .eq("language_code", locale)
     .range(startIndex, endIndex);
 

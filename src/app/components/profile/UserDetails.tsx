@@ -1,5 +1,5 @@
-import GetUserData from "./GetUserData";
-import { Button } from "./ui/button";
+import GetUserData from "../GetUserData";
+import { Button } from "../ui/button";
 
 export default async function UserDetails() {
   const userData = await GetUserData();

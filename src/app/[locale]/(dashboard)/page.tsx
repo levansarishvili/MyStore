@@ -2,11 +2,11 @@ import Link from "next/link";
 import { createClient } from "src/utils/supabase/server";
 import type { ProductsType } from "./store/page";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
-import NewProductsSlider from "src/app/components/NewProductsSlider";
+import NewProductsSlider from "../../components/home/NewProductsSlider";
 import { Button } from "src/app/components/ui/button";
-import ShopByCategory from "src/app/components/ShopByCategory";
-import MostPopularProducts from "src/app/components/MostPopularProducts";
-import LatestArticles from "src/app/components/LatestArticles";
+import ShopByCategory from "src/app/components/home/ShopByCategory";
+import MostPopularProducts from "../../components/home/MostPopularProducts";
+import LatestArticles from "../../components/home/LatestArticles";
 
 export default async function HomePage({
   params,

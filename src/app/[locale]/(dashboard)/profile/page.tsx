@@ -1,7 +1,7 @@
 import { Mail, Star, User } from "lucide-react";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
-import DeleteAccount from "src/app/components/DeleteAccount";
+import DeleteAccount from "../../../components/profile/DeleteAccount";
 import {
   Avatar,
   AvatarFallback,
@@ -16,8 +16,10 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../../components/ui/tabs";
-import UserDetails from "src/app/components/UserDetails";
+import UserDetails from "src/app/components/profile/UserDetails";
 import { is } from "cypress/types/bluebird";
+import MyProducts from "src/app/components/profile/MyProducts";
+import Image from "next/image";
 
 export default async function ProfilePage() {
   const userData = await GetUserData();
@@ -32,112 +34,127 @@ export default async function ProfilePage() {
         My Account
       </h1>
 
-      <div className="grid grid-cols-[1fr_3fr] max-lg:grid-cols-1 gap-10 md:gap-x-16 w-full rounded-2xl">
-        {/* User details */}
-        <div className="w-full flex justify-center">
-          <div className="w-full min-w-[18rem] rounded-xl p-6 bg-muted shadow-md">
-            {/* Avatar Section */}
-            <div className="relative flex flex-col items-center gap-4">
-              <div
-                className={`w-16 h-16 rounded-full border-2 ${
-                  isProMember ? "border-primary" : "border-muted-foreground"
-                } flex items-center justify-center overflow-hidden shadow-md`}
-              >
-                <Avatar className="w-full h-full">
-                  <AvatarImage
-                    src={
-                      userData?.user_metadata?.avatar_url ||
-                      "https://github.com/shadcn.png"
-                    }
-                    alt="user"
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                  <AvatarFallback>
-                    <User className="size-6 text-muted-foreground" />
-                  </AvatarFallback>
-                </Avatar>
+      <div className="flex flex-col gap-12">
+        <div className="grid grid-cols-[1fr_3fr] max-lg:grid-cols-1 gap-10 md:gap-x-16 w-full rounded-2xl">
+          {/* User details */}
+          <div className="w-full flex justify-center">
+            <div className="w-full min-w-[18rem] rounded-xl p-6 bg-muted shadow-md">
+              {/* Avatar Section */}
+              <div className="relative flex flex-col items-center gap-4">
+                <div
+                  className={`w-16 h-16 rounded-full border-2 ${
+                    isProMember ? "border-primary" : "border-muted-foreground"
+                  } flex items-center justify-center overflow-hidden shadow-md`}
+                >
+                  <Avatar className="w-full h-full">
+                    <AvatarImage
+                      src={
+                        userData?.user_metadata?.avatar_url ||
+                        "https://github.com/shadcn.png"
+                      }
+                      alt="user"
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                    <AvatarFallback>
+                      <Image
+                        src="/assets/user.svg"
+                        width={200}
+                        height={200}
+                        alt="user"
+                        className="w-14 h-14 rounded-full"
+                      />
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+
+                {isProMember && (
+                  <div className="flex items-center gap-2  text-primary px-3 py-1 text-sm">
+                    <Star className="size-6 fill-primary" />
+                    <span className="text-base font-medium">Pro Member</span>
+                  </div>
+                )}
               </div>
 
-              {isProMember && (
-                <div className="flex items-center gap-2  text-primary px-3 py-1 text-sm">
-                  <Star className="size-6 fill-primary" />
-                  <span className="text-base font-medium">Pro Member</span>
-                </div>
-              )}
-            </div>
-
-            {/* User Info */}
-            <div className="text-center mt-6 space-y-2">
-              {userData?.user_metadata?.user_name && (
+              {/* User Info */}
+              <div className="text-center mt-6 space-y-2">
+                {userData?.user_metadata?.user_name && (
+                  <p className="text-sm font-medium text-foreground">
+                    <span className="text-muted-foreground">Username:</span>{" "}
+                    {userData?.user_metadata?.user_name}
+                  </p>
+                )}
                 <p className="text-sm font-medium text-foreground">
-                  <span className="text-muted-foreground">Username:</span>{" "}
-                  {userData?.user_metadata?.user_name}
+                  {userData?.email}
                 </p>
-              )}
-              <p className="text-sm font-medium text-foreground">
-                {userData?.email}
-              </p>
-            </div>
+              </div>
 
-            {/* Actions */}
-            <div className="mt-6 flex justify-center w-full">
-              {/* <Button
+              {/* Actions */}
+              <div className="mt-6 flex justify-center w-full">
+                {/* <Button
                 variant="destructive"
                 className="text-sm font-medium rounded-lg transition"
               >
                 Cancel Subscription
               </Button> */}
-              <DeleteAccount userId={userId} />
+                <DeleteAccount userId={userId} />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Show create product form if user is a Pro member */}
-        {/* Tabs */}
-        <Tabs defaultValue="account" className="w-full">
-          {isProMember && (
-            <TabsList className="w-full grid grid-cols-3 gap-1 bg-muted rounded-lg mb-6 h-10">
-              <TabsTrigger
-                value="account"
-                className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
-              >
-                Account Details
-              </TabsTrigger>
-
-              <TabsTrigger
-                value="product"
-                className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
-              >
-                Add Product
-              </TabsTrigger>
-              <TabsTrigger
-                value="blog"
-                className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
-              >
-                Add Blog
-              </TabsTrigger>
-            </TabsList>
-          )}
-
-          <div className="p-4 bg-muted rounded-xl shadow-md">
-            <TabsContent value="account">
-              <UserDetails />
-            </TabsContent>
+          {/* Show create product form if user is a Pro member */}
+          {/* Tabs */}
+          <Tabs defaultValue="account" className="w-full">
             {isProMember && (
-              <>
-                <TabsContent value="product">
-                  <CreateProductForm />
-                </TabsContent>
-                <TabsContent value="blog">
-                  <CreateBlogForm />
-                </TabsContent>
-              </>
-            )}
-          </div>
-        </Tabs>
+              <TabsList className="w-full grid grid-cols-4 gap-1 bg-muted rounded-lg mb-6 h-10">
+                <TabsTrigger
+                  value="account"
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                >
+                  Account Details
+                </TabsTrigger>
 
-        {/* Get products that user created */}
-        <div className="flex flex-wrap gap-8"></div>
+                <TabsTrigger
+                  value="my products"
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                >
+                  My products
+                </TabsTrigger>
+
+                <TabsTrigger
+                  value="add product"
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                >
+                  Add Product
+                </TabsTrigger>
+                <TabsTrigger
+                  value="blog"
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                >
+                  Add Blog
+                </TabsTrigger>
+              </TabsList>
+            )}
+
+            <div className="p-4 bg-muted rounded-xl shadow-md">
+              <TabsContent value="account">
+                <UserDetails />
+              </TabsContent>
+              {isProMember && (
+                <>
+                  <TabsContent value="my products">
+                    <MyProducts />
+                  </TabsContent>
+                  <TabsContent value="add product">
+                    <CreateProductForm />
+                  </TabsContent>
+                  <TabsContent value="blog">
+                    <CreateBlogForm />
+                  </TabsContent>
+                </>
+              )}
+            </div>
+          </Tabs>
+        </div>
       </div>
     </section>
   );

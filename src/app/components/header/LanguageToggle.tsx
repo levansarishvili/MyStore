@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "../components/ui/button";
+import { Button } from "../../components/ui/button";
 import { Languages } from "lucide-react";
 
 import {
@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+} from "../../components/ui/dropdown-menu";
 
 export default function LanguageToggle() {
   const router = useRouter();

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export default function DeleteAccount({ userId }: { userId: string }) {
   const [isLoading, setIsLoading] = useState(false);

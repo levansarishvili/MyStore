@@ -1,4 +1,4 @@
-import Header from "src/app/components/Header";
+import Header from "src/app/components/header/Header";
 import { createClient } from "../../../utils/supabase/server";
 import { redirect } from "next/navigation";
 import Footer from "src/app/components/Footer";

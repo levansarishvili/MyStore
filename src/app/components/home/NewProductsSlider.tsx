@@ -6,11 +6,11 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../components/ui/carousel";
+} from "../../components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-import { ProductsType } from "../[locale]/(dashboard)/store/page";
-import ProductItem from "../[locale]/(dashboard)/store/ProductItem";
+import { ProductsType } from "../../[locale]/(dashboard)/store/page";
+import ProductItem from "../../[locale]/(dashboard)/store/ProductItem";
 import { useEffect, useState } from "react";
 
 export default function HeroSlider({
