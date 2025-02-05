@@ -1,9 +1,12 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Button } from "../ui/button";
 import { createClient } from "../../../utils/supabase/client";
+import Loading from "../../loading";
 import {
   Select,
   SelectContent,
@@ -13,193 +16,247 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
-
+const formSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  brand: z.string().min(2, "Brand is required"),
+  price: z.number().min(1, "Price must be greater than 0"),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+  category: z.string().min(1, "Category is required"),
+  images: z
+    .instanceof(FileList)
+    .refine((files) => files.length > 0, "At least one image is required"),
+});
+type FormData = z.infer<typeof formSchema>;
 export default function CreateProductForm() {
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
-  const [images, setImages] = useState<FileList | null>(null);
-  const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const supabase = createClient();
-
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
   async function uploadImages(files: FileList) {
     const uploadedUrls: string[] = [];
-
     for (const file of Array.from(files)) {
       const fileName = `${Date.now()}-${file.name}`;
       const { data, error } = await supabase.storage
         .from("product-images")
         .upload(fileName, file);
-
-      if (error) {
-        console.error("Image upload failed:", error);
-        return null;
-      }
-
+      if (error) return null;
       const { data: publicUrl } = supabase.storage
         .from("product-images")
         .getPublicUrl(data.path);
-
       uploadedUrls.push(publicUrl.publicUrl);
     }
-
     return uploadedUrls;
   }
-
-  async function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    const formData = new FormData(event.target as HTMLFormElement);
-
-    if (!images || images.length === 0) {
-      alert("Please upload at least one image.");
-      return;
-    }
-
-    const uploadedImageUrls = await uploadImages(images);
+  async function onSubmit(data: FormData) {
+    setLoading(true);
+    const uploadedImageUrls = await uploadImages(data.images);
     if (!uploadedImageUrls) {
       alert("Failed to upload images. Please try again.");
       return;
     }
-
-    const data = {
-      name: formData.get("name"),
-      price: formData.get("price"),
-      category: formData.get("category"),
-      description: formData.get("description"),
-      brand: formData.get("brand"),
-      images: uploadedImageUrls,
-    };
-
     const response = await fetch("/api/create-product", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...data, images: uploadedImageUrls }),
     });
-
-    const result = await response.json();
-
-    if (result.success) {
-      router.refresh();
+    if (response.ok) {
+      setLoading(false);
       setCreatedSuccessfully(true);
-    } else {
-      // Remove images form Supabase Storage
-      for (const imageUrl of uploadedImageUrls) {
-        const fileName = imageUrl.split("/").pop() || "";
-        await supabase.storage.from("product-images").remove([fileName]);
-      }
-      console.error(result.message);
+      router.refresh();
     }
   }
-
   return (
-    <div className="flex flex-col items-center justify-center gap-8 w-full">
+    <div className="flex flex-col items-center gap-8 w-full">
       {createdSuccessfully && (
-        <p className="text-primary text-2xl font-medium">
-          Product created successfully ✔ 🔥
+        <p className="text-primary text-base md:text-2xl font-medium">
+          Product created successfully ✔
         </p>
       )}
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-6 bg-muted sm:p-6 w-full"
-      >
-        {["name", "brand", "price"].map((id) => (
-          <div key={id} className="flex flex-col w-full">
-            <label
-              className="text-sm font-medium text-muted-foreground mb-1"
-              htmlFor={id}
-            >
-              {id.charAt(0).toUpperCase() + id.slice(1)}
-              <span className="text-destructive">*</span>
-            </label>
-            <input
-              className="w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300"
-              type={id === "price" ? "number" : "text"}
-              id={id}
-              name={id}
-              required
-            />
-          </div>
-        ))}
-
-        {/* Product description */}
-        <div className="flex flex-col w-full">
-          <label
-            className="text-sm font-medium text-muted-foreground mb-1"
-            htmlFor="description"
-          >
-            Product Description
-            <span className="text-destructive">*</span>
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            className="h-24 w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300"
-            required
-          />
-        </div>
-
-        {/* Category selector */}
-        <Select onValueChange={setCategory}>
-          <div className="flex w-full flex-col gap-2">
-            <label
-              className="text-sm font-medium text-start text-muted-foreground w-full"
-              htmlFor="category"
-            >
-              Product Category
-              <span className="text-destructive">*</span>
-            </label>
-            <SelectTrigger
-              id="category"
-              name="category"
-              className="w-full rounded-lg px-4 text-sm bg-background border border-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300"
-            >
-              <SelectValue placeholder="Select category" />
-            </SelectTrigger>
-          </div>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="Smartphones">Smartphones</SelectItem>
-              <SelectItem value="Tablets">Tablets</SelectItem>
-              <SelectItem value="Laptops">Laptops</SelectItem>
-              <SelectItem value="Audio">Audio</SelectItem>
-              <SelectItem value="Monitors">Monitors</SelectItem>
-              <SelectItem value="Photo and video">Photo and video</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        {/* Hidden input to ensure category is included in formData */}
-        <input type="hidden" name="category" value={category} />
-
-        {/* File Upload */}
-        <div className="flex flex-col w-full">
-          <label
-            className="text-sm font-medium text-muted-foreground mb-1"
-            htmlFor="images"
-          >
-            Upload Images
-            <span className="text-destructive">*</span>
-          </label>
-          <input
-            type="file"
-            id="images"
-            name="images"
-            multiple
-            accept="image/*"
-            onChange={(e) => setImages(e.target.files)}
-            className="w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300"
-            required
-          />
-        </div>
-
-        {/* Submit Button */}
-        <Button
-          type="submit"
-          className="mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
+      {loading ? (
+        <Loading />
+      ) : (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
         >
-          Add Product
-        </Button>
-      </form>
+          {/* Product Details */}
+          <div className="w-full flex flex-col md:flex-row gap-6">
+            {/* English Details */}
+            <div className="flex flex-col w-full md:w-1/2 gap-4">
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="name"
+                >
+                  Product Name
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  {...register("name")}
+                  className={`border ${
+                    errors.name ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  id="name"
+                />
+                {errors.name && (
+                  <p className="text-destructive text-xs">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="brand"
+                >
+                  Product Brand
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  {...register("brand")}
+                  className={`border ${
+                    errors.brand ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  id="brand"
+                />
+                {errors.brand && (
+                  <p className="text-destructive text-xs">
+                    {errors.brand.message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Pricing and Description */}
+            <div className="flex flex-col w-full md:w-1/2 gap-4">
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="price"
+                >
+                  Price
+                  <span className="text-destructive">*</span>
+                </label>
+                <input
+                  type="number"
+                  {...register("price", { valueAsNumber: true })}
+                  className={`border ${
+                    errors.price ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  id="price"
+                />
+                {errors.price && (
+                  <p className="text-destructive text-xs">
+                    {errors.price.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="description"
+                >
+                  Description
+                  <span className="text-destructive">*</span>
+                </label>
+                <textarea
+                  {...register("description")}
+                  className={`border ${
+                    errors.description ? "border-destructive" : "border-muted"
+                  } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  id="description"
+                />
+                {errors.description && (
+                  <p className="text-destructive text-xs">
+                    {errors.description.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Category and Image Upload */}
+          <div className="flex flex-col w-full gap-4">
+            <div className="flex flex-col gap-2">
+              <label
+                className="text-sm font-medium text-muted-foreground"
+                htmlFor="category"
+              >
+                Category
+                <span className="text-destructive">*</span>
+              </label>
+              <Select onValueChange={(value) => setValue("category", value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {[
+                      "Smartphones",
+                      "Tablets",
+                      "Laptops",
+                      "Audio",
+                      "Monitors",
+                    ].map((cat) => (
+                      <SelectItem key={cat} value={cat}>
+                        {cat}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              {errors.category && (
+                <p className="text-destructive text-xs">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                className="text-sm font-medium text-muted-foreground"
+                htmlFor="images"
+              >
+                Upload Images
+                <span className="text-destructive">*</span>
+              </label>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={(e) => setValue("images", e.target.files!)}
+                className={`border ${
+                  errors.images ? "border-destructive" : "border-muted"
+                } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+              />
+              {errors.images && (
+                <p className="text-destructive text-xs">
+                  {errors.images.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="w-full flex justify-center">
+            <Button
+              type="submit"
+              className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
+            >
+              Add Product
+            </Button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }

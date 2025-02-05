@@ -9,7 +9,7 @@ import { Input } from "../ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { marked } from "marked";
+import Loading from "../../loading";
 
 // Validation schema with Zod
 const blogSchema = z.object({
@@ -29,6 +29,8 @@ const blogSchema = z.object({
 
 export default function CreateBlogForm() {
   const [image, setImage] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
@@ -69,6 +71,7 @@ export default function CreateBlogForm() {
 
   // Submit function
   const onSubmit = async (data: any) => {
+    setIsLoading(true);
     if (!image) {
       alert("Please upload an image");
       return;
@@ -109,6 +112,8 @@ export default function CreateBlogForm() {
       const result = await response.json();
 
       if (result.success) {
+        setIsLoading(false);
+        setCreatedSuccessfully(true);
         console.log("Blog created successfully");
         router.refresh();
       }
@@ -128,170 +133,186 @@ export default function CreateBlogForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
-    >
-      {/* Post Titles and Content */}
-      <div className="w-full flex flex-col md:flex-row gap-6">
-        {/* English Content */}
-        <div className="flex flex-col w-full md:w-1/2 gap-4">
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-muted-foreground"
-              htmlFor="title"
-            >
-              Post Title
-              <span className="text-destructive">*</span>
-            </label>
-            <Controller
-              control={control}
-              name="title"
-              defaultValue=""
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="text"
-                  id="title"
-                  placeholder="Enter title in English"
-                  className={`border ${
-                    errors.title ? "border-destructive" : ""
-                  } w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300`}
-                />
-              )}
-            />
-            {errors.title && (
-              <p className="text-destructive text-xs">{errors.title.message}</p>
-            )}
-          </div>
+    <div className="flex flex-col items-center gap-8 w-full">
+      {createdSuccessfully && (
+        <p className="text-primary text-base md:text-2xl font-medium">
+          Blog created successfully ✔
+        </p>
+      )}
 
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-muted-foreground"
-              htmlFor="body"
-            >
-              Post Content
-              <span className="text-destructive">*</span>
-            </label>
-            <Controller
-              control={control}
-              name="body"
-              defaultValue=""
-              render={({ field }) => (
-                <Textarea
-                  {...field}
-                  id="body"
-                  placeholder="Write your content in markdown..."
-                  className={`border ${
-                    errors.body ? "border-destructive" : "border-muted"
-                  } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                />
-              )}
-            />
-            {errors.body && (
-              <p className="text-destructive text-xs">{errors.body.message}</p>
-            )}
-          </div>
-        </div>
-
-        {/* Georgian Content */}
-        <div className="flex flex-col w-full md:w-1/2 gap-4">
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-muted-foreground"
-              htmlFor="title_ka"
-            >
-              Post Title (Georgian)
-              <span className="text-destructive">*</span>
-            </label>
-            <Controller
-              control={control}
-              name="title_ka"
-              defaultValue=""
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="text"
-                  id="title_ka"
-                  placeholder="Enter title in Georgian"
-                  className={`border ${
-                    errors.title_ka ? "border-destructive" : "border-muted"
-                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                />
-              )}
-            />
-            {errors.title_ka && (
-              <p className="text-destructive text-xs">
-                {errors.title_ka.message}
-              </p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label
-              className="text-sm font-medium text-muted-foreground"
-              htmlFor="body_ka"
-            >
-              Post Content (Georgian)
-              <span className="text-destructive">*</span>
-            </label>
-            <Controller
-              control={control}
-              name="body_ka"
-              defaultValue=""
-              render={({ field }) => (
-                <Textarea
-                  {...field}
-                  id="body_ka"
-                  placeholder="Write your content in markdown..."
-                  className={`border ${
-                    errors.body_ka ? "border-destructive" : "border-muted"
-                  } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                />
-              )}
-            />
-            {errors.body_ka && (
-              <p className="text-destructive text-xs">
-                {errors.body_ka.message}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Image Upload */}
-      <div className="flex flex-col gap-2 w-full">
-        <label
-          className="text-sm font-medium text-muted-foreground"
-          htmlFor="image"
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
         >
-          Upload Image
-          <span className="text-destructive">*</span>
-        </label>
-        <Input
-          name="image"
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files![0])}
-          className={`border ${
-            errors.image ? "border-destructive" : "border-muted"
-          } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-        />
-        {errors.image && (
-          <p className="text-destructive text-xs">{errors.image.message}</p>
-        )}
-      </div>
+          {/* Post Titles and Content */}
+          <div className="w-full flex flex-col md:flex-row gap-6">
+            {/* English Content */}
+            <div className="flex flex-col w-full md:w-1/2 gap-4">
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="title"
+                >
+                  Post Title
+                  <span className="text-destructive">*</span>
+                </label>
+                <Controller
+                  control={control}
+                  name="title"
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      id="title"
+                      placeholder="Enter title in English"
+                      className={`border ${
+                        errors.title ? "border-destructive" : ""
+                      } w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300`}
+                    />
+                  )}
+                />
+                {errors.title && (
+                  <p className="text-destructive text-xs">
+                    {errors.title.message}
+                  </p>
+                )}
+              </div>
 
-      {/* Submit Button */}
-      <div className="w-full flex justify-center">
-        <Button
-          variant={"default"}
-          type="submit"
-          className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
-        >
-          Add Post
-        </Button>
-      </div>
-    </form>
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="body"
+                >
+                  Post Content
+                  <span className="text-destructive">*</span>
+                </label>
+                <Controller
+                  control={control}
+                  name="body"
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      id="body"
+                      placeholder="Write your content in markdown..."
+                      className={`border ${
+                        errors.body ? "border-destructive" : "border-muted"
+                      } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                    />
+                  )}
+                />
+                {errors.body && (
+                  <p className="text-destructive text-xs">
+                    {errors.body.message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Georgian Content */}
+            <div className="flex flex-col w-full md:w-1/2 gap-4">
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="title_ka"
+                >
+                  Post Title (Georgian)
+                  <span className="text-destructive">*</span>
+                </label>
+                <Controller
+                  control={control}
+                  name="title_ka"
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      id="title_ka"
+                      placeholder="Enter title in Georgian"
+                      className={`border ${
+                        errors.title_ka ? "border-destructive" : "border-muted"
+                      } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                    />
+                  )}
+                />
+                {errors.title_ka && (
+                  <p className="text-destructive text-xs">
+                    {errors.title_ka.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label
+                  className="text-sm font-medium text-muted-foreground"
+                  htmlFor="body_ka"
+                >
+                  Post Content (Georgian)
+                  <span className="text-destructive">*</span>
+                </label>
+                <Controller
+                  control={control}
+                  name="body_ka"
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      id="body_ka"
+                      placeholder="Write your content in markdown..."
+                      className={`border ${
+                        errors.body_ka ? "border-destructive" : "border-muted"
+                      } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                    />
+                  )}
+                />
+                {errors.body_ka && (
+                  <p className="text-destructive text-xs">
+                    {errors.body_ka.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Image Upload */}
+          <div className="flex flex-col gap-2 w-full">
+            <label
+              className="text-sm font-medium text-muted-foreground"
+              htmlFor="image"
+            >
+              Upload Image
+              <span className="text-destructive">*</span>
+            </label>
+            <Input
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files![0])}
+              className={`border ${
+                errors.image ? "border-destructive" : "border-muted"
+              } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+            />
+            {errors.image && (
+              <p className="text-destructive text-xs">{errors.image.message}</p>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <div className="w-full flex justify-center">
+            <Button
+              variant={"default"}
+              type="submit"
+              className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
+            >
+              Add Post
+            </Button>
+          </div>
+        </form>
+      )}
+    </div>
   );
 }
