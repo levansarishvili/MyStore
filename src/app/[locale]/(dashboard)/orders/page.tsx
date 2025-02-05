@@ -30,7 +30,6 @@ export default async function OrdersPage() {
     .select("*")
     .eq("user_id", userData?.id)) as { data: OrdersType[] | null; error: any };
 
-  console.log(orders);
   const sortedOrders = orders?.sort(
     (a, b) =>
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()

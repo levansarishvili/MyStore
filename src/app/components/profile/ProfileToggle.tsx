@@ -35,7 +35,7 @@ export default function ProfileToggle({
         >
           <Avatar className="w-10 h-10 flex items-center justify-center">
             <AvatarImage
-              src={userImageUrl || "https://github.com/shadcn.png"}
+              src={userImageUrl || "/assets/user.svg"}
               alt="user"
               className="w-8 h-8 rounded-full"
             />

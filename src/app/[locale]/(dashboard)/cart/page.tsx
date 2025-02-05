@@ -1,5 +1,5 @@
 import { createClient } from "src/utils/supabase/server";
-import ProductCartList from "src/app/components/ProductCartList";
+import ProductCartList from "../../../components/product/ProductCartList";
 import GetUserData from "src/app/components/GetUserData";
 
 interface ProductType {

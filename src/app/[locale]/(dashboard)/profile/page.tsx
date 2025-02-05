@@ -50,7 +50,7 @@ export default async function ProfilePage() {
                     <AvatarImage
                       src={
                         userData?.user_metadata?.avatar_url ||
-                        "https://github.com/shadcn.png"
+                        "/assets/user.svg"
                       }
                       alt="user"
                       className="w-full h-full object-cover rounded-full"

@@ -45,28 +45,6 @@ export default function ProductItem({
   const isAuthor =
     userId === products?.find((product) => product.id === id)?.user_id;
 
-  // Function to handle product deletion
-  const handleDelete = async (productId: string) => {
-    try {
-      const res = await fetch(`/api/delete-product`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        console.error("Failed to delete product:", data.message);
-        return;
-      }
-
-      console.log("Product deleted successfully");
-      router.push("?deleted=true");
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
-  };
-
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
     if (
@@ -145,19 +123,6 @@ export default function ProductItem({
                 : "Add to cart"
             }`}
           </Button>
-
-          {/* Delete product */}
-          {isProMember && isAuthor && (
-            <div className="">
-              <Button
-                variant={"destructive"}
-                className="bg-red-700 text-white text-sm px-4 py-1 rounded-lg font-medium transition-all duration-300 hover:bg-white hover:text-gray-950 hover:shadow-lg"
-                onClick={() => handleDelete(id)}
-              >
-                <Trash2 className="size-4" />
-              </Button>
-            </div>
-          )}
         </div>
       </div>
 

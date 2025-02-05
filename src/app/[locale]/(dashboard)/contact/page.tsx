@@ -1,5 +1,3 @@
-import Button from "../../../components/buttons/Button";
-
 function Contact() {
   return (
     <section className="flex flex-col items-center gap-20">
