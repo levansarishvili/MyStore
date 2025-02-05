@@ -31,7 +31,7 @@ export async function login(formData: FormData) {
   AddUserOnStripe(data.email);
 
   revalidatePath("/", "layout");
-  redirect("/profile");
+  redirect("/");
 }
 
 // Sign in with Github

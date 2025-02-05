@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Button } from "src/app/components/ui/button";
 
 export default function BuySubscriptionButton({
   isProMember,
@@ -28,14 +28,14 @@ export default function BuySubscriptionButton({
     }
   }
   return (
-    <button
+    <Button
       onClick={handleSubmit}
       type="submit"
-      className={`flex justify-center text-[1.6rem] items-center bg-[#ec5e2a] rounded-full text-[#F4F2FD] font-medium px-6 py-2 hover:bg-slate-200 hover:text-[#ec5e2a] duration-300 ${
+      className={`flex justify-center text-base items-center rounded-lg text-white hover:bg-[#2ca76e] font-medium px-6 py-2  duration-300 ${
         isProMember ? "cursor-not-allowed" : ""
       }`}
     >
       Subscribe
-    </button>
+    </Button>
   );
 }

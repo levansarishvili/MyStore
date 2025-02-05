@@ -1,4 +1,3 @@
-import { data } from "cypress/types/jquery";
 import BlogItem from "./BlogItem";
 import { createClient } from "src/utils/supabase/server";
 import PaginationComponent from "src/app/components/PaginationComponent";

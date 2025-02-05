@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const redirectTo = requestUrl.searchParams.get("redirect_to") || "/profile"; // Default redirect
+  const redirectTo = requestUrl.searchParams.get("redirect_to") || "/";
   const origin = requestUrl.origin;
 
   const supabase = await createClient();
@@ -26,7 +26,6 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser();
 
   const email = user?.email;
- 
 
   if (email) {
     // Add user to Stripe

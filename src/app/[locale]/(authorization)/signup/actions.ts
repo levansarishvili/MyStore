@@ -33,5 +33,5 @@ export async function signup(formData: FormData) {
   AddUserOnStripe(data.email);
 
   revalidatePath("/", "layout");
-  redirect("/profile");
+  redirect("/");
 }
