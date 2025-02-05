@@ -96,7 +96,7 @@ export default async function ProfilePage() {
         {/* Tabs */}
         <Tabs defaultValue="account" className="w-full">
           {isProMember && (
-            <TabsList className="w-full flex justify-center gap-2 bg-muted rounded-lg mb-6 h-10">
+            <TabsList className="w-full grid grid-cols-3 gap-1 bg-muted rounded-lg mb-6 h-10">
               <TabsTrigger
                 value="account"
                 className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"

@@ -10,7 +10,7 @@ export default async function UserDetails() {
   }
 
   return (
-    <form className="flex flex-col justify-center items-center gap-6 w-full bg-muted p-6 rounded-xl">
+    <form className="flex flex-col justify-center items-center gap-6 w-full bg-muted sm:p-6 rounded-xl">
       {[
         { label: "Full Name", id: "full_name", type: "text" },
         { label: "Username", id: "user_name", type: "text" },

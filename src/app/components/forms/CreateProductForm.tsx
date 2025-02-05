@@ -4,10 +4,20 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { createClient } from "../../../utils/supabase/client";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
 
 export default function CreateProductForm() {
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
+  const [category, setCategory] = useState("");
   const router = useRouter();
   const supabase = createClient();
 
@@ -73,6 +83,11 @@ export default function CreateProductForm() {
       router.refresh();
       setCreatedSuccessfully(true);
     } else {
+      // Remove images form Supabase Storage
+      for (const imageUrl of uploadedImageUrls) {
+        const fileName = imageUrl.split("/").pop() || "";
+        await supabase.storage.from("product-images").remove([fileName]);
+      }
       console.error(result.message);
     }
   }
@@ -86,9 +101,9 @@ export default function CreateProductForm() {
       )}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-6 bg-muted p-6 w-full"
+        className="flex flex-col items-center justify-center gap-6 bg-muted sm:p-6 w-full"
       >
-        {["name", "description", "category", "brand", "price"].map((id) => (
+        {["name", "brand", "price"].map((id) => (
           <div key={id} className="flex flex-col w-full">
             <label
               className="text-sm font-medium text-muted-foreground mb-1"
@@ -106,6 +121,55 @@ export default function CreateProductForm() {
             />
           </div>
         ))}
+
+        {/* Product description */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="description"
+          >
+            Product Description
+            <span className="text-destructive">*</span>
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className="h-24 w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300"
+            required
+          />
+        </div>
+
+        {/* Category selector */}
+        <Select onValueChange={setCategory}>
+          <div className="flex w-full flex-col gap-2">
+            <label
+              className="text-sm font-medium text-start text-muted-foreground w-full"
+              htmlFor="category"
+            >
+              Product Category
+              <span className="text-destructive">*</span>
+            </label>
+            <SelectTrigger
+              id="category"
+              name="category"
+              className="w-full rounded-lg px-4 text-sm bg-background border border-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300"
+            >
+              <SelectValue placeholder="Select category" />
+            </SelectTrigger>
+          </div>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="Smartphones">Smartphones</SelectItem>
+              <SelectItem value="Tablets">Tablets</SelectItem>
+              <SelectItem value="Laptops">Laptops</SelectItem>
+              <SelectItem value="Audio">Audio</SelectItem>
+              <SelectItem value="Monitors">Monitors</SelectItem>
+              <SelectItem value="Photo and video">Photo and video</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        {/* Hidden input to ensure category is included in formData */}
+        <input type="hidden" name="category" value={category} />
 
         {/* File Upload */}
         <div className="flex flex-col w-full">

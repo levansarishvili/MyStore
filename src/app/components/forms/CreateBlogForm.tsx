@@ -123,7 +123,7 @@ export default function CreateBlogForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 bg-muted p-6 w-full"
+      className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
     >
       {/* Post Titles and Content */}
       <div className="w-full flex flex-col md:flex-row gap-6">
@@ -177,7 +177,7 @@ export default function CreateBlogForm() {
                   placeholder="Write your content in markdown..."
                   className={`border ${
                     errors.body ? "border-destructive" : "border-muted"
-                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
                 />
               )}
             />
@@ -239,7 +239,7 @@ export default function CreateBlogForm() {
                   placeholder="Write your content in markdown..."
                   className={`border ${
                     errors.body_ka ? "border-destructive" : "border-muted"
-                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
                 />
               )}
             />

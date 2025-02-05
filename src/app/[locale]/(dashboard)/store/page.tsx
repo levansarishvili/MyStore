@@ -53,6 +53,7 @@ export default async function Store({ params, searchParams }: Props) {
   const { data, error } = await supabase
     .from("products")
     .select("*")
+    .order("id", { ascending: false })
     .range(startIndex, endIndex);
   const products = data as ProductsType[];
 
