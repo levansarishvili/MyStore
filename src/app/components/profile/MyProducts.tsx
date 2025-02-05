@@ -14,29 +14,40 @@ export default async function MyProducts() {
     .order("id", { ascending: false })
     .eq("user_id", userdata?.id)) as { data: ProductsType[]; error: any };
 
+  if (error) {
+    console.error("Error fetching products:", error);
+    return null;
+  }
+
   return (
     <section className="flex flex-col gap-4">
       {myProducts?.map((product) => (
         <div
           key={product.id}
-          className="flex gap-4 w-full justify-between border rounded-lg p-4"
+          className="flex gap-4 max-custom-sm:flex-col w-full justify-between items-center border rounded-lg p-4"
         >
-          <Image
-            src={product.image_urls?.[0] || "/assets/placeholder.png"}
-            alt={product.name}
-            width={800}
-            height={600}
-            className="w-12 h-12"
-          />
-          <p>{product.name}</p>
-          <span>
-            {new Date(product.created_at)
-              .toLocaleDateString("en-GB")
-              .replace(/\//g, ".")}
-          </span>
-          <p>${product.price / 100}</p>
-          <p>{product.solded_quantity}</p>
-          <DeleteProduct id={product.id} />
+          <div className="flex gap-4 justify-start items-center w-full">
+            <Image
+              src={product.image_urls?.[0] || "/assets/placeholder.png"}
+              alt={product.name}
+              width={800}
+              height={600}
+              className="w-12 h-12"
+            />
+            <p className="line-clamp-2 text-xs md:text-sm">{product.name}</p>
+          </div>
+          <div className="flex justify-between items-center w-full">
+            <span className="text-xs md:text-sm">
+              {new Date(product.created_at)
+                .toLocaleDateString("en-GB")
+                .replace(/\//g, ".")}
+            </span>
+            <p className="text-xs md:text-sm">${product.price / 100}</p>
+            <p className="text-xs md:text-sm">
+              Sold: {product.solded_quantity}
+            </p>
+            <DeleteProduct id={product.id} />
+          </div>
         </div>
       ))}
     </section>

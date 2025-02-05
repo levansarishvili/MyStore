@@ -1,3 +1,5 @@
+import { Button } from "src/app/components/ui/button";
+
 function Contact() {
   return (
     <section className="flex flex-col items-center gap-20">
@@ -38,7 +40,7 @@ function Contact() {
               className="contact-input dark:bg-[#4a4a4a] w-[35rem] outline-none rounded-md border border-gray-300 px-4 py-6 text-[1.4rem] text-input h-40 transition-all duration-300 focus:border-[#ec5e2a]"
               placeholder="Write text"
             />
-            <Button className="btn" name="Send" />
+            <Button className="" name="Send" />
           </form>
         </div>
 

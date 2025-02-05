@@ -20,8 +20,15 @@ import UserDetails from "src/app/components/profile/UserDetails";
 import { is } from "cypress/types/bluebird";
 import MyProducts from "src/app/components/profile/MyProducts";
 import Image from "next/image";
+import MyBlogs from "src/app/components/blog/MyBlogs";
 
-export default async function ProfilePage() {
+export default async function ProfilePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const locale = params.locale;
+
   const userData = await GetUserData();
   const userId = userData?.id as string;
 
@@ -105,7 +112,7 @@ export default async function ProfilePage() {
           {/* Tabs */}
           <Tabs defaultValue="account" className="w-full">
             {isProMember && (
-              <TabsList className="w-full grid grid-cols-4 gap-1 bg-muted rounded-lg mb-6 h-10">
+              <TabsList className="w-full grid grid-cols-5 gap-1 bg-muted rounded-lg mb-6 h-10">
                 <TabsTrigger
                   value="account"
                   className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
@@ -118,6 +125,13 @@ export default async function ProfilePage() {
                   className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   My products
+                </TabsTrigger>
+
+                <TabsTrigger
+                  value="my blogs"
+                  className="px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                >
+                  My blogs
                 </TabsTrigger>
 
                 <TabsTrigger
@@ -149,6 +163,9 @@ export default async function ProfilePage() {
                   </TabsContent>
                   <TabsContent value="blog">
                     <CreateBlogForm />
+                  </TabsContent>
+                  <TabsContent value="my blogs">
+                    <MyBlogs locale={locale} />
                   </TabsContent>
                 </>
               )}

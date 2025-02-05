@@ -3,28 +3,28 @@
 import { useRouter } from "next/navigation";
 import { Trash2 } from "lucide-react";
 
-export default function DeleteProduct({ id }: { id: string }) {
+export default function DeleteBlog({ id }: { id: string }) {
   const router = useRouter();
 
   // Function to handle product deletion
-  const handleDelete = async (productId: string) => {
+  const handleDelete = async (blogId: string) => {
     try {
-      const res = await fetch(`/api/delete-product`, {
+      const res = await fetch(`/api/delete-blog`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify({ blogId }),
       });
 
       if (!res.ok) {
         const data = await res.json();
-        console.error("Failed to delete product:", data.message);
+        console.error("Failed to delete blog:", data.message);
         return;
       }
 
-      console.log("Product deleted successfully");
+      console.log("Blog deleted successfully");
       router.push("?deleted=true");
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.error("Error deleting blog:", error);
     }
   };
 

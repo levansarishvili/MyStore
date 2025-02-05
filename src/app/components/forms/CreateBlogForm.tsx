@@ -94,8 +94,6 @@ export default function CreateBlogForm() {
       image_url: imageUrl,
     };
 
-    console.log(blogData, blogData_ka);
-
     try {
       const response = await fetch("/api/create-blog", {
         method: "POST",
