@@ -4,14 +4,30 @@ import { stripe } from "../../../../../lib/stripe";
 import { createClient } from "../../../../../utils/supabase/server";
 import Link from "next/link";
 import { Button } from "src/app/components/ui/button";
+import { createTranslator } from "next-intl";
+
+interface paramsType {
+  searchParams: { session_id: string };
+  params: {
+    locale: string;
+  };
+}
 
 export default async function ResultPage({
   searchParams,
-}: {
-  searchParams: { session_id: string };
-}): Promise<JSX.Element> {
+  params,
+}: paramsType): Promise<JSX.Element> {
   if (!searchParams.session_id)
     throw new Error("Please provide a valid session_id (`cs_test_...`)");
+
+  const locale = params.locale;
+  if (!locale) {
+    console.error("Locale not found in params.");
+  }
+
+  const messages = (await import(`../../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.retrieve(searchParams.session_id, {
@@ -39,33 +55,30 @@ export default async function ResultPage({
 
   return (
     <section className="flex flex-col w-full min-h-screen items-center mt-12 lg:mt-20 max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
-      <div className="flex flex-col gap-2 md:gap-6 bg-card rounded-2xl p-4 lg:p-10 justify-center items-center max-w-[40rem] text-center mx-auto shadow-lg">
+      <div className="border flex flex-col gap-6 md:gap-8 bg-card rounded-2xl p-4 lg:p-10 justify-center items-center max-w-[40rem] text-center mx-auto shadow-md">
         {/* Title */}
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary flex items-center gap-2 sm:mb-4">
-          🎉 Checkout Successful!
+        <h1 className="text-base md:text-xl lg:text-2xl font-semibold text-primary flex items-center gap-2">
+          🎉 {t("SuccessSubscriptionMessage.title")}
         </h1>
 
         {/* Success Message */}
-        <p className="text-lg md:text-xl leading-relaxed">
-          Congratulations, &nbsp;
+        <p className="text-sm md:text-base text-muted-foreground">
+          {t("SuccessSubscriptionMessage.congrats")} &nbsp;
           <span className="font-semibold text-primary">
-            {user?.user?.email}
+            {user?.user?.email}&nbsp;
           </span>
-          ! You are now a
-          <span className="text-yellow-400 font-bold"> Pro Member</span>! 🚀
+          🚀
         </p>
 
         {/* Benefits Description */}
-        <p className="text-sm md:text-base text-muted-foreground">
-          Now you can access all the benefits of our Pro plan. Add products for
-          sale and manage your inventory. You can also create and manage blog
-          posts.
+        <p className="text-xs md:text-base text-muted-foreground mb-4">
+          {t("SuccessSubscriptionMessage.message")}
         </p>
 
         {/* CTA Button */}
         <Link href="/">
           <Button className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50">
-            Go to Home
+            {t("SuccessSubscriptionMessage.button")}
           </Button>
         </Link>
       </div>

@@ -62,7 +62,7 @@ export default function LoginPage({ params }: paramsType) {
           <Button
             formAction={signup}
             variant={"default"}
-            className="text-foreground hover:bg-[#38cb89]/80 transition-all duration-300 w-full"
+            className="text-white hover:bg-[#2ca76e] transition-all duration-300 w-full"
             data-cy="signup-button"
           >
             {t("signup-button")}

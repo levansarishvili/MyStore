@@ -28,7 +28,11 @@ export async function login(formData: FormData) {
   }
 
   // Add user into stripe if they don't exist yet
-  AddUserOnStripe(data.email);
+  try {
+    await AddUserOnStripe(data.email);
+  } catch (stripeError) {
+    console.error("Stripe Error:", stripeError);
+  }
 
   revalidatePath("/", "layout");
   redirect("/");

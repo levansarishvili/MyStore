@@ -177,5 +177,31 @@
     "email": "Email",
     "password": "Password",
     "signup-button": "Sign up"
+  },
+  "SuccessPaymentMessage": {
+    "title": "Checkout Successful!",
+    "message": "Payment is successful. Thank you for shopping with us!",
+    "button": "Go to home"
+  },
+  "SuccessSubscriptionMessage": {
+    "title": "Checkout Successful!",
+    "congrats": "Congratulations!",
+    "message": "Now you can access all the benefits of our Pro plan. Add products for sale and manage your inventory. You can also create and manage blog posts.",
+    "button": "Go to home"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "question": "Have any questions? We'd love to hear from you!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "button": "Send",
+    "address": "Chavchavadze street #12, Tbilisi, Georgia"
+  },
+  "Profile": {
+    "title": "Profile",
+    "orders": "Orders",
+    "cart": "Cart",
+    "logout": "Logout"
   }
 }

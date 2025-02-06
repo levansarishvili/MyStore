@@ -4,19 +4,35 @@ import { stripe } from "../../../../../lib/stripe";
 import { createClient } from "../../../../../utils/supabase/server";
 import Link from "next/link";
 import { Button } from "src/app/components/ui/button";
+import { createTranslator } from "next-intl";
 
 interface cardProductType {
   id: number;
   quantity: number;
 }
 
+interface paramsType {
+  searchParams: { session_id: string };
+  params: {
+    locale: string;
+  };
+}
+
 export default async function ResultPage({
   searchParams,
-}: {
-  searchParams: { session_id: string };
-}): Promise<JSX.Element> {
+  params,
+}: paramsType): Promise<JSX.Element> {
   if (!searchParams.session_id)
     throw new Error("Please provide a valid session_id (`cs_test_...`)");
+
+  const locale = params.locale;
+  if (!locale) {
+    console.error("Locale not found in params.");
+  }
+
+  const messages = (await import(`../../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   const supabase = await createClient();
   const { data: user } = await supabase.auth.getUser();
@@ -87,17 +103,16 @@ export default async function ResultPage({
 
   return (
     <section className="flex flex-col w-full min-h-screen items-center mt-12 lg:mt-20 max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
-      <div className="flex flex-col gap-10 bg-card rounded-lg p-8 justify-center items-center max-w-[40rem] text-center mx-auto shadow">
-        <h1 className="text-2xl lg:text-3xl font-semibold text-primary flex items-center gap-2 mb-6">
-          🎉 Checkout Successful!
+      <div className="flex flex-col gap-8 lg:gap-12 bg-card rounded-lg p-8 justify-center items-center max-w-[30rem] text-center mx-auto shadow-md border">
+        <h1 className="text-base md:text-xl lg:text-2xl font-semibold text-primary flex items-center gap-2">
+          🎉 {t("SuccessPaymentMessage.title")}
         </h1>
-        <p className="text-base md:text-lg text-muted-foreground mb-8">
-          Your order has been placed successfully. Thank you for shopping with
-          us!
+        <p className="text-sm md:text-base text-muted-foreground mb-8">
+          {t("SuccessPaymentMessage.message")}
         </p>
         <Link href="/">
           <Button className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-[#38CB89]/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#38CB89] focus:ring-opacity-50">
-            Go to Home
+            {t("SuccessPaymentMessage.button")}
           </Button>
         </Link>
       </div>

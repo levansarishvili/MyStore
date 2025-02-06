@@ -99,7 +99,7 @@ export default async function HomePage({
               </div>
               <Link href="/store" className="">
                 <Button
-                  className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#38CB89]/80 transition-all duration-300"
+                  className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#2ca76e] transition-all duration-300"
                   variant="default"
                 >
                   {t("Hero.button")}
