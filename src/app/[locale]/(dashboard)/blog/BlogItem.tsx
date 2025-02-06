@@ -3,6 +3,7 @@ import { Button } from "../../../components/ui/button";
 import { Link } from "../../../../i18n/routing";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
+import { useTranslations } from "next-intl";
 
 interface Props {
   id: number;
@@ -18,6 +19,8 @@ export default function BlogItem({
   image_url,
   locale,
 }: Props) {
+  const t = useTranslations("Blogs.BlogItem");
+
   return (
     <li className="relative min-w-[16rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-card border hover:shadow-md">
       <div className="w-full flex flex-col items-center justify-between gap-4 h-full">
@@ -42,9 +45,9 @@ export default function BlogItem({
             <Link href={`/blog/${id}`}>
               <Button
                 variant="default"
-                className="w-32 bg-[#38cb89] text-white hover:bg-[#2ca76e] transition-all duration-300"
+                className=" bg-[#38cb89] text-white hover:bg-[#2ca76e] transition-all duration-300"
               >
-                Read more
+                {t("readMore")}
               </Button>
             </Link>
           </div>

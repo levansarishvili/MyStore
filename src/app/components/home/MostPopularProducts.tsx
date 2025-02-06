@@ -1,18 +1,25 @@
 import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import ProductItem from "../../[locale]/(dashboard)/store/ProductItem";
+import { createTranslator } from "next-intl";
 interface Props {
   topProducts: ProductsType[];
   inCartArrTop: boolean[];
+  locale: string;
 }
 
 export default async function MostPopularProducts({
   topProducts,
   inCartArrTop,
+  locale,
 }: Props) {
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
+
   return (
     <section className="flex flex-col gap-12 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h2 className="text-2xl md:text-3xl font-medium">
-        Most Popular Products
+        {t("PopularProducts.title")}
       </h2>
 
       <div className="w-full grid grid-cols-1 min-[460px]:grid-cols-2 custom-md:grid-cols-3 custom-lg:grid-cols-4 gap-6 justify-center">

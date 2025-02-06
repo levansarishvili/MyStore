@@ -8,7 +8,7 @@ export const metadata = {
   title: "e-shop",
   description: "Web site created with Next.js.",
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.svg",
   },
 };
 

@@ -23,9 +23,20 @@ function Footer() {
     <footer className="bg-background w-full mt-24 border-t py-10">
       <div className="md:border-b pb-8 max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between max-sm:flex-col gap-8 px-6 md:px-12 lg:px-20 py-0">
         <div className="flex flex-col gap-8">
-          <p className="text-2xl font-medium">3legant.</p>
+          <div className="flex gap-2">
+            <Image
+              src="/assets/logo.svg"
+              alt="Logo"
+              width={400}
+              height={400}
+              className="w-10"
+            />
+            <p className="max-sm:hidden text-lg md:text-xl font-semibold">
+              e-shop
+            </p>
+          </div>
           <p className="text-base font-normal md:font-medium md:text-xl max-w-[16.5rem]">
-            Power Your Life with the Best in Tech.
+            {t("title")}
           </p>
           <div className="flex gap-6">
             <Facebook className="hover:stroke-primary transition-all duration-300 cursor-pointer" />
@@ -38,14 +49,14 @@ function Footer() {
         <Accordion type="single" collapsible className="w-full sm:hidden">
           <AccordionItem value="item-1">
             <AccordionTrigger className="hover:no-underline text-base font-medium">
-              Page
+              {t("page.title")}
             </AccordionTrigger>
             <AccordionContent>
               <Link
                 href="/"
                 className="hover:text-primary transition-all duration-300"
               >
-                Home
+                {t("page.home")}
               </Link>
             </AccordionContent>
             <AccordionContent>
@@ -53,7 +64,7 @@ function Footer() {
                 href="/"
                 className="hover:text-primary transition-all duration-300"
               >
-                Product
+                {t("page.products")}
               </Link>
             </AccordionContent>
             <AccordionContent>
@@ -61,7 +72,7 @@ function Footer() {
                 href="/"
                 className="hover:text-primary transition-all duration-300"
               >
-                Blog
+                {t("page.blogs")}
               </Link>
             </AccordionContent>
             <AccordionContent>
@@ -69,84 +80,84 @@ function Footer() {
                 href="/"
                 className="hover:text-primary transition-all duration-300"
               >
-                Contact
+                {t("page.contact")}
               </Link>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger className="hover:no-underline text-base font-medium">
-              Info
+              {t("info.title")}
             </AccordionTrigger>
-            <AccordionContent>Shipping Policy</AccordionContent>
-            <AccordionContent>Return & Refund</AccordionContent>
-            <AccordionContent>Support</AccordionContent>
-            <AccordionContent>FAQs</AccordionContent>
+            <AccordionContent>{t("info.shipping")}</AccordionContent>
+            <AccordionContent>{t("info.return")}</AccordionContent>
+            <AccordionContent>{t("info.support")}</AccordionContent>
+            <AccordionContent>{t("info.faq")}</AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger className="hover:no-underline text-base font-medium">
-              Office
+              {t("office.title")}
             </AccordionTrigger>
-            <AccordionContent>221B Baker Street</AccordionContent>
-            <AccordionContent>London NW1 6XE</AccordionContent>
-            <AccordionContent>United Kingdom</AccordionContent>
-            <AccordionContent>+44 20 7946 0958</AccordionContent>
+            <AccordionContent>{t("office.address")}</AccordionContent>
+            <AccordionContent>{t("office.city")}</AccordionContent>
+            <AccordionContent>{t("office.country")}</AccordionContent>
+            <AccordionContent>+995 599 999 999</AccordionContent>
           </AccordionItem>
         </Accordion>
         {/* =============================================== */}
         <div className="flex flex-col gap-6 sm:gap-10 max-sm:hidden">
-          <p className="text-base font-medium">Page</p>
+          <p className="text-base font-medium">{t("page.title")}</p>
           <ul className="flex flex-col gap-6">
             <Link
               href="/"
               className="hover:text-primary transition-all duration-300"
             >
-              <li className="text-sm">Home</li>
+              <li className="text-sm">{t("page.home")}</li>
             </Link>
             <Link
               href="/store"
               className="hover:text-primary transition-all duration-300"
             >
-              <li className="text-sm">Shop</li>
+              <li className="text-sm">{t("page.products")}</li>
             </Link>
             <Link
               href="/blog"
               className="hover:text-primary transition-all duration-300"
             >
-              <li className="text-sm">Blog</li>
+              <li className="text-sm">{t("page.blogs")}</li>
             </Link>
             <Link
               href="/contact"
               className="hover:text-primary transition-all duration-300"
             >
-              <li className="text-sm">Contact</li>
+              <li className="text-sm">{t("page.contact")}</li>
             </Link>
           </ul>
         </div>
         <div className="flex flex-col gap-6 sm:gap-10 max-sm:hidden">
           <div className="flex items- justify-between gap-2 cursor-pointer">
-            <p className="text-base font-medium">Info</p>
+            <p className="text-base font-medium">{t("info.title")}</p>
             <ChevronDown className="hidden max-sm:flex" />
           </div>
           <ul className="flex flex-col gap-6">
-            <li className="text-sm">Shipping Policy</li>
-            <li className="text-sm">Return & Refund</li>
-            <li className="text-sm">Support</li>
-            <li className="text-sm">FAQs</li>
+            <li className="text-sm">{t("info.shipping")}</li>
+            <li className="text-sm">{t("info.return")}</li>
+            <li className="text-sm">{t("info.support")}</li>
+            <li className="text-sm">{t("info.faq")}</li>
           </ul>
         </div>
 
         <div className="flex flex-col gap-6 sm:gap-10 max-sm:hidden">
-          <p className="text-base font-medium">Office</p>
+          <p className="text-base font-medium">{t("office.title")}</p>
           <ul className="flex flex-col gap-6">
-            <li className="text-sm">221B Baker Street</li>
-            <li className="text-sm">London NW1 6XE</li>
-            <li className="text-sm">United Kingdom</li>
-            <li className="text-sm">+44 20 7946 0958</li>
+            <li className="text-sm">{t("office.address")}</li>
+            <li className="text-sm">{t("office.city")}</li>
+            <li className="text-sm">{t("office.country")}</li>
+            <li className="text-sm">+995 599 999 999</li>
           </ul>
         </div>
       </div>
       <div className="max-w-[90rem] w-full h-full mx-auto my-0 flex justify-between max-sm:flex-col gap-8 px-6 md:px-12 lg:px-20 pt-8">
-        <p className="text-xs">Copyright © 2023 3legant. All rights reserved</p>
+        <p className="text-xs">{t("copyright")}</p>
 
         <div className="flex gap-4">
           <Image

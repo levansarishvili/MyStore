@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "../../../components/ui/table";
+import { createTranslator } from "next-intl";
 
 interface OrdersType {
   id: string;
@@ -21,7 +22,18 @@ interface OrdersType {
   total_price: number;
 }
 
-export default async function OrdersPage() {
+interface ParamsType {
+  params: { locale: string };
+  locale: string;
+}
+
+export default async function OrdersPage({ params }: ParamsType) {
+  const locale = params.locale;
+
+  const messages = (await import(`../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
+
   // Fetch orders by user
   const supabase = await createClient();
   const userData = await GetUserData();
@@ -42,24 +54,25 @@ export default async function OrdersPage() {
 
   return (
     <section className="flex flex-col items-center min-h-screen gap-10 lg:gap-20 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-2xl lg:text-3xl font-medium mt-10 lg:mt-16">
-        Orders
+      <h1 className="text-xl md:text-2xl font-medium mt-10 lg:mt-16">
+        {t("Orders.title")}
       </h1>
 
       {orders?.length !== 0 && (
         <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
-          <TableCaption className="text-muted-foreground text-sm py-2">
-            A list of your recent payments.
-          </TableCaption>
           <TableHeader className="bg-primary max-md:text-xs">
             <TableRow className="hover:bg-primary">
               <TableHead className="px-4 py-3 font-semibold text-white">
                 #
               </TableHead>
-              <TableHead className="px-4 py-3 text-white">Date</TableHead>
-              <TableHead className="px-4 py-3 text-white">Details</TableHead>
+              <TableHead className="px-4 py-3 text-white">
+                {t("Orders.table.date")}
+              </TableHead>
+              <TableHead className="px-4 py-3 text-white">
+                {t("Orders.table.details")}
+              </TableHead>
               <TableHead className="px-4 py-3 text-white text-right">
-                Amount
+                {t("Orders.table.ammount")}
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -82,7 +95,7 @@ export default async function OrdersPage() {
                     href={`/orders/${order.id}`}
                     className="hover:text-primary transition-all duration-300 underline"
                   >
-                    Details
+                    {t("Orders.table.view")}
                   </Link>
                 </TableCell>
                 <TableCell className="max-md:px-2 px-4 py-3 text-right">
@@ -94,7 +107,7 @@ export default async function OrdersPage() {
           <TableFooter className="max-md:text-xs">
             <TableRow className="bg-muted font-semibold">
               <TableCell colSpan={3} className="px-4 py-3">
-                Total
+                {t("Orders.table.total")}
               </TableCell>
               <TableCell className="max-md:px-2 px-4 py-3 text-right text-primary">
                 {totalPrice ? `$${(totalPrice / 100).toFixed(2)}` : "$0.00"}

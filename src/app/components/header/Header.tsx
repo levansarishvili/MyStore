@@ -10,6 +10,7 @@ import BurgerMenu from "../../[locale]/BurgerMenu";
 import { ShoppingCart } from "lucide-react";
 import { createClient } from "src/utils/supabase/server";
 import CartButton from "./CartButton";
+import Image from "next/image";
 
 // Create Header component
 async function Header() {
@@ -38,7 +39,16 @@ async function Header() {
       {!isNotAuthenticated && <NotificationBar />}
       <div className="max-w-[90rem] w-full h-16 mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0 rounded-xl">
         <Link href="/" className="h-10 flex gap-4 items-center">
-          <p className="text-lg md:text-2xl font-medium">3legant.</p>
+          <Image
+            src="/assets/logo.svg"
+            alt="Logo"
+            width={400}
+            height={400}
+            className="w-12"
+          />
+          <p className="max-sm:hidden text-xl md:text-2xl font-semibold">
+            e-shop
+          </p>
         </Link>
 
         {/* Navigation for larger screens */}

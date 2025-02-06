@@ -1,12 +1,14 @@
 "use client";
 
 import { Button } from "src/app/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function BuySubscriptionButton({
   isProMember,
 }: {
   isProMember: boolean;
 }) {
+  const t = useTranslations("Pricing");
   // Handle form submission
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,7 +37,7 @@ export default function BuySubscriptionButton({
         isProMember ? "cursor-not-allowed" : ""
       }`}
     >
-      Subscribe
+      {t("button")}
     </Button>
   );
 }

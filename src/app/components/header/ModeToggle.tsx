@@ -10,9 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function ModeToggle() {
+  const t = useTranslations("ModeToggle");
+
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -59,7 +61,7 @@ export function ModeToggle() {
             }`}
           >
             <SunMedium className="size-4" />
-            Light
+            {t("light")}
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -72,7 +74,7 @@ export function ModeToggle() {
             }`}
           >
             <MoonStar className="size-4" />
-            Dark
+            {t("dark")}
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -85,7 +87,7 @@ export function ModeToggle() {
             }`}
           >
             <Monitor className="size-4" />
-            System
+            {t("system")}
           </div>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Star, Trash, Trash2, ShoppingCart } from "lucide-react";
 import { ProductsType } from "./page";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -41,6 +42,7 @@ export default function ProductItem({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inCart, setInCart] = useState(in_cart);
   const router = useRouter();
+  const t = useTranslations("Products.ProductItem");
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
@@ -107,12 +109,12 @@ export default function ProductItem({
         <div className="flex gap-4 w-full justify-center items-center">
           {/* Add to cart button */}
           <Button
-            className="rounded-lg text-xs md:text-sm  px-2 py-4 text-white hover:bg-[#2ca76e] transition-all duration-300 w-36"
+            className="flex gap-4 justify-center items-center rounded-lg text-xs md:text-sm  px-2 py-4 text-white hover:bg-[#2ca76e] transition-all duration-300 w-36"
             variant="default"
             onClick={() => handleAddToCart(id)}
           >
             <ShoppingCart className="size-4 fill-transparent stroke-white" />
-            {`${inCart ? "In cart" : "Add to cart"}`}
+            {`${inCart ? `${t("inCart")}` : `${t("addToCart")}`}`}
           </Button>
         </div>
       </div>
@@ -122,17 +124,16 @@ export default function ProductItem({
         <DialogContent className="max-sm:w-[16rem] max-w-[24rem] rounded-lg">
           <DialogHeader className="text-center flex flex-col gap-4">
             <DialogTitle className="text-sm md:text-base font-medium">
-              Product Already in Cart
+              {t("ModalMessage.title")}
             </DialogTitle>
             <DialogDescription className="text-xs md:text-sm">
-              This product is already in your cart. You can update the quantity
-              in the cart.
+              {t("ModalMessage.desc")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Link href="/cart">
               <Button className="text-xs md:text-sm text-white hover:bg-[#2ca76e] transition-all duration-300">
-                Go to cart
+                {t("ModalMessage.button")}
               </Button>
             </Link>
           </DialogFooter>

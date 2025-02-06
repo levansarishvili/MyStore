@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import { Languages } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   DropdownMenu,
@@ -13,7 +14,12 @@ import {
 } from "../../components/ui/dropdown-menu";
 
 export default function LanguageToggle() {
+  const t = useTranslations("LanguageToggle");
+
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [language, setLanguage] = useState("ka");
 
   // Sync with localStorage on mount
@@ -28,7 +34,11 @@ export default function LanguageToggle() {
   const handleLanguageChange = (newLanguage: string) => {
     setLanguage(() => newLanguage);
     localStorage.setItem("language", newLanguage);
-    router.push(`/${newLanguage}`);
+
+    const newPath = pathname.replace(/^\/[a-z]{2}/, `/${newLanguage}`);
+    router.push(
+      `${newPath}${searchParams ? `?${searchParams.toString()}` : ""}`
+    );
   };
 
   return (
@@ -52,7 +62,7 @@ export default function LanguageToggle() {
             language === "ka" ? "text-primary focus:text-primary" : ""
           }`}
         >
-          <span>GEO</span>
+          <span>{t("ka")}</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -61,7 +71,7 @@ export default function LanguageToggle() {
             language === "en" ? "text-primary focus:text-primary" : ""
           }`}
         >
-          <span>ENG</span>
+          <span>{t("en")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

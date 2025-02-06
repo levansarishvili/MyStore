@@ -3,6 +3,7 @@ import { createClient } from "../../../../utils/supabase/server";
 import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus";
 import GetUserData from "../../../components/GetUserData";
 import ProductItem from "./ProductItem";
+import { createTranslator } from "next-intl";
 
 export interface ProductsType {
   id: string;
@@ -24,6 +25,10 @@ interface Props {
 }
 
 export default async function Store({ params, searchParams }: Props) {
+  const locale = params.locale;
+  const messages = (await import(`../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
   const supabase = await createClient();
 
   // Get user data
@@ -72,7 +77,7 @@ export default async function Store({ params, searchParams }: Props) {
 
   return (
     <section className="mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-2xl lg:text-3xl font-medium">Products</h1>
+      <h1 className="text-xl md:text-2xl font-medium">{t("Products.title")}</h1>
 
       <div className="w-full grid grid-cols-1 min-[460px]:grid-cols-2 custom-md:grid-cols-3 custom-lg:grid-cols-4 gap-6 justify-center">
         {products?.map((product) => (

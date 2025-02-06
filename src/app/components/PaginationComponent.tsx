@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "./ui/pagination";
+import { useTranslations } from "next-intl";
 
 export default function PaginationComponent({
   page,
@@ -15,6 +16,8 @@ export default function PaginationComponent({
   page: number;
   totalPages: number;
 }) {
+  const t = useTranslations("Pagination");
+
   return (
     <Pagination className="mt-12 md:mt-16">
       <PaginationContent>
@@ -22,7 +25,9 @@ export default function PaginationComponent({
           <PaginationPrevious
             className={`${page === 1 && "pointer-events-none opacity-60"}`}
             href={`?page=${page > 1 ? page - 1 : 1}`}
-          />
+          >
+            {t("prev")}
+          </PaginationPrevious>
         </PaginationItem>
         <PaginationItem
           className={`${page === 1 && "opacity-0 pointer-events-none"}`}
@@ -58,7 +63,9 @@ export default function PaginationComponent({
               page === totalPages && "pointer-events-none opacity-60"
             }`}
             href={`?page=${page < totalPages ? page + 1 : page}`}
-          />
+          >
+            {t("next")}
+          </PaginationNext>
         </PaginationItem>
       </PaginationContent>
     </Pagination>

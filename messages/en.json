@@ -1,25 +1,181 @@
 {
-  "HomePage": {
-    "title-part1": "Welcome to",
-    "title-part2": "ecommerce website",
-    "description": "Explore the app and manage your products and blog posts."
-  },
   "Navigation": {
     "home": "Home",
     "products": "Products",
     "blogs": "Blogs",
     "contact": "Contact"
   },
+  "NotificationBar": {
+    "discount": "30% off — Limited time!",
+    "button": "Shop now"
+  },
+  "NewProducts": {
+    "title": "New Products"
+  },
+
+  "ShopByCategory": {
+    "title": "Shop by Categories",
+    "categories": {
+      "laptops": "Laptops",
+      "smartphones": "Smartphones",
+      "tablets": "Tablets",
+      "audio": "Audio",
+      "monitors": "Monitors",
+      "photo-and-video": "Photo and video"
+    }
+  },
+  "PopularProducts": {
+    "title": "Popular Products"
+  },
+  "LatestBlogs": {
+    "title": "Latest Blogs",
+    "readMore": "View More"
+  },
+
+  "Hero": {
+    "title": "Find the perfect tech for you",
+    "description": "Whether you're leveling up, starting fresh, or a tech pro, discover the perfect device for you",
+    "button": "Shopping Now"
+  },
+
   "Footer": {
-    "copyright": "© Levan Sarishvili, Tbilisi, Georgia, 2025."
+    "title": "Find the perfect tech for you",
+    "copyright": "Created by Levan Sarishvili - Tbilisi, 2025.",
+    "page": {
+      "title": "Page",
+      "home": "Home",
+      "products": "Products",
+      "blogs": "Blogs",
+      "contact": "Contact"
+    },
+    "info": {
+      "title": "Info",
+      "shipping": "Shipping Policy",
+      "return": "Return & Refund",
+      "support": "Support",
+      "faq": "FAQ"
+    },
+    "office": {
+      "title": "Office",
+      "address": "Chavchavadze street #12",
+      "country": "Georgia",
+      "city": "Tbilisi"
+    }
+  },
+  "ModeToggle": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "LanguageToggle": {
+    "en": "Eng",
+    "ka": "Geo"
+  },
+  "ProfileToggle": {
+    "title": "My Account",
+    "profile": "Profile",
+    "orders": "Orders",
+    "cart": "Cart",
+    "pro": "Buy subscription",
+    "logout": "Logout"
+  },
+  "Cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "table": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "subtotal": "Subtotal"
+    },
+    "button": "Checkout"
+  },
+  "Orders": {
+    "title": "Orders",
+    "table": {
+      "date": "Date",
+      "details": "Details",
+      "view": "View",
+      "ammount": "Ammount",
+      "total": "Total"
+    }
+  },
+  "OrderDetails": {
+    "title": "Order Details",
+    "orderItem": {
+      "price": "Price",
+      "ammount": "Ammount",
+      "quantity": "Quantity"
+    }
+  },
+  "Pricing": {
+    "title": "Buy Subscription",
+    "message": "You are a pro member already!",
+    "freePlan": "Free Plan",
+    "proPlan": "Pro Plan",
+    "button": "Subscribe",
+    "benefits": {
+      "item1": "View and buy products",
+      "item2": "View blogs",
+      "item3": "Edit products",
+      "item4": "Add new products",
+      "item5": "Edit blogs",
+      "item6": "Add new blogs"
+    }
+  },
+  "Products": {
+    "title": "Products",
+    "ProductItem": {
+      "addToCart": "Add",
+      "inCart": "In cart",
+      "ModalMessage": {
+        "title": "Product Already in Cart",
+        "desc": "This product is already in your cart. You can update the quantity or proceed to checkout.",
+        "button": "Go to cart"
+      }
+    },
+    "ProductDetails": {
+      "title": "Product Details",
+      "price": "Price",
+      "addToCart": "Add",
+      "inCart": "In cart",
+      "ModalMessage": {
+        "title": "Product Already in Cart",
+        "desc": "This product is already in your cart. You can update the quantity or proceed to checkout.",
+        "button": "Go to cart"
+      }
+    }
+  },
+  "Pagination": {
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "Blogs": {
+    "title": "Blogs",
+    "emptyMessage": "Currently there are not any blogs!",
+    "BlogItem": {
+      "readMore": "Read More"
+    },
+    "BlogDetails": {
+      "title": "Blog Details"
+    }
   },
   "LoginPage": {
-    "login-header": "Sign In",
-    "SignUp-header": "Sign Up",
+    "title": "Sign In",
+    "question": "Don't have an accout yet?",
+    "link": "Sign up",
     "email": "Email",
     "password": "Password",
     "login-button": "Sign in",
-    "signup-button": "Sign up",
     "sign-in-with": "or sign in with"
+  },
+  "SignUpPage": {
+    "title": "Sign Up",
+    "question": "You already have an account?",
+    "link": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "signup-button": "Sign up"
   }
 }

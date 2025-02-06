@@ -1,13 +1,21 @@
 import Image from "next/image";
 import { createClient } from "../../../../../utils/supabase/server";
-import { filter } from "cypress/types/bluebird";
+import { createTranslator } from "next-intl";
 
-export default async function OrderDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface paramsType {
+  params: {
+    id: string;
+    locale: string;
+  };
+}
+
+export default async function OrderDetailsPage({ params }: paramsType) {
+  const locale = params.locale;
   const id = params.id;
+
+  const messages = (await import(`../../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   const supabase = await createClient();
 
@@ -55,8 +63,8 @@ export default async function OrderDetailsPage({
 
   return (
     <section className="flex flex-col items-center gap-16 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-2xl lg:text-3xl font-medium text-foreground mt-10 lg:mt-16">
-        Order Details
+      <h1 className="text-xl md:text-2xl font-medium text-foreground mt-10 lg:mt-16">
+        {t("OrderDetails.title")}
       </h1>
 
       <ul className="flex flex-col gap-6 w-full">
@@ -87,13 +95,13 @@ export default async function OrderDetailsPage({
                   {filteredProducts[index].name}
                 </h2>
                 <p className="text-xs sm:text-sm text-muted-foreground">
-                  Price:&nbsp;
+                  {t("OrderDetails.orderItem.price")}:&nbsp;
                   <span className="font-medium text-primary">
                     ${filteredProducts[index].price / 100}
                   </span>
                 </p>
                 <p className="text-xs sm:text-sm text-muted-foreground">
-                  Quantity:{" "}
+                  {t("OrderDetails.orderItem.quantity")}:{" "}
                   <span className="font-medium">{orderItem.quantity}</span>
                 </p>
               </div>
@@ -101,7 +109,7 @@ export default async function OrderDetailsPage({
               {/* Order Summary */}
               <div className="flex flex-col items-center sm:items-end gap-2">
                 <p className="text-xs sm:text-sm lg:text-base font-semibold text-primary">
-                  Subtotal: $
+                  {t("OrderDetails.orderItem.ammount")}: $
                   {(filteredProducts[index].price * orderItem.quantity) / 100}
                 </p>
                 <p className="text-xs md:text-sm text-muted-foreground">

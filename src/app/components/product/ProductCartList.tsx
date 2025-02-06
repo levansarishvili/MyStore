@@ -6,6 +6,7 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Table,
   TableBody,
@@ -34,6 +35,8 @@ export default function ProductCartList({
 }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const router = useRouter();
+
+  const t = useTranslations("Cart");
 
   // Calculate total price whenever products change
   useEffect(() => {
@@ -135,9 +138,7 @@ export default function ProductCartList({
       {/* If cart is empty */}
       {products.length === 0 && (
         <div className="flex flex-col items-center gap-4 mt-16">
-          <h2 className="text-xl lg:text-2xl font-medium">
-            Your cart is empty
-          </h2>
+          <h2 className="text-xl lg:text-2xl font-medium">{t("empty")}</h2>
 
           <Link href="/store">
             <Button className="hover:bg-[#2ca76e] transition-all duration-300">
@@ -149,25 +150,20 @@ export default function ProductCartList({
 
       {products.length > 0 && (
         <Table className="w-full border rounded-lg overflow-hidden shadow">
-          <TableCaption className="text-muted-foreground text-sm py-2">
-            A list of all products in your cart
-          </TableCaption>
           <TableHeader className="bg-primary max-md:text-[10px]">
             <TableRow className="hover:bg-primary">
               <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
-                Product
+                {t("table.product")}
               </TableHead>
               <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
-                Price
+                {t("table.price")}
               </TableHead>
               <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
-                Quantity
+                {t("table.quantity")}
               </TableHead>
-              <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
-                Action
-              </TableHead>
+              <TableHead className="px-2 md:px-4 py-3 font-medium text-white"></TableHead>
               <TableHead className="text-right px-2 md:px-4 py-3 font-medium text-white">
-                Subtotal
+                {t("table.subtotal")}
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -224,7 +220,7 @@ export default function ProductCartList({
           </TableBody>
           <TableFooter className="md:text-lg">
             <TableRow>
-              <TableCell colSpan={4}>Total</TableCell>
+              <TableCell colSpan={4}>{t("table.total")}</TableCell>
               <TableCell className="text-primary text-right">
                 ${totalPrice}
               </TableCell>
@@ -237,11 +233,11 @@ export default function ProductCartList({
       {products.length > 0 && (
         <div className="flex justify-center w-full">
           <Button
-            className="hover:bg-[#2ca76e] transition-all duration-300 w-56"
+            className="hover:bg-[#2ca76e] text-white transition-all duration-300 w-56"
             variant="default"
             onClick={handleBuyProduct}
           >
-            Checkout
+            {t("button")}
           </Button>
         </div>
       )}

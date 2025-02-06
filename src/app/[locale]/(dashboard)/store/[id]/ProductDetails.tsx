@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ProductsType } from "../page";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Button } from "src/app/components/ui/button";
+import { useTranslations } from "next-intl";
 import {
   Carousel,
   CarouselContent,
@@ -33,7 +34,7 @@ export default function ProductDetails({ product, isInCart }: Props) {
   const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
-  console.log(isInCart);
+  const t = useTranslations("Products.ProductDetails");
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
@@ -67,7 +68,7 @@ export default function ProductDetails({ product, isInCart }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-12 mt-10 lg:mt-16">
-      <h1 className="text-2xl lg:text-3xl font-medium">Product Details</h1>
+      <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300">
         {/* Product Details */}
         <div className="flex justify-center items-center w-full overflow-hidden h-auto transition-all duration-300">
@@ -107,7 +108,7 @@ export default function ProductDetails({ product, isInCart }: Props) {
             <p className="text-sm md:text-base">{product?.description}</p>
           </div>
           <p className="text-sm md:text-base font-medium">
-            Price: {product?.price / 100} $
+            {t("price")}: {product?.price / 100} $
           </p>
           <div className="flex">
             <Button
@@ -116,7 +117,7 @@ export default function ProductDetails({ product, isInCart }: Props) {
               onClick={() => handleAddToCart(product.id)}
             >
               <ShoppingCart className="size-4 fill-transparent stroke-white" />
-              {`${inBag ? "In cart" : "Add to cart"}`}
+              {`${inBag ? `${t("inCart")}` : `${t("addToCart")}`}`}
             </Button>
           </div>
         </div>
@@ -127,17 +128,16 @@ export default function ProductDetails({ product, isInCart }: Props) {
         <DialogContent className="max-sm:w-[16rem] max-w-[24rem] rounded-lg">
           <DialogHeader className="text-center flex flex-col gap-4">
             <DialogTitle className="text-sm md:text-base font-medium">
-              Product Already in Cart
+              {t("ModalMessage.title")}
             </DialogTitle>
             <DialogDescription className="text-xs md:text-sm">
-              This product is already in your cart. You can update the quantity
-              in the cart.
+              {t("ModalMessage.desc")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Link href="/cart">
               <Button className="text-xs md:text-sm text-white hover:bg-[#38CB89]/80 transition-all duration-300">
-                Go to cart
+                {t("ModalMessage.button")}
               </Button>
             </Link>
           </DialogFooter>

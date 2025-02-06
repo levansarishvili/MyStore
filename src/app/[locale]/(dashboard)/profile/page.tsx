@@ -37,7 +37,7 @@ export default async function ProfilePage({
 
   return (
     <section className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 w-full">
-      <h1 className="text-2xl lg:text-3xl font-medium text-center mb-10">
+      <h1 className="text-xl md:text-2xl font-medium text-center mb-10">
         My Account
       </h1>
 

@@ -2,6 +2,7 @@ import BlogItem from "./BlogItem";
 import { createClient } from "src/utils/supabase/server";
 import PaginationComponent from "src/app/components/PaginationComponent";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
+import { createTranslator } from "next-intl";
 
 export interface blogType {
   id: number;
@@ -23,6 +24,10 @@ interface ParamsType {
 export default async function BlogPage({ params, searchParams }: ParamsType) {
   const supabase = await createClient();
   const locale = params.locale;
+
+  const messages = (await import(`../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   if (!locale) {
     return null;
@@ -61,7 +66,7 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
 
   return (
     <section className="min-h-screen mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-2xl lg:text-3xl font-medium">Blogs</h1>
+      <h1 className="text-xl md:text-2xl font-medium">{t("Blogs.title")}</h1>
 
       <ul className="w-full grid grid-cols-1 gap-6 custom-sm:grid-cols-2 lg:grid-cols-3">
         {posts?.map((post) => (
@@ -77,7 +82,7 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
       </ul>
 
       {posts?.length === 0 && (
-        <p className="text-base">Currently there are not any posts!</p>
+        <p className="text-base">{t("Blogs.emptyMessage")}</p>
       )}
 
       {/* Pagination */}

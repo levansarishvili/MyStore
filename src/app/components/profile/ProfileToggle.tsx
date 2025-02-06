@@ -15,16 +15,18 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function ProfileToggle({
   userImageUrl,
 }: {
   userImageUrl: string;
 }) {
+  const t = useTranslations("ProfileToggle");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,35 +56,35 @@ export default function ProfileToggle({
 
       <DropdownMenuContent className="w-56 rounded-lg px-2 py-2 flex flex-col justify-between gap-2 mt-1">
         <DropdownMenuLabel className="px-4 text-base font-medium">
-          My Account
+          {t("title")}
         </DropdownMenuLabel>
 
         <DropdownMenuGroup className="py-2">
           <Link href="/profile">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <User className="min-w-4 min-h-4" />
-              <span>Profile</span>
+              <span>{t("profile")}</span>
             </DropdownMenuItem>
           </Link>
 
           <Link href="/cart">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <ShoppingCart className="min-w-4 min-h-4" />
-              <span>Cart</span>
+              <span>{t("cart")}</span>
             </DropdownMenuItem>
           </Link>
 
           <Link href="/orders">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <CreditCard className="min-w-4 min-h-4" />
-              <span>Orders</span>
+              <span>{t("orders")}</span>
             </DropdownMenuItem>
           </Link>
 
           <Link href="/pricing">
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <Sparkles className="min-w-4 min-h-4 fill-[#FFD700]" />
-              <span>Become a Pro</span>
+              <span>{t("pro")}</span>
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
@@ -94,7 +96,7 @@ export default function ProfileToggle({
             data-cy="sign-out-button"
           >
             <LogOut className="size-5" />
-            <span>Log out</span>
+            <span>{t("logout")}</span>
           </Button>
         </form>
       </DropdownMenuContent>

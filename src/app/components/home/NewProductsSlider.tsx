@@ -15,11 +15,13 @@ import { useEffect, useState } from "react";
 interface Props {
   newProducts: ProductsType[];
   inCartArrNew: boolean[];
+  locale: string;
 }
 
 export default function NewProductsSlider({
   newProducts,
   inCartArrNew,
+  locale,
 }: Props) {
   const [swiperKey, setSwiperKey] = useState(0);
 

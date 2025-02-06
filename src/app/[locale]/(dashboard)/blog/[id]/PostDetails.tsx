@@ -1,13 +1,16 @@
 import Image from "next/image";
 import type { blogType } from "../../blog/page";
 import ReactMarkdown from "react-markdown";
+import { useTranslations } from "next-intl";
 
 export default function PostDetails({ post }: { post: blogType }) {
+  const t = useTranslations("Blogs.BlogDetails");
+
   return (
     <section className="min-h-screen mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-2xl lg:text-3xl font-medium">Blog Details</h1>
+      <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
       <div className="w-full max-w-4xl bg-muted p-4 md:p-8 rounded-2xl shadow-md">
-        <h2 className="text-base lg:text-2xl font-medium mt-6 text-foreground">
+        <h2 className="text-base lg:text-xl font-medium mt-6 text-foreground">
           {post.translated_title}
         </h2>
 
