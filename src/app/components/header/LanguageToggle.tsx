@@ -37,7 +37,7 @@ export default function LanguageToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="w-10 h-10 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
+          className="w-9 h-9 text-foreground focus-visible:ring-0 hover:text-primary rounded-lg"
         >
           <Languages className="size-5 sm:size-6" />
         </Button>

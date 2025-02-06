@@ -124,6 +124,7 @@ body {
   .dark {
     /* --background: 20 14.3% 4.1%; */
     --background: 240 5.9% 10%;
+    --background: 240 5.9% 10%;
     --foreground: 0 0% 95%;
     --card: 240 3.7% 15.9%;
     --card-foreground: 0 0% 95%;
@@ -149,6 +150,8 @@ body {
     --chart-5: 340 75% 55%;
 
     /* --background: #110c0a;
+    #0a192f
+    #102a43
     --foreground: #f2f2f2;
     --card: #1a1613;
     --card-foreground: #f2f2f2;

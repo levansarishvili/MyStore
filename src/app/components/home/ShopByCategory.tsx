@@ -17,7 +17,7 @@ export default function ShopByCategory() {
       <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 py-4">
         {categories.map((category, index) => (
           <Link href="/store" key={index} className="group">
-            <div className="border flex flex-col items-center gap-3 bg-muted rounded-xl py-4 md:py-10 hover:shadow-md transition-all duration-300 cursor-pointer">
+            <div className="border flex flex-col items-center gap-3 bg-card rounded-xl py-4 md:py-10 hover:shadow-md transition-all duration-300 cursor-pointer">
               <div className="w-1/2 h-20 md:h-32 rounded-lg overflow-hidden flex justify-center">
                 <Image
                   src={category.image}

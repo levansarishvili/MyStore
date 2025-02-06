@@ -27,7 +27,7 @@ export function ModeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="w-10 h-10 text-foreground focus-visible:ring-0 rounded-lg"
+          className="w-9 h-9 text-foreground focus-visible:ring-0 rounded-lg"
         >
           {/* Render fallback during SSR */}
           {mounted && (

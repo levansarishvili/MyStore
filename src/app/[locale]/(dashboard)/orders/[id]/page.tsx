@@ -63,7 +63,7 @@ export default async function OrderDetailsPage({
         {orderItems?.map((orderItem, index) => (
           <li
             key={orderItem.id}
-            className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 md:gap-10 p-4 sm:p-6 bg-muted border border-border rounded-xl shadow-md w-full"
+            className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 md:gap-10 p-4 sm:p-6 bg-card border border-border rounded-lg w-full"
           >
             {/* Product Image */}
             <div className="w-28 h-28 md:w-32 md:h-32 overflow-hidden rounded-lg">

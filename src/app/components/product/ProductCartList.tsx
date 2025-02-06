@@ -209,7 +209,7 @@ export default function ProductCartList({
 
                 <TableCell className="">
                   <button
-                    className="p-1 rounded-lg bg-white hover:bg-destructive hover:text-white transition-all duration-200"
+                    className="p-1 rounded-lg bg-muted hover:bg-destructive hover:text-white transition-all duration-200"
                     onClick={() => handleDeleteFromCart(product.product_id)}
                   >
                     <Trash2 className="size-3 md:size-4" />
@@ -225,7 +225,9 @@ export default function ProductCartList({
           <TableFooter className="md:text-lg">
             <TableRow>
               <TableCell colSpan={4}>Total</TableCell>
-              <TableCell className="text-right">${totalPrice}</TableCell>
+              <TableCell className="text-primary text-right">
+                ${totalPrice}
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>

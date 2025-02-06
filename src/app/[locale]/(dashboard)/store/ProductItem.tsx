@@ -73,7 +73,7 @@ export default function ProductItem({
   };
 
   return (
-    <div className="pt-6 bg-muted border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 min-w-52 md:min-w-56">
+    <div className="pt-6 bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 min-w-52 md:min-w-56">
       <div className="max-sm:w-[30%] md:w-2/3 w-[40%] h-[6rem] md:h-[10rem] flex justify-center items-center overflow-hidden rounded-xl">
         <Link href={`/store/${id}`}>
           <Image

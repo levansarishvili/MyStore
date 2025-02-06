@@ -19,7 +19,7 @@ export default function BlogItem({
   locale,
 }: Props) {
   return (
-    <li className="relative min-w-[16rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-muted shadow-sm border hover:shadow-md">
+    <li className="relative min-w-[16rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-card border hover:shadow-md">
       <div className="w-full flex flex-col items-center justify-between gap-4 h-full">
         {/* Image with fallback */}
         <div className="w-full h-40 lg:h-52 overflow-hidden rounded-lg">

@@ -9,6 +9,7 @@ import MostPopularProducts from "../../components/home/MostPopularProducts";
 import LatestArticles from "../../components/home/LatestArticles";
 import GetUserData from "src/app/components/GetUserData";
 import { boolean } from "zod";
+import Image from "next/image";
 
 interface cartItemsType {
   product_id: string;
@@ -80,12 +81,12 @@ export default async function HomePage({
   return (
     <>
       {/* Hero Section */}
-      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('/assets/bg-img-small.png')] sm:bg-[url('/assets/bg-img.png')]">
-        <div className="bg-black/20 w-full h-full flex justify-center items-center max-sm:items-end">
-          <div className="w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-            <div className="flex flex-col max-sm:items-center max-sm:gap-6 gap-10 max-w-[32rem]">
+      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-black">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+          <div className="order-last md:order-first">
+            <div className="flex flex-col max-sm:items-center max-sm:gap-6 gap-10">
               <div className="rounded-2xl flex flex-col gap-4">
-                <h1 className="max-sm:text-center bg-text-gradient bg-clip-text max-w-[32rem] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[3rem] sm:leading-[3.5rem] md:leading-[4.5rem] lg:leading-[5rem] text-white">
+                <h1 className="max-sm:text-center bg-text-gradient bg-clip-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[3rem] sm:leading-[3.5rem] md:leading-[4.5rem] lg:leading-[5rem] text-white">
                   Power Your Life with the Best in Tech.
                 </h1>
                 <p className="max-sm:text-center text-base sm:text-xl text-white font-sans">
@@ -95,13 +96,24 @@ export default async function HomePage({
               </div>
               <Link href="/store" className="w-1/2">
                 <Button
-                  className="text-sm sm:text-lg font-sans font-medium h-12 w-full hover:bg-[#38CB89]/80 transition-all duration-300"
+                  className="text-sm sm:text-lg text-white font-sans font-medium h-12 w-full hover:bg-[#38CB89]/80 transition-all duration-300"
                   variant="default"
                 >
                   Shopping Now
                 </Button>
               </Link>
             </div>
+          </div>
+
+          {/* Banner Image */}
+          <div className="order-first md:order-last justify-center flex flex-col items-center">
+            <Image
+              src="/assets/banner-img.png"
+              alt="baner"
+              width={1200}
+              height={600}
+              className="w-2/3 md:w-auto"
+            />
           </div>
         </div>
       </section>
