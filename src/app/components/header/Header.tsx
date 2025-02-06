@@ -8,11 +8,26 @@ import { ModeToggle } from "./ModeToggle";
 import NotificationBar from "./NotificationBar";
 import BurgerMenu from "../../[locale]/BurgerMenu";
 import { ShoppingCart } from "lucide-react";
+import { createClient } from "src/utils/supabase/server";
 
 // Create Header component
 async function Header() {
+  const supabase = await createClient();
   const userData = await GetUserData();
+
+  const userId = userData?.id;
   const userImageUrl = userData?.user_metadata?.avatar_url;
+
+  // Fetch cart quantity
+  const { data: cartItems, error } = await supabase
+    .from("cart")
+    .select("quantity")
+    .eq("user_id", userId);
+
+  const cartQuantity = cartItems?.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   const isNotAuthenticated = !userData;
   const isProMember = await CheckSubscriptionStatus();
@@ -57,7 +72,13 @@ async function Header() {
               </div>
 
               {/* Cart Icon */}
-              <Link href="/cart">
+              <Link href="/cart" className="relative flex items-center">
+                {/* Display quantity only if greater than 0 */}
+                {cartQuantity > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                    {cartQuantity}
+                  </span>
+                )}
                 <div className="flex gap-4 px-4 cursor-pointer hover:text-primary text-sm rounded-lg transition-all duration-300">
                   <ShoppingCart className="size-5 sm:size-6" />
                 </div>

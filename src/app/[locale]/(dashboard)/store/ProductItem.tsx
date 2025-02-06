@@ -65,6 +65,7 @@ export default function ProductItem({
         return;
       }
       setInCart(() => true);
+      router.refresh();
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);

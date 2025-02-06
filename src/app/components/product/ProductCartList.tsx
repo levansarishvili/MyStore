@@ -148,11 +148,11 @@ export default function ProductCartList({
       )}
 
       {products.length > 0 && (
-        <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
+        <Table className="w-full border rounded-lg overflow-hidden shadow">
           <TableCaption className="text-muted-foreground text-sm py-2">
             A list of all products in your cart
           </TableCaption>
-          <TableHeader className="bg-primary max-md:text-xs">
+          <TableHeader className="bg-primary max-md:text-[10px]">
             <TableRow className="hover:bg-primary">
               <TableHead className="px-2 md:px-4 py-3 font-medium text-white">
                 Product
@@ -174,7 +174,7 @@ export default function ProductCartList({
           <TableBody className="text-xs md:text-sm">
             {products.map((product) => (
               <TableRow key={product.id}>
-                <TableCell className="font-medium flex max-md:items-start items-center max-md:flex-col gap-2">
+                <TableCell className="font-medium flex max-md:items-start items-center max-md:flex-col gap-2 pl-1 sm:pl-2">
                   <Image
                     src={product.image_url}
                     alt={product.name}
@@ -190,31 +190,33 @@ export default function ProductCartList({
                 <TableCell>${product.price / 100}</TableCell>
 
                 <TableCell>
-                  <div className="flex justify-center items-center gap-2 md:gap-4 border rounded-lg px-1 md:px-2 py-1 max-w-20">
+                  <div className="flex justify-center items-center gap-1 md:gap-2 border rounded-lg px-1 md:px-2 py-1 max-w-20">
                     <button
+                      className="p-1 rounded-lg hover:bg-primary hover:text-white transition-all duration-200"
                       onClick={() => handleQuantityDecrease(product.product_id)}
                     >
-                      <Minus className="size-3 cursor-pointer" />
+                      <Minus className="size-2.5 sm:size-3.5 cursor-pointer" />
                     </button>
-                    <p className="">{product.quantity}</p>
+                    <p className="text-xs md:text-sm">{product.quantity}</p>
                     <button
+                      className="p-1 rounded-lg hover:bg-primary hover:text-white transition-all duration-200"
                       onClick={() => handleQuantityIncrease(product.product_id)}
                     >
-                      <Plus className="size-3 cursor-pointer" />
+                      <Plus className="size-2.5 sm:size-3.5 cursor-pointer" />
                     </button>
                   </div>
                 </TableCell>
 
                 <TableCell className="">
                   <button
-                    className=""
+                    className="p-1 rounded-lg bg-white hover:bg-destructive hover:text-white transition-all duration-200"
                     onClick={() => handleDeleteFromCart(product.product_id)}
                   >
-                    <Trash2 className="size-3 md:size-4 stroke-red-600" />
+                    <Trash2 className="size-3 md:size-4" />
                   </button>
                 </TableCell>
 
-                <TableCell className="text-right ">
+                <TableCell className="text-right pr-1 sm:pr-4">
                   ${(product.price / 100) * product.quantity}
                 </TableCell>
               </TableRow>
@@ -233,7 +235,7 @@ export default function ProductCartList({
       {products.length > 0 && (
         <div className="flex justify-center w-full">
           <Button
-            className="hover:bg-[#38CB89]/80 transition-all duration-300 w-56"
+            className="hover:bg-[#2ca76e] transition-all duration-300 w-56"
             variant="default"
             onClick={handleBuyProduct}
           >

@@ -58,6 +58,7 @@ export default function ProductDetails({ product, isInCart }: Props) {
         return;
       }
       setInBag(() => true);
+      router.refresh();
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);
