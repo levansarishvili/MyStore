@@ -2,7 +2,7 @@ import { createClient } from "src/utils/supabase/server";
 import GetUserData from "../GetUserData";
 import Image from "next/image";
 import DeleteBlog from "./DeleteBlog";
-import type { blogType } from "../../[locale]/(dashboard)/blog/page";
+import type { BlogType } from "../../[locale]/(dashboard)/blog/page";
 import { SquarePen } from "lucide-react";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ export default async function MyBlogs({ locale }: { locale: string }) {
     .select("*")
     .order("id", { ascending: false })
     .eq("language_code", locale)
-    .eq("user_id", userdata?.id)) as { data: blogType[]; error: any };
+    .eq("user_id", userdata?.id)) as { data: BlogType[]; error: any };
 
   if (error) {
     console.error("Error fetching products:", error);

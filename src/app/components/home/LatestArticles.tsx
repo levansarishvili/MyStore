@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "src/utils/supabase/server";
-import type { blogType } from "../../[locale]/(dashboard)/blog/page";
+import type { BlogType } from "../../[locale]/(dashboard)/blog/page";
 import BlogItem from "../../[locale]/(dashboard)/blog/BlogItem";
 import { createTranslator } from "next-intl";
 
@@ -16,7 +16,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
     .select("*")
     .eq("language_code", locale)
     .order("id", { ascending: false })
-    .limit(3)) as { data: blogType[]; error: any };
+    .limit(3)) as { data: BlogType[]; error: any };
 
   if (error) {
     console.error(error);

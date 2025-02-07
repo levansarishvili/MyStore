@@ -9,10 +9,10 @@ import { Input } from "../ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { blogType } from "src/app/[locale]/(dashboard)/blog/page";
+import { BlogType } from "src/app/[locale]/(dashboard)/blog/page";
 
 interface EditBlogFormProps {
-  myBlogs: blogType[];
+  myBlogs: BlogType[];
   id: string;
 }
 

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import type { blogType } from "../../blog/page";
+import type { BlogType } from "../../blog/page";
 import ReactMarkdown from "react-markdown";
 import { useTranslations } from "next-intl";
 
-export default function PostDetails({ post }: { post: blogType }) {
+export default function PostDetails({ post }: { post: BlogType }) {
   const t = useTranslations("Blogs.BlogDetails");
 
   return (
