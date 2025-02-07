@@ -1,7 +1,7 @@
 import { createClient } from "src/utils/supabase/server";
 import PageNotFound from "../../../../components/PageNotFound";
 import PostDetails from "./PostDetails";
-import { blogType } from "../page";
+import { BlogType } from "../page";
 
 interface ParamsType {
   id: string;
@@ -23,7 +23,7 @@ export default async function PostsDetailsPage({
     .select("*")
     .eq("id", id)
     .eq("language_code", locale)
-    .single()) as { data: blogType; error: any };
+    .single()) as { data: BlogType; error: any };
 
   if (error) {
     console.error(error);
