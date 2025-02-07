@@ -13,19 +13,20 @@ import {
 } from "../../components/ui/select";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface Props {
   categories: string[];
 }
 
 function ProductFilter({ categories }: Props) {
+  const t = useTranslations("ProductFilter");
   const sortOptions = [
-    { label: "Sort is not applied", value: "empty" },
-    { label: "Name: A - Z", value: "title-asc" },
-    { label: "Name: Z - A", value: "title-desc" },
-    { label: "Price: Low to High", value: "price-asc" },
-    { label: "Price: High to Low", value: "price-desc" },
+    { label: `${t("sort.empty")}`, value: "empty" },
+    { label: `${t("sort.title-asc")}`, value: "title-asc" },
+    { label: `${t("sort.title-desc")}`, value: "title-desc" },
+    { label: `${t("sort.price-asc")}`, value: "price-asc" },
+    { label: `${t("sort.price-desc")}`, value: "price-desc" },
   ];
 
   const searchParams = useSearchParams();
@@ -77,7 +78,7 @@ function ProductFilter({ categories }: Props) {
       {/* Searching functionality */}
       <div className="max-sm:w-full">
         <Input
-          placeholder="Search product.."
+          placeholder={t("search")}
           onChange={handleSearch}
           className="text-sm p-2 border rounded-md max-sm:w-full"
         />
@@ -88,7 +89,7 @@ function ProductFilter({ categories }: Props) {
         <div className="">
           <Select value={activeSort} onValueChange={handleSort}>
             <SelectTrigger>
-              <SelectValue placeholder="Select Sort Option" />
+              <SelectValue placeholder={t("sort.title")} />
             </SelectTrigger>
             <SelectContent className="text-xl">
               <SelectGroup className="">
@@ -110,7 +111,7 @@ function ProductFilter({ categories }: Props) {
         <div className="">
           <Select value={activeCategory} onValueChange={handleFilter}>
             <SelectTrigger>
-              <SelectValue placeholder="Select a category" />
+              <SelectValue placeholder={t("category.title")} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -127,7 +128,7 @@ function ProductFilter({ categories }: Props) {
 
       {/* Reset filters*/}
       <Button variant={"destructive"} className="" onClick={handleClearFilters}>
-        Reset Filters
+        {t("reset")}
       </Button>
     </section>
   );

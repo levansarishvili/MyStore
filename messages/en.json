@@ -261,5 +261,27 @@
       "message-5": "Title in Georgian should be at most 100 characters",
       "message-6": "Content in Georgian should be at least 10 characters"
     }
+  },
+  "ProductFilter": {
+    "search": "Search product..",
+    "sort": {
+      "title": "Sort by",
+      "empty": "Sort is not applied",
+      "title-asc": "Name: A - Z",
+      "title-desc": "Name: Z - A",
+      "price-asc": "Price: Low to High",
+      "price-desc": "Price: High to Low"
+    },
+    "category": {
+      "title": "Select a category",
+      "item1": "Audio",
+      "item2": "Laptops",
+      "item3": "Monitors",
+      "item4": "Photo and video",
+      "item5": "Smartphones",
+      "item6": "Tablets"
+    },
+
+    "reset": "Reset Filters"
   }
 }
