@@ -25,12 +25,38 @@ interface Props {
   searchParams: { [key: string]: string | undefined };
 }
 
+interface categoryType {
+  category: string;
+}
+
 export default async function Store({ params, searchParams }: Props) {
   const locale = params.locale;
   const messages = (await import(`../../../../../messages/${locale}.json`))
     .default;
   const t = createTranslator({ locale, messages });
   const supabase = await createClient();
+
+  console.log(searchParams);
+
+  // Get all product categories
+  const { data: categories, error: categoriesError } = (await supabase
+    .from("products")
+    .select("category")
+    .order("category", { ascending: true })) as {
+    data: categoryType[];
+    error: any;
+  };
+
+  if (categoriesError) {
+    console.error("Error fetching categories:", categoriesError);
+    return null;
+  }
+
+  const uniqueCategories = Array.from(
+    new Set(categories.map((category) => category.category))
+  );
+
+  console.log(uniqueCategories);
 
   // Get user data
   const userData = await GetUserData();
@@ -40,48 +66,78 @@ export default async function Store({ params, searchParams }: Props) {
     return null;
   }
 
-  // Fetch all products
-  const { data: allProducts, error: allProductsError } = await supabase
-    .from("products")
-    .select("*");
-
-  if (allProductsError) {
-    console.error("Error fetching products:", allProductsError);
-    return null;
-  }
-
   // Fetch products from cart
   const { data: cartItems, error: fetchError } = await supabase
     .from("cart")
     .select("product_id")
     .eq("user_id", userId);
 
-  const productsCount = allProducts?.length || 0;
+  if (fetchError) {
+    console.error("Error fetching cart items:", fetchError);
+    return null;
+  }
 
+  let products: ProductsType[] = [];
+  // Fetch products from Supabase according to pagination and filters
+  let query = supabase.from("products").select("*");
+
+  // Apply search filter if `search` exists
+  if (searchParams.search) {
+    query = query.ilike("name", `%${searchParams.search}%`);
+  }
+
+  // Apply category filter if `category` exists
+  if (searchParams.category) {
+    query = query.eq("category", `${searchParams.category}`);
+  }
+
+  // Apply sorting based on `sortBy` parameter
+  if (searchParams.sortBy) {
+    if (searchParams.sortBy === "title-asc") {
+      query = query.order("name", { ascending: true });
+    } else if (searchParams.sortBy === "title-desc") {
+      query = query.order("name", { ascending: false });
+    } else if (searchParams.sortBy === "price-asc") {
+      query = query.order("price", { ascending: true });
+    } else if (searchParams.sortBy === "price-desc") {
+      query = query.order("price", { ascending: false });
+    }
+  }
+
+  // Execute the query
+  const { data, error } = await query;
+  if (error) {
+    console.error("Error fetching products:", error);
+  } else {
+    products = data as ProductsType[];
+  }
+
+  const productsCount = products?.length || 0;
   const page = Number(searchParams?.page) || 1;
 
+  // Calculate pagination parameters
   const itemsPerPage = 8;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage - 1;
   const totalPages = Math.ceil(productsCount / itemsPerPage);
+  query = query.range(startIndex, endIndex);
 
-  // Fetch products from Supabase according to pagination
-  const { data, error } = await supabase
-    .from("products")
-    .select("*")
-    .order("id", { ascending: false })
-    .range(startIndex, endIndex);
-  const products = data as ProductsType[];
+  // Execute the query
+  const { data: productsData, error: newError } = await query;
+  if (error) {
+    console.error("Error fetching products:", error);
+  } else {
+    products = productsData as ProductsType[];
+  }
 
-  const sortedProducts = products.sort((a, b) => Number(b.id) - Number(a.id));
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <section className="mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-14 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Products.title")}</h1>
 
       {/* Product filter */}
-      <ProductFilter />
+      <ProductFilter categories={uniqueCategories} />
 
       <div className="w-full grid grid-cols-1 min-[460px]:grid-cols-2 custom-md:grid-cols-3 custom-lg:grid-cols-4 gap-6 justify-center">
         {products?.map((product) => (

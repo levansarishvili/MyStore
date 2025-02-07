@@ -111,7 +111,7 @@ export default async function HomePage({
           {/* Banner Image */}
           <div className="order-first md:order-last justify-center flex flex-col items-center">
             <Image
-              src="/assets/banner-img.png"
+              src="/assets/banner.png"
               alt="banner"
               width={1200}
               height={600}
