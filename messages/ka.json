@@ -16,12 +16,12 @@
   "ShopByCategory": {
     "title": "შეიძინე კატეგორიების მიხედვით",
     "categories": {
-      "smartphones": "სმარტფონები",
-      "laptops": "ლეპტოპები",
-      "tablets": "ტაბლეტები",
-      "audio": "აუდიო",
-      "monitors": "მონიტორები",
-      "photo-and-video": "ფოტო და ვიდეო"
+      "Smartphones": "სმარტფონები",
+      "Laptops": "ლეპტოპები",
+      "Tablets": "ტაბლეტები",
+      "Audio": "აუდიო",
+      "Monitors": "მონიტორები",
+      "Photo+and+video": "ფოტო და ვიდეო"
     }
   },
   "PopularProducts": {
@@ -283,6 +283,19 @@
       "item4": "ფოტო და ვიდეო",
       "item5": "ტელეფონები",
       "item6": "ტაბლეტები"
+    },
+
+    "reset": "გასუფთავება"
+  },
+  "BlogFilter": {
+    "search": "მოძებნე სტატია..",
+    "sort": {
+      "title": "სორტირება",
+      "empty": "სორტირება გამორთულია",
+      "title-asc": "სათაური: A - Z",
+      "title-desc": "სათაური: Z - A",
+      "date-asc": "ახალი დამატებული",
+      "date-desc": "ბოლოს დამატებული"
     },
 
     "reset": "გასუფთავება"

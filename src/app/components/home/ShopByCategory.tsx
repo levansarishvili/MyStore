@@ -3,12 +3,12 @@ import Link from "next/link";
 import { createTranslator } from "next-intl";
 
 const categories = [
-  { name: "smartphones", image: "/assets/phone.PNG" },
-  { name: "tablets", image: "/assets/tablet.PNG" },
-  { name: "laptops", image: "/assets/laptop.PNG" },
-  { name: "audio", image: "/assets/headphone.PNG" },
-  { name: "monitors", image: "/assets/monitor.PNG" },
-  { name: "photo-and-video", image: "/assets/camera.PNG" },
+  { name: "Smartphones", image: "/assets/phone.png" },
+  { name: "Tablets", image: "/assets/tablet.png" },
+  { name: "Laptops", image: "/assets/laptop.png" },
+  { name: "Audio", image: "/assets/headphone.png" },
+  { name: "Monitors", image: "/assets/monitor.png" },
+  { name: "Photo+and+video", image: "/assets/camera.png" },
 ];
 
 export default async function ShopByCategory({ locale }: { locale: string }) {
@@ -23,7 +23,11 @@ export default async function ShopByCategory({ locale }: { locale: string }) {
       </h2>
       <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 py-4">
         {categories.map((category, index) => (
-          <Link href="/store" key={index} className="group">
+          <Link
+            href={`/${locale}/store/?category=${category.name}`}
+            key={index}
+            className="group"
+          >
             <div className="border flex flex-col items-center gap-3 bg-card rounded-xl py-4 md:py-10 hover:shadow-md transition-all duration-300 cursor-pointer">
               <div className="w-1/2 h-20 md:h-32 rounded-lg overflow-hidden flex justify-center">
                 <Image

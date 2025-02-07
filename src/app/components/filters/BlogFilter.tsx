@@ -2,14 +2,28 @@
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import { Input } from "../ui/input";
+import { useTranslations } from "next-intl";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
+import { Button } from "../ui/button";
 
-export default function PostFilter() {
+export default function BlogFilter() {
+  const t = useTranslations("BlogFilter");
+
   const sortOptions = [
-    { label: "Sort is not applied", value: "" },
-    { label: "Name: A - Z", value: "title-asc" },
-    { label: "Name: Z - A", value: "title-desc" },
-    { label: "Views: Low to High", value: "views-asc" },
-    { label: "Views: High to Low", value: "views-desc" },
+    { label: `${t("sort.empty")}`, value: "empty" },
+    { label: `${t("sort.title-asc")}`, value: "title-asc" },
+    { label: `${t("sort.title-desc")}`, value: "title-desc" },
+    { label: `${t("sort.date-asc")}`, value: "date-asc" },
+    { label: `${t("sort.date-desc")}`, value: "date-desc" },
   ];
 
   const searchParams = useSearchParams();
@@ -25,7 +39,7 @@ export default function PostFilter() {
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
-  // Handle Product search with debounced callback
+  // Handle Blog search with debounced callback
   const handleSearch = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const params = new URLSearchParams(searchParams);
@@ -35,45 +49,51 @@ export default function PostFilter() {
     400
   );
 
+  // Reset all filters
+  function handleClearFilters() {
+    const params = new URLSearchParams(searchParams);
+    params.delete("sortBy");
+    params.delete("search");
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+  }
+
   return (
-    <div className="post-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 rounded-2xl w-[30rem] p-8 bg-[#f1f3f5]">
+    <section className="flex flex-wrap justify-center items-center gap-2">
       {/* Searching functionality */}
-      <div className="post-search-wrapper flex flex-col items-start gap-4 w-full">
-        <label
-          className="search-title text-3xl font-semibold cursor-pointer"
-          htmlFor="search"
-        >
-          Search Product:
-        </label>
-        <input
-          id="search"
-          className="post-search border dark:bg-[#4a4a4a] px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
-          placeholder="Search post.."
+      <div className="max-sm:w-full">
+        <Input
+          placeholder={t("search")}
           onChange={handleSearch}
-        ></input>
+          className="text-sm p-2 border rounded-md max-sm:w-full"
+        />
       </div>
 
       {/* Sorting functionality */}
-      <div className="post-sort-wrapper flex flex-col items-start gap-4 w-full">
-        <label
-          className="sort-title text-3xl font-semibold cursor-pointer"
-          htmlFor="sort"
-        >
-          Sort By:
-        </label>
-        <select
-          id="sort"
-          className="post-sort border dark:bg-[#4a4a4a] px-4 py-3 rounded-lg cursor-pointer outline-none text-[1.4rem] w-full border-gray-300 transition-all duration-300 focus:border-[#ec5e2a]"
-          value={activeSort}
-          onChange={(e) => handleSort(e.target.value)}
-        >
-          {sortOptions.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+      <div className="">
+        <Select value={activeSort} onValueChange={handleSort}>
+          <SelectTrigger>
+            <SelectValue placeholder={t("sort.title")} />
+          </SelectTrigger>
+          <SelectContent className="text-xl">
+            <SelectGroup className="">
+              {sortOptions.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  className=""
+                >
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
-    </div>
+
+      {/* Reset filters*/}
+      <Button variant={"destructive"} className="" onClick={handleClearFilters}>
+        {t("reset")}
+      </Button>
+    </section>
   );
 }

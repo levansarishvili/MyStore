@@ -88,9 +88,9 @@ export default async function HomePage({
       <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('/assets/bg-img.png')]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
           <div className="order-last md:order-first">
-            <div className="flex flex-col max-md:items-center max-sm:gap-6 gap-10">
+            <div className="flex flex-col max-md:items-center max-sm:gap-6 gap-10 md:gap-12 w-full lg:w-[90%]">
               <div className="rounded-2xl flex flex-col gap-4">
-                <h1 className="max-md:text-center bg-text-gradient bg-clip-text text-2xl md:text-3xl lg:text-4xl font-medium lg:leading-[3rem] text-white">
+                <h1 className="max-md:text-center bg-text-gradient bg-clip-text text-3xl md:text-4xl lg:text-5xl font-medium sm:leading-[2rem] md:leading-[3rem] lg:leading-[4rem] text-white">
                   {t("Hero.title")}
                 </h1>
                 <p className="max-sm:text-center text-sm md:text-base text-white font-sans">
@@ -99,7 +99,7 @@ export default async function HomePage({
               </div>
               <Link href={`/${locale}/store`} className="">
                 <Button
-                  className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#2ca76e] transition-all duration-300"
+                  className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#4a5852] transition-all duration-300"
                   variant="default"
                 >
                   {t("Hero.button")}

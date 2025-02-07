@@ -16,12 +16,12 @@
   "ShopByCategory": {
     "title": "Shop by Categories",
     "categories": {
-      "laptops": "Laptops",
-      "smartphones": "Smartphones",
-      "tablets": "Tablets",
-      "audio": "Audio",
-      "monitors": "Monitors",
-      "photo-and-video": "Photo and video"
+      "Laptops": "Laptops",
+      "Smartphones": "Smartphones",
+      "Tablets": "Tablets",
+      "Audio": "Audio",
+      "Monitors": "Monitors",
+      "Photo+and+video": "Photo and video"
     }
   },
   "PopularProducts": {
@@ -280,6 +280,19 @@
       "item4": "Photo and video",
       "item5": "Smartphones",
       "item6": "Tablets"
+    },
+
+    "reset": "Reset Filters"
+  },
+  "BlogFilter": {
+    "search": "Search blog..",
+    "sort": {
+      "title": "Sort by",
+      "empty": "Sort is not applied",
+      "title-asc": "Name: A - Z",
+      "title-desc": "Name: Z - A",
+      "date-asc": "Date: A - Z",
+      "date-desc": "Date: Z - A"
     },
 
     "reset": "Reset Filters"
