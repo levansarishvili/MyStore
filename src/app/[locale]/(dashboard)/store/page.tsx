@@ -4,6 +4,7 @@ import CheckSubscriptionStatus from "../../../components/CheckSubscriptionStatus
 import GetUserData from "../../../components/GetUserData";
 import ProductItem from "./ProductItem";
 import { createTranslator } from "next-intl";
+import ProductFilter from "src/app/components/filters/ProductFilter";
 
 export interface ProductsType {
   id: string;
@@ -78,6 +79,9 @@ export default async function Store({ params, searchParams }: Props) {
   return (
     <section className="mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Products.title")}</h1>
+
+      {/* Product filter */}
+      <ProductFilter />
 
       <div className="w-full grid grid-cols-1 min-[460px]:grid-cols-2 custom-md:grid-cols-3 custom-lg:grid-cols-4 gap-6 justify-center">
         {products?.map((product) => (

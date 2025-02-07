@@ -3,12 +3,12 @@ import Link from "next/link";
 import { createTranslator } from "next-intl";
 
 const categories = [
-  { name: "smartphones", image: "/assets/phone.png" },
-  { name: "tablets", image: "/assets/tablet.png" },
-  { name: "laptops", image: "/assets/laptop.png" },
-  { name: "audio", image: "/assets/headphone.png" },
-  { name: "monitors", image: "/assets/monitor.png" },
-  { name: "photo-and-video", image: "/assets/camera.png" },
+  { name: "smartphones", image: "/assets/phone.PNG" },
+  { name: "tablets", image: "/assets/tablet.PNG" },
+  { name: "laptops", image: "/assets/laptop.PNG" },
+  { name: "audio", image: "/assets/headphone.PNG" },
+  { name: "monitors", image: "/assets/monitor.PNG" },
+  { name: "photo-and-video", image: "/assets/camera.PNG" },
 ];
 
 export default async function ShopByCategory({ locale }: { locale: string }) {
