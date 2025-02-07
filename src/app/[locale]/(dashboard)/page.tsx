@@ -112,7 +112,7 @@ export default async function HomePage({
           <div className="order-first md:order-last justify-center flex flex-col items-center">
             <Image
               src="/assets/banner-img.png"
-              alt="baner"
+              alt="banner"
               width={1200}
               height={600}
               className="w-2/3 md:w-auto"
