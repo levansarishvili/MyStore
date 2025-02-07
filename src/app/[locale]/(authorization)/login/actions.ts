@@ -24,7 +24,10 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect("/login");
+    if (error) {
+      console.error(error);
+      return { success: false, message: "Invalid email or password." };
+    }
   }
 
   // Add user into stripe if they don't exist yet
@@ -35,6 +38,7 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
+  return { success: true };
   redirect("/");
 }
 

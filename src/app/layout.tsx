@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { Inter } from "next/font/google";
 import { Noto_Sans_Georgian } from "next/font/google";
 import { ThemeProvider } from "./components/theme-provider";
+import { Toaster } from "./components/ui/toaster";
 
 export const metadata = {
   title: "e-shop",
@@ -54,6 +55,7 @@ export default function RootLayout({
             <>{children}</>
           </div>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

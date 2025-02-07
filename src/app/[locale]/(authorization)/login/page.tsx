@@ -1,23 +1,76 @@
-import Link from "next/link";
+"use client";
+
 import { login, signInWithGithub, signInWithGoogle } from "./actions";
 import { useTranslations } from "next-intl";
 import { Button } from "src/app/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Link from "next/link";
+import { useToast } from "@/components/hooks/use-toast";
+
+// Validation schema
+const loginSchema = z.object({
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .min(1, "Password is required"),
+});
+
+type FormData = z.infer<typeof loginSchema>;
 
 interface paramsType {
   params: { locale: string };
-  locale: string;
 }
 
+// Login page component
 export default function LoginPage({ params }: paramsType) {
   const locale = params.locale;
   const t = useTranslations("LoginPage");
+  const { toast } = useToast();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  // Submit handler
+  const onSubmit = async (data: FormData) => {
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+
+    const result = await login(formData);
+
+    if (!result.success) {
+      toast({
+        title: "Login Failed",
+        description: result.message,
+        variant: "default",
+      });
+      // Clear the form data if login fails
+      reset();
+    } else {
+      toast({
+        title: "Login Successful",
+        description: "Redirecting...",
+      });
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="mt-16 bg-card flex flex-col items-center gap-6 justify-center border max-w-[20rem] lg:max-w-[24rem] mx-auto rounded-xl px-6 md:px-8 py-4 shadow-md w-full">
-      <form className="w-full flex flex-col items-center gap-6 lg:gap-8 justify-center max-w-[20rem] lg:max-w-[24rem] mx-auto">
+      <form
+        className="w-full flex flex-col items-center gap-6 lg:gap-8 justify-center max-w-[20rem] lg:max-w-[24rem] mx-auto"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
         <div className="flex">
           <p className="text-xs sm:text-sm lg:text-base">
@@ -36,13 +89,15 @@ export default function LoginPage({ params }: paramsType) {
               {t("email")}:
             </label>
             <input
+              {...register("email")}
               className="border rounded-lg px-4 py-2 text-sm bg-background"
               id="email"
-              name="email"
               type="email"
               data-cy="email-input"
-              required
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email.message}</p>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label
@@ -52,21 +107,23 @@ export default function LoginPage({ params }: paramsType) {
               {t("password")}:
             </label>
             <input
+              {...register("password")}
               className="border rounded-lg px-4 py-2 text-sm bg-background"
               id="password"
-              name="password"
               type="password"
               data-cy="password-input"
-              required
             />
+            {errors.password && (
+              <p className="text-red-500 text-xs">{errors.password.message}</p>
+            )}
           </div>
         </div>
         <div className="w-2/3">
           <Button
-            formAction={login}
             variant={"default"}
             className="hover:bg-[#2ca76e] text-white transition-all duration-300 w-full text-sm"
             data-cy="login-button"
+            type="submit"
           >
             {t("login-button")}
           </Button>
