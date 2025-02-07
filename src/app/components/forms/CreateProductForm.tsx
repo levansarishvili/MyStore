@@ -16,6 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
+import { useTranslations } from "next-intl";
+
 const formSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   brand: z.string().min(2, "Brand is required"),
@@ -28,6 +30,7 @@ const formSchema = z.object({
 });
 type FormData = z.infer<typeof formSchema>;
 export default function CreateProductForm() {
+  const t = useTranslations("Profile.AddProductForm");
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -76,7 +79,7 @@ export default function CreateProductForm() {
     <div className="flex flex-col items-center gap-8 w-full">
       {createdSuccessfully && (
         <p className="text-primary text-base md:text-2xl font-medium">
-          Product created successfully ✔
+          {t("addMessage")} ✔
         </p>
       )}
       {loading ? (
@@ -95,7 +98,7 @@ export default function CreateProductForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="name"
                 >
-                  Product Name
+                  {t("name")}
                   <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -117,7 +120,7 @@ export default function CreateProductForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="brand"
                 >
-                  Product Brand
+                  {t("brand")}
                   <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -142,7 +145,7 @@ export default function CreateProductForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="price"
                 >
-                  Price
+                  {t("price")}
                   <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -165,7 +168,7 @@ export default function CreateProductForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="description"
                 >
-                  Description
+                  {t("description")}
                   <span className="text-destructive">*</span>
                 </label>
                 <textarea
@@ -191,12 +194,12 @@ export default function CreateProductForm() {
                 className="text-sm font-medium text-muted-foreground"
                 htmlFor="category"
               >
-                Category
+                {t("category")}
                 <span className="text-destructive">*</span>
               </label>
               <Select onValueChange={(value) => setValue("category", value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
+                  <SelectValue placeholder={t("categoryLabel")} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -226,7 +229,7 @@ export default function CreateProductForm() {
                 className="text-sm font-medium text-muted-foreground"
                 htmlFor="images"
               >
-                Upload Images
+                {t("image")}
                 <span className="text-destructive">*</span>
               </label>
               <input
@@ -252,7 +255,7 @@ export default function CreateProductForm() {
               type="submit"
               className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
             >
-              Add Product
+              {t("button")}
             </Button>
           </div>
         </form>

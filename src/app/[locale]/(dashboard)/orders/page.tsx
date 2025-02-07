@@ -12,6 +12,8 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import { createTranslator } from "next-intl";
+import { Button } from "src/app/components/ui/button";
+import Image from "next/image";
 
 interface OrdersType {
   id: string;
@@ -24,7 +26,6 @@ interface OrdersType {
 
 interface ParamsType {
   params: { locale: string };
-  locale: string;
 }
 
 export default async function OrdersPage({ params }: ParamsType) {
@@ -119,7 +120,23 @@ export default async function OrdersPage({ params }: ParamsType) {
 
       {/* When orders is empty */}
       {orders?.length === 0 && (
-        <p className="text-lg">Your order history is empty!</p>
+        <div className="flex flex-col items-center gap-8 mt-10">
+          <p className="text-base lg:text-xl font-medium">
+            {t("Orders.message")}
+          </p>
+          <Image
+            src="/assets/empty-img.svg"
+            alt="empty"
+            width={500}
+            height={500}
+            className="w-24 md:w-32"
+          />
+          <Link href="/store">
+            <Button className="hover:bg-[#2ca76e] text-white transition-all duration-300">
+              {t("Orders.emptyButton")}
+            </Button>
+          </Link>
+        </div>
       )}
     </section>
   );

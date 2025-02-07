@@ -10,12 +10,15 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Loading from "../../loading";
+import { useTranslations } from "next-intl";
+
+// const t = useTranslations("Profile.AddBlogForm");
 
 // Validation schema with Zod
 const blogSchema = z.object({
   title: z
     .string()
-    .min(1, "Title is required")
+    .min(1, "error")
     .max(100, "Title should be at most 100 characters"),
   body: z.string().min(10, "Content should be at least 10 characters"),
   title_ka: z
@@ -25,6 +28,7 @@ const blogSchema = z.object({
   body_ka: z
     .string()
     .min(10, "Content in Georgian should be at least 10 characters"),
+  image: z.custom<File>((file) => file instanceof File, "Image is required"),
 });
 
 export default function CreateBlogForm() {
@@ -33,6 +37,8 @@ export default function CreateBlogForm() {
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const router = useRouter();
   const supabase = createClient();
+
+  const t = useTranslations("Profile.AddBlogForm");
 
   // React Hook Form setup
   const {
@@ -71,16 +77,18 @@ export default function CreateBlogForm() {
 
   // Submit function
   const onSubmit = async (data: any) => {
-    setIsLoading(true);
     if (!image) {
       alert("Please upload an image");
       return;
     }
+    setIsLoading(() => true);
 
     const imageUrl = await uploadImage(image);
 
     if (!imageUrl) {
       alert("Image upload failed. Please try again.");
+      setIsLoading(() => false);
+
       return;
     }
 
@@ -136,7 +144,7 @@ export default function CreateBlogForm() {
     <div className="flex flex-col items-center gap-8 w-full">
       {createdSuccessfully && (
         <p className="text-primary text-base md:text-2xl font-medium">
-          Blog created successfully ✔
+          {t("addMessage")} ✔
         </p>
       )}
 
@@ -156,7 +164,7 @@ export default function CreateBlogForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="title"
                 >
-                  Post Title
+                  {t("name")}
                   <span className="text-destructive">*</span>
                 </label>
                 <Controller
@@ -168,7 +176,7 @@ export default function CreateBlogForm() {
                       {...field}
                       type="text"
                       id="title"
-                      placeholder="Enter title in English"
+                      placeholder={t("namePlaceholderlEng")}
                       className={`border ${
                         errors.title ? "border-destructive" : ""
                       } w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300`}
@@ -187,7 +195,7 @@ export default function CreateBlogForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="body"
                 >
-                  Post Content
+                  {t("content")}
                   <span className="text-destructive">*</span>
                 </label>
                 <Controller
@@ -198,7 +206,7 @@ export default function CreateBlogForm() {
                     <Textarea
                       {...field}
                       id="body"
-                      placeholder="Write your content in markdown..."
+                      placeholder={t("contentPlaceholderlEng")}
                       className={`border ${
                         errors.body ? "border-destructive" : "border-muted"
                       } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
@@ -220,7 +228,7 @@ export default function CreateBlogForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="title_ka"
                 >
-                  Post Title (Georgian)
+                  {t("name")}
                   <span className="text-destructive">*</span>
                 </label>
                 <Controller
@@ -232,7 +240,7 @@ export default function CreateBlogForm() {
                       {...field}
                       type="text"
                       id="title_ka"
-                      placeholder="Enter title in Georgian"
+                      placeholder={t("namePlaceholderlGeo")}
                       className={`border ${
                         errors.title_ka ? "border-destructive" : "border-muted"
                       } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
@@ -251,7 +259,7 @@ export default function CreateBlogForm() {
                   className="text-sm font-medium text-muted-foreground"
                   htmlFor="body_ka"
                 >
-                  Post Content (Georgian)
+                  {t("content")}
                   <span className="text-destructive">*</span>
                 </label>
                 <Controller
@@ -262,7 +270,7 @@ export default function CreateBlogForm() {
                     <Textarea
                       {...field}
                       id="body_ka"
-                      placeholder="Write your content in markdown..."
+                      placeholder={t("contentPlaceholderlGeo")}
                       className={`border ${
                         errors.body_ka ? "border-destructive" : "border-muted"
                       } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
@@ -284,20 +292,25 @@ export default function CreateBlogForm() {
               className="text-sm font-medium text-muted-foreground"
               htmlFor="image"
             >
-              Upload Image
+              {t("image")}
               <span className="text-destructive">*</span>
             </label>
-            <Input
+            <Controller
+              control={control}
               name="image"
-              type="file"
-              accept="image/*"
-              onChange={(e) => setImage(e.target.files![0])}
-              className={`border ${
-                errors.image ? "border-destructive" : "border-muted"
-              } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+              render={({ field }) => (
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => field.onChange(e.target.files?.[0])}
+                  className={`border ${
+                    errors.image ? "border-destructive" : "border-muted"
+                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                />
+              )}
             />
             {errors.image && (
-              <p className="text-destructive text-xs">{errors.image.message}</p>
+              <p className="text-red-600 text-xs">{errors.image.message}</p>
             )}
           </div>
 
@@ -308,7 +321,7 @@ export default function CreateBlogForm() {
               type="submit"
               className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
             >
-              Add Post
+              {t("button")}
             </Button>
           </div>
         </form>

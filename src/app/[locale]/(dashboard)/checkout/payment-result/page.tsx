@@ -110,7 +110,7 @@ export default async function ResultPage({
         <p className="text-sm md:text-base text-muted-foreground mb-8">
           {t("SuccessPaymentMessage.message")}
         </p>
-        <Link href="/">
+        <Link href={`/${locale}`}>
           <Button className="px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-[#38CB89]/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#38CB89] focus:ring-opacity-50">
             {t("SuccessPaymentMessage.button")}
           </Button>

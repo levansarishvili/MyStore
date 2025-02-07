@@ -6,17 +6,17 @@ import { ProductsType } from "../page";
 import GetUserData from "src/app/components/GetUserData";
 
 interface paramsType {
-  id: string;
+  params: {
+    id: string;
+    locale: string;
+  };
 }
 
 // Fetch product data from API according to product ID
-export default async function ProductDetailsPage({
-  params,
-}: {
-  params: paramsType;
-}) {
+export default async function ProductDetailsPage({ params }: paramsType) {
   const { id } = params;
   let product: ProductsType | null = null;
+  const locale = params.locale;
 
   const userData = await GetUserData();
   const userId = userData?.id;
@@ -58,7 +58,7 @@ export default async function ProductDetailsPage({
 
   return (
     <section className="w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <ProductDetails product={product} isInCart={isInCart} />
+      <ProductDetails product={product} isInCart={isInCart} locale={locale} />
     </section>
   );
 }

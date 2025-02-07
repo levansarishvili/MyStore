@@ -7,13 +7,12 @@ import CheckSubscriptionStatus from "../CheckSubscriptionStatus";
 import { ModeToggle } from "./ModeToggle";
 import NotificationBar from "./NotificationBar";
 import BurgerMenu from "../../[locale]/BurgerMenu";
-import { ShoppingCart } from "lucide-react";
 import { createClient } from "src/utils/supabase/server";
 import CartButton from "./CartButton";
 import Image from "next/image";
 
 // Create Header component
-async function Header() {
+async function Header({ locale }: { locale: string }) {
   const supabase = await createClient();
   const userData = await GetUserData();
 
@@ -36,7 +35,7 @@ async function Header() {
 
   return (
     <header className="flex flex-col items-center sticky top-0 z-10 shadow-md bg-background">
-      {!isNotAuthenticated && <NotificationBar />}
+      {!isNotAuthenticated && <NotificationBar locale={locale} />}
       <div className="max-w-[90rem] w-full h-16 mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0 rounded-xl">
         <Link href="/" className="h-10 flex gap-4 items-center">
           <Image
@@ -54,7 +53,7 @@ async function Header() {
         {/* Navigation for larger screens */}
         {!isNotAuthenticated && (
           <nav className="">
-            <Navigation />
+            <Navigation locale={locale} />
           </nav>
         )}
 
@@ -70,26 +69,24 @@ async function Header() {
 
           {!isNotAuthenticated && (
             <>
-              {/* Divider */}
               <div className="bg-border rounded-lg h-10 w-[1px]"></div>
-
               {/* User Profile */}
               <div
                 className={`${
                   isProMember ? "border-2 border-primary rounded-full" : ""
                 }`}
               >
-                <ProfileToggle userImageUrl={userImageUrl} />
+                <ProfileToggle userImageUrl={userImageUrl} locale={locale} />
               </div>
 
               {/* Cart Icon */}
-              <CartButton cartQuantity={cartQuantity} />
+              <CartButton cartQuantity={cartQuantity} locale={locale} />
             </>
           )}
         </div>
 
         {/* Navigation for smaller screens */}
-        {!isNotAuthenticated && <BurgerMenu />}
+        {!isNotAuthenticated && <BurgerMenu locale={locale} />}
       </div>
     </header>
   );

@@ -3,10 +3,15 @@ import GetUserData from "../GetUserData";
 import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import Image from "next/image";
 import DeleteProduct from "../product/DeleteProduct";
+import { createTranslator } from "next-intl";
 
-export default async function MyProducts() {
+export default async function MyProducts({ locale }: { locale: string }) {
   const supabase = await createClient();
   const userdata = await GetUserData();
+
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   const { data: myProducts, error } = (await supabase
     .from("products")
@@ -44,7 +49,7 @@ export default async function MyProducts() {
             </span>
             <p className="text-xs md:text-sm">${product.price / 100}</p>
             <p className="text-xs md:text-sm">
-              Sold: {product.solded_quantity}
+              {t("Profile.MyProductsForm.sold")}: {product.solded_quantity}
             </p>
             <DeleteProduct id={product.id} />
           </div>

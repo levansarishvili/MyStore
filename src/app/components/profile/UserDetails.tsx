@@ -1,8 +1,13 @@
 import GetUserData from "../GetUserData";
 import { Button } from "../ui/button";
+import { createTranslator } from "next-intl";
 
-export default async function UserDetails() {
+export default async function UserDetails({ locale }: { locale: string }) {
   const userData = await GetUserData();
+
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   if (!userData) {
     console.error("User data not found");
@@ -12,10 +17,26 @@ export default async function UserDetails() {
   return (
     <form className="flex flex-col justify-center items-center gap-6 w-full bg-muted sm:p-6 rounded-xl">
       {[
-        { label: "Full Name", id: "full_name", type: "text" },
-        { label: "Username", id: "user_name", type: "text" },
-        { label: "Phone", id: "phone", type: "tel" },
-        { label: "Email", id: "email", type: "email" },
+        {
+          label: `${t("Profile.AccountForm.name")}`,
+          id: "full_name",
+          type: "text",
+        },
+        {
+          label: `${t("Profile.AccountForm.username")}`,
+          id: "user_name",
+          type: "text",
+        },
+        {
+          label: `${t("Profile.AccountForm.phone")}`,
+          id: "phone",
+          type: "tel",
+        },
+        {
+          label: `${t("Profile.AccountForm.email")}`,
+          id: "email",
+          type: "email",
+        },
       ].map(({ label, id, type }) => (
         <div key={id} className="flex flex-col w-full">
           <label
@@ -37,7 +58,7 @@ export default async function UserDetails() {
         variant="default"
         className="mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
       >
-        Save Changes
+        {t("Profile.AccountForm.button")}
       </Button>
     </form>
   );

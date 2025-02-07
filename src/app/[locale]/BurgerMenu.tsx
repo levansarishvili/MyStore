@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { MenuIcon, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-const Sidebar = () => {
+const Sidebar = ({ locale }: { locale: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("Navigation");
 
@@ -91,7 +91,7 @@ const Sidebar = () => {
         <Link
           id="home"
           className="menu-item hover:text-primary transition-all duration-300"
-          href="/"
+          href={`/${locale}`}
           onClick={handleMenuItemClick}
         >
           {t("home")}
@@ -99,7 +99,7 @@ const Sidebar = () => {
         <Link
           id="about"
           className="menu-item hover:text-primary transition-all duration-300"
-          href="/store"
+          href={`/${locale}/store`}
           onClick={handleMenuItemClick}
         >
           {t("products")}
@@ -107,7 +107,7 @@ const Sidebar = () => {
         <Link
           id="contact"
           className="menu-item hover:text-primary transition-all duration-300"
-          href="/blog"
+          href={`/${locale}/blog`}
           onClick={handleMenuItemClick}
         >
           {t("blogs")}
@@ -115,7 +115,7 @@ const Sidebar = () => {
         <Link
           id="contact"
           className="menu-item hover:text-primary transition-all duration-300"
-          href="/contact"
+          href={`/${locale}/contact`}
           onClick={handleMenuItemClick}
         >
           {t("contact")}

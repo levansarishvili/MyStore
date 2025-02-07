@@ -1,7 +1,7 @@
 import { Link } from "../../i18n/routing";
 import { useTranslations } from "next-intl";
 
-export default function Navigation() {
+export default function Navigation({ locale }: { locale: string }) {
   const t = useTranslations("Navigation");
 
   return (

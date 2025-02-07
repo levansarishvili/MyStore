@@ -17,10 +17,11 @@ import {
   TabsTrigger,
 } from "../../../components/ui/tabs";
 import UserDetails from "src/app/components/profile/UserDetails";
-import { is } from "cypress/types/bluebird";
 import MyProducts from "src/app/components/profile/MyProducts";
 import Image from "next/image";
 import MyBlogs from "src/app/components/blog/MyBlogs";
+import Link from "next/link";
+import { createTranslator } from "next-intl";
 
 export default async function ProfilePage({
   params,
@@ -28,6 +29,10 @@ export default async function ProfilePage({
   params: { locale: string };
 }) {
   const locale = params.locale;
+
+  const messages = (await import(`../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   const userData = await GetUserData();
   const userId = userData?.id as string;
@@ -38,7 +43,7 @@ export default async function ProfilePage({
   return (
     <section className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 w-full">
       <h1 className="text-xl md:text-2xl font-medium text-center mb-10">
-        My Account
+        {t("Profile.title")}
       </h1>
 
       <div className="flex flex-col gap-12">
@@ -77,7 +82,9 @@ export default async function ProfilePage({
                 {isProMember && (
                   <div className="flex items-center gap-2  text-primary px-3 py-1 text-sm">
                     <Star className="size-6 fill-primary" />
-                    <span className="text-base font-medium">Pro Member</span>
+                    <span className="text-base font-medium">
+                      {t("Profile.pro")}
+                    </span>
                   </div>
                 )}
               </div>
@@ -86,7 +93,6 @@ export default async function ProfilePage({
               <div className="text-center mt-6 space-y-2">
                 {userData?.user_metadata?.user_name && (
                   <p className="text-sm font-medium text-foreground">
-                    <span className="text-muted-foreground">Username:</span>{" "}
                     {userData?.user_metadata?.user_name}
                   </p>
                 )}
@@ -96,14 +102,28 @@ export default async function ProfilePage({
               </div>
 
               {/* Actions */}
-              <div className="mt-6 flex justify-center w-full">
+              <div className="mt-6 flex gap-6 lg:flex-col justify-center w-full">
                 {/* <Button
                 variant="destructive"
                 className="text-sm font-medium rounded-lg transition"
               >
                 Cancel Subscription
               </Button> */}
-                <DeleteAccount userId={userId} />
+                {!isProMember && (
+                  <div className="flex justify-center">
+                    <Link href={`/${locale}/pricing`}>
+                      <Button
+                        className="text-white hover:bg-[#38CB89]/80 transition-all duration-300"
+                        variant="default"
+                      >
+                        {t("Profile.subscribeButton")}
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+                <div className="flex justify-center">
+                  <DeleteAccount userId={userId} />
+                </div>
               </div>
             </div>
           </div>
@@ -111,52 +131,52 @@ export default async function ProfilePage({
           {/* Show create product form if user is a Pro member */}
           <Tabs defaultValue="account" className="w-full">
             {isProMember && (
-              <TabsList className="w-full flex flex-wrap justify-start gap-1 bg-muted rounded-lg mb-6 h-auto">
+              <TabsList className="w-full flex flex-wrap justify-center gap-3 bg-muted rounded-lg mb-6 h-auto">
                 <TabsTrigger
                   value="account"
-                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
-                  Account
+                  {t("Profile.AccountForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my products"
-                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
-                  My products
+                  {t("Profile.MyProductsForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my blogs"
-                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
-                  My blogs
+                  {t("Profile.MyBlogsForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="add product"
-                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
-                  Add Product
+                  {t("Profile.AddProductForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="blog"
-                  className="flex-1 min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
-                  Add Blog
+                  {t("Profile.AddBlogForm.title")}
                 </TabsTrigger>
               </TabsList>
             )}
 
             <div className="p-4 bg-muted rounded-xl shadow-md">
               <TabsContent value="account">
-                <UserDetails />
+                <UserDetails locale={locale} />
               </TabsContent>
               {isProMember && (
                 <>
                   <TabsContent value="my products">
-                    <MyProducts />
+                    <MyProducts locale={locale} />
                   </TabsContent>
                   <TabsContent value="add product">
                     <CreateProductForm />

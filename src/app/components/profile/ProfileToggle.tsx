@@ -20,11 +20,15 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
+interface ProfileToggleProps {
+  userImageUrl: string;
+  locale: string;
+}
+
 export default function ProfileToggle({
   userImageUrl,
-}: {
-  userImageUrl: string;
-}) {
+  locale,
+}: ProfileToggleProps) {
   const t = useTranslations("ProfileToggle");
 
   return (
@@ -60,28 +64,28 @@ export default function ProfileToggle({
         </DropdownMenuLabel>
 
         <DropdownMenuGroup className="py-2">
-          <Link href="/profile">
+          <Link href={`/${locale}/profile`}>
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <User className="min-w-4 min-h-4" />
               <span>{t("profile")}</span>
             </DropdownMenuItem>
           </Link>
 
-          <Link href="/cart">
+          <Link href={`/${locale}/cart`}>
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <ShoppingCart className="min-w-4 min-h-4" />
               <span>{t("cart")}</span>
             </DropdownMenuItem>
           </Link>
 
-          <Link href="/orders">
+          <Link href={`/${locale}/orders`}>
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <CreditCard className="min-w-4 min-h-4" />
               <span>{t("orders")}</span>
             </DropdownMenuItem>
           </Link>
 
-          <Link href="/pricing">
+          <Link href={`/${locale}/pricing`}>
             <DropdownMenuItem className="flex gap-4 px-4 cursor-pointer focus:text-primary text-sm rounded-lg">
               <Sparkles className="min-w-4 min-h-4 fill-[#FFD700]" />
               <span>{t("pro")}</span>

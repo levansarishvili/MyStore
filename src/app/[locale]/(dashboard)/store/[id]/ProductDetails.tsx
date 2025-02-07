@@ -28,9 +28,10 @@ import {
 interface Props {
   product: ProductsType;
   isInCart: boolean;
+  locale: string;
 }
 
-export default function ProductDetails({ product, isInCart }: Props) {
+export default function ProductDetails({ product, isInCart, locale }: Props) {
   const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -135,7 +136,7 @@ export default function ProductDetails({ product, isInCart }: Props) {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Link href="/cart">
+            <Link href={`/${locale}/cart`}>
               <Button className="text-xs md:text-sm text-white hover:bg-[#38CB89]/80 transition-all duration-300">
                 {t("ModalMessage.button")}
               </Button>

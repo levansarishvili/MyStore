@@ -67,7 +67,7 @@ export async function POST(req: Request) {
       line_items: lineItems,
       success_url: `${req.headers.get(
         "origin"
-      )}/donate-with-checkout/payment-result?session_id={CHECKOUT_SESSION_ID}`,
+      )}/checkout/payment-result?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/?canceled=true`,
       metadata: {
         user_id: userId,

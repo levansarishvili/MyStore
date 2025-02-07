@@ -97,7 +97,7 @@ export default async function HomePage({
                   {t("Hero.description")}.
                 </p>
               </div>
-              <Link href="/store" className="">
+              <Link href={`/${locale}/store`} className="">
                 <Button
                   className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#2ca76e] transition-all duration-300"
                   variant="default"

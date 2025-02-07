@@ -16,7 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Create Footer component
-function Footer() {
+function Footer({ locale }: { locale: string }) {
   const t = useTranslations("Footer");
 
   return (
@@ -53,7 +53,7 @@ function Footer() {
             </AccordionTrigger>
             <AccordionContent>
               <Link
-                href="/"
+                href={`/${locale}`}
                 className="hover:text-primary transition-all duration-300"
               >
                 {t("page.home")}
@@ -61,7 +61,7 @@ function Footer() {
             </AccordionContent>
             <AccordionContent>
               <Link
-                href="/"
+                href={`/${locale}/store`}
                 className="hover:text-primary transition-all duration-300"
               >
                 {t("page.products")}
@@ -69,7 +69,7 @@ function Footer() {
             </AccordionContent>
             <AccordionContent>
               <Link
-                href="/"
+                href={`/${locale}/blog`}
                 className="hover:text-primary transition-all duration-300"
               >
                 {t("page.blogs")}
@@ -77,7 +77,7 @@ function Footer() {
             </AccordionContent>
             <AccordionContent>
               <Link
-                href="/"
+                href={`/${locale}/contact`}
                 className="hover:text-primary transition-all duration-300"
               >
                 {t("page.contact")}
@@ -108,25 +108,25 @@ function Footer() {
           <p className="text-base font-medium">{t("page.title")}</p>
           <ul className="flex flex-col gap-6">
             <Link
-              href="/"
+              href={`/${locale}`}
               className="hover:text-primary transition-all duration-300"
             >
               <li className="text-sm">{t("page.home")}</li>
             </Link>
             <Link
-              href="/store"
+              href={`/${locale}/store`}
               className="hover:text-primary transition-all duration-300"
             >
               <li className="text-sm">{t("page.products")}</li>
             </Link>
             <Link
-              href="/blog"
+              href={`/${locale}/blog`}
               className="hover:text-primary transition-all duration-300"
             >
               <li className="text-sm">{t("page.blogs")}</li>
             </Link>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="hover:text-primary transition-all duration-300"
             >
               <li className="text-sm">{t("page.contact")}</li>

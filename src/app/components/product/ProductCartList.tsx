@@ -137,12 +137,18 @@ export default function ProductCartList({
     <div className="flex flex-col justify-center gap-10 items-center w-full">
       {/* If cart is empty */}
       {products.length === 0 && (
-        <div className="flex flex-col items-center gap-4 mt-16">
-          <h2 className="text-xl lg:text-2xl font-medium">{t("empty")}</h2>
-
+        <div className="flex flex-col items-center gap-8 mt-16">
+          <h2 className="text-base lg:text-xl font-medium">{t("empty")}</h2>
+          <Image
+            src="/assets/empty-img.svg"
+            alt="empty"
+            width={500}
+            height={500}
+            className="w-24 md:w-32"
+          />
           <Link href="/store">
-            <Button className="hover:bg-[#2ca76e] transition-all duration-300">
-              Go to shop
+            <Button className="hover:bg-[#2ca76e] text-white transition-all duration-300">
+              {t("emptyButton")}
             </Button>
           </Link>
         </div>

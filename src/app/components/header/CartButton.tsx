@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 
 interface PropsType {
   cartQuantity: number | undefined;
+  locale: string;
 }
 
-export default function CartButton({ cartQuantity }: PropsType) {
+export default function CartButton({ cartQuantity, locale }: PropsType) {
   const [cartItemsQuantity, setCartItemsQuantity] = useState(cartQuantity || 0);
 
   // Update cartItemsQuantity when cartQuantity prop changes
@@ -16,7 +17,7 @@ export default function CartButton({ cartQuantity }: PropsType) {
 
   return (
     <Link
-      href="/cart"
+      href={`/${locale}/cart`}
       className="relative flex justify-center hover:text-primary hover:bg-muted items-center w-9 h-9 rounded-lg transition-all duration-300"
     >
       {/* Display quantity only if greater than 0 */}

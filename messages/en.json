@@ -89,10 +89,13 @@
       "total": "Total",
       "subtotal": "Subtotal"
     },
-    "button": "Checkout"
+    "button": "Checkout",
+    "emptyButton": "Go to shop"
   },
   "Orders": {
     "title": "Orders",
+    "emptyButton": "Go to shop",
+    "message": "You don't have any orders yet!",
     "table": {
       "date": "Date",
       "details": "Details",
@@ -183,6 +186,11 @@
     "message": "Payment is successful. Thank you for shopping with us!",
     "button": "Go to home"
   },
+  "UnsuccessPaymentMessage": {
+    "title": "Payment Failed!",
+    "message": "Your payment was not completed. You can try again or return to the store.",
+    "button": "Go to home"
+  },
   "SuccessSubscriptionMessage": {
     "title": "Checkout Successful!",
     "congrats": "Congratulations!",
@@ -199,9 +207,59 @@
     "address": "Chavchavadze street #12, Tbilisi, Georgia"
   },
   "Profile": {
-    "title": "Profile",
-    "orders": "Orders",
-    "cart": "Cart",
-    "logout": "Logout"
+    "title": "My Account",
+    "pro": "Pro Member",
+    "username": "Username",
+    "deleteButton": "Delete Account",
+    "deleting": "Deleting",
+    "deleteMessage": "Your account has been successfully deleted.",
+    "subscribeButton": "Buy Subscription",
+    "AccountForm": {
+      "title": "Account",
+      "name": "Full Name",
+      "username": "Username",
+      "phone": "Phone",
+      "email": "Email",
+      "button": "Save Changes"
+    },
+    "MyProductsForm": {
+      "title": "My Products",
+      "sold": "Sold"
+    },
+    "MyBlogsForm": {
+      "title": "My Blogs"
+    },
+    "AddProductForm": {
+      "title": "Add Product",
+      "addMessage": "Product created successfully!",
+      "name": "Product Name",
+      "price": "Price",
+      "brand": "Brand",
+      "description": "Description",
+      "category": "Category",
+      "categoryLabel": "Select category",
+      "image": "Upload Images",
+      "button": "Add Product"
+    },
+    "AddBlogForm": {
+      "title": "My Blogs",
+      "addMessage": "Blog created successfully",
+      "name": "Blog Title",
+      "content": "Blog Content",
+      "namePlaceholderlGeo": "In Georgian",
+      "namePlaceholderlEng": "In English",
+      "contentPlaceholderlGeo": "In Georgian - Use Markdown",
+      "contentPlaceholderlEng": "In English - Use Markdown",
+      "image": "Upload Image",
+      "button": "Add Blog"
+    },
+    "ErrorMessages": {
+      "message-1": "Title is required",
+      "message-2": "Title should be at most 100 characters",
+      "message-3": "Content should be at least 10 characters",
+      "message-4": "Title in Georgian is required",
+      "message-5": "Title in Georgian should be at most 100 characters",
+      "message-6": "Content in Georgian should be at least 10 characters"
+    }
   }
 }

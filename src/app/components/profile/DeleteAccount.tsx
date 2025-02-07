@@ -3,11 +3,17 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 
-export default function DeleteAccount({ userId }: { userId: string }) {
+interface DeleteAccountProps {
+  userId: string;
+}
+
+export default function DeleteAccount({ userId }: DeleteAccountProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const t = useTranslations("Profile");
 
   const router = useRouter();
 
@@ -29,7 +35,7 @@ export default function DeleteAccount({ userId }: { userId: string }) {
         const data = await response.json();
         setError(data.message || "Failed to delete user");
       } else {
-        setSuccessMessage("Your account has been successfully deleted.");
+        setSuccessMessage(`${t("deleteMessage")}`);
       }
     } catch (error) {
       setError("An error occurred while deleting your account.");
@@ -43,7 +49,9 @@ export default function DeleteAccount({ userId }: { userId: string }) {
   return (
     <div>
       {error && <p className="text-red-500">{error}</p>}
-      {successMessage && <p className="text-green-500">{successMessage}</p>}
+      {successMessage && (
+        <p className="text-primary text-sm">{successMessage}</p>
+      )}
       <Button
         variant={"destructive"}
         onClick={handleUserDelete}
@@ -53,7 +61,7 @@ export default function DeleteAccount({ userId }: { userId: string }) {
           isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {isLoading ? "Deleting..." : "Delete Account"}
+        {isLoading ? `${t("deleting")}...` : `${t("deleteButton")}`}
       </Button>
     </div>
   );
