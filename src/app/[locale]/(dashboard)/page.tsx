@@ -1,97 +1,149 @@
-import Image from "next/image";
 import Link from "next/link";
-import HeroSlider from "src/app/components/HeroSlider";
 import { createClient } from "src/utils/supabase/server";
-import {
-  Smartphone,
-  Tablet,
-  Tv,
-  Laptop,
-  Headphones,
-  Camera,
-} from "lucide-react";
 import type { ProductsType } from "./store/page";
 import CheckSubscriptionStatus from "src/app/components/CheckSubscriptionStatus";
-import NewProductsSlider from "src/app/components/NewProductsSlider";
+import NewProductsSlider from "../../components/home/NewProductsSlider";
+import { Button } from "src/app/components/ui/button";
+import ShopByCategory from "src/app/components/home/ShopByCategory";
+import MostPopularProducts from "../../components/home/MostPopularProducts";
+import LatestArticles from "../../components/home/LatestArticles";
+import GetUserData from "src/app/components/GetUserData";
+import Image from "next/image";
+import { createTranslator } from "next-intl";
 
-export default async function HomePage() {
+interface cartItemsType {
+  product_id: string;
+}
+
+export default async function HomePage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const locale = params.locale;
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
+
   const supabase = await createClient();
-  const { data, error } = await supabase.from("products").select("*").limit(8);
+  const userData = await GetUserData();
+  const userId = userData?.id;
+  if (!userId) {
+    console.error("User ID not found");
+    return;
+  }
+
+  // fetch products from cart
+  const { data: cartItems, error: fetchError } = (await supabase
+    .from("cart")
+    .select("product_id")
+    .eq("user_id", userId)) as { data: cartItemsType[]; error: any };
+
+  if (fetchError) {
+    console.error(fetchError);
+    return;
+  }
+
+  // Get top 8 most popular products
+  const { data: topProducts, error } = (await supabase
+    .from("products")
+    .select("*")
+    .order("solded_quantity", { ascending: false })
+    .limit(8)) as { data: ProductsType[]; error: any };
+
   if (error) {
     console.error(error);
     return;
   }
-  const products = data as ProductsType[];
+
+  // Check if any popular product is in cart
+  const cartTopProductIds = new Set(cartItems?.map((item) => item.product_id));
+  const inCartArrTop = topProducts.map((product) =>
+    cartTopProductIds.has(product.id)
+  );
+
+  // Get top 8 most new products
+  const { data: newProducts, error: newProductsError } = (await supabase
+    .from("products")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(8)) as { data: ProductsType[]; error: any };
+
+  if (newProductsError) {
+    console.error(newProductsError);
+    return;
+  }
+
+  // Check if any popular product is in cart
+  const cartNewProductIds = new Set(cartItems?.map((item) => item.product_id));
+  const inCartArrNew = newProducts.map((product) =>
+    cartNewProductIds.has(product.id)
+  );
+
   const isProMember = await CheckSubscriptionStatus();
 
   return (
     <>
-      <section className="grid grid-cols-[3fr_1fr] max-md:grid-cols-1 gap-12 overflow-hidden">
-        {/* Slider */}
-        <HeroSlider />
-
-        {/* Search Bar */}
-        <div className="grid grid-rows-2 max-md:grid-rows-1 max-md:grid-cols-2 gap-6 ">
-          <div className="border bg-card rounded-2xl shadow-md">
-            <Image
-              src="/assets/slider-1.png"
-              width={1200}
-              height={600}
-              alt="offer"
-              className="w-full h-full object-cover rounded-2xl"
-            />
+      {/* Hero Section */}
+      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//bg-img.png')]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+          <div className="order-last md:order-first">
+            <div className="flex flex-col max-md:items-center max-sm:gap-6 gap-10 md:gap-12 w-full lg:w-[90%]">
+              <div className="rounded-2xl flex flex-col gap-4">
+                <h1 className="max-md:text-center bg-text-gradient bg-clip-text text-3xl md:text-4xl lg:text-5xl font-medium sm:leading-[2rem] md:leading-[3rem] lg:leading-[4rem] text-white">
+                  {t("Hero.title")}
+                </h1>
+                <p className="max-sm:text-center text-sm md:text-base text-white font-sans">
+                  {t("Hero.description")}.
+                </p>
+              </div>
+              <Link href={`/${locale}/store`} className="">
+                <Button
+                  className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#4a5852] transition-all duration-300"
+                  variant="default"
+                >
+                  {t("Hero.button")}
+                </Button>
+              </Link>
+            </div>
           </div>
-          <div className="border bg-card rounded-2xl shadow-md">
+
+          {/* Banner Image */}
+          <div className="order-first md:order-last justify-center flex flex-col items-center">
             <Image
-              src="/assets/slider-1.png"
+              src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//banner.png"
+              alt="banner"
               width={1200}
               height={600}
-              alt="offer"
-              className="w-full h-full object-cover rounded-2xl"
+              className="w-2/3 md:w-auto"
             />
           </div>
         </div>
       </section>
 
       {/* New Products */}
-      <section className="w-full grid grid-cols-1 gap-12 overflow-hidden">
-        <h2 className="text-2xl font-semibold">New Arrivals</h2>
-
-        <NewProductsSlider products={products} />
+      <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+        <h2 className="text-2xl md:text-3xl font-medium">
+          {t("NewProducts.title")}
+        </h2>
+        <NewProductsSlider
+          locale={locale}
+          newProducts={newProducts}
+          inCartArrNew={inCartArrNew}
+        />
       </section>
 
-      {/* Featured Categories */}
-      <section className="flex flex-col gap-12 w-full">
-        <h2 className="text-2xl font-semibold">Shop by Categories</h2>
+      {/* Shop by Categories */}
+      <ShopByCategory locale={locale} />
+      {/* Most Popular Products */}
+      <MostPopularProducts
+        topProducts={topProducts}
+        inCartArrTop={inCartArrTop}
+        locale={locale}
+      />
 
-        <div className="flex flex-wrap gap-12 w-full justify-center">
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Smartphone className="size-8" />
-            <p>Smartphones</p>
-          </div>
-
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Tablet className="size-8" />
-            <p>Tablets</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Laptop className="size-8" />
-            <p>Laptops</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Tv className="size-8" />
-            <p>TV</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Headphones className="size-8" />
-            <p>Headphones</p>
-          </div>
-          <div className="flex flex-col w-28 h-28 text-sm items-center justify-center gap-2 rounded-2xl border  hover:bg-primary hover:text-white cursor-pointer transition-all duration-300">
-            <Camera className="size-8" />
-            <p>Photo | Video</p>
-          </div>
-        </div>
-      </section>
+      {/* Latest Articles */}
+      <LatestArticles locale={locale} />
     </>
   );
 }

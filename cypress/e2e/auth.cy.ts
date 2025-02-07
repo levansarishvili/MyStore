@@ -5,7 +5,7 @@ describe("Auth", () => {
 
   // Login user test
   it("Logs in successfully", () => {
-    cy.login("testuser@gmail.com", "test123");
+    cy.login("testuser@gmail.com", "test123$");
   });
 
   // Failed login test
@@ -30,7 +30,7 @@ describe("Auth", () => {
   it("Signs up successfully", () => {
     cy.get("[data-cy='email-input']").type("newtestuser@gmail.com");
 
-    cy.get("[data-cy='password-input']").type("test123");
+    cy.get("[data-cy='password-input']").type("test123$");
 
     cy.get("[data-cy='signup-button']").click();
 

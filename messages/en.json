@@ -1,25 +1,300 @@
 {
-  "HomePage": {
-    "title-part1": "Welcome to",
-    "title-part2": "ecommerce website",
-    "description": "Explore the app and manage your products and blog posts."
-  },
   "Navigation": {
     "home": "Home",
-    "about": "About",
     "products": "Products",
     "blogs": "Blogs",
     "contact": "Contact"
   },
+  "NotificationBar": {
+    "discount": "30% off — Limited time!",
+    "button": "Shop now"
+  },
+  "NewProducts": {
+    "title": "New Products"
+  },
+
+  "ShopByCategory": {
+    "title": "Shop by Categories",
+    "categories": {
+      "Laptops": "Laptops",
+      "Smartphones": "Smartphones",
+      "Tablets": "Tablets",
+      "Audio": "Audio",
+      "Monitors": "Monitors",
+      "Photo+and+video": "Photo and video"
+    }
+  },
+  "PopularProducts": {
+    "title": "Popular Products"
+  },
+  "LatestBlogs": {
+    "title": "Latest Blogs",
+    "readMore": "View More"
+  },
+
+  "Hero": {
+    "title": "Find the perfect tech for you",
+    "description": "Whether you're leveling up, starting fresh, or a tech pro, discover the perfect device for you",
+    "button": "Shopping Now"
+  },
+
   "Footer": {
-    "copyright": "© Levan Sarishvili, Tbilisi, Georgia, 2025."
+    "title": "Find the perfect tech for you",
+    "copyright": "Created by Levan Sarishvili - Tbilisi, 2025.",
+    "page": {
+      "title": "Page",
+      "home": "Home",
+      "products": "Products",
+      "blogs": "Blogs",
+      "contact": "Contact"
+    },
+    "info": {
+      "title": "Info",
+      "shipping": "Shipping Policy",
+      "return": "Return & Refund",
+      "support": "Support",
+      "faq": "FAQ"
+    },
+    "office": {
+      "title": "Office",
+      "address": "Chavchavadze street #12",
+      "country": "Georgia",
+      "city": "Tbilisi"
+    }
+  },
+  "ModeToggle": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "LanguageToggle": {
+    "en": "Eng",
+    "ka": "Geo"
+  },
+  "ProfileToggle": {
+    "title": "My Account",
+    "profile": "Profile",
+    "orders": "Orders",
+    "cart": "Cart",
+    "pro": "Buy subscription",
+    "logout": "Logout"
+  },
+  "Cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "table": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "subtotal": "Subtotal"
+    },
+    "button": "Checkout",
+    "emptyButton": "Go to shop"
+  },
+  "Orders": {
+    "title": "Orders",
+    "emptyButton": "Go to shop",
+    "message": "You don't have any orders yet!",
+    "table": {
+      "date": "Date",
+      "details": "Details",
+      "view": "View",
+      "ammount": "Ammount",
+      "total": "Total"
+    }
+  },
+  "OrderDetails": {
+    "title": "Order Details",
+    "orderItem": {
+      "price": "Price",
+      "ammount": "Ammount",
+      "quantity": "Quantity"
+    }
+  },
+  "Pricing": {
+    "title": "Buy Subscription",
+    "message": "You are a pro member already!",
+    "freePlan": "Free Plan",
+    "proPlan": "Pro Plan",
+    "button": "Subscribe",
+    "benefits": {
+      "item1": "View and buy products",
+      "item2": "View blogs",
+      "item3": "Edit products",
+      "item4": "Add new products",
+      "item5": "Edit blogs",
+      "item6": "Add new blogs"
+    }
+  },
+  "Products": {
+    "title": "Products",
+    "ProductItem": {
+      "addToCart": "Add",
+      "inCart": "In cart",
+      "ModalMessage": {
+        "title": "Product Already in Cart",
+        "desc": "This product is already in your cart. You can update the quantity or proceed to checkout.",
+        "button": "Go to cart"
+      }
+    },
+    "ProductDetails": {
+      "title": "Product Details",
+      "price": "Price",
+      "addToCart": "Add",
+      "inCart": "In cart",
+      "ModalMessage": {
+        "title": "Product Already in Cart",
+        "desc": "This product is already in your cart. You can update the quantity or proceed to checkout.",
+        "button": "Go to cart"
+      }
+    }
+  },
+  "Pagination": {
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "Blogs": {
+    "title": "Blogs",
+    "emptyMessage": "Currently there are not any blogs!",
+    "BlogItem": {
+      "readMore": "Read More"
+    },
+    "BlogDetails": {
+      "title": "Blog Details"
+    }
   },
   "LoginPage": {
-    "login-header": "Login",
+    "title": "Sign In",
+    "question": "Don't have an accout yet?",
+    "link": "Sign up",
     "email": "Email",
     "password": "Password",
     "login-button": "Sign in",
-    "signup-button": "Sign up",
     "sign-in-with": "or sign in with"
+  },
+  "SignUpPage": {
+    "title": "Sign Up",
+    "question": "You already have an account?",
+    "link": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "signup-button": "Sign up"
+  },
+  "SuccessPaymentMessage": {
+    "title": "Checkout Successful!",
+    "message": "Payment is successful. Thank you for shopping with us!",
+    "button": "Go to home"
+  },
+  "UnsuccessPaymentMessage": {
+    "title": "Payment Failed!",
+    "message": "Your payment was not completed. You can try again or return to the store.",
+    "button": "Go to home"
+  },
+  "SuccessSubscriptionMessage": {
+    "title": "Checkout Successful!",
+    "congrats": "Congratulations!",
+    "message": "Now you can access all the benefits of our Pro plan. Add products for sale and manage your inventory. You can also create and manage blog posts.",
+    "button": "Go to home"
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "question": "Have any questions? We'd love to hear from you!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "button": "Send",
+    "address": "Chavchavadze street #12, Tbilisi, Georgia"
+  },
+  "Profile": {
+    "title": "My Account",
+    "pro": "Pro Member",
+    "username": "Username",
+    "deleteButton": "Delete Account",
+    "deleting": "Deleting",
+    "deleteMessage": "Your account has been successfully deleted.",
+    "subscribeButton": "Buy Subscription",
+    "AccountForm": {
+      "title": "Account",
+      "name": "Full Name",
+      "username": "Username",
+      "phone": "Phone",
+      "email": "Email",
+      "button": "Save Changes"
+    },
+    "MyProductsForm": {
+      "title": "My Products",
+      "sold": "Sold"
+    },
+    "MyBlogsForm": {
+      "title": "My Blogs"
+    },
+    "AddProductForm": {
+      "title": "Add Product",
+      "addMessage": "Product created successfully!",
+      "name": "Product Name",
+      "price": "Price",
+      "brand": "Brand",
+      "description": "Description",
+      "category": "Category",
+      "categoryLabel": "Select category",
+      "image": "Upload Images",
+      "button": "Add Product"
+    },
+    "AddBlogForm": {
+      "title": "My Blogs",
+      "addMessage": "Blog created successfully",
+      "name": "Blog Title",
+      "content": "Blog Content",
+      "namePlaceholderlGeo": "In Georgian",
+      "namePlaceholderlEng": "In English",
+      "contentPlaceholderlGeo": "In Georgian - Use Markdown",
+      "contentPlaceholderlEng": "In English - Use Markdown",
+      "image": "Upload Image",
+      "button": "Add Blog"
+    },
+    "ErrorMessages": {
+      "message-1": "Title is required",
+      "message-2": "Title should be at most 100 characters",
+      "message-3": "Content should be at least 10 characters",
+      "message-4": "Title in Georgian is required",
+      "message-5": "Title in Georgian should be at most 100 characters",
+      "message-6": "Content in Georgian should be at least 10 characters"
+    }
+  },
+  "ProductFilter": {
+    "search": "Search product..",
+    "sort": {
+      "title": "Sort by",
+      "empty": "Sort is not applied",
+      "title-asc": "Name: A - Z",
+      "title-desc": "Name: Z - A",
+      "price-asc": "Price: Low to High",
+      "price-desc": "Price: High to Low"
+    },
+    "category": {
+      "title": "Select a category",
+      "item1": "Audio",
+      "item2": "Laptops",
+      "item3": "Monitors",
+      "item4": "Photo and video",
+      "item5": "Smartphones",
+      "item6": "Tablets"
+    },
+
+    "reset": "Reset Filters"
+  },
+  "BlogFilter": {
+    "search": "Search blog..",
+    "sort": {
+      "title": "Sort by",
+      "empty": "Sort is not applied",
+      "title-asc": "Name: A - Z",
+      "title-desc": "Name: Z - A",
+      "date-asc": "Date: A - Z",
+      "date-desc": "Date: Z - A"
+    },
+
+    "reset": "Reset Filters"
   }
 }

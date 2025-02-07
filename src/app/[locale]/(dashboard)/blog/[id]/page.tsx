@@ -1,11 +1,11 @@
+import { createClient } from "src/utils/supabase/server";
 import PageNotFound from "../../../../components/PageNotFound";
 import PostDetails from "./PostDetails";
-import { supabase } from "../../../../../lib/supabaseClient";
-
-import type { Post } from "../../../../hooks/useFetchPosts";
+import { BlogType } from "../page";
 
 interface ParamsType {
   id: string;
+  locale: string;
 }
 
 // Fetch posts data from API according to post ID
@@ -15,29 +15,20 @@ export default async function PostsDetailsPage({
   params: ParamsType;
 }) {
   const { id } = params;
-  let postDetailsData: Post | null = null;
+  const locale = params.locale;
+  const supabase = await createClient();
 
-  try {
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .eq("id", id)
-      .single();
+  let { data: post, error } = (await supabase
+    .from("post_translations")
+    .select("*")
+    .eq("id", id)
+    .eq("language_code", locale)
+    .single()) as { data: BlogType; error: any };
 
-    if (error) {
-      console.error(error);
-      return <PageNotFound />;
-    }
-
-    postDetailsData = data;
-  } catch (err) {
-    console.error(err);
-  }
-
-  if (!postDetailsData) {
-    // If no data, return not found
+  if (error) {
+    console.error(error);
     return <PageNotFound />;
   }
 
-  return <PostDetails post={postDetailsData} />;
+  return <PostDetails post={post} />;
 }

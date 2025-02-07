@@ -2,49 +2,38 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { useTranslations } from "next-intl";
 
-function ProductFilter() {
-  const categories = [
-    "all",
-    "beauty",
-    "fragrances",
-    "furniture",
-    "groceries",
-    "home-decoration",
-    "kitchen-accessories",
-    "laptops",
-    "mens-shirts",
-    "mens-shoes",
-    "mens-watches",
-    "mobile-accessories",
-    "motorcycle",
-    "skin-care",
-    "smartphones",
-    "sports-accessories",
-    "sunglasses",
-    "tablets",
-    "tops",
-    "vehicle",
-    "womens-bags",
-    "womens-dresses",
-    "womens-jewellery",
-    "womens-shoes",
-    "womens-watches",
-  ];
+interface Props {
+  categories: string[];
+}
 
+function ProductFilter({ categories }: Props) {
+  const t = useTranslations("ProductFilter");
   const sortOptions = [
-    { label: "Sort is not applied", value: "" },
-    { label: "Name: A - Z", value: "title-asc" },
-    { label: "Name: Z - A", value: "title-desc" },
-    { label: "Price: Low to High", value: "price-asc" },
-    { label: "Price: High to Low", value: "price-desc" },
+    { label: `${t("sort.empty")}`, value: "empty" },
+    { label: `${t("sort.title-asc")}`, value: "title-asc" },
+    { label: `${t("sort.title-desc")}`, value: "title-desc" },
+    { label: `${t("sort.price-asc")}`, value: "price-asc" },
+    { label: `${t("sort.price-desc")}`, value: "price-desc" },
   ];
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathName = usePathname();
 
-  const activeCategory = searchParams.get("category") ?? "all";
+  const activeCategory = searchParams.get("category") ?? "";
   const activeSort = searchParams.get("sortBy") ?? "";
 
   // Handle filter by category
@@ -64,61 +53,84 @@ function ProductFilter() {
   // Handle Product search with debounced callback
   const handleSearch = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      // Clear category filter when search input changes
       const params = new URLSearchParams(searchParams);
+      params.delete("category");
+
+      // Set the search term in URL
       params.set("search", e.target.value);
       router.replace(`${pathName}?${params.toString()}`, { scroll: false });
     },
     400
   );
 
+  // Reset all filters
+  function handleClearFilters() {
+    const params = new URLSearchParams(searchParams);
+    params.delete("category");
+    params.delete("sortBy");
+    params.delete("search");
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+  }
+
   return (
-    <div className="product-filter-wrapper dark:bg-[#313131] flex flex-col gap-8 rounded-2xl p-8 h-[50rem] w-[30rem] bg-[#f1f3f5]">
+    <section className="flex flex-wrap justify-center items-center gap-2">
       {/* Searching functionality */}
-      <div className="search-wrapper text-xl flex flex-col gap-4">
-        <h2 className="filter-title text-3xl font-semibold">Search Product</h2>
-        <input
-          className="product-search dark:bg-[#4a4a4a] border border-gray-300 px-4 py-3 rounded-lg cursor-pointer outline-none transition-all duration-300 focus:border-[#ec5e2a]"
-          placeholder="Search product.."
+      <div className="max-sm:w-full">
+        <Input
+          placeholder={t("search")}
           onChange={handleSearch}
-        ></input>
+          className="text-sm p-2 border rounded-md max-sm:w-full"
+        />
       </div>
 
-      {/* Sorting functionality */}
-      <div className="sort-wrapper text-xl flex flex-col gap-4">
-        <h2 className="filter-title text-3xl font-semibold">Sort By</h2>
-        <select
-          className="sort-dropdown dark:bg-[#4a4a4a] border border-gray-300 px-4 py-3 rounded-lg cursor-pointer outline-none transition-all duration-300 focus:border-[#ec5e2a]"
-          value={activeSort}
-          onChange={(e) => handleSort(e.target.value)}
-        >
-          {sortOptions.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+      <div className="flex justify-center gap-4">
+        {/* Sorting functionality */}
+        <div className="">
+          <Select value={activeSort} onValueChange={handleSort}>
+            <SelectTrigger>
+              <SelectValue placeholder={t("sort.title")} />
+            </SelectTrigger>
+            <SelectContent className="text-xl">
+              <SelectGroup className="">
+                {sortOptions.map((option) => (
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    className=""
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
 
-      {/* Filtering functionality */}
-      <div className="filter-wrapper flex flex-col gap-4 h-96">
-        <h2 className="filter-title text-3xl font-semibold">Categories</h2>
-        <div className="category-list flex flex-col items-start justify-start gap-4 overflow-y-auto">
-          {categories.map((category, index) => (
-            <button
-              key={category}
-              className={`filter__btn dark:bg-[#4a4a4a] dark:text-white flex text-xl border-none px-4 py-2 w-72 rounded-lg cursor-pointer transition-all duration-300 hover:bg-[#ec5e2a] hover:text-white ${
-                category === activeCategory
-                  ? "bg-[#ec5e2a] text-white"
-                  : "bg-white text-black hover:bg-[#ec5e2a] hover:text-white"
-              }`}
-              onClick={() => handleFilter(category)}
-            >
-              {category}
-            </button>
-          ))}
+        {/* Filtering functionality */}
+        <div className="">
+          <Select value={activeCategory} onValueChange={handleFilter}>
+            <SelectTrigger>
+              <SelectValue placeholder={t("category.title")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {categories.map((category) => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </div>
-    </div>
+
+      {/* Reset filters*/}
+      <Button variant={"destructive"} className="" onClick={handleClearFilters}>
+        {t("reset")}
+      </Button>
+    </section>
   );
 }
 

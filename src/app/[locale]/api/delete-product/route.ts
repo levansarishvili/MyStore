@@ -74,6 +74,41 @@ export async function DELETE(req: Request) {
       );
     }
 
+    // Delete all product images from Supabase storage
+    const { data: productImages, error: imagesError } = await supabase
+      .from("products")
+      .select("image_urls")
+      .eq("id", productId)
+      .single();
+
+    if (imagesError) {
+      console.log("Failed to fetch product images from Supabase:", imagesError);
+      return NextResponse.json(
+        { success: false, message: "Failed to fetch product images" },
+        { status: 500 }
+      );
+    }
+
+    const imageUrls = productImages?.image_urls || [];
+
+    const imageNames = imageUrls.map((url: string) => {
+      const urlParts = url.split("/");
+      return urlParts[urlParts.length - 1];
+    });
+
+    for (const imageName of imageNames) {
+      try {
+        await supabase.storage.from("product-images").remove([imageName]);
+        console.log(`Image ${imageName} deleted successfully ✔`);
+      } catch (err) {
+        console.log(`Failed to delete image ${imageName} from Supabase:`, err);
+        return NextResponse.json(
+          { success: false, message: "Failed to delete image" },
+          { status: 500 }
+        );
+      }
+    }
+
     // Delete product from Supabase
     const { data, error: deleteError } = await supabase
       .from("products")

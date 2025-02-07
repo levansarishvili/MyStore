@@ -36,8 +36,8 @@ export async function createCheckoutSession(
         },
       ],
       ...(ui_mode === "hosted" && {
-        success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${origin}/donate-with-checkout`,
+        success_url: `${origin}/checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/checkout`,
       }),
       ...(ui_mode === "embedded" && {
         return_url: `${origin}/donate-with-embedded-checkout/result?session_id={CHECKOUT_SESSION_ID}`,

@@ -64,8 +64,8 @@ export async function POST(req: Request) {
           },
         ],
         ...(ui_mode === "hosted" && {
-          success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${origin}`,
+          success_url: `${origin}/checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${origin}/checkout/cancel`,
         }),
         ui_mode,
       });

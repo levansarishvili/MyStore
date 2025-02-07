@@ -1,19 +1,40 @@
 import Link from "next/link";
 import { createClient } from "../../../../utils/supabase/server";
 import GetUserData from "../../../components/GetUserData";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../../components/ui/table";
+import { createTranslator } from "next-intl";
+import { Button } from "src/app/components/ui/button";
 import Image from "next/image";
 
 interface OrdersType {
   id: string;
-  product_id: string;
+  stripe_purchase_id: string;
   stripe_product_id: string;
-  stripe_price_id: string;
   created_at: string;
   user_id: string;
-  price: number;
+  total_price: number;
 }
 
-export default async function OrdersPage() {
+interface ParamsType {
+  params: { locale: string };
+}
+
+export default async function OrdersPage({ params }: ParamsType) {
+  const locale = params.locale;
+
+  const messages = (await import(`../../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
+
   // Fetch orders by user
   const supabase = await createClient();
   const userData = await GetUserData();
@@ -22,75 +43,101 @@ export default async function OrdersPage() {
     .select("*")
     .eq("user_id", userData?.id)) as { data: OrdersType[] | null; error: any };
 
-  // Fetch all products by ordered product IDs
-  const { data: products, error: productsError } = await supabase
-    .from("products")
-    .select("*")
-    .in("id", orders?.map((order) => order.product_id) as string[]);
-
   const sortedOrders = orders?.sort(
     (a, b) =>
       new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   );
 
+  const totalPrice = sortedOrders?.reduce(
+    (acc, order) => acc + order.total_price,
+    0
+  );
+
   return (
-    <section className="flex flex-col items-center gap-20 w-full px-16">
-      <h1 className="text-3xl font-semibold">Orders</h1>
+    <section className="flex flex-col items-center min-h-screen gap-10 lg:gap-20 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+      <h1 className="text-xl md:text-2xl font-medium mt-10 lg:mt-16">
+        {t("Orders.title")}
+      </h1>
 
-      <ul className="flex flex-col gap-10 w-full px-16 justify-center items-center">
-        {sortedOrders && sortedOrders.length > 0 ? (
-          sortedOrders.map((order) => (
-            <Link
-              href={`/orders/${order.id}`}
-              key={order.id}
-              className="w-full"
-            >
-              <li className="flex items-center gap-6 p-6 bg-white dark:bg-[#313131] rounded-lg shadow-md hover:shadow-md hover:shadow-[#ec5e2a] transition-all duration-300 ease-in-out px-16 cursor-pointer">
-                {/* Product Name and Order Date */}
-                <div className="flex-1 flex flex-col gap-6">
-                  <h2 className="text-2xl font-semibold text-[#ec5e2a]">
-                    {
-                      products?.find(
-                        (product) => product.id === order.product_id
-                      )?.name
-                    }
-                  </h2>
-                  <p className="text-xl text-gray-600 dark:text-gray-300 mt-2">
-                    Order date: {new Date(order.created_at).toDateString()}
-                  </p>
-                  {/* Total Price */}
-                  <div className="flex-shrink-0">
-                    <p className="text-2xl font-medium">
-                      ${(order.price / 100).toFixed(2)}
-                    </p>
-                  </div>
-                </div>
+      {orders?.length !== 0 && (
+        <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
+          <TableHeader className="bg-primary max-md:text-xs">
+            <TableRow className="hover:bg-primary">
+              <TableHead className="px-4 py-3 font-semibold text-white">
+                #
+              </TableHead>
+              <TableHead className="px-4 py-3 text-white">
+                {t("Orders.table.date")}
+              </TableHead>
+              <TableHead className="px-4 py-3 text-white">
+                {t("Orders.table.details")}
+              </TableHead>
+              <TableHead className="px-4 py-3 text-white text-right">
+                {t("Orders.table.ammount")}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody className="max-md:text-xs">
+            {sortedOrders?.map((order, index) => (
+              <TableRow
+                key={order.id}
+                className={index % 2 === 0 ? "bg-muted/50" : "bg-background"}
+              >
+                <TableCell className="max-md:px-2 px-4 py-3 font-medium">
+                  #{order.id}
+                </TableCell>
+                <TableCell className="max-md:px-2 px-4 py-3">
+                  {new Date(order.created_at)
+                    .toLocaleDateString("en-GB")
+                    .replace(/\//g, ".")}
+                </TableCell>
+                <TableCell className="max-md:px-2 px-4 py-3">
+                  <Link
+                    href={`/orders/${order.id}`}
+                    className="hover:text-primary transition-all duration-300 underline"
+                  >
+                    {t("Orders.table.view")}
+                  </Link>
+                </TableCell>
+                <TableCell className="max-md:px-2 px-4 py-3 text-right">
+                  {`$${(order.total_price / 100).toFixed(2)}`}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter className="max-md:text-xs">
+            <TableRow className="bg-muted font-semibold">
+              <TableCell colSpan={3} className="px-4 py-3">
+                {t("Orders.table.total")}
+              </TableCell>
+              <TableCell className="max-md:px-2 px-4 py-3 text-right text-primary">
+                {totalPrice ? `$${(totalPrice / 100).toFixed(2)}` : "$0.00"}
+              </TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      )}
 
-                {/* Product Image */}
-                <div className="flex-shrink-0">
-                  <Image
-                    src={
-                      products?.find(
-                        (product) => product.id === order.product_id
-                      )?.image_url as string
-                    }
-                    width={150}
-                    height={150}
-                    alt={
-                      products?.find(
-                        (product) => product.id === order.product_id
-                      )?.name as string
-                    }
-                    className="rounded-lg shadow-sm"
-                  />
-                </div>
-              </li>
-            </Link>
-          ))
-        ) : (
-          <p className="text-2xl font-semibold">You have no orders yet. ❌</p>
-        )}
-      </ul>
+      {/* When orders is empty */}
+      {orders?.length === 0 && (
+        <div className="flex flex-col items-center gap-8 mt-10">
+          <p className="text-base lg:text-xl font-medium">
+            {t("Orders.message")}
+          </p>
+          <Image
+            src="/assets/empty-img.svg"
+            alt="empty"
+            width={500}
+            height={500}
+            className="w-24 md:w-32"
+          />
+          <Link href="/store">
+            <Button className="hover:bg-[#2ca76e] text-white transition-all duration-300">
+              {t("Orders.emptyButton")}
+            </Button>
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

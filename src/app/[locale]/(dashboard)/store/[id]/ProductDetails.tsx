@@ -1,50 +1,149 @@
 "use client";
 
-import Button from "../../../../components/buttons/Button";
 import Image from "next/image";
 import { ProductsType } from "../page";
+import { Heart, ShoppingCart } from "lucide-react";
+import { Button } from "src/app/components/ui/button";
+import { useTranslations } from "next-intl";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../../../../components/ui/carousel";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../../../components/ui/dialog";
 
-export default function ProductDetails({ product }: { product: ProductsType }) {
+interface Props {
+  product: ProductsType;
+  isInCart: boolean;
+  locale: string;
+}
+
+export default function ProductDetails({ product, isInCart, locale }: Props) {
+  const [inBag, setInBag] = useState(isInCart);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+  const t = useTranslations("Products.ProductDetails");
+
+  // Function to handle add to cart button click
+  const handleAddToCart = async (productId: string) => {
+    if (inBag) {
+      setIsModalOpen(() => true);
+      return;
+    }
+    try {
+      const res = await fetch(`/api/add-to-cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        if (data.message === "Product already in cart") {
+          console.log("Product already in cart");
+          return;
+        }
+        console.error("Failed to add product to cart:", data.message);
+        return;
+      }
+      setInBag(() => true);
+      router.refresh();
+      console.log("Product added to cart successfully");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
+
   return (
-    <div className="product-details__wrapper flex flex-col items-center gap-20">
-      <h1 className="section-header text-4xl font-semibold">Product Details</h1>
-      <div className="product-details__content flex justify-center items-center gap-32 rounded-2xl p-16 transition-all duration-300 hover:shadow-lg bg-[#f1f3f5] dark:bg-[#313131] dark:hover:shadow-md dark:hover:shadow-[#ec5e2a]">
+    <div className="flex flex-col items-center gap-12 mt-10 lg:mt-16">
+      <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300">
         {/* Product Details */}
-
-        <div className="product-img-wrapper flex justify-center items-center w-[35rem] overflow-hidden h-[30rem] transition-all duration-300">
-          <Image
-            className="product-details__img w-96 h-96 object-contain"
-            src={product?.image_url || "/assets/placeholder-img.png"}
-            alt={product?.name}
-            width={250}
-            height={250}
-            quality={100}
-            priority={true}
-          />
+        <div className="flex justify-center items-center w-full overflow-hidden h-auto transition-all duration-300">
+          <Carousel className="w-full max-w-xs">
+            <CarouselContent className="">
+              {product?.image_urls?.map((image, index) => (
+                <CarouselItem
+                  key={index}
+                  className="flex justify-center items-center"
+                >
+                  <div className="p-1 w-2/3 md:w-full">
+                    <Image
+                      className="object-contain"
+                      src={image || "/assets/placeholder-img.png"}
+                      alt={product?.name}
+                      width={1200}
+                      height={600}
+                      quality={100}
+                      priority={true}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden lg:flex" />
+            <CarouselNext className="hidden lg:flex" />
+          </Carousel>
         </div>
 
         {/* Product Settings */}
-        <div className="product-details flex flex-col items-start justify-center gap-8 w-[40rem] h-full">
-          <div className="product-desc-wrapper flex flex-col items-start justify-center gap-8">
-            <h2 className="product-details__title text-4xl font-semibold text-gray-600">
-              {product?.name}
-            </h2>
-            <p className="product-details__category text-3xl text-[#ec5e2a] font-semibold">
+        <div className="flex flex-col items-start justify-center gap-6 max-w-[40rem] p-4">
+          <div className="flex flex-col items-start justify-center gap-6">
+            <h2 className="text-xl md:text-2xl font-medium">{product?.name}</h2>
+            <p className="text-base md:text-lg text-primary font-medium">
               {product?.category}
             </p>
-            <p className="product-details__desc text-2xl">
-              {product?.description}
-            </p>
+            <p className="text-sm md:text-base">{product?.description}</p>
           </div>
-          <p className="product-details__price text-2xl font-medium">
-            Price: {product?.price / 100} $
+          <p className="text-sm md:text-base font-medium">
+            {t("price")}: {product?.price / 100} $
           </p>
-          <div className="btn-wrapper flex gap-12">
-            <Button className="btn" name="&#10084; Wishlist" />
-            <Button className="btn" name="Add to cart" />
+          <div className="flex">
+            <Button
+              variant={"default"}
+              className="hover:bg-[#2ca76e] transition all duration-300 text-white text-sm w-[10rem]"
+              onClick={() => handleAddToCart(product.id)}
+            >
+              <ShoppingCart className="size-4 fill-transparent stroke-white" />
+              {`${inBag ? `${t("inCart")}` : `${t("addToCart")}`}`}
+            </Button>
           </div>
         </div>
       </div>
+
+      {/* Modal window for product is already in cart */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-sm:w-[16rem] max-w-[24rem] rounded-lg">
+          <DialogHeader className="text-center flex flex-col gap-4">
+            <DialogTitle className="text-sm md:text-base font-medium">
+              {t("ModalMessage.title")}
+            </DialogTitle>
+            <DialogDescription className="text-xs md:text-sm">
+              {t("ModalMessage.desc")}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Link href={`/${locale}/cart`}>
+              <Button className="text-xs md:text-sm text-white hover:bg-[#38CB89]/80 transition-all duration-300">
+                {t("ModalMessage.button")}
+              </Button>
+            </Link>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

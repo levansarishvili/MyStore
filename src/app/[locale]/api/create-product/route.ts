@@ -4,10 +4,18 @@ import { createClient } from "../../../../utils/supabase/server";
 import GetUserData from "../../../components/GetUserData";
 
 export async function POST(req: Request) {
-  const { name, price, category, description, image } = await req.json();
+  const { name, price, category, description, images, brand } =
+    await req.json();
 
-  // Validate required fields
-  if (!name || !price || !category || !description || !image) {
+  if (
+    !name ||
+    !price ||
+    !category ||
+    !brand ||
+    !description ||
+    !images ||
+    images.length === 0
+  ) {
     return NextResponse.json(
       { success: false, message: "Missing required fields" },
       { status: 400 }
@@ -19,10 +27,9 @@ export async function POST(req: Request) {
   });
 
   const supabase = await createClient();
-
-  // Get user ID
   const userData = await GetUserData();
   const userId = userData?.id;
+
   if (!userId) {
     return NextResponse.json(
       { success: false, message: "User not logged in" },
@@ -30,51 +37,47 @@ export async function POST(req: Request) {
     );
   }
 
-  let stripeProduct;
-  let stripePrice;
-
+  // Create product on Stripe
   try {
-    // Create Stripe product
-    stripeProduct = await stripe.products.create({
+    const stripeProduct = await stripe.products.create({
       name,
       description,
-      images: [image],
+      images,
     });
 
-    // Create Stripe price
-    stripePrice = await stripe.prices.create({
+    const stripePrice = await stripe.prices.create({
       unit_amount: Math.round(price * 100),
       currency: "usd",
       product: stripeProduct.id,
     });
 
-    // Create product in Supabase
-    const { data, error } = await supabase.from("products").insert({
+    // Insert product into Supabase
+    const { error } = await supabase.from("products").insert({
       name,
       price: Math.round(price * 100),
       category,
       description,
-      image_url: image,
+      brand,
+      image_urls: images,
       user_id: userId,
       stripe_product_id: stripeProduct.id,
       stripe_price_id: stripePrice.id,
     });
 
     if (error) {
-      console.log("Failed to create product on Supabase:", error);
+      console.error("Failed to create product:", error);
       return NextResponse.json(
         { success: false, message: "Failed to create product" },
         { status: 500 }
       );
     }
 
-    console.log("Product added successfully ✔");
     return NextResponse.json(
       { success: true, message: "Product created successfully" },
       { status: 201 }
     );
   } catch (err) {
-    console.log("Error occurred:", err);
+    console.error("Error:", err);
     return NextResponse.json(
       { success: false, message: "Internal Server Error" },
       { status: 500 }

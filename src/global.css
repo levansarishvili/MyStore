@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Swiper CSS */
-@import "swiper/css";
-@import "swiper/css/navigation";
-@import "swiper/css/pagination";
-
 *,
 *::before,
 *::after {
@@ -42,18 +37,33 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #0e8d41;
+  background: #38cb89;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #0e8d41;
+  background: #38cb89;
 }
 
 .swiper-slide {
   display: flex !important;
   justify-content: center !important;
+}
+
+.markdown h2 {
+  font-weight: 600;
+}
+.markdown li {
+  font-weight: 500;
+  list-style: disc;
+  margin-left: 30px;
+}
+
+.markdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @layer base {
@@ -64,7 +74,7 @@ body {
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 142.1 76.2% 36.3%;
+    --primary: 153, 59%, 51%;
     --primary-foreground: 355.7 100% 97.3%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
@@ -76,7 +86,7 @@ body {
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
+    --ring: 153, 59%, 51%;
     --radius: 0.5rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -114,12 +124,13 @@ body {
   .dark {
     /* --background: 20 14.3% 4.1%; */
     --background: 240 5.9% 10%;
+    --background: 240 5.9% 10%;
     --foreground: 0 0% 95%;
     --card: 240 3.7% 15.9%;
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
+    --primary: 153, 59%, 51%;
     --primary-foreground: 144.9 80.4% 10%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
@@ -131,7 +142,7 @@ body {
     --destructive-foreground: 0 85.7% 97.3%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
+    --ring: 153, 59%, 51%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -139,6 +150,8 @@ body {
     --chart-5: 340 75% 55%;
 
     /* --background: #110c0a;
+    #0a192f
+    #102a43
     --foreground: #f2f2f2;
     --card: #1a1613;
     --card-foreground: #f2f2f2;
@@ -171,5 +184,13 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .bg-clip-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
