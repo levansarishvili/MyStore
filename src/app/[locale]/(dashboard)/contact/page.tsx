@@ -35,9 +35,11 @@ export default function ContactPage() {
               className="w-full h-28 text-sm"
               required
             />
-            <Button className="w-full bg-[#38cb89] hover:bg-[#2da874] text-white font-medium py-2 px-4 rounded-lg transition">
-              {t("button")}
-            </Button>
+            <div className="flex justify-center">
+              <Button className="w-full max-w-32 bg-[#38cb89] hover:bg-[#2da874] text-white font-medium py-2 px-4 rounded-lg transition">
+                {t("button")}
+              </Button>
+            </div>
           </form>
         </div>
         <div className="flex flex-col justify-center">
