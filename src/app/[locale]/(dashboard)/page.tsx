@@ -85,7 +85,7 @@ export default async function HomePage({
   return (
     <>
       {/* Hero Section */}
-      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('/assets/bg-img.png')]">
+      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//bg-img.png')]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
           <div className="order-last md:order-first">
             <div className="flex flex-col max-md:items-center max-sm:gap-6 gap-10 md:gap-12 w-full lg:w-[90%]">
@@ -111,7 +111,7 @@ export default async function HomePage({
           {/* Banner Image */}
           <div className="order-first md:order-last justify-center flex flex-col items-center">
             <Image
-              src="/assets/banner.png"
+              src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//banner.png"
               alt="banner"
               width={1200}
               height={600}

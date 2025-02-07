@@ -4,7 +4,7 @@ Welcome to **E-Shop**, your go-to destination for all things **electronics**! Fr
 
 ## 📸 Screenshot
 
-![Project Screenshot](./public/assets/project-screenshot.png)
+![Project Screenshot](https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//project-screenshot.png)
 
 ## 🚀 Features
 

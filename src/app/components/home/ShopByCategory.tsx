@@ -3,12 +3,36 @@ import Link from "next/link";
 import { createTranslator } from "next-intl";
 
 const categories = [
-  { name: "Smartphones", image: "/assets/phone.png" },
-  { name: "Tablets", image: "/assets/tablet.png" },
-  { name: "Laptops", image: "/assets/laptop.png" },
-  { name: "Audio", image: "/assets/headphone.png" },
-  { name: "Monitors", image: "/assets/monitor.png" },
-  { name: "Photo+and+video", image: "/assets/camera.png" },
+  {
+    name: "Smartphones",
+    image:
+      "https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//phone.png",
+  },
+  {
+    name: "Tablets",
+    image:
+      "https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//tablet.png",
+  },
+  {
+    name: "Laptops",
+    image:
+      "https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//laptop.png",
+  },
+  {
+    name: "Audio",
+    image:
+      "https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//headphone.png",
+  },
+  {
+    name: "Monitors",
+    image:
+      "https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//monitor.png",
+  },
+  {
+    name: "Photo+and+video",
+    image:
+      "https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//camera.png",
+  },
 ];
 
 export default async function ShopByCategory({ locale }: { locale: string }) {
