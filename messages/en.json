@@ -130,7 +130,7 @@
   "Products": {
     "title": "Products",
     "ProductItem": {
-      "addToCart": "Add",
+      "addToCart": "Add to cart",
       "inCart": "In cart",
       "ModalMessage": {
         "title": "Product Already in Cart",
@@ -141,7 +141,7 @@
     "ProductDetails": {
       "title": "Product Details",
       "price": "Price",
-      "addToCart": "Add",
+      "addToCart": "Add to cart",
       "inCart": "In cart",
       "ModalMessage": {
         "title": "Product Already in Cart",

@@ -80,7 +80,7 @@ async function Header({ locale }: { locale: string }) {
               </div>
 
               {/* Cart Icon */}
-              <CartButton cartQuantity={cartQuantity} locale={locale} />
+              <CartButton cartQuantityServer={cartQuantity} locale={locale} />
             </>
           )}
         </div>

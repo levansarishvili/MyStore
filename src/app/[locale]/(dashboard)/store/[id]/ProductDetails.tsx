@@ -13,7 +13,6 @@ import {
   CarouselPrevious,
 } from "../../../../components/ui/carousel";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Dialog,
@@ -24,6 +23,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../../../components/ui/dialog";
+import { useCart } from "src/app/context/CartContext";
 
 interface Props {
   product: ProductsType;
@@ -34,7 +34,7 @@ interface Props {
 export default function ProductDetails({ product, isInCart, locale }: Props) {
   const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const router = useRouter();
+  const { cartQuantity, setCartQuantity } = useCart();
   const t = useTranslations("Products.ProductDetails");
 
   // Function to handle add to cart button click
@@ -59,8 +59,10 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
         console.error("Failed to add product to cart:", data.message);
         return;
       }
+      // If the product is successfully added to the cart, update the state
       setInBag(() => true);
-      router.refresh();
+      setCartQuantity((prev) => prev + 1);
+
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);
