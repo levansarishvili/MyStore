@@ -16,12 +16,14 @@ export default async function PostsDetailsPage({
 }) {
   const { id } = params;
   const locale = params.locale;
+  console.log(locale, id);
+
   const supabase = await createClient();
 
   let { data: post, error } = (await supabase
     .from("post_translations")
     .select("*")
-    .eq("id", id)
+    .eq("blog_id", id)
     .eq("language_code", locale)
     .single()) as { data: BlogType; error: any };
 

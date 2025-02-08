@@ -93,7 +93,7 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
         {posts?.map((post) => (
           <BlogItem
             key={post.id}
-            id={post.id}
+            id={post.blog_id}
             title={post.translated_title || ""}
             content={post.translated_body || ""}
             image_url={post.image_url}

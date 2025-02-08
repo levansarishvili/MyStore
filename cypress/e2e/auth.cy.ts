@@ -5,7 +5,13 @@ describe("Auth", () => {
 
   // Login user test
   it("Logs in successfully", () => {
-    cy.login("testuser@gmail.com", "test123$");
+    // cy.login("testuser@gmail.com", "test123$");
+    cy.get("[data-cy='email-input']")
+      .should("be.visible")
+      .type("testuser@gmail.com");
+    cy.get("[data-cy='password-input']").should("be.visible").type("test123$");
+    cy.get("[data-cy='login-button']").should("be.visible").click();
+    cy.get("[data-cy='user-button']").should("be.visible");
   });
 
   // Failed login test

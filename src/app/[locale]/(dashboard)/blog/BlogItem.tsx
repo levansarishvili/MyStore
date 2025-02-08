@@ -45,7 +45,7 @@ export default function BlogItem({
             <Link href={`/blog/${id}`}>
               <Button
                 variant="default"
-                className=" bg-[#38cb89] text-white hover:bg-[#2ca76e] transition-all duration-300"
+                className="bg-[#38cb89] text-white hover:bg-[#2ca76e] transition-all duration-300"
               >
                 {t("readMore")}
               </Button>
