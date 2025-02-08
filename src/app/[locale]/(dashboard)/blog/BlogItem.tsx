@@ -22,8 +22,8 @@ export default function BlogItem({
   const t = useTranslations("Blogs.BlogItem");
 
   return (
-    <li className="relative min-w-[16rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-card border hover:shadow-md">
-      <div className="w-full flex flex-col items-center justify-between gap-4 h-full">
+    <li className="relative min-w-[16rem] flex flex-col items-start gap-6 rounded-2xl transition-all duration-300  bg-card border hover:shadow-md cursor-pointer group">
+      <div className="w-full flex flex-col items-center justify-between gap-4 h-full group">
         {/* Image with fallback */}
         <div className="w-full h-40 lg:h-52 overflow-hidden rounded-lg">
           <Image
@@ -31,7 +31,7 @@ export default function BlogItem({
             alt={title}
             width={1200}
             height={600}
-            className="object-cover w-full h-full"
+            className="scale-105 object-cover w-full h-full group-hover:scale-100 transition-all duration-500"
           />
         </div>
 

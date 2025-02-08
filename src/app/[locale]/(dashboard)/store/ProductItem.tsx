@@ -79,7 +79,7 @@ export default function ProductItem({
       <div className="max-sm:w-[30%] md:w-2/3 w-[40%] h-[6rem] md:h-[10rem] flex justify-center items-center overflow-hidden rounded-xl">
         <Link href={`/store/${id}`}>
           <Image
-            className="object-coveropacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-95"
+            className="object-coveropacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
             src={imageSrc || ""}
             alt={name}
             width={200}

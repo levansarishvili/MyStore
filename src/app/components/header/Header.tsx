@@ -52,7 +52,7 @@ async function Header({ locale }: { locale: string }) {
 
         {/* Navigation for larger screens */}
         {!isNotAuthenticated && (
-          <nav className="">
+          <nav className="max-md:hidden">
             <Navigation locale={locale} />
           </nav>
         )}
@@ -80,7 +80,7 @@ async function Header({ locale }: { locale: string }) {
               </div>
 
               {/* Cart Icon */}
-              <CartButton cartQuantityServer={cartQuantity} locale={locale} />
+              <CartButton locale={locale} />
             </>
           )}
         </div>
