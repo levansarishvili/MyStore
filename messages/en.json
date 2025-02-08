@@ -90,6 +90,7 @@
       "subtotal": "Subtotal"
     },
     "button": "Checkout",
+    "clearButton": "Clear Cart",
     "emptyButton": "Go to shop"
   },
   "Orders": {
@@ -148,6 +149,10 @@
         "desc": "This product is already in your cart. You can update the quantity or proceed to checkout.",
         "button": "Go to cart"
       }
+    },
+    "SimilarProducts": {
+      "title": "Similar Products",
+      "viewAll": "View All"
     }
   },
   "Pagination": {

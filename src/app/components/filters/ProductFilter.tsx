@@ -14,6 +14,7 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useTranslations } from "next-intl";
+import { FilterX } from "lucide-react";
 
 interface Props {
   categories: string[];
@@ -74,13 +75,13 @@ function ProductFilter({ categories }: Props) {
   }
 
   return (
-    <section className="flex flex-wrap justify-center items-center gap-2">
+    <section className="flex flex-wrap justify-center items-center gap-4 bg-muted rounded-lg px-1 sm:px-6 py-2">
       {/* Searching functionality */}
       <div className="max-sm:w-full">
         <Input
           placeholder={t("search")}
           onChange={handleSearch}
-          className="text-sm p-2 border rounded-md max-sm:w-full"
+          className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full"
         />
       </div>
 
@@ -88,16 +89,16 @@ function ProductFilter({ categories }: Props) {
         {/* Sorting functionality */}
         <div className="">
           <Select value={activeSort} onValueChange={handleSort}>
-            <SelectTrigger>
-              <SelectValue placeholder={t("sort.title")} />
+            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
+              <SelectValue placeholder={t("sort.title")} className="" />
             </SelectTrigger>
-            <SelectContent className="text-xl">
+            <SelectContent className="rounded-lg border-none text-sm p-2 border max-sm:w-full">
               <SelectGroup className="">
                 {sortOptions.map((option) => (
                   <SelectItem
                     key={option.value}
                     value={option.value}
-                    className=""
+                    className="rounded-lg cursor-pointer"
                   >
                     {option.label}
                   </SelectItem>
@@ -110,13 +111,17 @@ function ProductFilter({ categories }: Props) {
         {/* Filtering functionality */}
         <div className="">
           <Select value={activeCategory} onValueChange={handleFilter}>
-            <SelectTrigger>
+            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
               <SelectValue placeholder={t("category.title")} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="rounded-lg border-none text-sm p-2 border max-sm:w-full">
               <SelectGroup>
                 {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
+                  <SelectItem
+                    key={category}
+                    value={category}
+                    className="rounded-lg cursor-pointer"
+                  >
                     {category}
                   </SelectItem>
                 ))}
@@ -127,7 +132,12 @@ function ProductFilter({ categories }: Props) {
       </div>
 
       {/* Reset filters*/}
-      <Button variant={"destructive"} className="" onClick={handleClearFilters}>
+      <Button
+        variant={"destructive"}
+        className="rounded-lg"
+        onClick={handleClearFilters}
+      >
+        <FilterX className="size-5" />
         {t("reset")}
       </Button>
     </section>

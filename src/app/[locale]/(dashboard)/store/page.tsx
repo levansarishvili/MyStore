@@ -36,8 +36,6 @@ export default async function Store({ params, searchParams }: Props) {
   const t = createTranslator({ locale, messages });
   const supabase = await createClient();
 
-  console.log(searchParams);
-
   // Get all product categories
   const { data: categories, error: categoriesError } = (await supabase
     .from("products")

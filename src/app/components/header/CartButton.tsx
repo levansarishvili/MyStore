@@ -18,7 +18,7 @@ export default function CartButton({ locale }: PropsType) {
     >
       {/* Display quantity only if greater than 0 */}
       {cartQuantity > 0 && (
-        <span className="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+        <span className="absolute -top-2 -right-2 bg-primary text-white text-xs font-medium px-2 py-1 rounded-full">
           {cartQuantity}
         </span>
       )}

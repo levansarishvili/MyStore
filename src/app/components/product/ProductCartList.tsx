@@ -162,6 +162,27 @@ export default function ProductCartList({
     }
   };
 
+  // Function to clear the cart
+  const handleClearCart = async () => {
+    try {
+      const res = await fetch(`/api/clear-cart`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Failed to clear cart:", data.message);
+        return;
+      }
+      setCartQuantity(0);
+      setProductsInCart([]);
+      console.log("Cart cleared successfully");
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center gap-10 items-center w-full">
       {/* If cart is empty */}
@@ -266,13 +287,21 @@ export default function ProductCartList({
 
       {/* Checkout button */}
       {productsInCart.length > 0 && (
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full gap-6">
           <Button
             className="hover:bg-[#2ca76e] text-white transition-all duration-300 w-56"
             variant="default"
             onClick={handleBuyProduct}
           >
             {t("button")}
+          </Button>
+
+          <Button
+            className="rouned-lg"
+            variant={"destructive"}
+            onClick={handleClearCart}
+          >
+            {t("clearButton")}
           </Button>
         </div>
       )}
