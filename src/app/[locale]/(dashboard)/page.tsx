@@ -125,8 +125,8 @@ export default async function HomePage({
                     href={`/${locale}/store`}
                     className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 opacity-0 group-hover:left-1/2 group-hover:translate-x-[-50%] group-hover:opacity-100 transition-all duration-500 ease-in-out"
                   >
-                    <div className="flex justify-center items-center gap-2 bg-muted/90 text-foreground px-3 py-1 rounded-lg shadow-md hover:text-primary transition-all duration-300">
-                      <p className="text-sm md:text-base font-medium">
+                    <div className="flex flex-nowrap justify-center items-center gap-2 bg-muted/90 text-foreground px-3 py-1 rounded-lg shadow-md hover:text-primary transition-all duration-300">
+                      <p className="text-sm font-medium">
                         {t("Hero.viewMore")}
                       </p>
                       <Link2 className="size-4" />
