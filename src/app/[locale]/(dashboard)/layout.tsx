@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Footer from "src/app/components/Footer";
 import { CartProvider } from "src/app/context/CartContext";
 import GetUserData from "src/app/components/GetUserData";
+import PageNotFound from "src/app/components/PageNotFound";
 
 interface Props {
   children: React.ReactNode;
@@ -24,7 +25,6 @@ export default async function DashboardLayout({ children, params }: Props) {
 
   if (cartError) {
     console.error("Error fetching cart quantity:", cartError);
-    return null;
   }
 
   const cartQuantity = cartQuantityServer?.reduce(

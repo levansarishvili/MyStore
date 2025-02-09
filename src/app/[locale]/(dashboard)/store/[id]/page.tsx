@@ -23,7 +23,6 @@ export default async function ProductDetailsPage({ params }: paramsType) {
   const userId = userData?.id;
   if (!userId) {
     console.error("User ID not found");
-    return;
   }
 
   try {
