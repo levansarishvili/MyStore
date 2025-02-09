@@ -49,7 +49,7 @@ export default function NewProductsSlider({
           loop: true,
         }}
       >
-        <CarouselContent className="flex gap-4 py-4">
+        <CarouselContent className="flex gap-3.5 py-4">
           {newProducts.map((product, index) => (
             <CarouselItem
               key={product.id}
