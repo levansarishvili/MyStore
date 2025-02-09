@@ -17,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "../../components/ui/table";
+import { useCart } from "src/app/context/CartContext";
 
 interface ProductType {
   id: number;
@@ -35,17 +36,18 @@ export default function ProductCartList({
 }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const router = useRouter();
-
+  const { cartQuantity, setCartQuantity } = useCart();
+  const [productsInCart, setProductsInCart] = useState(products);
   const t = useTranslations("Cart");
 
   // Calculate total price whenever products change
   useEffect(() => {
-    const total = products.reduce(
+    const total = productsInCart.reduce(
       (acc, product) => acc + (product.price / 100) * product.quantity,
       0
     );
     setTotalPrice(total);
-  }, [products]);
+  }, [productsInCart]);
 
   // Handle product quantity increase
   const handleQuantityIncrease = async (productId: number) => {
@@ -56,8 +58,16 @@ export default function ProductCartList({
         body: JSON.stringify({ productId }),
       });
       if (res.ok) {
+        // Update cart quantity and products in cart locally
+        setCartQuantity((prev) => prev + 1);
+        setProductsInCart((prev) =>
+          prev.map((product) =>
+            product.product_id === productId
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
+          )
+        );
         console.log("Product quantity increased successfully");
-        router.refresh();
       } else {
         const data = await res.json();
         console.error("Failed to increase product quantity:", data.message);
@@ -69,6 +79,13 @@ export default function ProductCartList({
 
   // Handle product quantity decrease
   const handleQuantityDecrease = async (productId: number) => {
+    // If the quantity is 1 not allow to decrease
+    if (
+      productsInCart.find((product) => product.product_id === productId)
+        ?.quantity === 1
+    ) {
+      return;
+    }
     try {
       const res = await fetch(`/api/decrease-product-quantity`, {
         method: "POST",
@@ -76,8 +93,16 @@ export default function ProductCartList({
         body: JSON.stringify({ productId }),
       });
       if (res.ok) {
+        // Update cart quantity and products in cart locally
+        setCartQuantity((prev) => prev - 1);
+        setProductsInCart((prev) =>
+          prev.map((product) =>
+            product.product_id === productId
+              ? { ...product, quantity: Math.max(1, product.quantity - 1) }
+              : product
+          )
+        );
         console.log("Product quantity decreased successfully");
-        router.refresh();
       } else {
         const data = await res.json();
         console.error("Failed to decrease product quantity:", data.message);
@@ -96,8 +121,12 @@ export default function ProductCartList({
         body: JSON.stringify({ productId }),
       });
       if (res.ok) {
+        // Update cart quantity and remove the deleted product from the cart
+        setCartQuantity((prev) => prev - 1);
+        setProductsInCart((prev) =>
+          prev.filter((product) => product.product_id !== productId)
+        );
         console.log("Product deleted successfully");
-        router.refresh();
       } else {
         const data = await res.json();
         console.error("Failed to delete product:", data.message);
@@ -133,10 +162,31 @@ export default function ProductCartList({
     }
   };
 
+  // Function to clear the cart
+  const handleClearCart = async () => {
+    try {
+      const res = await fetch(`/api/clear-cart`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Failed to clear cart:", data.message);
+        return;
+      }
+      setCartQuantity(0);
+      setProductsInCart([]);
+      console.log("Cart cleared successfully");
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center gap-10 items-center w-full">
       {/* If cart is empty */}
-      {products.length === 0 && (
+      {productsInCart.length === 0 && (
         <div className="flex flex-col items-center gap-8 mt-16">
           <h2 className="text-base lg:text-xl font-medium">{t("empty")}</h2>
           <Image
@@ -154,7 +204,7 @@ export default function ProductCartList({
         </div>
       )}
 
-      {products.length > 0 && (
+      {productsInCart.length > 0 && (
         <Table className="w-full border rounded-lg overflow-hidden shadow">
           <TableHeader className="bg-primary max-md:text-[10px]">
             <TableRow className="hover:bg-primary">
@@ -174,7 +224,7 @@ export default function ProductCartList({
             </TableRow>
           </TableHeader>
           <TableBody className="text-xs md:text-sm">
-            {products.map((product) => (
+            {productsInCart.map((product) => (
               <TableRow key={product.id}>
                 <TableCell className="font-medium flex max-md:items-start items-center max-md:flex-col gap-2 pl-1 sm:pl-2">
                   <Image
@@ -209,7 +259,7 @@ export default function ProductCartList({
                   </div>
                 </TableCell>
 
-                <TableCell className="">
+                <TableCell>
                   <button
                     className="p-1 rounded-lg bg-muted hover:bg-destructive hover:text-white transition-all duration-200"
                     onClick={() => handleDeleteFromCart(product.product_id)}
@@ -236,14 +286,22 @@ export default function ProductCartList({
       )}
 
       {/* Checkout button */}
-      {products.length > 0 && (
-        <div className="flex justify-center w-full">
+      {productsInCart.length > 0 && (
+        <div className="flex justify-center w-full gap-6">
           <Button
             className="hover:bg-[#2ca76e] text-white transition-all duration-300 w-56"
             variant="default"
             onClick={handleBuyProduct}
           >
             {t("button")}
+          </Button>
+
+          <Button
+            className="rouned-lg"
+            variant={"destructive"}
+            onClick={handleClearCart}
+          >
+            {t("clearButton")}
           </Button>
         </div>
       )}

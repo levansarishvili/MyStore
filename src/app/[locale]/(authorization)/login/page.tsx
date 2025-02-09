@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Link from "next/link";
-import { useToast } from "@/components/hooks/use-toast";
+import { useToast } from "src/app/components/ui/use-toast";
 
 // Validation schema
 const loginSchema = z.object({

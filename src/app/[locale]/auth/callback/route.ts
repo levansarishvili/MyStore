@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (error) {
       console.error("Error exchanging code for session:", error);
-      return NextResponse.redirect(`${origin}/error`);
+      return NextResponse.redirect(`${origin}/login`);
     }
   }
 
@@ -34,7 +34,7 @@ export async function GET(request: Request) {
 
   if (userError || !user) {
     console.error("Failed to fetch user:", userError);
-    return NextResponse.redirect(`${origin}/error`);
+    return NextResponse.redirect(`${origin}/login`);
   }
 
   // Step 3: Redirect user to the intended destination

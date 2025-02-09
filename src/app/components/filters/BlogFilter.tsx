@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { Button } from "../ui/button";
+import { FilterX } from "lucide-react";
 
 export default function BlogFilter() {
   const t = useTranslations("BlogFilter");
@@ -58,29 +59,29 @@ export default function BlogFilter() {
   }
 
   return (
-    <section className="flex flex-wrap justify-center items-center gap-2">
+    <section className="flex flex-wrap justify-center items-center gap-4 bg-muted rounded-lg px-1 sm:px-6 py-2">
       {/* Searching functionality */}
       <div className="max-sm:w-full">
         <Input
           placeholder={t("search")}
           onChange={handleSearch}
-          className="text-sm p-2 border rounded-md max-sm:w-full"
+          className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full"
         />
       </div>
 
       {/* Sorting functionality */}
-      <div className="">
+      <div className="flex justify-center gap-4">
         <Select value={activeSort} onValueChange={handleSort}>
-          <SelectTrigger>
+          <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
             <SelectValue placeholder={t("sort.title")} />
           </SelectTrigger>
-          <SelectContent className="text-xl">
+          <SelectContent className="rounded-lg border-none text-sm p-2 border max-sm:w-full">
             <SelectGroup className="">
               {sortOptions.map((option) => (
                 <SelectItem
                   key={option.value}
                   value={option.value}
-                  className=""
+                  className="rounded-lg cursor-pointer"
                 >
                   {option.label}
                 </SelectItem>
@@ -91,7 +92,12 @@ export default function BlogFilter() {
       </div>
 
       {/* Reset filters*/}
-      <Button variant={"destructive"} className="" onClick={handleClearFilters}>
+      <Button
+        variant={"destructive"}
+        className="rounded-lg"
+        onClick={handleClearFilters}
+      >
+        <FilterX className="size-5" />
         {t("reset")}
       </Button>
     </section>

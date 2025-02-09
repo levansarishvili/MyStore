@@ -13,7 +13,6 @@ import {
   CarouselPrevious,
 } from "../../../../components/ui/carousel";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Dialog,
@@ -24,6 +23,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../../../components/ui/dialog";
+import { useCart } from "src/app/context/CartContext";
 
 interface Props {
   product: ProductsType;
@@ -34,7 +34,7 @@ interface Props {
 export default function ProductDetails({ product, isInCart, locale }: Props) {
   const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const router = useRouter();
+  const { cartQuantity, setCartQuantity } = useCart();
   const t = useTranslations("Products.ProductDetails");
 
   // Function to handle add to cart button click
@@ -59,8 +59,10 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
         console.error("Failed to add product to cart:", data.message);
         return;
       }
+      // If the product is successfully added to the cart, update the state
       setInBag(() => true);
-      router.refresh();
+      setCartQuantity((prev) => prev + 1);
+
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -70,9 +72,9 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
   return (
     <div className="flex flex-col items-center gap-12 mt-10 lg:mt-16">
       <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300">
         {/* Product Details */}
-        <div className="flex justify-center items-center w-full overflow-hidden h-auto transition-all duration-300">
+        <div className="flex justify-center items-center w-full overflow-hidden h-auto transition-all duration-300 bg-card border rounded-xl shadow-md">
           <Carousel className="w-full max-w-xs">
             <CarouselContent className="">
               {product?.image_urls?.map((image, index) => (
@@ -100,7 +102,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
         </div>
 
         {/* Product Settings */}
-        <div className="flex flex-col items-start justify-center gap-6 max-w-[40rem] p-4">
+        <div className="flex flex-col items-start justify-center gap-6 w-full p-4 md:p-8 bg-card border rounded-xl shadow-md">
           <div className="flex flex-col items-start justify-center gap-6">
             <h2 className="text-xl md:text-2xl font-medium">{product?.name}</h2>
             <p className="text-base md:text-lg text-primary font-medium">

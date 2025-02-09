@@ -29,7 +29,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
         <h2 className="text-2xl md:text-3xl font-medium">
           {t("LatestBlogs.title")}
         </h2>
-        <div className="flex justify-end gap-16">
+        <div className="flex justify-end">
           <Link
             href={`/${locale}/blog`}
             className="flex gap-2 items-center hover:text-primary transition-all duration-300"
@@ -37,7 +37,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
             <p className="text-sm sm:text-base font-medium">
               {t("LatestBlogs.readMore")}
             </p>
-            <ArrowRight className="size-5" />
+            <ArrowRight className="size-4" />
           </Link>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
         {latestPosts?.map((post) => (
           <BlogItem
             key={post.id}
-            id={post.id}
+            id={Number(post.blog_id)}
             title={post.translated_title || ""}
             content={post.translated_body || ""}
             image_url={post.image_url}

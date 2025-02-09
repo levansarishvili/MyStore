@@ -8,8 +8,10 @@ import ShopByCategory from "src/app/components/home/ShopByCategory";
 import MostPopularProducts from "../../components/home/MostPopularProducts";
 import LatestArticles from "../../components/home/LatestArticles";
 import GetUserData from "src/app/components/GetUserData";
-import Image from "next/image";
 import { createTranslator } from "next-intl";
+import BannerSlider from "src/app/components/home/BannerSlider";
+import Image from "next/image";
+import { ArrowRight, Link2 } from "lucide-react";
 
 interface cartItemsType {
   product_id: string;
@@ -85,38 +87,61 @@ export default async function HomePage({
   return (
     <>
       {/* Hero Section */}
-      <section className="flex max-sm:flex-col max-sm:justify-end max-sm:pb-16 w-full h-[38rem] sm:h-[40rem] md:h-[44rem] lg:h-[48rem] bg-cover bg-top items-center bg-[url('https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//bg-img.png')]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-          <div className="order-last md:order-first">
-            <div className="flex flex-col max-md:items-center max-sm:gap-6 gap-10 md:gap-12 w-full lg:w-[90%]">
-              <div className="rounded-2xl flex flex-col gap-4">
-                <h1 className="max-md:text-center bg-text-gradient bg-clip-text text-3xl md:text-4xl lg:text-5xl font-medium sm:leading-[2rem] md:leading-[3rem] lg:leading-[4rem] text-white">
-                  {t("Hero.title")}
-                </h1>
-                <p className="max-sm:text-center text-sm md:text-base text-white font-sans">
-                  {t("Hero.description")}.
+      <section className="mt-10 flex max-sm:justify-end w-full mx-auto px-6 md:px-12 lg:px-20 py-0">
+        <div className="grid grid-cols-1 custom-lg:grid-cols-[3fr_1fr] gap-6 md:gap-8 w-full overflow-hidden">
+          {/* Hero Slider */}
+          <div className="relative bg-muted rounded-2xl overflow-hidden shadow-md">
+            <BannerSlider />
+
+            <div className="rounded-2xl p-2 md:p-4 absolute z-2 left-0 md:left-6 bottom-0 md:bottom-8 flex flex-col items-start text-center gap-2 md:gap-4 w-full max-w-[14rem] sm:max-w-[20rem] md:max-w-[26rem]">
+              <h1 className="bg-muted/25 text-foreground p-2 rounded-lg text-start tracking-wide text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold leading-snug sm:leading-tight uppercase">
+                {t("Hero.title")}
+              </h1>
+              <div className="flex flex-col gap-2 sm:gap-4 md:gap-6 p-2 items-start">
+                <p className="max-sm:hidden text-start text-xs sm:text-sm md:text-base text-muted-foreground font-sans leading-relaxed sm:leading-normal">
+                  {t("Hero.description")}
                 </p>
+                <Link href={`/${locale}/store`}>
+                  <Button
+                    className="text-sm md:px-8 font-medium bg-primary  hover:bg-[#2ca76e] transition-all duration-300 rounded-lg shadow-md uppercase"
+                    variant="default"
+                  >
+                    {t("Hero.button")}
+                  </Button>
+                </Link>
               </div>
-              <Link href={`/${locale}/store`} className="">
-                <Button
-                  className="text-sm sm:text-base text-white font-sans font-medium h-12 hover:bg-[#4a5852] transition-all duration-300"
-                  variant="default"
-                >
-                  {t("Hero.button")}
-                </Button>
-              </Link>
             </div>
           </div>
 
-          {/* Banner Image */}
-          <div className="order-first md:order-last justify-center flex flex-col items-center">
-            <Image
-              src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//banner.png"
-              alt="banner"
-              width={1200}
-              height={600}
-              className="w-2/3 md:w-auto"
-            />
+          {/* Side Banners */}
+          <div className="flex custom-lg:flex-col items-center gap-6 w-full max-sm:hidden">
+            {["small-banner-2.webp", "small-banner-1.webp"].map(
+              (banner, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden w-full h-full rounded-2xl bg-muted flex items-center justify-center text-white font-medium shadow-md transition-all duration-300 hover:opacity-80"
+                >
+                  <Link
+                    href={`/${locale}/store`}
+                    className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 opacity-0 group-hover:left-1/2 group-hover:translate-x-[-50%] group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                  >
+                    <div className="flex flex-nowrap justify-center items-center gap-2 bg-muted/90 text-foreground px-3 py-1 rounded-lg shadow-md hover:text-primary transition-all duration-300">
+                      <p className="text-sm font-medium">
+                        {t("Hero.viewMore")}
+                      </p>
+                      <Link2 className="size-4" />
+                    </div>
+                  </Link>
+                  <Image
+                    src={`https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//${banner}`}
+                    width={600}
+                    height={400}
+                    alt="banner"
+                    className="transition-all duration-300 opacity-90 group-hover:opacity-100"
+                  />
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>

@@ -33,8 +33,9 @@
   },
 
   "Hero": {
-    "title": "Find the perfect tech for you",
-    "description": "Whether you're leveling up, starting fresh, or a tech pro, discover the perfect device for you",
+    "title": "Find the perfect devices for you",
+    "viewMore": "View More",
+    "description": "Explore the latest gadgets and upgrade to the perfect device for your needs.",
     "button": "Shopping Now"
   },
 
@@ -90,6 +91,7 @@
       "subtotal": "Subtotal"
     },
     "button": "Checkout",
+    "clearButton": "Clear Cart",
     "emptyButton": "Go to shop"
   },
   "Orders": {
@@ -130,7 +132,7 @@
   "Products": {
     "title": "Products",
     "ProductItem": {
-      "addToCart": "Add",
+      "addToCart": "Add to cart",
       "inCart": "In cart",
       "ModalMessage": {
         "title": "Product Already in Cart",
@@ -141,13 +143,17 @@
     "ProductDetails": {
       "title": "Product Details",
       "price": "Price",
-      "addToCart": "Add",
+      "addToCart": "Add to cart",
       "inCart": "In cart",
       "ModalMessage": {
         "title": "Product Already in Cart",
         "desc": "This product is already in your cart. You can update the quantity or proceed to checkout.",
         "button": "Go to cart"
       }
+    },
+    "SimilarProducts": {
+      "title": "Similar Products",
+      "viewAll": "View All"
     }
   },
   "Pagination": {

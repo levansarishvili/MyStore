@@ -7,7 +7,7 @@ import { Button } from "src/app/components/ui/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/components/hooks/use-toast";
+import { useToast } from "src/app/components/ui/use-toast";
 
 interface paramsType {
   params: { locale: string };

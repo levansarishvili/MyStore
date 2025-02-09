@@ -3,7 +3,6 @@
 import { Link } from "../../../../i18n/routing";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
-import { useRouter } from "next/navigation";
 import { Star, Trash, Trash2, ShoppingCart } from "lucide-react";
 import { ProductsType } from "./page";
 import { useState } from "react";
@@ -16,6 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../../components/ui/dialog";
+import { useCart } from "src/app/context/CartContext";
 
 interface Props {
   id: string;
@@ -41,7 +41,7 @@ export default function ProductItem({
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inCart, setInCart] = useState(in_cart);
-  const router = useRouter();
+  const { cartQuantity, setCartQuantity } = useCart();
   const t = useTranslations("Products.ProductItem");
 
   // Function to handle add to cart button click
@@ -67,7 +67,7 @@ export default function ProductItem({
         return;
       }
       setInCart(() => true);
-      router.refresh();
+      setCartQuantity((prev) => prev + 1);
       console.log("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -79,7 +79,7 @@ export default function ProductItem({
       <div className="max-sm:w-[30%] md:w-2/3 w-[40%] h-[6rem] md:h-[10rem] flex justify-center items-center overflow-hidden rounded-xl">
         <Link href={`/store/${id}`}>
           <Image
-            className="object-coveropacity-80 transition-all duration-300 group-hover:opacity-100 group-hover:scale-95"
+            className="object-coveropacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
             src={imageSrc || ""}
             alt={name}
             width={200}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useToast } from "@/components/hooks/use-toast";
+import { useToast } from "src/app/components/ui/use-toast";
 import {
   Toast,
   ToastClose,
