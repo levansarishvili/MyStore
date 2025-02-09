@@ -7,12 +7,12 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { ScrollArea, ScrollBar } from "../../components/ui/scroll-area";
 import { useTranslations } from "next-intl";
 import { FilterX } from "lucide-react";
 
@@ -37,35 +37,28 @@ function ProductFilter({ categories }: Props) {
   const activeCategory = searchParams.get("category") ?? "";
   const activeSort = searchParams.get("sortBy") ?? "";
 
-  // Handle filter by category
   function handleFilter(filter: string) {
     const params = new URLSearchParams(searchParams);
     params.set("category", filter);
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
-  // Handle sorting
   function handleSort(sortOption: string) {
     const params = new URLSearchParams(searchParams);
     params.set("sortBy", sortOption);
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
-  // Handle Product search with debounced callback
   const handleSearch = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      // Clear category filter when search input changes
       const params = new URLSearchParams(searchParams);
       params.delete("category");
-
-      // Set the search term in URL
       params.set("search", e.target.value);
       router.replace(`${pathName}?${params.toString()}`, { scroll: false });
     },
     400
   );
 
-  // Reset all filters
   function handleClearFilters() {
     const params = new URLSearchParams(searchParams);
     params.delete("category");
@@ -75,30 +68,86 @@ function ProductFilter({ categories }: Props) {
   }
 
   return (
-    <section className="flex flex-wrap justify-center items-center gap-4 bg-muted rounded-lg px-1 sm:px-6 py-2">
-      {/* Searching functionality */}
-      <div className="max-sm:w-full">
+    <section className="w-full flex flex-col lg:flex-row gap-6 max-h-[24rem]">
+      {/* Sidebar for big screens */}
+      <aside className="hidden lg:flex flex-col gap-4 w-64 p-4 bg-muted rounded-lg">
+        {/* Search */}
+        <Input
+          placeholder={t("search")}
+          onChange={handleSearch}
+          className="rounded-lg bg-background border-none text-sm p-2"
+        />
+
+        {/* Sort Dropdown */}
+        <Select value={activeSort} onValueChange={handleSort}>
+          <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2">
+            <SelectValue placeholder={t("sort.title")} />
+          </SelectTrigger>
+          <SelectContent className="rounded-lg border-none text-sm p-1">
+            <SelectGroup>
+              {sortOptions.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  className="rounded-lg cursor-pointer"
+                >
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        {/* Scrollable Category List */}
+        <ScrollArea className="h-48 rounded-lg bg-background p-2 border border-muted smooth-scrollbar">
+          <ul className="flex flex-col gap-2 px-1 py-1 pr-4">
+            {categories.map((category) => (
+              <li
+                key={category}
+                className={`cursor-pointer px-2 py-1 text-sm rounded-md transition-all ${
+                  activeCategory === category
+                    ? "bg-primary text-white"
+                    : "hover:bg-muted"
+                }`}
+                onClick={() => handleFilter(category)}
+              >
+                {category}
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
+
+        {/* Reset Filters Button */}
+        <Button
+          variant="outline"
+          className="rounded-lg"
+          onClick={handleClearFilters}
+        >
+          <FilterX className="size-5" /> {t("reset")}
+        </Button>
+      </aside>
+
+      {/* Horizontal filter for small screens */}
+      <div className="w-full flex max-sm:flex-col justify-center items-center gap-4 bg-muted rounded-lg px-1 sm:px-6 py-2 lg:hidden">
         <Input
           placeholder={t("search")}
           onChange={handleSearch}
           className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full"
         />
-      </div>
 
-      <div className="flex justify-center gap-4">
-        {/* Sorting functionality */}
-        <div className="">
+        <div className="flex gap-2 sm:gap-4 max-w-1/2 w-full">
+          {/* Sort Dropdown */}
           <Select value={activeSort} onValueChange={handleSort}>
             <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
-              <SelectValue placeholder={t("sort.title")} className="" />
+              <SelectValue placeholder={t("sort.title")} />
             </SelectTrigger>
-            <SelectContent className="rounded-lg border-none text-sm p-2 border max-sm:w-full">
-              <SelectGroup className="">
+            <SelectContent className="rounded-lg border-none text-sm p-1">
+              <SelectGroup>
                 {sortOptions.map((option) => (
                   <SelectItem
                     key={option.value}
                     value={option.value}
-                    className="rounded-lg cursor-pointer"
+                    className="rounded-lg"
                   >
                     {option.label}
                   </SelectItem>
@@ -106,40 +155,35 @@ function ProductFilter({ categories }: Props) {
               </SelectGroup>
             </SelectContent>
           </Select>
-        </div>
 
-        {/* Filtering functionality */}
-        <div className="">
+          {/* Category List */}
           <Select value={activeCategory} onValueChange={handleFilter}>
-            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
+            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border">
               <SelectValue placeholder={t("category.title")} />
             </SelectTrigger>
-            <SelectContent className="rounded-lg border-none text-sm p-2 border max-sm:w-full">
-              <SelectGroup>
-                {categories.map((category) => (
-                  <SelectItem
-                    key={category}
-                    value={category}
-                    className="rounded-lg cursor-pointer"
-                  >
-                    {category}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
+            <SelectContent className="rounded-lg border-none text-sm p-2">
+              {categories.map((category) => (
+                <SelectItem
+                  key={category}
+                  value={category}
+                  className="rounded-lg cursor-pointer"
+                >
+                  {category}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
+
+          {/* Reset Filters Button */}
+          <Button
+            variant="outline"
+            className="rounded-lg lg:hidden p-2"
+            onClick={handleClearFilters}
+          >
+            <FilterX className="size-4" />
+          </Button>
         </div>
       </div>
-
-      {/* Reset filters*/}
-      <Button
-        variant={"destructive"}
-        className="rounded-lg"
-        onClick={handleClearFilters}
-      >
-        <FilterX className="size-5" />
-        {t("reset")}
-      </Button>
     </section>
   );
 }

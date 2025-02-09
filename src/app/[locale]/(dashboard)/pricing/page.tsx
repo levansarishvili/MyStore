@@ -18,7 +18,7 @@ export default async function Pricing({ params }: Props) {
 
   return (
     <section className="flex flex-col gap-6 md:gap-10 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-xl md:text-2xl mt-10 lg:mt-16 font-medium text-center">
+      <h1 className="text-xl md:text-2xl font-medium text-center">
         {t("Pricing.title")}
       </h1>
 

@@ -55,6 +55,15 @@ export default async function MyProducts({ locale }: { locale: string }) {
           </div>
         </div>
       ))}
+
+      {/* If no blog is found */}
+      {!myProducts?.length && (
+        <div className="flex flex-col items-center justify-center gap-2 p-6 rounded-lg bg-muted">
+          <p className="text-sm md:text-base text-muted-foreground">
+            {t("Profile.MyProductsForm.emptyMessage")}
+          </p>
+        </div>
+      )}
     </section>
   );
 }

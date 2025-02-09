@@ -5,10 +5,15 @@ import DeleteBlog from "./DeleteBlog";
 import type { BlogType } from "../../[locale]/(dashboard)/blog/page";
 import { SquarePen } from "lucide-react";
 import Link from "next/link";
+import { createTranslator } from "next-intl";
 
 export default async function MyBlogs({ locale }: { locale: string }) {
   const supabase = await createClient();
   const userdata = await GetUserData();
+
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
+  const t = createTranslator({ locale, messages });
 
   const { data: myBlogs, error } = (await supabase
     .from("post_translations")
@@ -54,6 +59,15 @@ export default async function MyBlogs({ locale }: { locale: string }) {
           </div>
         </div>
       ))}
+
+      {/* If no blog is found */}
+      {!myBlogs?.length && (
+        <div className="flex flex-col items-center justify-center gap-2 p-6 rounded-lg bg-muted">
+          <p className="text-sm md:text-base text-muted-foreground">
+            {t("Profile.MyBlogsForm.emptyMessage")}
+          </p>
+        </div>
+      )}
     </section>
   );
 }

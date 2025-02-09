@@ -131,26 +131,33 @@ export default async function Store({ params, searchParams }: Props) {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <section className="mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-14 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="flex flex-col items-center gap-10 lg:gap-14 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Products.title")}</h1>
 
-      {/* Product filter */}
-      <ProductFilter categories={uniqueCategories} />
+      <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-10">
+        {/* Product filter */}
+        <ProductFilter categories={uniqueCategories} />
 
-      <div className="w-full grid grid-cols-1 min-[460px]:grid-cols-2 custom-md:grid-cols-3 custom-lg:grid-cols-4 gap-6 justify-center">
-        {products?.map((product) => (
-          <ProductItem
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            imageSrc={product.image_urls?.[0] || "/assets/placeholder-img.png"}
-            price={product.price}
-            isProMember={isProMember}
-            products={products}
-            userId={userId}
-            in_cart={cartItems?.some((item) => item.product_id === product.id)}
-          />
-        ))}
+        {/* Products */}
+        <div className="w-full grid grid-cols-1 custom-sm:grid-cols-2 custom-md:grid-cols-3 lg:grid-cols-2 custom-lg-2:grid-cols-3 gap-6 justify-center">
+          {products?.map((product) => (
+            <ProductItem
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              imageSrc={
+                product.image_urls?.[0] || "/assets/placeholder-img.png"
+              }
+              price={product.price}
+              isProMember={isProMember}
+              products={products}
+              userId={userId}
+              in_cart={cartItems?.some(
+                (item) => item.product_id === product.id
+              )}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Pagination */}

@@ -102,7 +102,7 @@ export default async function ResultPage({
   }
 
   return (
-    <section className="flex flex-col w-full min-h-screen items-center mt-12 lg:mt-20 max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
+    <section className="flex flex-col w-full min-h-screen items-center max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
       <div className="flex flex-col gap-8 lg:gap-12 bg-card rounded-lg p-8 justify-center items-center max-w-[30rem] text-center mx-auto shadow-md border">
         <h1 className="text-base md:text-xl lg:text-2xl font-semibold text-primary flex items-center gap-2">
           🎉 {t("SuccessPaymentMessage.title")}

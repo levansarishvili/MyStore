@@ -230,10 +230,12 @@
     },
     "MyProductsForm": {
       "title": "My Products",
-      "sold": "Sold"
+      "sold": "Sold",
+      "emptyMessage": "You have not added any products yet!"
     },
     "MyBlogsForm": {
-      "title": "My Blogs"
+      "title": "My Blogs",
+      "emptyMessage": "You have not added any blogs yet!"
     },
     "AddProductForm": {
       "title": "Add Product",
@@ -279,7 +281,7 @@
       "price-desc": "Price: High to Low"
     },
     "category": {
-      "title": "Select a category",
+      "title": "Category",
       "item1": "Audio",
       "item2": "Laptops",
       "item3": "Monitors",

@@ -87,7 +87,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-12 mt-10 lg:mt-16">
+    <div className="flex flex-col items-center gap-16">
       <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300">
         {/* Product Details */}
@@ -126,7 +126,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
         ${
           currentSlide === index + 1
             ? "border-primary border-2 shadow-lg"
-            : "opacity-90"
+            : "opacity-70"
         }`}
               >
                 <Image

@@ -41,7 +41,7 @@ export default async function ProfilePage({
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <section className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 w-full">
+    <section className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 w-full">
       <h1 className="text-xl md:text-2xl font-medium text-center mb-10">
         {t("Profile.title")}
       </h1>
@@ -134,43 +134,43 @@ export default async function ProfilePage({
               <TabsList className="w-full flex flex-wrap justify-center gap-3 bg-muted rounded-lg mb-6 h-auto">
                 <TabsTrigger
                   value="account"
-                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="bg-background min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.AccountForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my products"
-                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.MyProductsForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my blogs"
-                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.MyBlogsForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="add product"
-                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.AddProductForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
-                  value="blog"
-                  className="border min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  value="add blog"
+                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.AddBlogForm.title")}
                 </TabsTrigger>
               </TabsList>
             )}
 
-            <div className="p-4 bg-muted rounded-xl shadow-md">
-              <TabsContent value="account">
+            <div className="p-4 bg-muted rounded-xl shadow-md min-h-[16rem]">
+              <TabsContent value="account" className="">
                 <UserDetails locale={locale} />
               </TabsContent>
               {isProMember && (
@@ -178,14 +178,14 @@ export default async function ProfilePage({
                   <TabsContent value="my products">
                     <MyProducts locale={locale} />
                   </TabsContent>
+                  <TabsContent value="my blogs">
+                    <MyBlogs locale={locale} />
+                  </TabsContent>
                   <TabsContent value="add product">
                     <CreateProductForm />
                   </TabsContent>
-                  <TabsContent value="blog">
+                  <TabsContent value="add blog">
                     <CreateBlogForm />
-                  </TabsContent>
-                  <TabsContent value="my blogs">
-                    <MyBlogs locale={locale} />
                   </TabsContent>
                 </>
               )}

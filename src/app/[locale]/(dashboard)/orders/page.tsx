@@ -55,9 +55,7 @@ export default async function OrdersPage({ params }: ParamsType) {
 
   return (
     <section className="flex flex-col items-center min-h-screen gap-10 lg:gap-20 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h1 className="text-xl md:text-2xl font-medium mt-10 lg:mt-16">
-        {t("Orders.title")}
-      </h1>
+      <h1 className="text-xl md:text-2xl font-medium">{t("Orders.title")}</h1>
 
       {orders?.length !== 0 && (
         <Table className="w-full border border-muted rounded-lg overflow-hidden shadow">
