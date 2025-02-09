@@ -6,6 +6,7 @@ import type { BlogType } from "../../[locale]/(dashboard)/blog/page";
 import { SquarePen } from "lucide-react";
 import Link from "next/link";
 import { createTranslator } from "next-intl";
+import { Button } from "../ui/button";
 
 export default async function MyBlogs({ locale }: { locale: string }) {
   const supabase = await createClient();
@@ -51,11 +52,10 @@ export default async function MyBlogs({ locale }: { locale: string }) {
                 .replace(/\//g, ".")}
             </span>
             <DeleteBlog id={blog.blog_id || ""} />
-            <Link href={`/blog/${blog.id}`} className="flex items-center">
-              <button className="p-1 hover:bg-primary rounded-lg bg-background hover:text-white transition-all duration-200">
-                <SquarePen className="size-4 cursor-pointer " />
-              </button>
-            </Link>
+
+            <Button className="p-2 bg-transparent rounded-lg border-2 border-transparent hover:border-primary hover:bg-primary-200 transition-all duration-200 ease-in-out">
+              <SquarePen className="size-5 text-foreground hover:text-white cursor-pointer" />
+            </Button>
           </div>
         </div>
       ))}

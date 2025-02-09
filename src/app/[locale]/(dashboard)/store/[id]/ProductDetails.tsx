@@ -122,11 +122,9 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
               <button
                 key={index}
                 onClick={() => carouselApi?.scrollTo(index)}
-                className={`bg-background w-12 sm:w-16 rounded-lg border-2 cursor-pointer transition-all duration-300 
+                className={`bg-background px-6 w-full py-2 max-w-20 lg:max-w-24 rounded-lg border cursor-pointer transition-all duration-300 
         ${
-          currentSlide === index + 1
-            ? "border-primary border-2 shadow-lg"
-            : "opacity-70"
+          currentSlide === index + 1 ? "border-primary shadow-lg" : "opacity-70"
         }`}
               >
                 <Image

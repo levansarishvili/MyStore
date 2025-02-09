@@ -250,7 +250,7 @@
       "button": "Add Product"
     },
     "AddBlogForm": {
-      "title": "My Blogs",
+      "title": "Add Blog",
       "addMessage": "Blog created successfully",
       "name": "Blog Title",
       "content": "Blog Content",
