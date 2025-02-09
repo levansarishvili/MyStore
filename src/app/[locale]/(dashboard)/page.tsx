@@ -11,6 +11,7 @@ import GetUserData from "src/app/components/GetUserData";
 import { createTranslator } from "next-intl";
 import BannerSlider from "src/app/components/home/BannerSlider";
 import Image from "next/image";
+import { ArrowRight, Link2 } from "lucide-react";
 
 interface cartItemsType {
   product_id: string;
@@ -87,7 +88,7 @@ export default async function HomePage({
     <>
       {/* Hero Section */}
       <section className="mt-10 flex max-sm:justify-end w-full mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <div className="grid grid-cols-1 custom-lg:grid-cols-[3fr_1fr] gap-6 md:gap-8 w-full">
+        <div className="grid grid-cols-1 custom-lg:grid-cols-[3fr_1fr] gap-6 md:gap-8 w-full overflow-hidden">
           {/* Hero Slider */}
           <div className="relative bg-muted rounded-2xl overflow-hidden shadow-md">
             <BannerSlider />
@@ -113,23 +114,34 @@ export default async function HomePage({
           </div>
 
           {/* Side Banners */}
-          <div className="flex custom-lg:flex-col items-center gap-6 w-full h-full">
-            <div className="overflow-hidden w-full h-full rounded-2xl bg-muted flex items-center justify-center text-white font-medium shadow-md">
-              <Image
-                src="/assets/small-banner-2.png"
-                width={600}
-                height={400}
-                alt="banner"
-              />
-            </div>
-            <div className="overflow-hidden w-full h-full rounded-2xl bg-muted flex items-center justify-center text-white font-medium shadow-md">
-              <Image
-                src="/assets/small-banner-1.png"
-                width={600}
-                height={400}
-                alt="banner"
-              />
-            </div>
+          <div className="flex custom-lg:flex-col items-center gap-6 w-full max-sm:hidden">
+            {["small-banner-2.webp", "small-banner-1.webp"].map(
+              (banner, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden w-full h-full rounded-2xl bg-muted flex items-center justify-center text-white font-medium shadow-md transition-all duration-300 hover:opacity-80"
+                >
+                  <Link
+                    href={`/${locale}/store`}
+                    className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 opacity-0 group-hover:left-1/2 group-hover:translate-x-[-50%] group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                  >
+                    <div className="flex justify-center items-center gap-2 bg-muted/90 text-foreground px-3 py-1 rounded-lg shadow-md hover:text-primary transition-all duration-300">
+                      <p className="text-sm md:text-base font-medium">
+                        {t("Hero.viewMore")}
+                      </p>
+                      <Link2 className="size-4" />
+                    </div>
+                  </Link>
+                  <Image
+                    src={`https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//${banner}`}
+                    width={600}
+                    height={400}
+                    alt="banner"
+                    className="transition-all duration-300 opacity-90 group-hover:opacity-100"
+                  />
+                </div>
+              )
+            )}
           </div>
         </div>
       </section>

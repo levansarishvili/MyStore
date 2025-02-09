@@ -34,7 +34,7 @@ async function Header({ locale }: { locale: string }) {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <header className="flex flex-col items-center sticky top-0 z-10 shadow-md bg-background">
+    <header className="flex flex-col items-center sticky z-50 top-0 shadow-md bg-background">
       {!isNotAuthenticated && <NotificationBar locale={locale} />}
       <div className="max-w-[90rem] w-full h-16 mx-auto my-0 flex justify-between items-center px-6 md:px-12 lg:px-20 py-0 rounded-xl">
         <Link href="/" className="h-10 flex gap-4 items-center">

@@ -46,7 +46,7 @@ export default async function LatestArticles({ locale }: { locale: string }) {
         {latestPosts?.map((post) => (
           <BlogItem
             key={post.id}
-            id={post.id}
+            id={Number(post.blog_id)}
             title={post.translated_title || ""}
             content={post.translated_body || ""}
             image_url={post.image_url}

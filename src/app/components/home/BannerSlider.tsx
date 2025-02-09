@@ -28,33 +28,36 @@ export default function BannerSlider() {
           <CarouselItem className="flex justify-center items-center w-full">
             <div className="w-full">
               <Image
-                src="/assets/hero-slider-1.png"
+                src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//hero-slider-1.webp"
                 alt="banner"
                 width={1200}
                 height={600}
-                className="w-full"
+                className="w-full h-full"
+                priority
               />
             </div>
           </CarouselItem>
           <CarouselItem className="flex justify-center items-center">
             <div className="w-full">
               <Image
-                src="/assets/hero-slider-2.png"
+                src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//hero-slider-2.webp"
                 alt="banner"
                 width={1200}
                 height={600}
-                className="w-full"
+                className="w-full h-full"
+                priority
               />
             </div>
           </CarouselItem>
           <CarouselItem className="flex justify-center items-center">
             <div className="w-full">
               <Image
-                src="/assets/hero-slider-3.png"
+                src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//hero-slider-3.webp"
                 alt="banner"
                 width={1200}
                 height={600}
-                className="w-full"
+                className="w-full h-full"
+                priority
               />
             </div>
           </CarouselItem>
