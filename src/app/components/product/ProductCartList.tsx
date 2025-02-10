@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Loader, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -38,6 +38,8 @@ export default function ProductCartList({
   const router = useRouter();
   const { cartQuantity, setCartQuantity } = useCart();
   const [productsInCart, setProductsInCart] = useState(products);
+  const [loading, setLoading] = useState(false);
+  const [loadingClear, setLoadingClear] = useState(false);
   const t = useTranslations("Cart");
 
   // Calculate total price whenever products change
@@ -138,6 +140,7 @@ export default function ProductCartList({
 
   // Function to handle buy product button click
   const handleBuyProduct = async () => {
+    setLoading(() => true);
     try {
       const res = await fetch(`/api/buy-product`, {
         method: "POST",
@@ -153,6 +156,7 @@ export default function ProductCartList({
       const data = await res.json();
 
       console.log("Product bought successfully");
+      setLoading(() => false);
       if (data.success && data.url) {
         // Redirect to Stripe checkout page
         router.push(data.url);
@@ -164,6 +168,7 @@ export default function ProductCartList({
 
   // Function to clear the cart
   const handleClearCart = async () => {
+    setLoadingClear(() => true);
     try {
       const res = await fetch(`/api/clear-cart`, {
         method: "DELETE",
@@ -178,6 +183,7 @@ export default function ProductCartList({
       setCartQuantity(0);
       setProductsInCart([]);
       console.log("Cart cleared successfully");
+      setLoadingClear(() => false);
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
@@ -287,21 +293,37 @@ export default function ProductCartList({
 
       {/* Checkout button */}
       {productsInCart.length > 0 && (
-        <div className="flex justify-center w-full gap-6">
+        <div className="flex justify-center items-center w-full gap-6">
           <Button
-            className="hover:bg-[#2ca76e] text-white transition-all duration-300 w-56"
-            variant="default"
             onClick={handleBuyProduct}
+            className={`max-w-36 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+              loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+            }`}
           >
-            {t("button")}
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                {t("button")}
+                <Loader className="size-4 animate-spin" />
+              </div>
+            ) : (
+              t("button")
+            )}
           </Button>
 
           <Button
-            className="rouned-lg"
-            variant={"destructive"}
             onClick={handleClearCart}
+            className={`max-w-36 bg-destructive hover:bg-destructive/80 text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+              loadingClear ? "cursor-wait opacity-70" : ""
+            }`}
           >
-            {t("clearButton")}
+            {loadingClear ? (
+              <div className="flex items-center justify-center gap-2">
+                {t("clearButton")}
+                <Loader className="size-4 animate-spin" />
+              </div>
+            ) : (
+              t("clearButton")
+            )}
           </Button>
         </div>
       )}

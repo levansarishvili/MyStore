@@ -104,23 +104,6 @@ export async function POST(req: Request) {
       })
     );
 
-    // Clean up cart items
-    await Promise.all(
-      cartItems.map(async (item) => {
-        await supabase.from("cart").delete().eq("id", item.id);
-
-        // Change in_cart status to false in products table for the deleted product
-        const { error: updateError } = await supabase
-          .from("products")
-          .update({ in_cart: false })
-          .eq("id", item.product_id);
-
-        if (updateError) {
-          console.error("Error updating in_cart status:", updateError);
-        }
-      })
-    );
-
     return NextResponse.json(
       { success: true, sessionId: session.id, url: session.url },
       { status: 200 }

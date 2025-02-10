@@ -62,7 +62,7 @@ export default async function OrderDetailsPage({ params }: paramsType) {
   );
 
   return (
-    <section className="flex flex-col items-center gap-16 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="flex flex-col items-center gap-6 md:gap-8 lg:gap-12 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium text-foreground">
         {t("OrderDetails.title")}
       </h1>
@@ -77,7 +77,7 @@ export default async function OrderDetailsPage({ params }: paramsType) {
             <div className="w-28 h-28 md:w-32 md:h-32 overflow-hidden rounded-lg">
               <Image
                 src={
-                  filteredProducts[index].image_urls?.[1] ||
+                  filteredProducts[index].image_urls?.[0] ||
                   "/assets/placeholder-img.png"
                 }
                 alt={filteredProducts[index].name || "Product Image"}

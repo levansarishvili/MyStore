@@ -38,10 +38,16 @@ function Footer({ locale }: { locale: string }) {
           <p className="text-base font-normal md:font-medium md:text-xl max-w-[16.5rem]">
             {t("title")}
           </p>
-          <div className="flex gap-6">
-            <Facebook className="hover:stroke-primary transition-all duration-300 cursor-pointer" />
-            <Instagram className="hover:stroke-primary transition-all duration-300 cursor-pointer" />
-            <Linkedin className="hover:stroke-primary transition-all duration-300 cursor-pointer" />
+          <div className="flex gap-6 ">
+            <div className="p-1 hover:bg-muted transition-all duration-300 rounded-md">
+              <Facebook className="text-primary cursor-pointer size-6" />
+            </div>
+            <div className="p-1 hover:bg-muted transition-all duration-300 rounded-md">
+              <Linkedin className="text-primary cursor-pointer size-6" />
+            </div>
+            <div className="p-1 hover:bg-muted transition-all duration-300 rounded-md">
+              <Instagram className="text-primary cursor-pointer size-6" />
+            </div>
           </div>
         </div>
 
@@ -100,7 +106,7 @@ function Footer({ locale }: { locale: string }) {
             <AccordionContent>{t("office.address")}</AccordionContent>
             <AccordionContent>{t("office.city")}</AccordionContent>
             <AccordionContent>{t("office.country")}</AccordionContent>
-            <AccordionContent>+995 599 999 999</AccordionContent>
+            <AccordionContent>0322 11 22 33</AccordionContent>
           </AccordionItem>
         </Accordion>
         {/* =============================================== */}
@@ -152,7 +158,7 @@ function Footer({ locale }: { locale: string }) {
             <li className="text-sm">{t("office.address")}</li>
             <li className="text-sm">{t("office.city")}</li>
             <li className="text-sm">{t("office.country")}</li>
-            <li className="text-sm">+995 599 999 999</li>
+            <li className="text-sm">0322 11 22 33</li>
           </ul>
         </div>
       </div>

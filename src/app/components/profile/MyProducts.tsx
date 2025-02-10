@@ -4,6 +4,8 @@ import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import Image from "next/image";
 import DeleteProduct from "../product/DeleteProduct";
 import { createTranslator } from "next-intl";
+import EditProductModal from "../forms/ProductEditForm";
+import { Card, CardContent } from "../ui/card";
 
 export default async function MyProducts({ locale }: { locale: string }) {
   const supabase = await createClient();
@@ -27,33 +29,47 @@ export default async function MyProducts({ locale }: { locale: string }) {
   return (
     <section className="flex flex-col gap-4">
       {myProducts?.map((product) => (
-        <div
+        <Card
           key={product.id}
-          className="flex gap-4 max-custom-sm:flex-col w-full justify-between items-center border rounded-lg p-4"
+          className="w-full rounded-xl border border-muted bg-muted"
         >
-          <div className="flex gap-4 justify-start items-center w-full">
-            <Image
-              src={product.image_urls?.[0] || "/assets/placeholder.png"}
-              alt={product.name}
-              width={800}
-              height={600}
-              className="w-12 h-12"
-            />
-            <p className="line-clamp-2 text-xs md:text-sm">{product.name}</p>
-          </div>
-          <div className="flex justify-between items-center w-full">
-            <span className="text-xs md:text-sm">
-              {new Date(product.created_at)
-                .toLocaleDateString("en-GB")
-                .replace(/\//g, ".")}
-            </span>
-            <p className="text-xs md:text-sm">${product.price / 100}</p>
-            <p className="text-xs md:text-sm">
-              {t("Profile.MyProductsForm.sold")}: {product.solded_quantity}
-            </p>
-            <DeleteProduct id={product.id} />
-          </div>
-        </div>
+          <CardContent className="p-4 flex flex-col gap-4 sm:flex-row sm:items-center">
+            {/* Image & Name */}
+            <div className="flex flex-col items-center gap-2 w-full sm:w-1/4">
+              <Image
+                src={product.image_urls?.[0] || "/assets/placeholder.png"}
+                alt={product.name}
+                width={800}
+                height={600}
+                className="w-16 h-16 object-cover rounded-md"
+              />
+              <p className="line-clamp-2 text-sm font-medium text-center">
+                {product.name}
+              </p>
+            </div>
+
+            {/* Product Info */}
+            <div className="flex flex-col items-center gap-2 sm:w-2/4">
+              <span className="text-xs text-muted-foreground">
+                {new Date(product.created_at)
+                  .toLocaleDateString("en-GB")
+                  .replace(/\//g, ".")}
+              </span>
+              <p className="text-sm font-semibold">
+                ${(product.price / 100).toFixed(2)}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {t("Profile.MyProductsForm.sold")}: {product.solded_quantity}
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-4 sm:w-1/4  justify-center sm:justify-end">
+              <EditProductModal product={product} />
+              <DeleteProduct id={product.id} />
+            </div>
+          </CardContent>
+        </Card>
       ))}
 
       {/* If no blog is found */}

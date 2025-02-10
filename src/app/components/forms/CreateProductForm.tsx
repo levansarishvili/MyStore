@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { useTranslations } from "next-intl";
+import { Loader } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
@@ -74,6 +75,7 @@ export default function CreateProductForm() {
       setLoading(false);
       setCreatedSuccessfully(true);
       reset();
+      router.refresh();
     }
   }
   return (
@@ -200,7 +202,7 @@ export default function CreateProductForm() {
               <SelectTrigger className="bg-background border-none rounded-lg">
                 <SelectValue placeholder={t("categoryLabel")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background rounded-lg border-none">
                 <SelectGroup>
                   {[
                     "Smartphones",
@@ -209,7 +211,11 @@ export default function CreateProductForm() {
                     "Audio",
                     "Monitors",
                   ].map((cat) => (
-                    <SelectItem key={cat} value={cat}>
+                    <SelectItem
+                      key={cat}
+                      value={cat}
+                      className="rounded-lg cursor-pointer"
+                    >
                       {cat}
                     </SelectItem>
                   ))}
@@ -257,29 +263,9 @@ export default function CreateProductForm() {
             }`}
           >
             {loading ? (
-              <div className="flex items-center justify-center">
-                <svg
-                  className="animate-spin h-5 w-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 0116 0"
-                  ></path>
-                </svg>
+              <div className="flex items-center justify-center gap-2">
                 {t("button")}
+                <Loader className="size-4 animate-spin h-5 w-5" />
               </div>
             ) : (
               t("button")

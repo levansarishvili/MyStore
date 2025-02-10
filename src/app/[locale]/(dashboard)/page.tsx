@@ -27,6 +27,8 @@ export default async function HomePage({
     .default;
   const t = createTranslator({ locale, messages });
 
+  const heroCategories = ["Audio", "Photo+and+video"];
+
   const supabase = await createClient();
   const userData = await GetUserData();
   const userId = userData?.id;
@@ -90,11 +92,11 @@ export default async function HomePage({
       <section className="flex max-sm:justify-end w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
         <div className="grid grid-cols-1 custom-lg:grid-cols-[3fr_1fr] gap-6 md:gap-8 w-full overflow-hidden">
           {/* Hero Slider */}
-          <div className="relative bg-muted rounded-2xl overflow-hidden shadow-md custom-lg:mb-2">
+          <div className="relative bg-muted rounded-2xl overflow-hidden shadow-md mb-2 max-sm:min-h-[12rem]">
             <BannerSlider />
 
-            <div className="rounded-2xl p-2 md:p-4 absolute z-2 left-0 md:left-6 bottom-0 md:bottom-8 flex flex-col items-start text-center gap-2 md:gap-4 w-full max-w-[14rem] sm:max-w-[20rem] md:max-w-[26rem]">
-              <h1 className="bg-muted/25 text-foreground p-2 rounded-lg text-start tracking-wide text-sm sm:text-xl md:text-2xl lg:text-4xl font-semibold leading-snug sm:leading-tight uppercase">
+            <div className="rounded-2xl p-2 md:p-4 absolute z-2 left-1/2 bottom-0 max-custom-xs:transform max-custom-xs:-translate-x-1/2 max-custom-xs:-translate-y-1/2 custom-xs:left-2 custom-xs:bottom-2 sm:left-4 sm:bottom-6 md:left-6 md:bottom-8 flex flex-col items-start max-custom-xs:items-center text-center gap-2 md:gap-4 w-full max-w-[14rem] sm:max-w-[20rem] md:max-w-[26rem]">
+              <h1 className="bg-muted/25 text-foreground p-2 rounded-lg text-center custom-xs:text-start tracking-wide text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold leading-snug sm:leading-tight uppercase">
                 {t("Hero.title")}
               </h1>
               <div className="flex flex-col gap-2 sm:gap-4 md:gap-6 p-2 items-start">
@@ -114,8 +116,8 @@ export default async function HomePage({
           </div>
 
           {/* Side Banners */}
-          <div className="flex custom-lg:flex-col items-center gap-6 w-full max-sm:hidden custom-lg:mb-2">
-            {["small-banner-2.webp", "small-banner-1.webp"].map(
+          <div className="flex custom-lg:flex-col items-center gap-6 w-full max-custom-xs:hidden mb-2">
+            {["small-banner-2.webp", "small-banner-1%20.webp"].map(
               (banner, index) => (
                 <div
                   key={index}
@@ -126,7 +128,7 @@ export default async function HomePage({
 
                   {/* Button Link - Appears smoothly on hover */}
                   <Link
-                    href={`/${locale}/store`}
+                    href={`/${locale}/store?category=${heroCategories[index]}`}
                     className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out"
                   >
                     <div className="flex flex-nowrap justify-center items-center gap-2 bg-muted/90 text-foreground px-3 py-1 rounded-lg shadow-md hover:text-primary transition-all duration-300">
@@ -153,8 +155,8 @@ export default async function HomePage({
       </section>
 
       {/* New Products */}
-      <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-        <h2 className="text-2xl md:text-3xl font-medium">
+      <section className="w-full flex flex-col max-sm:items-center gap-6 md:gap-8 lg:gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+        <h2 className="text-xl sm:text:2xl md:text-3xl font-medium">
           {t("NewProducts.title")}
         </h2>
         <NewProductsSlider

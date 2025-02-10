@@ -33,7 +33,7 @@ export default async function ShoppingCartPage({ params }: paramsType) {
   const products = data as ProductType[];
 
   return (
-    <section className="flex justify-start flex-col w-full min-h-screen items-center gap-10 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="flex justify-start flex-col w-full min-h-screen items-center gap-6 md:gap-8 lg:gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Cart.title")}</h1>
 
       <ProductCartList products={products} />

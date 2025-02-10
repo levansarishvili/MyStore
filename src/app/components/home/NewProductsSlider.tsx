@@ -38,11 +38,6 @@ export default function NewProductsSlider({
   return (
     <div className="flex justify-center rounded-2xl w-full">
       <Carousel
-        plugins={[
-          Autoplay({
-            delay: 5000,
-          }),
-        ]}
         className="min-w-full max-w-xs"
         opts={{
           align: "start",
@@ -62,7 +57,7 @@ export default function NewProductsSlider({
                 id={product.id}
                 name={product.name}
                 imageSrc={
-                  product.image_urls?.[1] || "/assets/placeholder-img.png"
+                  product.image_urls?.[0] || "/assets/placeholder-img.png"
                 }
                 price={product.price}
                 isProMember={true}

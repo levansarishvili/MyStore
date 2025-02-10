@@ -1,13 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Trash2 } from "lucide-react";
+import { Loader, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 export default function DeleteProduct({ id }: { id: string }) {
+  const [loading, setLoading] = useState(false);
+  const [deleteState, setDeleteState] = useState(false);
   const router = useRouter();
 
   // Function to handle product deletion
   const handleDelete = async (productId: string) => {
+    setLoading(() => true);
     try {
       const res = await fetch(`/api/delete-product`, {
         method: "DELETE",
@@ -22,7 +26,8 @@ export default function DeleteProduct({ id }: { id: string }) {
       }
 
       console.log("Product deleted successfully");
-      router.push("?deleted=true");
+      setLoading(() => false);
+      router.refresh();
     } catch (error) {
       console.error("Error deleting product:", error);
     }
@@ -30,10 +35,19 @@ export default function DeleteProduct({ id }: { id: string }) {
 
   return (
     <button
-      className="p-1 bg-background text-foreground hover:text-destructive-foreground hover:bg-destructive transition-all duration-200 rounded-md"
+      className={`p-1 bg-destructive text-white hover:text-destructive-foreground hover:bg-destructive transition-all duration-200 rounded-md ${
+        loading ? "cursor-wait opacity-50" : ""
+      }`}
       onClick={() => handleDelete(id)}
+      disabled={loading}
     >
-      <Trash2 className="size-4" />
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <Loader className="size-4 animate-spin h-5 w-5" />
+        </div>
+      ) : (
+        <Trash2 className="size-4" />
+      )}
     </button>
   );
 }

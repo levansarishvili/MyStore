@@ -210,6 +210,8 @@
     "email": "Email",
     "message": "Message",
     "button": "Send",
+    "sending": "Sending..",
+    "sendMessage": "Message sent successfully!",
     "address": "Chavchavadze street #12, Tbilisi, Georgia"
   },
   "Profile": {

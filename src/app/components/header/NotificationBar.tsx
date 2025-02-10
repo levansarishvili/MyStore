@@ -17,11 +17,11 @@ export default function NotificationBar({ locale }: { locale: string }) {
   const t = useTranslations("NotificationBar");
 
   return (
-    <div className="w-full h-10 bg-[#38CB89]">
-      <div className="flex items-center justify-center lg:justify-between h-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <div className="max-sm:hidden w-full h-10 bg-[#38CB89]">
+      <div className="flex items-center justify-between h-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
         <a
           href="tel:0322 11 22 33"
-          className="max-lg:hidden flex gap-2 items-center text-xs font-medium"
+          className="flex gap-2 items-center text-xs font-medium"
         >
           <Phone className="size-3.5 fill-primary" />
           <span className="text-xs font-medium">0322 11 22 33</span>
@@ -41,7 +41,7 @@ export default function NotificationBar({ locale }: { locale: string }) {
           </div>
         </div>
 
-        <div className="max-lg:hidden flex gap-12 items-center">
+        <div className="flex gap-12 items-center">
           <a href="mailto:contact@eshop.ge" className="flex gap-2 items-center">
             <Mail className="size-3.5 fill-primary" />
             <span className="text-xs font-medium">contact@eshop.ge</span>

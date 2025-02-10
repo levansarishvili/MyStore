@@ -125,13 +125,13 @@ export default function ContactPage() {
                   disabled={loading}
                   className="w-full bg-[#38cb89] hover:bg-[#2da874] text-white font-medium py-2 px-8 rounded-lg transition"
                 >
-                  {loading ? "Sending..." : t("button")}
+                  {loading ? t("sending") : t("button")}
                 </Button>
               </div>
 
               {success && (
                 <p className="text-green-500 text-center mt-2">
-                  Message sent successfully!
+                  {t("sendMessage")}
                 </p>
               )}
               {error && (
@@ -143,15 +143,15 @@ export default function ContactPage() {
           <div className="flex flex-col justify-center">
             <div className="flex flex-col space-y-6">
               <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#38cb89]" />
+                <Mail className="w-5 h-5 text-primary" />
                 <span className="text-sm">contact@e-shop.com</span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#38cb89]" />
+                <Phone className="w-5 h-5 text-primary" />
                 <span className="text-sm">+995 599 999 999 </span>
               </div>
               <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-[#38cb89]" />
+                <MapPin className="w-5 h-5 text-primary" />
                 <span className="text-sm">{t("address")}</span>
               </div>
             </div>
