@@ -37,7 +37,7 @@ export default function BannerSlider() {
               />
               {/* For small screens */}
               <Image
-                src="/assets/hero-slider-small-1.png"
+                src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//hero-slider-small-1.webp"
                 alt="banner"
                 width={1200}
                 height={600}
@@ -58,7 +58,7 @@ export default function BannerSlider() {
               />
               {/* For small screens */}
               <Image
-                src="/assets/hero-slider-small-2.png"
+                src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//hero-slider-small-2.webp"
                 alt="banner"
                 width={1200}
                 height={600}
@@ -79,7 +79,7 @@ export default function BannerSlider() {
               />
               {/* For small screens */}
               <Image
-                src="/assets/hero-slider-small-3.png"
+                src="https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//hero-slider-small-3.webp"
                 alt="banner"
                 width={1200}
                 height={600}

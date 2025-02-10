@@ -77,7 +77,7 @@ export default async function OrderDetailsPage({ params }: paramsType) {
             <div className="w-28 h-28 md:w-32 md:h-32 overflow-hidden rounded-lg">
               <Image
                 src={
-                  filteredProducts[index].image_urls?.[1] ||
+                  filteredProducts[index].image_urls?.[0] ||
                   "/assets/placeholder-img.png"
                 }
                 alt={filteredProducts[index].name || "Product Image"}

@@ -57,7 +57,7 @@ export default function NewProductsSlider({
                 id={product.id}
                 name={product.name}
                 imageSrc={
-                  product.image_urls?.[1] || "/assets/placeholder-img.png"
+                  product.image_urls?.[0] || "/assets/placeholder-img.png"
                 }
                 price={product.price}
                 isProMember={true}

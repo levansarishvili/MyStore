@@ -143,15 +143,15 @@ export default function ContactPage() {
           <div className="flex flex-col justify-center">
             <div className="flex flex-col space-y-6">
               <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#38cb89]" />
+                <Mail className="w-5 h-5 text-primary" />
                 <span className="text-sm">contact@e-shop.com</span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#38cb89]" />
+                <Phone className="w-5 h-5 text-primary" />
                 <span className="text-sm">+995 599 999 999 </span>
               </div>
               <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-[#38cb89]" />
+                <MapPin className="w-5 h-5 text-primary" />
                 <span className="text-sm">{t("address")}</span>
               </div>
             </div>

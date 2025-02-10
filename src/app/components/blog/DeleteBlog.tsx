@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Loader, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 export default function DeleteBlog({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
@@ -35,8 +36,9 @@ export default function DeleteBlog({ id }: { id: string }) {
   };
 
   return (
-    <button
-      className={`p-1 bg-destructive text-white hover:text-destructive-foreground hover:bg-destructive transition-all duration-200 rounded-md ${
+    <Button
+      variant={"destructive"}
+      className={`p-0 w-6 h-6 bg-destructive text-white hover:bg-destructive transition-all duration-200 rounded-md ${
         loading ? "cursor-wait opacity-50" : ""
       }`}
       onClick={() => handleDelete(id)}
@@ -49,6 +51,6 @@ export default function DeleteBlog({ id }: { id: string }) {
       ) : (
         <Trash2 className="size-4" />
       )}
-    </button>
+    </Button>
   );
 }

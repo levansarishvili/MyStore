@@ -4,6 +4,21 @@ import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import Image from "next/image";
 import DeleteProduct from "../product/DeleteProduct";
 import { createTranslator } from "next-intl";
+import { SquarePen } from "lucide-react";
+import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/dialog";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Textarea } from "../ui/textarea";
+import EditProductModal from "../forms/ProductEditForm";
 
 export default async function MyProducts({ locale }: { locale: string }) {
   const supabase = await createClient();
@@ -52,6 +67,9 @@ export default async function MyProducts({ locale }: { locale: string }) {
               {t("Profile.MyProductsForm.sold")}: {product.solded_quantity}
             </p>
             <DeleteProduct id={product.id} />
+
+            {/* Modal window for product edit  */}
+            <EditProductModal product={product} />
           </div>
         </div>
       ))}

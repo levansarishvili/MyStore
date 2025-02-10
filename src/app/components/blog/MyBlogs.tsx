@@ -44,17 +44,19 @@ export default async function MyBlogs({ locale }: { locale: string }) {
           <p className="line-clamp-2 w-[60%] text-xs md:text-sm">
             {blog.translated_title}
           </p>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-8 items-center">
             <span className="text-xs md:text-sm">
               {new Date(blog.created_at || "")
                 .toLocaleDateString("en-GB")
                 .replace(/\//g, ".")}
             </span>
-            <DeleteBlog id={blog.blog_id || ""} />
+            <div className="flex gap-6 items-center">
+              <DeleteBlog id={blog.blog_id || ""} />
 
-            <Button className="p-2 bg-transparent rounded-lg border-2 border-transparent hover:border-primary hover:bg-primary-200 transition-all duration-200 ease-in-out">
-              <SquarePen className="size-5 text-foreground hover:text-white cursor-pointer" />
-            </Button>
+              <Button className="p-0 w-6 h-6 bg-primary rounded-md hover:border-primary hover:bg-primary-200 transition-all duration-200 ease-in-out">
+                <SquarePen className="size-4 text-foreground text-white cursor-pointer" />
+              </Button>
+            </div>
           </div>
         </div>
       ))}

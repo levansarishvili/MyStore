@@ -18,6 +18,7 @@ export interface ProductsType {
   stripe_product_id: string;
   stripe_price_id: string;
   solded_quantity: number;
+  brand: string;
 }
 
 interface Props {

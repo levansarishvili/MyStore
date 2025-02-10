@@ -91,7 +91,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
       <h1 className="w-full text-center text-xl md:text-2xl font-medium">
         {t("title")}
       </h1>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300  bg-card border py-4 md:py-8 lg:py-10">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300  bg-card border px-4 py-4 md:py-8 lg:py-10">
         {/* Product Details */}
         <div className="flex flex-col justify-center items-center w-full overflow-hidden h-auto transition-all duration-300">
           <Carousel setApi={setCarouselApi} className="w-full max-w-xs">
@@ -124,7 +124,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
               <button
                 key={index}
                 onClick={() => carouselApi?.scrollTo(index)}
-                className={`bg-background px-6 w-full py-2 max-w-20 lg:max-w-24 rounded-lg border cursor-pointer transition-all duration-300 
+                className={`bg-background px-4 w-full py-2 max-w-20 rounded-lg border cursor-pointer transition-all duration-300 
         ${
           currentSlide === index + 1 ? "border-primary shadow-lg" : "opacity-70"
         }`}
