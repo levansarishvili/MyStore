@@ -125,13 +125,13 @@ export default function ContactPage() {
                   disabled={loading}
                   className="w-full bg-[#38cb89] hover:bg-[#2da874] text-white font-medium py-2 px-8 rounded-lg transition"
                 >
-                  {loading ? "Sending..." : t("button")}
+                  {loading ? t("sending") : t("button")}
                 </Button>
               </div>
 
               {success && (
                 <p className="text-green-500 text-center mt-2">
-                  Message sent successfully!
+                  {t("sendMessage")}
                 </p>
               )}
               {error && (

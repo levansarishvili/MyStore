@@ -131,7 +131,7 @@ export default async function Store({ params, searchParams }: Props) {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <section className="flex flex-col items-center gap-10 lg:gap-14 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="flex flex-col items-center gap-6 md:gap-8 lg:gap-12 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Products.title")}</h1>
 
       <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-10">

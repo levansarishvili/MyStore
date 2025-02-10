@@ -38,11 +38,6 @@ export default function NewProductsSlider({
   return (
     <div className="flex justify-center rounded-2xl w-full">
       <Carousel
-        plugins={[
-          Autoplay({
-            delay: 5000,
-          }),
-        ]}
         className="min-w-full max-w-xs"
         opts={{
           align: "start",

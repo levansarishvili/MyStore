@@ -62,7 +62,7 @@ export default async function OrderDetailsPage({ params }: paramsType) {
   );
 
   return (
-    <section className="flex flex-col items-center gap-16 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="flex flex-col items-center gap-6 md:gap-8 lg:gap-12 w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium text-foreground">
         {t("OrderDetails.title")}
       </h1>

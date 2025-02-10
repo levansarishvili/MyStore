@@ -24,9 +24,9 @@ export default async function LatestArticles({ locale }: { locale: string }) {
   }
 
   return (
-    <section className="w-full flex flex-col gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="w-full flex flex-col gap-6 md:gap-8 lg:gap-12 max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <div className="w-full items-center flex justify-between gap-16">
-        <h2 className="text-2xl md:text-3xl font-medium">
+        <h2 className="text-xl sm:text:2xl md:text-3xl font-medium">
           {t("LatestBlogs.title")}
         </h2>
         <div className="flex justify-end">

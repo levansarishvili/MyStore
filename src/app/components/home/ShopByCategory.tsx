@@ -41,8 +41,8 @@ export default async function ShopByCategory({ locale }: { locale: string }) {
   const t = createTranslator({ locale, messages });
 
   return (
-    <section className="w-full flex flex-col max-sm:items-center gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h2 className="text-2xl md:text-3xl font-medium">
+    <section className="w-full flex flex-col max-sm:items-center gap-6 md:gap-8 lg:gap-12 overflow-hidden max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+      <h2 className="text-xl sm:text:2xl md:text-3xl font-medium">
         {t("ShopByCategory.title")}
       </h2>
       <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 py-4">

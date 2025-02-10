@@ -32,7 +32,16 @@ export default function BannerSlider() {
                 alt="banner"
                 width={1200}
                 height={600}
-                className="w-full h-full"
+                className="w-full h-full max-custom-xs:hidden"
+                priority
+              />
+              {/* For small screens */}
+              <Image
+                src="/assets/hero-slider-small-1.png"
+                alt="banner"
+                width={1200}
+                height={600}
+                className="w-full h-full custom-xs:hidden"
                 priority
               />
             </div>
@@ -44,7 +53,16 @@ export default function BannerSlider() {
                 alt="banner"
                 width={1200}
                 height={600}
-                className="w-full h-full"
+                className="w-full h-full max-custom-xs:hidden"
+                priority
+              />
+              {/* For small screens */}
+              <Image
+                src="/assets/hero-slider-small-2.png"
+                alt="banner"
+                width={1200}
+                height={600}
+                className="w-full h-full custom-xs:hidden"
                 priority
               />
             </div>
@@ -56,7 +74,16 @@ export default function BannerSlider() {
                 alt="banner"
                 width={1200}
                 height={600}
-                className="w-full h-full"
+                className="w-full h-full max-custom-xs:hidden"
+                priority
+              />
+              {/* For small screens */}
+              <Image
+                src="/assets/hero-slider-small-3.png"
+                alt="banner"
+                width={1200}
+                height={600}
+                className="w-full h-full custom-xs:hidden"
                 priority
               />
             </div>

@@ -26,19 +26,10 @@ export default function SimilarProducts({
           : "hidden"
       }`}
     >
-      <div className="w-full flex justify-between items-center">
-        <h2 className="text-start text-lg md:text-xl font-medium">
+      <div className="w-full flex justify-center items-center">
+        <h2 className="text-center text-xl md:text-2xl font-medium">
           {t("title")}
         </h2>
-        <Link
-          className="flex gap-2 items-center hover:text-primary transition-all duration-300"
-          href={`/${locale}/store?category=${
-            products && products[0]?.category
-          }`}
-        >
-          <p className="text-sm sm:text-base font-medium">{t("viewAll")}</p>
-          <ArrowRight className="size-4" />
-        </Link>
       </div>
 
       <div className="w-full grid grid-cols-1 min-[460px]:grid-cols-2 custom-md:grid-cols-3 custom-lg:grid-cols-4 gap-6 justify-center">

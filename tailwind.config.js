@@ -9,6 +9,7 @@ module.exports = {
         "custom-lg-2": "1160px",
         "custom-md": "800px",
         "custom-sm": "560px",
+        "custom-xs": "460px",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

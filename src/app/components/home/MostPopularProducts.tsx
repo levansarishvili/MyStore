@@ -17,8 +17,8 @@ export default async function MostPopularProducts({
   const t = createTranslator({ locale, messages });
 
   return (
-    <section className="flex flex-col gap-12 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <h2 className="text-2xl md:text-3xl font-medium">
+    <section className="flex flex-col gap-6 md:gap-8 lg:gap-12 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+      <h2 className="w-full text-center sm:text-start text-xl sm:text:2xl md:text-3xl font-medium">
         {t("PopularProducts.title")}
       </h2>
 
