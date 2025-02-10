@@ -4,7 +4,6 @@ import Image from "next/image";
 import DeleteBlog from "./DeleteBlog";
 import type { BlogType } from "../../[locale]/(dashboard)/blog/page";
 import { SquarePen } from "lucide-react";
-import Link from "next/link";
 import { createTranslator } from "next-intl";
 import { Button } from "../ui/button";
 

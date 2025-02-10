@@ -10,6 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { Loader } from "lucide-react";
 
 // Validation schema with Zod
 const blogSchema = z.object({
@@ -122,6 +123,7 @@ export default function CreateBlogForm() {
         setCreatedSuccessfully(true);
         console.log("Blog created successfully");
         reset();
+        router.refresh();
       }
     } catch (error) {
       // Delete image from Supabase Storage if blog creation fails
@@ -324,29 +326,9 @@ export default function CreateBlogForm() {
             }`}
           >
             {isLoading ? (
-              <div className="flex items-center justify-center">
-                <svg
-                  className="animate-spin h-5 w-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 0116 0"
-                  ></path>
-                </svg>
+              <div className="flex items-center justify-center gap-2">
                 {t("button")}
+                <Loader className="size-4 animate-spin h-5 w-5" />
               </div>
             ) : (
               t("button")
