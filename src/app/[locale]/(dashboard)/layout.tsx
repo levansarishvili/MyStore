@@ -42,7 +42,7 @@ export default async function DashboardLayout({ children, params }: Props) {
     <>
       <CartProvider cartQuantityServer={cartQuantity}>
         <Header locale={locale} />
-        <main className="flex flex-col justify-center items-center gap-12 md:gap-20 lg:gap-24 w-full">
+        <main className="flex flex-col justify-center items-center gap-10 mt-8 lg:mt-12 md:gap-16 lg:gap-20 w-full">
           {children}
         </main>
         <Footer locale={locale} />

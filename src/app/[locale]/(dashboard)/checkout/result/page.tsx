@@ -54,7 +54,7 @@ export default async function ResultPage({
     .eq("email", email);
 
   return (
-    <section className="flex flex-col w-full min-h-screen items-center mt-12 lg:mt-20 max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
+    <section className="flex flex-col w-full min-h-screen items-center max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-12 bg-background">
       <div className="border flex flex-col gap-6 md:gap-8 bg-card rounded-2xl p-4 lg:p-10 justify-center items-center max-w-[40rem] text-center mx-auto shadow-md">
         {/* Title */}
         <h1 className="text-base md:text-xl lg:text-2xl font-semibold text-primary flex items-center gap-2">

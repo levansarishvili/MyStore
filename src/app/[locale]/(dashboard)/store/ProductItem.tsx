@@ -75,11 +75,11 @@ export default function ProductItem({
   };
 
   return (
-    <div className="pt-6 bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 min-w-52 md:min-w-56">
+    <div className="p-4 bg-card border rounded-xl group flex flex-col items-center justify-between hover:shadow-md gap-4 cursor-pointer text-center transition-all duration-300 min-w-52 md:min-w-56">
       <div className="max-sm:w-[30%] md:w-2/3 w-[40%] h-[6rem] md:h-[10rem] flex justify-center items-center overflow-hidden rounded-xl">
         <Link href={`/store/${id}`}>
           <Image
-            className="object-coveropacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+            className="object-coveropacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-95 w-full"
             src={imageSrc || ""}
             alt={name}
             width={200}
@@ -93,11 +93,12 @@ export default function ProductItem({
       <div className="flex flex-col gap-4 w-full px-2 pb-6">
         <div className="flex flex-col gap-2 items-center justify-between w-full font-inter">
           <div className="flex gap-1">
-            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
-            <Star className="size-3.5 fill-yellow-500 stroke-yellow-500" />
+            {["a", "b", "c", "d", "e"].map((star, index) => (
+              <Star
+                key={index}
+                className="size-3.5 fill-yellow-500 stroke-yellow-500"
+              />
+            ))}
           </div>
           <h2 className="text-xs sm:text-sm font-medium">{name}</h2>
           <p className="text-xs sm:text-sm text-muted-foreground font-medium">{`${

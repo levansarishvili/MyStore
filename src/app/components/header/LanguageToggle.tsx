@@ -20,7 +20,7 @@ export default function LanguageToggle() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [language, setLanguage] = useState("ka");
+  const [language, setLanguage] = useState("");
 
   // Sync with localStorage on mount
   useEffect(() => {

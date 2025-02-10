@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../../../components/ui/carousel";
+import { type CarouselApi } from "../../../../components/ui/carousel";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
@@ -35,7 +36,23 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
   const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartQuantity, setCartQuantity } = useCart();
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [count, setCount] = useState(0);
   const t = useTranslations("Products.ProductDetails");
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
+    }
+
+    setCount(carouselApi.scrollSnapList().length);
+    setCurrentSlide(carouselApi.selectedScrollSnap() + 1);
+
+    carouselApi.on("select", () => {
+      setCurrentSlide(carouselApi.selectedScrollSnap() + 1);
+    });
+  }, [carouselApi]);
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
@@ -70,12 +87,12 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-12 mt-10 lg:mt-16">
+    <div className="flex flex-col items-center gap-16">
       <h1 className="text-xl md:text-2xl font-medium">{t("title")}</h1>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300">
         {/* Product Details */}
-        <div className="flex justify-center items-center w-full overflow-hidden h-auto transition-all duration-300 bg-card border rounded-xl shadow-md">
-          <Carousel className="w-full max-w-xs">
+        <div className="flex flex-col justify-center items-center w-full overflow-hidden h-auto transition-all duration-300 bg-card border rounded-xl shadow-md">
+          <Carousel setApi={setCarouselApi} className="w-full max-w-xs">
             <CarouselContent className="">
               {product?.image_urls?.map((image, index) => (
                 <CarouselItem
@@ -96,9 +113,32 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden lg:flex" />
-            <CarouselNext className="hidden lg:flex" />
+            <CarouselPrevious className="hidden custom-lg:flex" />
+            <CarouselNext className="hidden custom-lg:flex" />
           </Carousel>
+
+          <div className="flex justify-center items-center w-full gap-2 pb-4">
+            {product?.image_urls?.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => carouselApi?.scrollTo(index)}
+                className={`bg-background px-6 w-full py-2 max-w-20 lg:max-w-24 rounded-lg border cursor-pointer transition-all duration-300 
+        ${
+          currentSlide === index + 1 ? "border-primary shadow-lg" : "opacity-70"
+        }`}
+              >
+                <Image
+                  src={image || "/assets/placeholder-img.png"}
+                  alt={product?.name}
+                  width={1200}
+                  height={600}
+                  quality={100}
+                  priority={true}
+                  className="object-contain w-full"
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Product Settings */}

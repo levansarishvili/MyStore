@@ -11,7 +11,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function BannerSlider() {
   return (
-    <div className="w-full order-first md:order-last justify-center flex flex-col items-cente">
+    <div className="w-full order-first md:order-last justify-center flex flex-col items-center">
       <Carousel
         className="w-full"
         plugins={[

@@ -70,7 +70,7 @@
   },
   "LanguageToggle": {
     "en": "Eng",
-    "ka": "Geo"
+    "ka": "ქართ"
   },
   "ProfileToggle": {
     "title": "My Account",
@@ -230,10 +230,12 @@
     },
     "MyProductsForm": {
       "title": "My Products",
-      "sold": "Sold"
+      "sold": "Sold",
+      "emptyMessage": "You have not added any products yet!"
     },
     "MyBlogsForm": {
-      "title": "My Blogs"
+      "title": "My Blogs",
+      "emptyMessage": "You have not added any blogs yet!"
     },
     "AddProductForm": {
       "title": "Add Product",
@@ -248,7 +250,7 @@
       "button": "Add Product"
     },
     "AddBlogForm": {
-      "title": "My Blogs",
+      "title": "Add Blog",
       "addMessage": "Blog created successfully",
       "name": "Blog Title",
       "content": "Blog Content",
@@ -279,7 +281,7 @@
       "price-desc": "Price: High to Low"
     },
     "category": {
-      "title": "Select a category",
+      "title": "Category",
       "item1": "Audio",
       "item2": "Laptops",
       "item3": "Monitors",

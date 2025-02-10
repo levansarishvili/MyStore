@@ -90,7 +90,7 @@ const Sidebar = ({ locale }: { locale: string }) => {
       >
         <Link
           id="home"
-          className="menu-item hover:text-primary transition-all duration-300"
+          className="menu-item hover:text-primary transition-all duration-300 font-medium uppercase"
           href={`/${locale}`}
           onClick={handleMenuItemClick}
         >
@@ -98,7 +98,7 @@ const Sidebar = ({ locale }: { locale: string }) => {
         </Link>
         <Link
           id="about"
-          className="menu-item hover:text-primary transition-all duration-300"
+          className="menu-item hover:text-primary transition-all duration-300 font-medium uppercase"
           href={`/${locale}/store`}
           onClick={handleMenuItemClick}
         >
@@ -106,7 +106,7 @@ const Sidebar = ({ locale }: { locale: string }) => {
         </Link>
         <Link
           id="contact"
-          className="menu-item hover:text-primary transition-all duration-300"
+          className="menu-item hover:text-primary transition-all duration-300 font-medium uppercase"
           href={`/${locale}/blog`}
           onClick={handleMenuItemClick}
         >
@@ -114,7 +114,7 @@ const Sidebar = ({ locale }: { locale: string }) => {
         </Link>
         <Link
           id="contact"
-          className="menu-item hover:text-primary transition-all duration-300"
+          className="menu-item hover:text-primary transition-all duration-300 font-medium uppercase"
           href={`/${locale}/contact`}
           onClick={handleMenuItemClick}
         >

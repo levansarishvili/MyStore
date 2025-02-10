@@ -83,7 +83,7 @@ export default async function BlogPage({ params, searchParams }: ParamsType) {
   const isProMember = await CheckSubscriptionStatus();
 
   return (
-    <section className="min-h-screen mt-10 lg:mt-16 flex flex-col items-center gap-10 lg:gap-16 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
+    <section className="min-h-screen flex flex-col items-center gap-8 lg:gap-12 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Blogs.title")}</h1>
 
       {/* Blog Filter */}

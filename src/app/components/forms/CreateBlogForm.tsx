@@ -9,10 +9,7 @@ import { Input } from "../ui/input";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Loading from "../../loading";
 import { useTranslations } from "next-intl";
-
-// const t = useTranslations("Profile.AddBlogForm");
 
 // Validation schema with Zod
 const blogSchema = z.object({
@@ -44,6 +41,7 @@ export default function CreateBlogForm() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(blogSchema),
@@ -78,7 +76,7 @@ export default function CreateBlogForm() {
   // Submit function
   const onSubmit = async (data: any) => {
     if (!image) {
-      alert("Please upload an image");
+      console.log("Please upload an image");
       return;
     }
     setIsLoading(() => true);
@@ -86,7 +84,7 @@ export default function CreateBlogForm() {
     const imageUrl = await uploadImage(image);
 
     if (!imageUrl) {
-      alert("Image upload failed. Please try again.");
+      console.log("Image upload failed. Please try again.");
       setIsLoading(() => false);
 
       return;
@@ -123,7 +121,7 @@ export default function CreateBlogForm() {
         setIsLoading(false);
         setCreatedSuccessfully(true);
         console.log("Blog created successfully");
-        router.refresh();
+        reset();
       }
     } catch (error) {
       // Delete image from Supabase Storage if blog creation fails
@@ -148,184 +146,214 @@ export default function CreateBlogForm() {
         </p>
       )}
 
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
-        >
-          {/* Post Titles and Content */}
-          <div className="w-full flex flex-col md:flex-row gap-6">
-            {/* English Content */}
-            <div className="flex flex-col w-full md:w-1/2 gap-4">
-              <div className="flex flex-col gap-2">
-                <label
-                  className="text-sm font-medium text-muted-foreground"
-                  htmlFor="title"
-                >
-                  {t("name")}
-                  <span className="text-destructive">*</span>
-                </label>
-                <Controller
-                  control={control}
-                  name="title"
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      type="text"
-                      id="title"
-                      placeholder={t("namePlaceholderlEng")}
-                      className={`border ${
-                        errors.title ? "border-destructive" : ""
-                      } w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300`}
-                    />
-                  )}
-                />
-                {errors.title && (
-                  <p className="text-destructive text-xs">
-                    {errors.title.message}
-                  </p>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-6 bg-muted sm:p-6 w-full"
+      >
+        {/* Post Titles and Content */}
+        <div className="w-full flex flex-col md:flex-row gap-6">
+          {/* English Content */}
+          <div className="flex flex-col w-full md:w-1/2 gap-4">
+            <div className="flex flex-col gap-2">
+              <label
+                className="text-sm font-medium text-muted-foreground"
+                htmlFor="title"
+              >
+                {t("name")}
+                <span className="text-destructive">*</span>
+              </label>
+              <Controller
+                control={control}
+                name="title"
+                defaultValue=""
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    type="text"
+                    id="title"
+                    placeholder={t("namePlaceholderlEng")}
+                    className={`border ${
+                      errors.title ? "border-destructive" : ""
+                    } w-full rounded-lg px-4 py-2 text-sm bg-background border border-muted focus:border-primary focus:ring-2 focus:ring-primary outline-none transition-all duration-300`}
+                  />
                 )}
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  className="text-sm font-medium text-muted-foreground"
-                  htmlFor="body"
-                >
-                  {t("content")}
-                  <span className="text-destructive">*</span>
-                </label>
-                <Controller
-                  control={control}
-                  name="body"
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Textarea
-                      {...field}
-                      id="body"
-                      placeholder={t("contentPlaceholderlEng")}
-                      className={`border ${
-                        errors.body ? "border-destructive" : "border-muted"
-                      } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                    />
-                  )}
-                />
-                {errors.body && (
-                  <p className="text-destructive text-xs">
-                    {errors.body.message}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Georgian Content */}
-            <div className="flex flex-col w-full md:w-1/2 gap-4">
-              <div className="flex flex-col gap-2">
-                <label
-                  className="text-sm font-medium text-muted-foreground"
-                  htmlFor="title_ka"
-                >
-                  {t("name")}
-                  <span className="text-destructive">*</span>
-                </label>
-                <Controller
-                  control={control}
-                  name="title_ka"
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      type="text"
-                      id="title_ka"
-                      placeholder={t("namePlaceholderlGeo")}
-                      className={`border ${
-                        errors.title_ka ? "border-destructive" : "border-muted"
-                      } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                    />
-                  )}
-                />
-                {errors.title_ka && (
-                  <p className="text-destructive text-xs">
-                    {errors.title_ka.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  className="text-sm font-medium text-muted-foreground"
-                  htmlFor="body_ka"
-                >
-                  {t("content")}
-                  <span className="text-destructive">*</span>
-                </label>
-                <Controller
-                  control={control}
-                  name="body_ka"
-                  defaultValue=""
-                  render={({ field }) => (
-                    <Textarea
-                      {...field}
-                      id="body_ka"
-                      placeholder={t("contentPlaceholderlGeo")}
-                      className={`border ${
-                        errors.body_ka ? "border-destructive" : "border-muted"
-                      } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                    />
-                  )}
-                />
-                {errors.body_ka && (
-                  <p className="text-destructive text-xs">
-                    {errors.body_ka.message}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Image Upload */}
-          <div className="flex flex-col gap-2 w-full">
-            <label
-              className="text-sm font-medium text-muted-foreground"
-              htmlFor="image"
-            >
-              {t("image")}
-              <span className="text-destructive">*</span>
-            </label>
-            <Controller
-              control={control}
-              name="image"
-              render={({ field }) => (
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => field.onChange(e.target.files?.[0])}
-                  className={`border ${
-                    errors.image ? "border-destructive" : "border-muted"
-                  } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
-                />
+              />
+              {errors.title && (
+                <p className="text-destructive text-xs">
+                  {errors.title.message}
+                </p>
               )}
-            />
-            {errors.image && (
-              <p className="text-red-600 text-xs">{errors.image.message}</p>
-            )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                className="text-sm font-medium text-muted-foreground"
+                htmlFor="body"
+              >
+                {t("content")}
+                <span className="text-destructive">*</span>
+              </label>
+              <Controller
+                control={control}
+                name="body"
+                defaultValue=""
+                render={({ field }) => (
+                  <Textarea
+                    {...field}
+                    id="body"
+                    placeholder={t("contentPlaceholderlEng")}
+                    className={`border ${
+                      errors.body ? "border-destructive" : "border-muted"
+                    } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  />
+                )}
+              />
+              {errors.body && (
+                <p className="text-destructive text-xs">
+                  {errors.body.message}
+                </p>
+              )}
+            </div>
           </div>
 
-          {/* Submit Button */}
-          <div className="w-full flex justify-center">
-            <Button
-              variant={"default"}
-              type="submit"
-              className="max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 hover:bg-[#2ca76e]"
-            >
-              {t("button")}
-            </Button>
+          {/* Georgian Content */}
+          <div className="flex flex-col w-full md:w-1/2 gap-4">
+            <div className="flex flex-col gap-2">
+              <label
+                className="text-sm font-medium text-muted-foreground"
+                htmlFor="title_ka"
+              >
+                {t("name")}
+                <span className="text-destructive">*</span>
+              </label>
+              <Controller
+                control={control}
+                name="title_ka"
+                defaultValue=""
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    type="text"
+                    id="title_ka"
+                    placeholder={t("namePlaceholderlGeo")}
+                    className={`border ${
+                      errors.title_ka ? "border-destructive" : "border-muted"
+                    } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  />
+                )}
+              />
+              {errors.title_ka && (
+                <p className="text-destructive text-xs">
+                  {errors.title_ka.message}
+                </p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                className="text-sm font-medium text-muted-foreground"
+                htmlFor="body_ka"
+              >
+                {t("content")}
+                <span className="text-destructive">*</span>
+              </label>
+              <Controller
+                control={control}
+                name="body_ka"
+                defaultValue=""
+                render={({ field }) => (
+                  <Textarea
+                    {...field}
+                    id="body_ka"
+                    placeholder={t("contentPlaceholderlGeo")}
+                    className={`border ${
+                      errors.body_ka ? "border-destructive" : "border-muted"
+                    } h-32 w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+                  />
+                )}
+              />
+              {errors.body_ka && (
+                <p className="text-destructive text-xs">
+                  {errors.body_ka.message}
+                </p>
+              )}
+            </div>
           </div>
-        </form>
-      )}
+        </div>
+
+        {/* Image Upload */}
+        <div className="flex flex-col gap-2 w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground"
+            htmlFor="image"
+          >
+            {t("image")}
+            <span className="text-destructive">*</span>
+          </label>
+          <Controller
+            control={control}
+            name="image"
+            render={({ field }) => (
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setImage(file); // Update the image state
+                    field.onChange(file); // Pass the file to react-hook-form
+                  }
+                }}
+                className={`border ${
+                  errors.image ? "border-destructive" : "border-muted"
+                } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
+              />
+            )}
+          />
+          {errors.image && (
+            <p className="text-red-600 text-xs">{errors.image.message}</p>
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <div className="w-full flex justify-center">
+          <Button
+            type="submit"
+            className={`max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+              isLoading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+            }`}
+          >
+            {isLoading ? (
+              <div className="flex items-center justify-center">
+                <svg
+                  className="animate-spin h-5 w-5 mr-3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 0116 0"
+                  ></path>
+                </svg>
+                {t("button")}
+              </div>
+            ) : (
+              t("button")
+            )}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

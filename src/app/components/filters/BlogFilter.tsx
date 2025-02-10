@@ -59,9 +59,9 @@ export default function BlogFilter() {
   }
 
   return (
-    <section className="flex flex-wrap justify-center items-center gap-4 bg-muted rounded-lg px-1 sm:px-6 py-2">
+    <section className="w-full flex max-md:flex-col justify-between items-center gap-2 sm:gap-4 bg-muted rounded-lg px-1 sm:px-6 py-2">
       {/* Searching functionality */}
-      <div className="max-sm:w-full">
+      <div className="max-w-2/3 w-full">
         <Input
           placeholder={t("search")}
           onChange={handleSearch}
@@ -69,37 +69,46 @@ export default function BlogFilter() {
         />
       </div>
 
-      {/* Sorting functionality */}
-      <div className="flex justify-center gap-4">
-        <Select value={activeSort} onValueChange={handleSort}>
-          <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
-            <SelectValue placeholder={t("sort.title")} />
-          </SelectTrigger>
-          <SelectContent className="rounded-lg border-none text-sm p-2 border max-sm:w-full">
-            <SelectGroup className="">
-              {sortOptions.map((option) => (
-                <SelectItem
-                  key={option.value}
-                  value={option.value}
-                  className="rounded-lg cursor-pointer"
-                >
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+      <div className="flex gap-4 max-w-1/3 w-full justify-between">
+        {/* Sorting functionality */}
+        <div className="flex justify-center items-center gap-2 md:gap-4 w-full">
+          <Select value={activeSort} onValueChange={handleSort}>
+            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border">
+              <SelectValue placeholder={t("sort.title")} />
+            </SelectTrigger>
+            <SelectContent className="rounded-lg border-none text-sm p-2 border">
+              <SelectGroup className="">
+                {sortOptions.map((option) => (
+                  <SelectItem
+                    key={option.value}
+                    value={option.value}
+                    className="rounded-lg cursor-pointer"
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
 
-      {/* Reset filters*/}
-      <Button
-        variant={"destructive"}
-        className="rounded-lg"
-        onClick={handleClearFilters}
-      >
-        <FilterX className="size-5" />
-        {t("reset")}
-      </Button>
+        {/* Reset filters*/}
+        <Button
+          variant={"outline"}
+          className="rounded-lg max-md:hidden"
+          onClick={handleClearFilters}
+        >
+          <FilterX className="size-5" />
+          {t("reset")}
+        </Button>
+        <Button
+          variant={"outline"}
+          className="rounded-lg md:hidden p-2"
+          onClick={handleClearFilters}
+        >
+          <FilterX className="size-5" />
+        </Button>
+      </div>
     </section>
   );
 }

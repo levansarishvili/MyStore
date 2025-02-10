@@ -87,10 +87,10 @@ export default async function HomePage({
   return (
     <>
       {/* Hero Section */}
-      <section className="mt-10 flex max-sm:justify-end w-full mx-auto px-6 md:px-12 lg:px-20 py-0">
+      <section className="flex max-sm:justify-end w-full max-w-[90rem] mx-auto px-6 md:px-12 lg:px-20 py-0">
         <div className="grid grid-cols-1 custom-lg:grid-cols-[3fr_1fr] gap-6 md:gap-8 w-full overflow-hidden">
           {/* Hero Slider */}
-          <div className="relative bg-muted rounded-2xl overflow-hidden shadow-md">
+          <div className="relative bg-muted rounded-2xl overflow-hidden shadow-md custom-lg:mb-2">
             <BannerSlider />
 
             <div className="rounded-2xl p-2 md:p-4 absolute z-2 left-0 md:left-6 bottom-0 md:bottom-8 flex flex-col items-start text-center gap-2 md:gap-4 w-full max-w-[14rem] sm:max-w-[20rem] md:max-w-[26rem]">
@@ -114,16 +114,20 @@ export default async function HomePage({
           </div>
 
           {/* Side Banners */}
-          <div className="flex custom-lg:flex-col items-center gap-6 w-full max-sm:hidden">
+          <div className="flex custom-lg:flex-col items-center gap-6 w-full max-sm:hidden custom-lg:mb-2">
             {["small-banner-2.webp", "small-banner-1.webp"].map(
               (banner, index) => (
                 <div
                   key={index}
-                  className="group relative overflow-hidden w-full h-full rounded-2xl bg-muted flex items-center justify-center text-white font-medium shadow-md transition-all duration-300 hover:opacity-80"
+                  className="group relative overflow-hidden w-full h-full rounded-2xl bg-muted flex items-center justify-center text-white font-medium shadow-md transition-all duration-300"
                 >
+                  {/* Black overlay with smooth opacity transition */}
+                  <div className="absolute z-10 inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  {/* Button Link - Appears smoothly on hover */}
                   <Link
                     href={`/${locale}/store`}
-                    className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 opacity-0 group-hover:left-1/2 group-hover:translate-x-[-50%] group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                    className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out"
                   >
                     <div className="flex flex-nowrap justify-center items-center gap-2 bg-muted/90 text-foreground px-3 py-1 rounded-lg shadow-md hover:text-primary transition-all duration-300">
                       <p className="text-sm font-medium">
@@ -132,12 +136,14 @@ export default async function HomePage({
                       <Link2 className="size-4" />
                     </div>
                   </Link>
+
+                  {/* Banner Image with slight opacity transition */}
                   <Image
                     src={`https://trsiucvoloylukdbsoaf.supabase.co/storage/v1/object/public/website-images//${banner}`}
                     width={600}
                     height={400}
                     alt="banner"
-                    className="transition-all duration-300 opacity-90 group-hover:opacity-100"
+                    className="transition-all duration-300 opacity-100 group-hover:opacity-80"
                   />
                 </div>
               )
