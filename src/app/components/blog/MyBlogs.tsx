@@ -43,7 +43,7 @@ export default async function MyBlogs({ locale }: { locale: string }) {
           key={blog.id}
           className="w-full rounded-xl border border-muted bg-muted"
         >
-          <div className="p-4 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="p-4 flex flex-col gap-4 items-center sm:flex-row sm:items-center justify-center">
             <Image
               src={blog.image_url || "/assets/placeholder.png"}
               alt="blog"
@@ -51,7 +51,7 @@ export default async function MyBlogs({ locale }: { locale: string }) {
               height={600}
               className="w-20 h-auto rounded-md"
             />
-            <p className="line-clamp-2 w-[60%] text-xs md:text-sm">
+            <p className="text-center line-clamp-2 w-[60%] text-xs md:text-sm">
               {blog.translated_title}
             </p>
             <div className="flex gap-8 items-center">

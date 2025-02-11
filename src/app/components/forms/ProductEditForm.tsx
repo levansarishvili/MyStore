@@ -18,7 +18,7 @@ import {
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Textarea } from "../ui/textarea";
-import { SquarePen } from "lucide-react";
+import { Loader, SquarePen } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useTranslations } from "next-intl";
 
 const productSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -65,6 +66,7 @@ export default function EditProductModal({
 
   const [loading, setLoading] = useState(false);
   const supabase = createClient();
+  const t = useTranslations("Profile.editProductForm");
 
   // Function to handle image deletion
   const handleImageDelete = async (imageUrls: string[] | undefined) => {
@@ -146,73 +148,152 @@ export default function EditProductModal({
           <SquarePen className="size-4 text-foreground text-white cursor-pointer" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[40rem]">
-        <DialogHeader>
-          <DialogTitle>Edit Product</DialogTitle>
+      <DialogContent className="w-full max-h-[35rem] max-w-[90%] sm:max-w-[60%] h-[90%] overflow-y-scroll bg-muted rounded-lg">
+        <DialogHeader className="text-base sm:text-xl">
+          <DialogTitle className="text-center text-base sm:text-xl">
+            {t("title")}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <div>
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" {...register("name")} />
+          <div className="flex flex-col gap-2">
+            <Label
+              className="text-muted-foreground text-xs md:text-sm"
+              htmlFor="name"
+            >
+              {t("name")}
+              <span className="text-destructive">*</span>
+            </Label>
+            <Input
+              id="name"
+              {...register("name")}
+              className="text-xs md:text-sm bg-background rounded-lg border-none"
+            />
             {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
+              <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
             )}
           </div>
 
-          <div>
-            <Label htmlFor="price">Price</Label>
+          <div className="flex flex-col gap-2">
+            <Label
+              className="text-muted-foreground text-xs md:text-sm"
+              htmlFor="price"
+            >
+              {t("price")}
+              <span className="text-destructive">*</span>
+            </Label>
             <Input
+              className="text-xs md:text-sm bg-background rounded-lg border-none"
               id="price"
               type="number"
               {...register("price", { valueAsNumber: true })}
             />
             {errors.price && (
-              <p className="text-red-500">{errors.price.message}</p>
+              <p className="text-red-500 text-xs">{errors.price.message}</p>
             )}
           </div>
 
-          <div>
-            <Label htmlFor="brand">Brand</Label>
-            <Input id="brand" {...register("brand")} />
+          <div className="flex flex-col gap-2">
+            <Label
+              className="text-muted-foreground text-xs md:text-sm"
+              htmlFor="brand"
+            >
+              {t("brand")}
+              <span className="text-destructive">*</span>
+            </Label>
+            <Input
+              id="brand"
+              {...register("brand")}
+              className="text-xs md:text-sm bg-background rounded-lg border-none"
+            />
             {errors.brand && (
-              <p className="text-red-500">{errors.brand.message}</p>
+              <p className="text-red-500 text-xs">{errors.brand.message}</p>
             )}
           </div>
 
-          <div>
-            <Label htmlFor="description">Description</Label>
-            <Textarea id="description" {...register("description")} />
+          <div className="flex flex-col gap-2">
+            <Label
+              className="text-muted-foreground text-xs md:text-sm"
+              htmlFor="description"
+            >
+              {t("description")}
+              <span className="text-destructive">*</span>
+            </Label>
+            <Textarea
+              id="description"
+              {...register("description")}
+              className="h-[8rem] sm:h-[10rem] text-xs md:text-sm bg-background rounded-lg border-none"
+            />
             {errors.description && (
-              <p className="text-red-500">{errors.description.message}</p>
+              <p className="text-red-500 text-xs">
+                {errors.description.message}
+              </p>
             )}
           </div>
 
-          <div>
-            <Label htmlFor="category">Category</Label>
+          <div className="flex flex-col gap-2">
+            <Label
+              className="text-muted-foreground text-xs md:text-sm"
+              htmlFor="category"
+            >
+              {t("category")}
+            </Label>
             <Select
               onValueChange={(value) => setValue("category", value)}
               defaultValue={product.category}
             >
-              <SelectTrigger>
+              <SelectTrigger className="text-xs md:text-sm bg-background rounded-lg border-none">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Smartphones">Smartphones</SelectItem>
-                <SelectItem value="Laptops">Laptops</SelectItem>
-                <SelectItem value="Tablets">Tablets</SelectItem>
-                <SelectItem value="Audio">Audio</SelectItem>
-                <SelectItem value="Monitors">Monitors</SelectItem>
-                <SelectItem value="Photo+and+video">Photo and video</SelectItem>
+              <SelectContent className="bg-background rounded-lg border-none">
+                <SelectItem
+                  value="Smartphones"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  {t("categoryList.item1")}
+                </SelectItem>
+                <SelectItem
+                  value="Laptops"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  {t("categoryList.item2")}
+                </SelectItem>
+                <SelectItem
+                  value="Tablets"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  {t("categoryList.item3")}
+                </SelectItem>
+                <SelectItem
+                  value="Audio"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  {t("categoryList.item4")}
+                </SelectItem>
+                <SelectItem
+                  value="Monitors"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  {t("categoryList.item5")}
+                </SelectItem>
+                <SelectItem
+                  value="Photo+and+video"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  {t("categoryList.item6")}
+                </SelectItem>
               </SelectContent>
             </Select>
             {errors.category && (
-              <p className="text-red-500">{errors.category.message}</p>
+              <p className="text-red-500 text-xs">{errors.category.message}</p>
             )}
           </div>
 
-          <div>
-            <Label>Images</Label>
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground text-xs md:text-sm">
+              Images
+            </Label>
             <Input
+              className="text-xs md:text-sm bg-background rounded-lg border-none"
               type="file"
               accept="image/*"
               multiple
@@ -224,13 +305,24 @@ export default function EditProductModal({
           </div>
 
           <DialogFooter>
-            <Button
-              className="hover:bg-[#38CB89]/80 transition-all duration-300"
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? "Saving..." : "Save Changes"}
-            </Button>
+            {/* Submit Button */}
+            <div className="w-full flex justify-center">
+              <Button
+                type="submit"
+                className={`mt-4 bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+                  loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+                }`}
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    {t("button")}
+                    <Loader className="size-4 animate-spin h-5 w-5" />
+                  </div>
+                ) : (
+                  t("button")
+                )}
+              </Button>
+            </div>
           </DialogFooter>
         </form>
       </DialogContent>

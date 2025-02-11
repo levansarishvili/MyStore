@@ -16,11 +16,7 @@ import { ScrollArea, ScrollBar } from "../../components/ui/scroll-area";
 import { useTranslations } from "next-intl";
 import { FilterX } from "lucide-react";
 
-interface Props {
-  categories: string[];
-}
-
-function ProductFilter({ categories }: Props) {
+function ProductFilter() {
   const t = useTranslations("ProductFilter");
   const sortOptions = [
     { label: `${t("sort.empty")}`, value: "empty" },
@@ -28,6 +24,14 @@ function ProductFilter({ categories }: Props) {
     { label: `${t("sort.title-desc")}`, value: "title-desc" },
     { label: `${t("sort.price-asc")}`, value: "price-asc" },
     { label: `${t("sort.price-desc")}`, value: "price-desc" },
+  ];
+  const categories = [
+    { label: `${t("category.item1")}`, value: "Audio" },
+    { label: `${t("category.item2")}`, value: "Laptops" },
+    { label: `${t("category.item3")}`, value: "Monitors" },
+    { label: `${t("category.item4")}`, value: "Photo and video" },
+    { label: `${t("category.item5")}`, value: "Smartphones" },
+    { label: `${t("category.item6")}`, value: "Tablets" },
   ];
 
   const searchParams = useSearchParams();
@@ -103,15 +107,15 @@ function ProductFilter({ categories }: Props) {
           <ul className="flex flex-col gap-2 px-1 py-1 pr-4">
             {categories.map((category) => (
               <li
-                key={category}
+                key={category.value}
                 className={`cursor-pointer px-2 py-1 text-sm rounded-md transition-all ${
-                  activeCategory === category
+                  activeCategory === category.value
                     ? "bg-primary text-white"
                     : "hover:bg-muted"
                 }`}
-                onClick={() => handleFilter(category)}
+                onClick={() => handleFilter(category.value)}
               >
-                {category}
+                {category.label}
               </li>
             ))}
           </ul>
@@ -164,11 +168,11 @@ function ProductFilter({ categories }: Props) {
             <SelectContent className="rounded-lg border-none text-sm p-2">
               {categories.map((category) => (
                 <SelectItem
-                  key={category}
-                  value={category}
+                  key={category.value}
+                  value={category.value}
                   className="rounded-lg cursor-pointer"
                 >
-                  {category}
+                  {category.label}
                 </SelectItem>
               ))}
             </SelectContent>

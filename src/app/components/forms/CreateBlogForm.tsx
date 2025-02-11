@@ -181,9 +181,7 @@ export default function CreateBlogForm() {
                 )}
               />
               {errors.title && (
-                <p className="text-destructive text-xs">
-                  {errors.title.message}
-                </p>
+                <p className="text-red-500 text-xs">{errors.title.message}</p>
               )}
             </div>
 
@@ -211,9 +209,7 @@ export default function CreateBlogForm() {
                 )}
               />
               {errors.body && (
-                <p className="text-destructive text-xs">
-                  {errors.body.message}
-                </p>
+                <p className="text-red-500 text-xs">{errors.body.message}</p>
               )}
             </div>
           </div>
@@ -245,7 +241,7 @@ export default function CreateBlogForm() {
                 )}
               />
               {errors.title_ka && (
-                <p className="text-destructive text-xs">
+                <p className="text-red-500 text-xs">
                   {errors.title_ka.message}
                 </p>
               )}
@@ -275,9 +271,7 @@ export default function CreateBlogForm() {
                 )}
               />
               {errors.body_ka && (
-                <p className="text-destructive text-xs">
-                  {errors.body_ka.message}
-                </p>
+                <p className="text-red-500 text-xs">{errors.body_ka.message}</p>
               )}
             </div>
           </div>
@@ -313,7 +307,7 @@ export default function CreateBlogForm() {
             )}
           />
           {errors.image && (
-            <p className="text-red-600 text-xs">{errors.image.message}</p>
+            <p className="text-red-500 text-xs">{errors.image.message}</p>
           )}
         </div>
 

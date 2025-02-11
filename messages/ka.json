@@ -254,6 +254,27 @@
       "image": "ატვირთე სურათები",
       "button": "დამატება"
     },
+    "editProductForm": {
+      "title": "პროდუქტის რედაქტირება",
+      "editMessage": "პროდუქტი წარმატებით განახლდა!",
+      "name": "დასახელება",
+      "price": "ფასი",
+      "brand": "ბრენდი",
+      "description": "აღწერა",
+      "category": "კატეგორია",
+      "categoryLabel": "მონიშნე კატეგორია",
+      "image": "ატვირთე სურათები",
+      "button": "ცვლილებების შენახვა",
+      "categoryList": {
+        "title": "კატეგორია ",
+        "item1": "აუდიო",
+        "item2": "ლეპტოპები",
+        "item3": "მონიტორები",
+        "item4": "ფოტო და ვიდეო",
+        "item5": "ტელეფონები",
+        "item6": "ტაბლეტები"
+      }
+    },
     "AddBlogForm": {
       "title": "ბლოგის დამატება",
       "addMessage": "ბლოგი წარმატებით დაემატა",
@@ -265,6 +286,20 @@
       "contentPlaceholderlEng": "ინგლისურად - გამოიყენეთ Markdown სინტაქსი",
       "image": "ატვირთე ფოტო",
       "button": "დამატება"
+    },
+    "editBlogForm": {
+      "title": "ბლოგის რედაქტირება",
+      "editMessage": "ბლოგი წარმატებით შეიცვალა!",
+      "nameEn": "სათაური (ინგლისურად)",
+      "nameKa": "სათაური (ქართულად)",
+      "contentEn": "შინაარსი (ინგლისურად)",
+      "contentKa": "შინაარსი (ქართულად)",
+      "namePlaceholderlGeo": "ქართულად",
+      "namePlaceholderlEng": "ინგლისურად",
+      "contentPlaceholderlGeo": "ქართულად - გამოიყენეთ Markdown სინტაქსი",
+      "contentPlaceholderlEng": "ინგლისურად - გამოიყენეთ Markdown სინტაქსი",
+      "image": "ატვირთე ფოტო",
+      "button": "ცვლილებების შენახვა"
     },
     "ErrorMessages": {
       "message-1": "სათაური აუცილებელია",

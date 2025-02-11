@@ -80,6 +80,15 @@ export async function POST(req: Request) {
       },
     });
 
+    // Clear cart for the user after checkout session is created
+    const { error: clearError } = await supabase
+      .from("cart")
+      .delete()
+      .eq("user_id", userId);
+    if (clearError) {
+      console.error("Error clearing cart:", clearError);
+    }
+
     // Increase solded quantity in products table for each product in cart
     await Promise.all(
       cartItems.map(async (item) => {

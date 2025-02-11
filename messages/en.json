@@ -251,6 +251,27 @@
       "image": "Upload Images",
       "button": "Add Product"
     },
+    "editProductForm": {
+      "title": "Edit Product",
+      "editMessage": "Product updated successfully!",
+      "name": "Product Name",
+      "price": "Price",
+      "brand": "Brand",
+      "description": "Description",
+      "category": "Category",
+      "categoryLabel": "Select category",
+      "image": "Upload Images",
+      "button": "Save Changes",
+      "categoryList": {
+        "title": "Category",
+        "item1": "Audio",
+        "item2": "Laptops",
+        "item3": "Monitors",
+        "item4": "Photo and video",
+        "item5": "Smartphones",
+        "item6": "Tablets"
+      }
+    },
     "AddBlogForm": {
       "title": "Add Blog",
       "addMessage": "Blog created successfully",
@@ -262,6 +283,20 @@
       "contentPlaceholderlEng": "In English - Use Markdown",
       "image": "Upload Image",
       "button": "Add Blog"
+    },
+    "editBlogForm": {
+      "title": "Edit Blog",
+      "editMessage": "Blog edited successfully",
+      "nameEn": "Blog Title (In English)",
+      "nameKa": "Blog Title (In Georgian)",
+      "contentEn": "Blog Content (In English)",
+      "contentKa": "Blog Content (In Georgian)",
+      "namePlaceholderlGeo": "In Georgian",
+      "namePlaceholderlEng": "In English",
+      "contentPlaceholderlGeo": "In Georgian - Use Markdown",
+      "contentPlaceholderlEng": "In English - Use Markdown",
+      "image": "Upload Image",
+      "button": "Save Changes"
     },
     "ErrorMessages": {
       "message-1": "Title is required",
