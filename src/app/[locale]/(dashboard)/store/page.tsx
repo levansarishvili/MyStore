@@ -37,26 +37,6 @@ export default async function Store({ params, searchParams }: Props) {
   const t = createTranslator({ locale, messages });
   const supabase = await createClient();
 
-  // Get all product categories
-  const { data: categories, error: categoriesError } = (await supabase
-    .from("products")
-    .select("category")
-    .order("category", { ascending: true })) as {
-    data: categoryType[];
-    error: any;
-  };
-
-  if (categoriesError) {
-    console.error("Error fetching categories:", categoriesError);
-    return null;
-  }
-
-  const uniqueCategories = Array.from(
-    new Set(categories.map((category) => category.category))
-  );
-
-  console.log(uniqueCategories);
-
   // Get user data
   const userData = await GetUserData();
   const userId = userData?.id;
@@ -115,7 +95,7 @@ export default async function Store({ params, searchParams }: Props) {
   const page = Number(searchParams?.page) || 1;
 
   // Calculate pagination parameters
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage - 1;
   const totalPages = Math.ceil(productsCount / itemsPerPage);
@@ -137,10 +117,10 @@ export default async function Store({ params, searchParams }: Props) {
 
       <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-10">
         {/* Product filter */}
-        <ProductFilter categories={uniqueCategories} />
+        <ProductFilter />
 
         {/* Products */}
-        <div className="w-full grid grid-cols-1 custom-sm:grid-cols-2 custom-md:grid-cols-3 lg:grid-cols-2 custom-lg-2:grid-cols-3 gap-6 justify-center">
+        <div className="w-full grid grid-cols-1 custom-xs:grid-cols-2 custom-md:grid-cols-3 lg:grid-cols-2 custom-lg-2:grid-cols-3 gap-6 justify-center">
           {products?.map((product) => (
             <ProductItem
               key={product.id}

@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Link from "next/link";
 import { useToast } from "src/app/components/ui/use-toast";
+import { useState } from "react";
+import { Loader } from "lucide-react";
 
 // Validation schema
 const loginSchema = z.object({
@@ -27,6 +29,7 @@ interface paramsType {
 // Login page component
 export default function LoginPage({ params }: paramsType) {
   const locale = params.locale;
+  const [loading, setLoading] = useState(false);
   const t = useTranslations("LoginPage");
   const { toast } = useToast();
 
@@ -41,6 +44,7 @@ export default function LoginPage({ params }: paramsType) {
 
   // Submit handler
   const onSubmit = async (data: FormData) => {
+    setLoading(() => true);
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
@@ -54,13 +58,15 @@ export default function LoginPage({ params }: paramsType) {
         variant: "default",
       });
       // Clear the form data if login fails
+      setLoading(() => false);
+
       reset();
     } else {
       toast({
         title: "Login Successful",
         description: "Redirecting...",
       });
-
+      setLoading(() => false);
       window.location.href = "/";
     }
   };
@@ -119,14 +125,24 @@ export default function LoginPage({ params }: paramsType) {
           </div>
         </div>
         <div className="w-2/3">
-          <Button
-            variant={"default"}
-            className="hover:bg-[#2ca76e] text-white transition-all duration-300 w-full text-sm"
-            data-cy="login-button"
-            type="submit"
-          >
-            {t("login-button")}
-          </Button>
+          {/* Submit Button */}
+          <div className="w-full flex justify-center">
+            <Button
+              type="submit"
+              className={`min-w-[10rem] bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+                loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+              }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  {t("login-button")}
+                  <Loader className="size-4 animate-spin h-5 w-5" />
+                </div>
+              ) : (
+                t("login-button")
+              )}
+            </Button>
+          </div>
         </div>
       </form>
       <form className="flex flex-col gap-4 justify-center items-center">

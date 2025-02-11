@@ -19,6 +19,7 @@ import {
 } from "../../components/ui/dialog";
 import { Label } from "../../components/ui/label";
 import { SquarePen, Loader } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface TranslatedBlogType {
   id: number;
@@ -58,6 +59,8 @@ export default function EditBlogModal({
   const router = useRouter();
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("Profile.editBlogForm");
 
   const {
     register,
@@ -163,46 +166,102 @@ export default function EditBlogModal({
           <SquarePen className="size-4 text-foreground text-white cursor-pointer" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[40rem]">
+      <DialogContent className="w-full max-w-[90%] sm:max-w-[80%] h-[90%] max-sm:overflow-y-scroll bg-muted rounded-lg">
         <DialogHeader>
-          <DialogTitle>Edit Blog</DialogTitle>
+          <DialogTitle className="text-center text-base md:text-xl">
+            {t("title")}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <div>
-            <Label htmlFor="title">Title</Label>
-            <Input id="title" {...register("title")} />
-            {errors.title && (
-              <p className="text-red-500">{errors.title.message}</p>
-            )}
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+            {/* In english */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <Label
+                  className="text-muted-foreground text-xs md:text-sm"
+                  htmlFor="body"
+                >
+                  {t("contentEn")}
+                  <span className="text-destructive">*</span>
+                </Label>
+                <Textarea
+                  className="h-[8rem] sm:h-[12rem] text-xs md:text-sm bg-background rounded-lg border-none"
+                  id="body"
+                  {...register("body")}
+                />
+                {errors.body && (
+                  <p className="text-red-500 text-xs">{errors.body.message}</p>
+                )}
+              </div>
 
-          <div>
-            <Label htmlFor="body">Content</Label>
-            <Textarea id="body" {...register("body")} />
-            {errors.body && (
-              <p className="text-red-500">{errors.body.message}</p>
-            )}
-          </div>
+              <div className="flex flex-col gap-2">
+                <Label
+                  htmlFor="title"
+                  className="text-muted-foreground text-xs md:text-sm"
+                >
+                  {t("nameEn")}
+                  <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id="title"
+                  {...register("title")}
+                  className="text-xs md:text-sm bg-background rounded-lg border-none"
+                />
+                {errors.title && (
+                  <p className="text-red-500 text-xs">{errors.title.message}</p>
+                )}
+              </div>
+            </div>
 
-          <div>
-            <Label htmlFor="title_ka">Title (Georgian)</Label>
-            <Input id="title_ka" {...register("title_ka")} />
-            {errors.title_ka && (
-              <p className="text-red-500">{errors.title_ka.message}</p>
-            )}
-          </div>
+            {/* In Georgian */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <Label
+                  className="text-muted-foreground text-xs md:text-sm"
+                  htmlFor="body_ka"
+                >
+                  {t("contentKa")}
+                  <span className="text-destructive">*</span>
+                </Label>
+                <Textarea
+                  className="h-[8rem] sm:h-[12rem] text-xs md:text-sm bg-background rounded-lg border-none"
+                  id="body_ka"
+                  {...register("body_ka")}
+                />
+                {errors.body_ka && (
+                  <p className="text-red-500 text-xs">
+                    {errors.body_ka.message}
+                  </p>
+                )}
+              </div>
 
-          <div>
-            <Label htmlFor="body_ka">Content (Georgian)</Label>
-            <Textarea id="body_ka" {...register("body_ka")} />
-            {errors.body_ka && (
-              <p className="text-red-500">{errors.body_ka.message}</p>
-            )}
+              <div className="flex flex-col gap-2">
+                <Label
+                  className="text-muted-foreground text-xs md:text-sm"
+                  htmlFor="title_ka"
+                >
+                  {t("nameKa")}
+                  <span className="text-destructive">*</span>
+                </Label>
+                <Input
+                  id="title_ka"
+                  {...register("title_ka")}
+                  className="text-xs md:text-sm bg-background rounded-lg border-none"
+                />
+                {errors.title_ka && (
+                  <p className="text-red-500 text-xs">
+                    {errors.title_ka.message}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
-
-          <div>
-            <Label>Image</Label>
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground text-xs md:text-sm">
+              {t("image")}
+            </Label>
             <Input
+              className="text-xs md:text-sm bg-background rounded-lg border-none"
               type="file"
               accept="image/*"
               onChange={(e) => {
@@ -213,13 +272,24 @@ export default function EditBlogModal({
           </div>
 
           <DialogFooter>
-            <Button
-              className="hover:bg-[#38CB89]/80 transition-all duration-300"
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? <Loader className="animate-spin" /> : "Save Changes"}
-            </Button>
+            {/* Submit Button */}
+            <div className="w-full flex justify-center">
+              <Button
+                type="submit"
+                className={`mt-4 bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+                  loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+                }`}
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    {t("button")}
+                    <Loader className="size-4 animate-spin h-5 w-5" />
+                  </div>
+                ) : (
+                  t("button")
+                )}
+              </Button>
+            </div>
           </DialogFooter>
         </form>
       </DialogContent>

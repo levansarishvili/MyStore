@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { useTranslations } from "next-intl";
+import { Loader } from "lucide-react";
 
 interface DeleteAccountProps {
   userId: string;
@@ -47,22 +48,30 @@ export default function DeleteAccount({ userId }: DeleteAccountProps) {
   };
 
   return (
-    <div>
+    <div className="">
       {error && <p className="text-red-500">{error}</p>}
       {successMessage && (
         <p className="text-primary text-sm">{successMessage}</p>
       )}
-      <Button
-        variant={"destructive"}
-        onClick={handleUserDelete}
-        disabled={isLoading}
-        data-cy="delete-user-button"
-        className={`rounded-lg px-4 py-2 transition-all font-medium duration-300 text-sm ${
-          isLoading ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-      >
-        {isLoading ? `${t("deleting")}...` : `${t("deleteButton")}`}
-      </Button>
+      <div className="w-full flex justify-center">
+        <Button
+          type="submit"
+          variant={"destructive"}
+          onClick={handleUserDelete}
+          className={` text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+            isLoading ? "cursor-wait opacity-70" : ""
+          }`}
+        >
+          {isLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              {t("deleteButton")}
+              <Loader className="size-4 animate-spin h-5 w-5" />
+            </div>
+          ) : (
+            t("deleteButton")
+          )}
+        </Button>
+      </div>
     </div>
   );
 }

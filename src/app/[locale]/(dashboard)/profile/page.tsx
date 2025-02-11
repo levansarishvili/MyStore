@@ -102,18 +102,12 @@ export default async function ProfilePage({
               </div>
 
               {/* Actions */}
-              <div className="mt-6 flex gap-6 lg:flex-col justify-center w-full">
-                {/* <Button
-                variant="destructive"
-                className="text-sm font-medium rounded-lg transition"
-              >
-                Cancel Subscription
-              </Button> */}
+              <div className="mt-6 flex gap-6 max-custom-xs:flex-col lg:flex-col justify-center items-center w-full">
                 {!isProMember && (
                   <div className="flex justify-center">
                     <Link href={`/${locale}/pricing`}>
                       <Button
-                        className="text-white hover:bg-[#38CB89]/80 transition-all duration-300"
+                        className=" text-white hover:bg-[#38CB89]/80 transition-all duration-300"
                         variant="default"
                       >
                         {t("Profile.subscribeButton")}

@@ -110,9 +110,7 @@ export default function CreateProductForm() {
                 id="name"
               />
               {errors.name && (
-                <p className="text-destructive text-xs">
-                  {errors.name.message}
-                </p>
+                <p className="text-red-500 text-xs">{errors.name.message}</p>
               )}
             </div>
 
@@ -132,9 +130,7 @@ export default function CreateProductForm() {
                 id="brand"
               />
               {errors.brand && (
-                <p className="text-destructive text-xs">
-                  {errors.brand.message}
-                </p>
+                <p className="text-red-500 text-xs">{errors.brand.message}</p>
               )}
             </div>
           </div>
@@ -158,9 +154,7 @@ export default function CreateProductForm() {
                 id="price"
               />
               {errors.price && (
-                <p className="text-destructive text-xs">
-                  {errors.price.message}
-                </p>
+                <p className="text-red-500 text-xs">{errors.price.message}</p>
               )}
             </div>
 
@@ -180,7 +174,7 @@ export default function CreateProductForm() {
                 id="description"
               />
               {errors.description && (
-                <p className="text-destructive text-xs">
+                <p className="text-red-500 text-xs">
                   {errors.description.message}
                 </p>
               )}
@@ -223,9 +217,7 @@ export default function CreateProductForm() {
               </SelectContent>
             </Select>
             {errors.category && (
-              <p className="text-destructive text-xs">
-                {errors.category.message}
-              </p>
+              <p className="text-red-500 text-xs">{errors.category.message}</p>
             )}
           </div>
 
@@ -247,9 +239,7 @@ export default function CreateProductForm() {
               } w-full rounded-lg px-4 py-2 text-sm bg-background border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300`}
             />
             {errors.images && (
-              <p className="text-destructive text-xs">
-                {errors.images.message}
-              </p>
+              <p className="text-red-500 text-xs">{errors.images.message}</p>
             )}
           </div>
         </div>
