@@ -59,6 +59,7 @@ export default function EditBlogModal({
   const router = useRouter();
   const supabase = createClient();
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("Profile.editBlogForm");
 
   const {
@@ -165,7 +166,7 @@ export default function EditBlogModal({
           <SquarePen className="size-4 text-foreground text-white cursor-pointer" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[90%] sm:max-w-[80%] h-[90%] overflow-y-scroll bg-muted rounded-lg">
+      <DialogContent className="w-full max-w-[90%] sm:max-w-[80%] h-[90%] max-sm:overflow-y-scroll bg-muted rounded-lg">
         <DialogHeader>
           <DialogTitle className="text-center text-base md:text-xl">
             {t("title")}

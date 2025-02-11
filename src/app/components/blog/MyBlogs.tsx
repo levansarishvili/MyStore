@@ -3,9 +3,7 @@ import GetUserData from "../GetUserData";
 import Image from "next/image";
 import DeleteBlog from "./DeleteBlog";
 import type { BlogType } from "../../[locale]/(dashboard)/blog/page";
-import { SquarePen } from "lucide-react";
 import { createTranslator } from "next-intl";
-import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import EditBlogModal from "../forms/BlogEditForm";
 
@@ -61,7 +59,6 @@ export default async function MyBlogs({ locale }: { locale: string }) {
                   .replace(/\//g, ".")}
               </span>
               <div className="flex gap-6 items-center">
-                <DeleteBlog id={blog.blog_id || ""} />
                 <EditBlogModal
                   locale={locale}
                   blog={blog}
@@ -69,6 +66,7 @@ export default async function MyBlogs({ locale }: { locale: string }) {
                     (b) => b.blog_id === blog.blog_id
                   )}
                 />
+                <DeleteBlog id={blog.blog_id || ""} />
               </div>
             </div>
           </div>

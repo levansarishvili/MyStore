@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "src/app/components/ui/use-toast";
+import { Loader } from "lucide-react";
+import { useState } from "react";
 
 interface paramsType {
   params: { locale: string };
@@ -27,6 +29,8 @@ type FormData = z.infer<typeof signupSchema>;
 // Signup page component
 export default function SignUpPage({ params }: paramsType) {
   const locale = params.locale;
+  const [loading, setLoading] = useState(false);
+
   const t = useTranslations("SignUpPage");
   const { toast } = useToast();
 
@@ -41,6 +45,7 @@ export default function SignUpPage({ params }: paramsType) {
 
   // Submit handler
   const onSubmit = async (data: FormData) => {
+    setLoading(() => true);
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
@@ -53,6 +58,7 @@ export default function SignUpPage({ params }: paramsType) {
         description: result?.message || "Something went wrong",
         variant: "default",
       });
+      setLoading(() => false);
       // Clear form on failure
       reset();
     } else {
@@ -60,6 +66,7 @@ export default function SignUpPage({ params }: paramsType) {
         title: "Signup Successful",
         description: "Redirecting...",
       });
+      setLoading(() => false);
       window.location.href = "/";
     }
   };
@@ -118,14 +125,24 @@ export default function SignUpPage({ params }: paramsType) {
           </div>
         </div>
         <div className="w-2/3">
-          <Button
-            variant={"default"}
-            className="text-white hover:bg-[#2ca76e] transition-all duration-300 w-full"
-            data-cy="signup-button"
-            type="submit"
-          >
-            {t("signup-button")}
-          </Button>
+          {/* Submit Button */}
+          <div className="w-full flex justify-center">
+            <Button
+              type="submit"
+              className={`min-w-[10rem] bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+                loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+              }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  {t("signup-button")}
+                  <Loader className="size-4 animate-spin h-5 w-5" />
+                </div>
+              ) : (
+                t("signup-button")
+              )}
+            </Button>
+          </div>
         </div>
       </form>
     </div>

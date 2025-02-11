@@ -315,7 +315,7 @@ export default function CreateBlogForm() {
         <div className="w-full flex justify-center">
           <Button
             type="submit"
-            className={`max-w-36 mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+            className={`mt-4 bg-primary text-white text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
               isLoading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
             }`}
           >

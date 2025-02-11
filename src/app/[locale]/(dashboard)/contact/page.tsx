@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Loader } from "lucide-react";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import { Textarea } from "../../../components/ui/textarea";
@@ -120,13 +120,24 @@ export default function ContactPage() {
               </div>
 
               <div className="flex justify-center">
-                <Button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-[#38cb89] hover:bg-[#2da874] text-white font-medium py-2 px-8 rounded-lg transition"
-                >
-                  {loading ? t("sending") : t("button")}
-                </Button>
+                <div className="w-full flex justify-center">
+                  <Button
+                    type="submit"
+                    className={`min-w-[10rem] bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 flex items-center gap-2 ${
+                      loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+                    }`}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <Loader className="size-4 animate-spin" />
+                        {t("sending")}
+                      </>
+                    ) : (
+                      <>{t("button")}</>
+                    )}
+                  </Button>
+                </div>
               </div>
 
               {success && (

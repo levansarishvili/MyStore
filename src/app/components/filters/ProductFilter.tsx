@@ -79,21 +79,21 @@ function ProductFilter() {
         <Input
           placeholder={t("search")}
           onChange={handleSearch}
-          className="rounded-lg bg-background border-none text-sm p-2"
+          className="rounded-lg bg-background border-none text-xs md:text-sm p-2"
         />
 
         {/* Sort Dropdown */}
         <Select value={activeSort} onValueChange={handleSort}>
-          <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2">
+          <SelectTrigger className="rounded-lg bg-background border-none text-xs md:text-sm p-2">
             <SelectValue placeholder={t("sort.title")} />
           </SelectTrigger>
-          <SelectContent className="rounded-lg border-none text-sm p-1">
+          <SelectContent className="rounded-lg border-none text-xs md:text-sm p-1">
             <SelectGroup>
               {sortOptions.map((option) => (
                 <SelectItem
                   key={option.value}
                   value={option.value}
-                  className="rounded-lg cursor-pointer"
+                  className="rounded-lg cursor-pointer text-xs md:text-sm"
                 >
                   {option.label}
                 </SelectItem>
@@ -108,7 +108,7 @@ function ProductFilter() {
             {categories.map((category) => (
               <li
                 key={category.value}
-                className={`cursor-pointer px-2 py-1 text-sm rounded-md transition-all ${
+                className={`cursor-pointer px-2 py-1 text-xs md:text-sm rounded-md transition-all ${
                   activeCategory === category.value
                     ? "bg-primary text-white"
                     : "hover:bg-muted"
@@ -136,22 +136,22 @@ function ProductFilter() {
         <Input
           placeholder={t("search")}
           onChange={handleSearch}
-          className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full"
+          className="rounded-lg bg-background border-none text-xs md:text-sm p-2 border max-sm:w-full"
         />
 
         <div className="flex gap-2 sm:gap-4 max-w-1/2 w-full">
           {/* Sort Dropdown */}
           <Select value={activeSort} onValueChange={handleSort}>
-            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border max-sm:w-full">
+            <SelectTrigger className="rounded-lg bg-background border-none text-xs md:text-sm p-2 border max-sm:w-full">
               <SelectValue placeholder={t("sort.title")} />
             </SelectTrigger>
-            <SelectContent className="rounded-lg border-none text-sm p-1">
+            <SelectContent className="rounded-lg border-none text-xs md:text-sm p-1">
               <SelectGroup>
                 {sortOptions.map((option) => (
                   <SelectItem
                     key={option.value}
                     value={option.value}
-                    className="rounded-lg"
+                    className="rounded-lg text-xs md:text-sm cursor-pointer"
                   >
                     {option.label}
                   </SelectItem>
@@ -162,15 +162,15 @@ function ProductFilter() {
 
           {/* Category List */}
           <Select value={activeCategory} onValueChange={handleFilter}>
-            <SelectTrigger className="rounded-lg bg-background border-none text-sm p-2 border">
+            <SelectTrigger className="rounded-lg bg-background border-none text-xs md:text-sm p-2 border">
               <SelectValue placeholder={t("category.title")} />
             </SelectTrigger>
-            <SelectContent className="rounded-lg border-none text-sm p-2">
+            <SelectContent className="rounded-lg border-none text-xs md:text-sm p-2">
               {categories.map((category) => (
                 <SelectItem
                   key={category.value}
                   value={category.value}
-                  className="rounded-lg cursor-pointer"
+                  className="rounded-lg cursor-pointer text-xs md:text-sm"
                 >
                   {category.label}
                 </SelectItem>

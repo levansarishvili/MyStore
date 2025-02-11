@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ProductsType } from "../page";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart, Loader, ShoppingCart } from "lucide-react";
 import { Button } from "src/app/components/ui/button";
 import { useTranslations } from "next-intl";
 import {
@@ -39,6 +39,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const t = useTranslations("Products.ProductDetails");
 
   useEffect(() => {
@@ -60,6 +61,8 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
       setIsModalOpen(() => true);
       return;
     }
+
+    setLoading(() => true);
     try {
       const res = await fetch(`/api/add-to-cart`, {
         method: "POST",
@@ -71,9 +74,11 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
         const data = await res.json();
         if (data.message === "Product already in cart") {
           console.log("Product already in cart");
+          setLoading(() => false);
           return;
         }
         console.error("Failed to add product to cart:", data.message);
+        setLoading(() => false);
         return;
       }
       // If the product is successfully added to the cart, update the state
@@ -81,6 +86,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
       setCartQuantity((prev) => prev + 1);
 
       console.log("Product added to cart successfully");
+      setLoading(() => false);
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
@@ -156,14 +162,28 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
             {t("price")}: {product?.price / 100} $
           </p>
           <div className="flex">
-            <Button
-              variant={"default"}
-              className="hover:bg-[#2ca76e] transition all duration-300 text-white text-sm w-[10rem]"
-              onClick={() => handleAddToCart(product.id)}
-            >
-              <ShoppingCart className="size-4 fill-transparent stroke-white" />
-              {`${inBag ? `${t("inCart")}` : `${t("addToCart")}`}`}
-            </Button>
+            {/* Add to cart button */}
+            <div className="w-full flex justify-center">
+              <Button
+                onClick={() => handleAddToCart(product.id)}
+                className={`min-w-[10rem] bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 flex items-center gap-2 ${
+                  loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+                }`}
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader className="size-4 animate-spin" />
+                    {t("addToCart")}
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="size-4 fill-transparent stroke-white" />
+                    {inBag ? t("inCart") : t("addToCart")}
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
