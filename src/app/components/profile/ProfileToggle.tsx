@@ -23,11 +23,13 @@ import { useTranslations } from "next-intl";
 interface ProfileToggleProps {
   userImageUrl: string;
   locale: string;
+  userAvatar: string;
 }
 
 export default function ProfileToggle({
   userImageUrl,
   locale,
+  userAvatar,
 }: ProfileToggleProps) {
   const t = useTranslations("ProfileToggle");
 
@@ -41,7 +43,7 @@ export default function ProfileToggle({
         >
           <Avatar className="w-10 h-10 flex items-center justify-center">
             <AvatarImage
-              src={userImageUrl || "/assets/user.svg"}
+              src={userAvatar || userImageUrl || "/assets/user.svg"}
               alt="user"
               className="w-8 h-8 rounded-full"
             />

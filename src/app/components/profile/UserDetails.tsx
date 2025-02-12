@@ -47,15 +47,15 @@ export default function UserDetails({
     defaultValues: {
       first_name:
         userDetails?.first_name ||
-        userData?.user_metadata.full_name.split(" ")[0] ||
+        userData?.user_metadata.full_name?.split(" ")[0] ||
         "",
       last_name:
         userDetails?.last_name ||
-        userData?.user_metadata.full_name.split(" ")[1] ||
+        userData?.user_metadata.full_name?.split(" ")[1] ||
         "",
       username:
-        userDetails?.username || userData?.user_metadata.user_name || "",
-      phone: userDetails?.phone || userData?.user_metadata.phone || "",
+        userDetails?.username || userData?.user_metadata?.user_name || "",
+      phone: userDetails?.phone || userData?.user_metadata?.phone || "",
     },
   });
 
@@ -63,10 +63,22 @@ export default function UserDetails({
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
-    console.log("123");
 
     try {
-      let imageUrl = userData?.user_metadata.image_url || "";
+      let imageUrl = userDetails?.image_url || "";
+      // // Upload image on supabase storage and after that get image url
+      if (image) {
+        const fileName = `${Date.now()}-${image.name}`;
+        const { data: uploadData, error } = await supabase.storage
+          .from("user_avatars")
+          .upload(fileName, image);
+        if (error) return;
+
+        const { data: publicUrl } = supabase.storage
+          .from("user_avatars")
+          .getPublicUrl(uploadData.path);
+        imageUrl = publicUrl.publicUrl;
+      }
 
       // Update user profile details in Supabase table
       const { error: updateError } = await supabase
@@ -76,10 +88,13 @@ export default function UserDetails({
           last_name: data.last_name,
           username: data.username,
           phone: data.phone,
+          image_url: imageUrl,
         })
         .eq("user_id", userData.id);
 
       if (updateError) throw updateError;
+      deleteOldImage();
+      router.refresh();
 
       console.log("Profile updated successfully!");
     } catch (error) {
@@ -91,101 +106,138 @@ export default function UserDetails({
     }
   };
 
+  // Delete old image from supabase storage after uploading new one
+  const deleteOldImage = async () => {
+    if (userDetails?.image_url && image) {
+      try {
+        const { error: deleteError } = await supabase.storage
+          .from("user_avatars")
+          .remove([userDetails?.image_url.split("/").pop() || ""]);
+        if (deleteError) throw deleteError;
+      } catch (error) {
+        console.error("Error deleting old image:", error);
+      }
+    }
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 w-full bg-muted p-6 rounded-xl"
-    >
-      {/* First Name */}
-      <div className="flex flex-col w-full">
-        <label
-          className="text-sm font-medium text-muted-foreground mb-1"
-          htmlFor="first_name"
-        >
-          {t("first_name")} <span className="text-destructive">*</span>
-        </label>
-        <Input
-          {...register("first_name")}
-          className="rounded-lg border-none bg-background"
-        />
-        {errors.first_name && (
-          <p className="text-red-500 text-xs mt-1">
-            {errors.first_name.message}
-          </p>
-        )}
-      </div>
-
-      {/* Last Name */}
-      <div className="flex flex-col w-full">
-        <label
-          className="text-sm font-medium text-muted-foreground mb-1"
-          htmlFor="last_name"
-        >
-          {t("last_name")} <span className="text-destructive">*</span>
-        </label>
-        <Input
-          {...register("last_name")}
-          className="rounded-lg border-none bg-background"
-        />
-        {errors.last_name && (
-          <p className="text-red-500 text-xs mt-1">
-            {errors.last_name.message}
-          </p>
-        )}
-      </div>
-
-      {/* Username */}
-      <div className="flex flex-col w-full">
-        <label
-          className="text-sm font-medium text-muted-foreground mb-1"
-          htmlFor="username"
-        >
-          {t("username")} <span className="text-destructive">*</span>
-        </label>
-        <Input
-          {...register("username")}
-          className="rounded-lg border-none bg-background"
-        />
-        {errors.username && (
-          <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>
-        )}
-      </div>
-
-      {/* Phone */}
-      <div className="flex flex-col w-full">
-        <label
-          className="text-sm font-medium text-muted-foreground mb-1"
-          htmlFor="phone"
-        >
-          {t("phone")} <span className="text-destructive">*</span>
-        </label>
-        <Input
-          {...register("phone")}
-          className="rounded-lg border-none bg-background"
-        />
-        {errors.phone && (
-          <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
-        )}
-      </div>
-
-      {/* Submit Button */}
-      <div className="w-full flex justify-center">
-        <Button
-          type="submit"
-          className={`mt-4 bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
-            loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
-          }`}
-        >
-          {loading ? (
-            <div className="flex items-center justify-center gap-2">
-              {t("button")}
-              <Loader className="size-4 animate-spin h-5 w-5" />
-            </div>
-          ) : (
-            t("button")
+    <div className="w-full flex justify-center flex-col items-center">
+      <h2 className="text-base md:text-lg font-medium">{t("subtitle")}</h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-6 w-full bg-muted p-6 rounded-xl"
+      >
+        {/* First Name */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="first_name"
+          >
+            {t("first_name")} <span className="text-destructive">*</span>
+          </label>
+          <Input
+            {...register("first_name")}
+            className="rounded-lg border-none bg-background"
+          />
+          {errors.first_name && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.first_name.message}
+            </p>
           )}
-        </Button>
-      </div>
-    </form>
+        </div>
+
+        {/* Last Name */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="last_name"
+          >
+            {t("last_name")} <span className="text-destructive">*</span>
+          </label>
+          <Input
+            {...register("last_name")}
+            className="rounded-lg border-none bg-background"
+          />
+          {errors.last_name && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.last_name.message}
+            </p>
+          )}
+        </div>
+
+        {/* Username */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="username"
+          >
+            {t("username")} <span className="text-destructive">*</span>
+          </label>
+          <Input
+            {...register("username")}
+            className="rounded-lg border-none bg-background"
+          />
+          {errors.username && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.username.message}
+            </p>
+          )}
+        </div>
+
+        {/* Phone */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="phone"
+          >
+            {t("phone")} <span className="text-destructive">*</span>
+          </label>
+          <Input
+            {...register("phone")}
+            className="rounded-lg border-none bg-background"
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
+          )}
+        </div>
+
+        {/* Image Upload */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="image"
+          >
+            {t("uploadImage")}
+          </label>
+          <Input
+            type="file"
+            accept="image/*"
+            onChange={(e) =>
+              setImage(e.target.files ? e.target.files[0] : null)
+            }
+            className="rounded-lg border-none bg-background"
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div className="w-full flex justify-center">
+          <Button
+            type="submit"
+            className={`mt-4 bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+              loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+            }`}
+          >
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                {t("button")}
+                <Loader className="size-4 animate-spin h-5 w-5" />
+              </div>
+            ) : (
+              t("button")
+            )}
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }

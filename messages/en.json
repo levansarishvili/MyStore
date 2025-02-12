@@ -224,6 +224,7 @@
     "subscribeButton": "Buy Subscription",
     "AccountForm": {
       "title": "Account",
+      "subtitle": "Edit your account details",
       "first_name": "First Name",
       "last_name": "Last Name",
       "username": "Username",

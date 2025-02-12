@@ -227,6 +227,7 @@
     "subscribeButton": "გამოწერა",
     "AccountForm": {
       "title": "პროფილი",
+      "subtitle": "პროფილის რედაქტირება",
       "first_name": "სახელი",
       "last_name": "გვარი",
       "username": "მომხმარებლის სახელი",

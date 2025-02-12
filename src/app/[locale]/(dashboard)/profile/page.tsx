@@ -87,6 +87,7 @@ export default async function ProfilePage({
                   <Avatar className="w-full h-full">
                     <AvatarImage
                       src={
+                        userDetails?.image_url ||
                         userData?.user_metadata?.avatar_url ||
                         "/assets/user.svg"
                       }
