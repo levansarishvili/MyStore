@@ -32,6 +32,8 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 export default function CreateProductForm() {
   const t = useTranslations("Profile.AddProductForm");
+  const t2 = useTranslations("Profile.editProductForm.categoryList");
+
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -81,7 +83,7 @@ export default function CreateProductForm() {
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       {createdSuccessfully && (
-        <p className="text-primary text-base md:text-2xl font-medium">
+        <p className="text-primary text-base md:text-lg font-medium">
           {t("addMessage")} ✔
         </p>
       )}
@@ -204,6 +206,7 @@ export default function CreateProductForm() {
                     "Laptops",
                     "Audio",
                     "Monitors",
+                    "Photo and video",
                   ].map((cat) => (
                     <SelectItem
                       key={cat}

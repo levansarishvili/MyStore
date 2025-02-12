@@ -25,6 +25,17 @@ async function Header({ locale }: { locale: string }) {
     .select("quantity")
     .eq("user_id", userId);
 
+  // Fetch user details
+  const { data: userAvatar, error: userError } = await supabase
+    .from("user_profiles")
+    .select("image_url")
+    .eq("user_id", userId)
+    .single();
+
+  if (error || userError) {
+    console.error(error, userError);
+  }
+
   const cartQuantity = cartItems?.reduce(
     (total, item) => total + item.quantity,
     0
@@ -76,7 +87,11 @@ async function Header({ locale }: { locale: string }) {
                   isProMember ? "border-2 border-primary rounded-full" : ""
                 }`}
               >
-                <ProfileToggle userImageUrl={userImageUrl} locale={locale} />
+                <ProfileToggle
+                  userImageUrl={userImageUrl}
+                  locale={locale}
+                  userAvatar={userAvatar?.image_url}
+                />
               </div>
 
               {/* Cart Icon */}

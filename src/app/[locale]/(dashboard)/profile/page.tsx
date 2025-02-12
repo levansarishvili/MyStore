@@ -22,6 +22,21 @@ import Image from "next/image";
 import MyBlogs from "src/app/components/blog/MyBlogs";
 import Link from "next/link";
 import { createTranslator } from "next-intl";
+import { createClient } from "src/utils/supabase/server";
+
+export interface UserProfileDetailsType {
+  user_id: string;
+  email: string;
+  stripe_customer_id: string;
+  subscription_status: string;
+  subscription_id: string;
+  id: string | null;
+  first_name: string;
+  last_name: string;
+  username: string;
+  phone: string;
+  image_url: string;
+}
 
 export default async function ProfilePage({
   params,
@@ -29,6 +44,7 @@ export default async function ProfilePage({
   params: { locale: string };
 }) {
   const locale = params.locale;
+  const supabase = await createClient();
 
   const messages = (await import(`../../../../../messages/${locale}.json`))
     .default;
@@ -36,6 +52,16 @@ export default async function ProfilePage({
 
   const userData = await GetUserData();
   const userId = userData?.id as string;
+
+  // Fetch user details from supabase
+  const { data: userDetails, error } = (await supabase
+    .from("user_profiles")
+    .select("*")
+    .eq("user_id", userData?.id)
+    .single()) as { data: UserProfileDetailsType; error: any };
+  if (error) {
+    console.error("failed to fetch user details!", error);
+  }
 
   // Get subscription status
   const isProMember = await CheckSubscriptionStatus();
@@ -61,6 +87,7 @@ export default async function ProfilePage({
                   <Avatar className="w-full h-full">
                     <AvatarImage
                       src={
+                        userDetails?.image_url ||
                         userData?.user_metadata?.avatar_url ||
                         "/assets/user.svg"
                       }
@@ -107,7 +134,7 @@ export default async function ProfilePage({
                   <div className="flex justify-center">
                     <Link href={`/${locale}/pricing`}>
                       <Button
-                        className=" text-white hover:bg-[#38CB89]/80 transition-all duration-300"
+                        className=" text-white hover:bg-[#2ca76e] transition-all duration-300"
                         variant="default"
                       >
                         {t("Profile.subscribeButton")}
@@ -128,35 +155,35 @@ export default async function ProfilePage({
               <TabsList className="w-full flex flex-wrap justify-center gap-3 bg-muted rounded-lg mb-6 h-auto">
                 <TabsTrigger
                   value="account"
-                  className="bg-background min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 bg-background min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.AccountForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my products"
-                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.MyProductsForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="my blogs"
-                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.MyBlogsForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="add product"
-                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.AddProductForm.title")}
                 </TabsTrigger>
 
                 <TabsTrigger
                   value="add blog"
-                  className="bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
+                  className="flex-1 bg-background  min-w-[80px] px-2 py-1.5 text-xs sm:text-sm font-medium transition-all rounded-md data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-muted-foreground"
                 >
                   {t("Profile.AddBlogForm.title")}
                 </TabsTrigger>
@@ -165,7 +192,11 @@ export default async function ProfilePage({
 
             <div className="p-4 bg-muted rounded-xl shadow-md min-h-[16rem]">
               <TabsContent value="account" className="">
-                <UserDetails locale={locale} />
+                <UserDetails
+                  locale={locale}
+                  userData={userData}
+                  userDetails={userDetails}
+                />
               </TabsContent>
               {isProMember && (
                 <>
