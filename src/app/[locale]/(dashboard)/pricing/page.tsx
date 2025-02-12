@@ -85,8 +85,7 @@ export default async function Pricing({ params }: Props) {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <BuySubscriptionButton isProMember={isProMember} />
+          {!isProMember && <BuySubscriptionButton isProMember={isProMember} />}
         </div>
       </div>
     </section>
