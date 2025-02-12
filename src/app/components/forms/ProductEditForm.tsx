@@ -246,40 +246,40 @@ export default function EditProductModal({
               </SelectTrigger>
               <SelectContent className="bg-background rounded-lg border-none">
                 <SelectItem
-                  value="Smartphones"
+                  value="Audio"
                   className="text-xs md:text-sm rounded-lg"
                 >
-                  {t("categoryList.item1")}
+                  Audio
                 </SelectItem>
                 <SelectItem
                   value="Laptops"
                   className="text-xs md:text-sm rounded-lg"
                 >
-                  {t("categoryList.item2")}
-                </SelectItem>
-                <SelectItem
-                  value="Tablets"
-                  className="text-xs md:text-sm rounded-lg"
-                >
-                  {t("categoryList.item3")}
-                </SelectItem>
-                <SelectItem
-                  value="Audio"
-                  className="text-xs md:text-sm rounded-lg"
-                >
-                  {t("categoryList.item4")}
+                  Laptops
                 </SelectItem>
                 <SelectItem
                   value="Monitors"
                   className="text-xs md:text-sm rounded-lg"
                 >
-                  {t("categoryList.item5")}
+                  Monitors
                 </SelectItem>
                 <SelectItem
-                  value="Photo+and+video"
+                  value="Photo and video"
                   className="text-xs md:text-sm rounded-lg"
                 >
-                  {t("categoryList.item6")}
+                  Photo and video
+                </SelectItem>
+                <SelectItem
+                  value="Smartphones"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  Smartphones
+                </SelectItem>
+                <SelectItem
+                  value="Tablets"
+                  className="text-xs md:text-sm rounded-lg"
+                >
+                  Tablets
                 </SelectItem>
               </SelectContent>
             </Select>

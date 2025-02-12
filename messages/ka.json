@@ -227,11 +227,13 @@
     "subscribeButton": "გამოწერა",
     "AccountForm": {
       "title": "პროფილი",
-      "name": "სრული სახელი",
+      "first_name": "სახელი",
+      "last_name": "გვარი",
       "username": "მომხმარებლის სახელი",
       "phone": "ტელეფონის ნომერი",
       "email": "ელ-ფოსტა",
-      "button": "ცვლილებების შენახვა"
+      "button": "ცვლილებების შენახვა",
+      "uploadImage": "ატვირთე ფოტო"
     },
     "MyProductsForm": {
       "title": "ჩემი პროდუქტები",

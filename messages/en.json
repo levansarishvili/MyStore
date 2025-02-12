@@ -224,11 +224,13 @@
     "subscribeButton": "Buy Subscription",
     "AccountForm": {
       "title": "Account",
-      "name": "Full Name",
+      "first_name": "First Name",
+      "last_name": "Last Name",
       "username": "Username",
       "phone": "Phone",
       "email": "Email",
-      "button": "Save Changes"
+      "button": "Save Changes",
+      "uploadImage": "Upload Image"
     },
     "MyProductsForm": {
       "title": "My Products",

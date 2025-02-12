@@ -97,7 +97,7 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
       <h1 className="w-full text-center text-xl md:text-2xl font-medium">
         {t("title")}
       </h1>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300  bg-card border px-4 py-4 md:py-8 lg:py-10">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-16 rounded-2xl transition-all duration-300  bg-card border px-4 py-4 md:py-8 lg:py-10">
         {/* Product Details */}
         <div className="flex flex-col justify-center items-center w-full overflow-hidden h-auto transition-all duration-300">
           <Carousel setApi={setCarouselApi} className="w-full max-w-xs">
@@ -152,13 +152,15 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
         {/* Product Settings */}
         <div className="flex flex-col items-start justify-center gap-6 w-full p-4 md:p-8">
           <div className="flex flex-col items-start justify-center gap-6">
-            <h2 className="text-xl md:text-2xl font-medium">{product?.name}</h2>
-            <p className="text-base md:text-lg text-primary font-medium">
+            <h2 className="text-base md:text-xl font-medium">
+              {product?.name}
+            </h2>
+            <p className="text-sm md:text-lg text-primary font-medium">
               {product?.category}
             </p>
-            <p className="text-sm md:text-base">{product?.description}</p>
+            <p className="text-sm md:text-sm">{product?.description}</p>
           </div>
-          <p className="text-sm md:text-base font-medium">
+          <p className="text-sm font-medium">
             {t("price")}: {product?.price / 100} $
           </p>
           <div className="flex">
