@@ -33,6 +33,7 @@ export default function UserDetails({
   userDetails,
 }: UserDetailsProps) {
   const [image, setImage] = useState<File | null>(null);
+  const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const t = useTranslations("Profile.AccountForm");
   const supabase = createClient();
   const router = useRouter();
@@ -41,6 +42,7 @@ export default function UserDetails({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(userDetailsSchema),
@@ -93,6 +95,7 @@ export default function UserDetails({
         .eq("user_id", userData.id);
 
       if (updateError) throw updateError;
+      setCreatedSuccessfully(() => true);
       deleteOldImage();
       router.refresh();
 
@@ -100,7 +103,6 @@ export default function UserDetails({
     } catch (error) {
       console.error("Error updating profile:", error);
       console.log("Failed to update profile.");
-      router.refresh();
     } finally {
       setLoading(false);
     }
@@ -120,9 +122,22 @@ export default function UserDetails({
     }
   };
 
+  // Watch for input changes
+  const formValues = watch();
+  // Compare each input value with the initial values and if they changed make submit button visible
+  const isFormChanged = Object.entries(formValues).some(
+    ([key, value]) => value !== userDetails[key as keyof UserProfileDetailsType]
+  );
+
   return (
     <div className="w-full flex justify-center flex-col items-center">
       <h2 className="text-base md:text-lg font-medium">{t("subtitle")}</h2>
+
+      {createdSuccessfully && (
+        <p className="mt-2 text-primary text-sm md:text-base">
+          {t("success_message")}
+        </p>
+      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-6 w-full bg-muted p-6 rounded-xl"
@@ -201,6 +216,23 @@ export default function UserDetails({
           )}
         </div>
 
+        {/* Email */}
+        <div className="flex flex-col w-full">
+          <label
+            className="text-sm font-medium text-muted-foreground mb-1"
+            htmlFor="email"
+          >
+            {t("email")}
+          </label>
+          <Input
+            type="email"
+            accept="image/*"
+            disabled
+            value={userData.email}
+            className="rounded-lg border-none bg-background"
+          />
+        </div>
+
         {/* Image Upload */}
         <div className="flex flex-col w-full">
           <label
@@ -223,7 +255,9 @@ export default function UserDetails({
         <div className="w-full flex justify-center">
           <Button
             type="submit"
-            className={`mt-4 bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+            className={`${
+              image || isFormChanged ? "" : "hidden"
+            } mt-4 bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
               loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
             }`}
           >

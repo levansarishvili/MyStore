@@ -228,6 +228,7 @@
     "AccountForm": {
       "title": "პროფილი",
       "subtitle": "პროფილის რედაქტირება",
+      "success_message": "პროფილი წარმატებით განახლდა!",
       "first_name": "სახელი",
       "last_name": "გვარი",
       "username": "მომხმარებლის სახელი",

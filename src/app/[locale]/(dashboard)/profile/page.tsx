@@ -118,9 +118,9 @@ export default async function ProfilePage({
 
               {/* User Info */}
               <div className="text-center mt-6 space-y-2">
-                {userData?.user_metadata?.user_name && (
-                  <p className="text-sm font-medium text-foreground">
-                    {userData?.user_metadata?.user_name}
+                {userDetails.first_name && (
+                  <p className="text-base md:text-lg font-medium text-foreground">
+                    {userDetails?.first_name} {userDetails?.last_name}
                   </p>
                 )}
                 <p className="text-sm font-medium text-foreground">
