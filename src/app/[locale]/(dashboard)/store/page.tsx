@@ -95,7 +95,7 @@ export default async function Store({ params, searchParams }: Props) {
   const page = Number(searchParams?.page) || 1;
 
   // Calculate pagination parameters
-  const itemsPerPage = 9;
+  const itemsPerPage = 12;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage - 1;
   const totalPages = Math.ceil(productsCount / itemsPerPage);
