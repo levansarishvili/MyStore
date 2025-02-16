@@ -152,6 +152,17 @@
         "button": "გადადი კალათაში"
       }
     },
+    "ProductReviwes": {
+      "title": "პროდუქტის შეფასებები",
+      "emptyMessage": "შეფასებები ჯერ არ არის დამატებული!",
+      "success_message": "შეფასება წარმატებით დაემატა!",
+      "alreadyHasReview": "თქვენ უკვე გაქვს დამატებული შეფასება ამ პროდუქტისთვის!",
+      "ReviewsNum": "შეფასება",
+      "ReviewItem": {
+        "inputPlaceholder": "დაწერეთ შეფასება აქ...",
+        "submitButton": "შეფასების დამატება"
+      }
+    },
     "SimilarProducts": {
       "title": "მსგავსი პროდუქტები",
       "viewAll": "ყველას ნახვა"

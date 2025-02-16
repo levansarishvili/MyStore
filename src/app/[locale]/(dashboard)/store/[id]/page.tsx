@@ -5,12 +5,29 @@ import { supabase } from "../../../../../lib/supabaseClient";
 import { ProductsType } from "../page";
 import GetUserData from "src/app/components/GetUserData";
 import SimilarProducts from "./SimilarProducts";
+import ProductReviews from "./ProductReviews";
 
 interface paramsType {
   params: {
     id: string;
     locale: string;
   };
+}
+
+export interface UsersType {
+  user_id: string;
+  email: string;
+}
+
+export interface ReviewsType {
+  id: number;
+  created_at: string;
+  product_id: number;
+  review_text: string;
+  user_id: string;
+  rating: number;
+  likes: number | null;
+  dislikes: number | null;
 }
 
 // Fetch product data from API according to product ID
@@ -51,6 +68,24 @@ export default async function ProductDetailsPage({ params }: paramsType) {
     return null;
   }
 
+  const similarProducrsIds = products?.map((item) => item.id);
+
+  // Fetch similar products reviews
+  const { data: similarProductsReviews, error: similarProductsReviewsError } =
+    await supabase
+      .from("product_reviews")
+      .select("*")
+      .in("product_id", similarProducrsIds)
+      .order("created_at", { ascending: false });
+
+  if (similarProductsReviewsError) {
+    console.error(
+      "Error fetching similar reviews:",
+      similarProductsReviewsError
+    );
+    return null;
+  }
+
   // Check if product is in cart
   const { data: cartProductIds, error: cartError } = (await supabase
     .from("cart")
@@ -68,13 +103,62 @@ export default async function ProductDetailsPage({ params }: paramsType) {
     isInCart = true;
   }
 
+  // Fetch product reviews
+  const { data: reviews, error: reviewsError } = await supabase
+    .from("product_reviews")
+    .select("*")
+    .eq("product_id", id)
+    .order("created_at", { ascending: false });
+
+  if (reviewsError) {
+    console.error("Error fetching reviews:", reviewsError);
+    return null;
+  }
+
+  // Fetch user's email from Supabase
+  const { data: users, error: userError } = (await supabase
+    .from("user_profiles")
+    .select("email, user_id")) as { data: UsersType[]; error: any };
+
+  if (userError) {
+    console.error("Error fetching user:", userError);
+    return null;
+  }
+
+  // Check if user bought this product before
+  const { data: orderItems, error: orderItemsError } = await supabase
+    .from("order_items")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("product_id", id);
+
+  if (orderItemsError) {
+    console.error("Error fetching hasBoughtProduct:", orderItemsError);
+    return null;
+  }
+
+  const hasBoughtProduct = orderItems.length > 0;
+
   return (
-    <section className="w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
-      <ProductDetails product={product} isInCart={isInCart} locale={locale} />
+    <section className="w-full max-w-[90rem] my-0 mx-auto flex flex-col gap-6 md:gap-8 lg:gap-12 px-6 md:px-12 lg:px-20 py-0">
+      <ProductDetails
+        product={product}
+        isInCart={isInCart}
+        locale={locale}
+        reviews={reviews}
+      />
+      <ProductReviews
+        id={id}
+        userId={userId}
+        reviews={reviews}
+        users={users}
+        hasBoughtProduct={hasBoughtProduct}
+      />
       <SimilarProducts
         products={products}
         locale={locale}
         cartProductIds={cartProductIds}
+        reviews={similarProductsReviews}
       />
     </section>
   );

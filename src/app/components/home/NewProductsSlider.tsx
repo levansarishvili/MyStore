@@ -7,23 +7,26 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../../components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import ProductItem from "../../[locale]/(dashboard)/store/ProductItem";
 import { useEffect, useState } from "react";
+import type { reviewsType } from "../../[locale]/(dashboard)/page";
 
 interface Props {
   newProducts: ProductsType[];
   inCartArrNew: boolean[];
   locale: string;
+  reviews: reviewsType[];
 }
 
 export default function NewProductsSlider({
   newProducts,
   inCartArrNew,
   locale,
+  reviews,
 }: Props) {
   const [swiperKey, setSwiperKey] = useState(0);
+  console.log(reviews);
 
   // Handle Swiper reinitialization on resize
   useEffect(() => {
@@ -63,6 +66,9 @@ export default function NewProductsSlider({
                 isProMember={true}
                 userId={product.user_id}
                 in_cart={inCartArrNew[index]}
+                reviews={reviews.filter(
+                  (review) => review.product_id === product.id
+                )}
               />
             </CarouselItem>
           ))}
