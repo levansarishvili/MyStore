@@ -1,16 +1,20 @@
 import { ProductsType } from "../../[locale]/(dashboard)/store/page";
 import ProductItem from "../../[locale]/(dashboard)/store/ProductItem";
 import { createTranslator } from "next-intl";
+import type { reviewsType } from "../../[locale]/(dashboard)/page";
+
 interface Props {
   topProducts: ProductsType[];
   inCartArrTop: boolean[];
   locale: string;
+  reviews: reviewsType[];
 }
 
 export default async function MostPopularProducts({
   topProducts,
   inCartArrTop,
   locale,
+  reviews,
 }: Props) {
   const messages = (await import(`../../../../messages/${locale}.json`))
     .default;
@@ -37,6 +41,9 @@ export default async function MostPopularProducts({
               products={topProducts}
               userId={product.user_id}
               in_cart={inCartArrTop[index]}
+              reviews={reviews.filter(
+                (review) => review.product_id === product.id
+              )}
             />
           </>
         ))}

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ProductsType } from "../page";
-import { Heart, Loader, ShoppingCart } from "lucide-react";
+import { Heart, Loader, ShoppingCart, Star } from "lucide-react";
 import { Button } from "src/app/components/ui/button";
 import { useTranslations } from "next-intl";
 import {
@@ -25,14 +25,21 @@ import {
   DialogTrigger,
 } from "../../../../components/ui/dialog";
 import { useCart } from "src/app/context/CartContext";
+import type { ReviewsType } from "./page";
 
 interface Props {
   product: ProductsType;
   isInCart: boolean;
   locale: string;
+  reviews: ReviewsType[];
 }
 
-export default function ProductDetails({ product, isInCart, locale }: Props) {
+export default function ProductDetails({
+  product,
+  isInCart,
+  locale,
+  reviews,
+}: Props) {
   const [inBag, setInBag] = useState(isInCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartQuantity, setCartQuantity } = useCart();
@@ -41,6 +48,9 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const t = useTranslations("Products.ProductDetails");
+  const averageRating =
+    reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length ||
+    5;
 
   useEffect(() => {
     if (!carouselApi) {
@@ -155,6 +165,16 @@ export default function ProductDetails({ product, isInCart, locale }: Props) {
             <h2 className="text-base md:text-xl font-medium">
               {product?.name}
             </h2>
+            <div className="flex gap-1">
+              {Array.from({ length: Math.round(averageRating) }).map(
+                (star, index) => (
+                  <Star
+                    key={index}
+                    className="size-3.5 fill-yellow-500 stroke-yellow-500"
+                  />
+                )
+              )}
+            </div>
             <p className="text-sm md:text-lg text-primary font-medium">
               {product?.category}
             </p>

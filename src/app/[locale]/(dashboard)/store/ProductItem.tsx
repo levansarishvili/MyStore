@@ -16,6 +16,7 @@ import {
   DialogTitle,
 } from "../../../components/ui/dialog";
 import { useCart } from "src/app/context/CartContext";
+import type { reviewsType } from "./page";
 
 interface Props {
   id: string;
@@ -26,6 +27,7 @@ interface Props {
   products?: ProductsType[];
   userId: string | undefined;
   in_cart?: boolean;
+  reviews?: reviewsType[];
 }
 
 // Product card component
@@ -38,12 +40,20 @@ export default function ProductItem({
   products,
   userId,
   in_cart,
+  reviews,
 }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inCart, setInCart] = useState(in_cart);
   const { cartQuantity, setCartQuantity } = useCart();
   const t = useTranslations("Products.ProductItem");
   const [loading, setLoading] = useState(false);
+
+  // Calculate average rating
+  const averageRating =
+    (reviews &&
+      reviews.reduce((acc, review) => acc + review.rating, 0) /
+        reviews.length) ||
+    5;
 
   // Function to handle add to cart button click
   const handleAddToCart = async (productId: string) => {
@@ -100,12 +110,14 @@ export default function ProductItem({
       <div className="flex flex-col gap-4 w-full px-2 pb-4 sm:pb-6">
         <div className="flex flex-col gap-2 items-center justify-between w-full font-inter">
           <div className="flex gap-1">
-            {["a", "b", "c", "d", "e"].map((star, index) => (
-              <Star
-                key={index}
-                className="size-3.5 fill-yellow-500 stroke-yellow-500"
-              />
-            ))}
+            {Array.from({ length: Math.round(averageRating) }).map(
+              (star, index) => (
+                <Star
+                  key={index}
+                  className="size-3.5 fill-yellow-500 stroke-yellow-500"
+                />
+              )
+            )}
           </div>
           <h2 className="text-xs sm:text-sm font-medium">{name}</h2>
           <p className="text-xs sm:text-sm text-muted-foreground font-medium">{`${

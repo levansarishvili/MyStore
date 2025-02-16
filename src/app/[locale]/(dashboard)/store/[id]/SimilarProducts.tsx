@@ -10,11 +10,17 @@ interface Props {
   cartProductIds: {
     product_id: number;
   }[];
+  reviews: {
+    rating: number;
+    user_id: string;
+    product_id: string;
+  }[];
 }
 
 export default function SimilarProducts({
   products,
   locale,
+  reviews,
   cartProductIds,
 }: Props) {
   const t = useTranslations("Products.SimilarProducts");
@@ -43,6 +49,9 @@ export default function SimilarProducts({
             userId={product.user_id}
             in_cart={cartProductIds.some(
               (item) => item.product_id === Number(product.id)
+            )}
+            reviews={reviews.filter(
+              (review) => review.product_id === product.id
             )}
           />
         ))}

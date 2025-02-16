@@ -17,6 +17,12 @@ interface cartItemsType {
   product_id: string;
 }
 
+export interface reviewsType {
+  rating: number;
+  user_id: string;
+  product_id: string;
+}
+
 export default async function HomePage({
   params,
 }: {
@@ -37,7 +43,7 @@ export default async function HomePage({
     return;
   }
 
-  // fetch products from cart
+  // Fetch products from cart
   const { data: cartItems, error: fetchError } = (await supabase
     .from("cart")
     .select("product_id")
@@ -85,6 +91,39 @@ export default async function HomePage({
   );
 
   const isProMember = await CheckSubscriptionStatus();
+
+  // Get only the product IDs of the new products
+  const newProductIds = newProducts.map((product) => product.id);
+  const popularProductIds = topProducts.map((product) => product.id);
+
+  // Fetch reviews only for the popularProducts
+  const { data: popularProductsReviews, error: popularReviewsError } =
+    (await supabase
+      .from("product_reviews")
+      .select("product_id, rating, user_id")
+      .in("product_id", popularProductIds)) as {
+      data: reviewsType[];
+      error: any;
+    };
+
+  if (popularReviewsError) {
+    console.error(popularReviewsError);
+    return;
+  }
+
+  // Fetch reviews only for the newProducts
+  const { data: newProductsReviews, error: reviewsError } = (await supabase
+    .from("product_reviews")
+    .select("product_id, rating, user_id")
+    .in("product_id", newProductIds)) as {
+    data: reviewsType[];
+    error: any;
+  };
+
+  if (reviewsError) {
+    console.error(reviewsError);
+    return;
+  }
 
   return (
     <>
@@ -163,6 +202,7 @@ export default async function HomePage({
           locale={locale}
           newProducts={newProducts}
           inCartArrNew={inCartArrNew}
+          reviews={newProductsReviews}
         />
       </section>
 
@@ -173,6 +213,7 @@ export default async function HomePage({
         topProducts={topProducts}
         inCartArrTop={inCartArrTop}
         locale={locale}
+        reviews={popularProductsReviews}
       />
 
       {/* Latest Articles */}

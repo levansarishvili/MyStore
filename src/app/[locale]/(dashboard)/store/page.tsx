@@ -21,6 +21,12 @@ export interface ProductsType {
   brand: string;
 }
 
+export interface reviewsType {
+  rating: number;
+  user_id: string;
+  product_id: string;
+}
+
 interface Props {
   params: { locale: string };
   searchParams: { [key: string]: string | undefined };
@@ -111,6 +117,18 @@ export default async function Store({ params, searchParams }: Props) {
 
   const isProMember = await CheckSubscriptionStatus();
 
+  // Fetch product reviews
+  const { data: reviews, error: reviewsError } = (await supabase
+    .from("product_reviews")
+    .select("rating, product_id, user_id")) as {
+    data: reviewsType[];
+    error: any;
+  };
+
+  if (reviewsError) {
+    console.error("Error fetching product reviews:", reviewsError);
+  }
+
   return (
     <section className="flex flex-col items-center gap-6 md:gap-8 lg:gap-12 w-full max-w-[90rem] my-0 mx-auto px-6 md:px-12 lg:px-20 py-0">
       <h1 className="text-xl md:text-2xl font-medium">{t("Products.title")}</h1>
@@ -135,6 +153,9 @@ export default async function Store({ params, searchParams }: Props) {
               userId={userId}
               in_cart={cartItems?.some(
                 (item) => item.product_id === product.id
+              )}
+              reviews={reviews.filter(
+                (review) => review.product_id === product.id
               )}
             />
           ))}

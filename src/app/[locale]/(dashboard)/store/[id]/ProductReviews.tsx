@@ -26,6 +26,7 @@ import {
 } from "../../../../components/ui/avatar";
 import { useTranslations } from "next-intl";
 import { Loader } from "lucide-react";
+import { has } from "cypress/types/lodash";
 
 // Supabase setup
 const supabase = createClient();
@@ -41,6 +42,7 @@ interface ProductReviewsProps {
   userId: string | undefined;
   reviews: ReviewsType[];
   users: UsersType[];
+  hasBoughtProduct: boolean;
 }
 
 export default function ProductReviews({
@@ -48,6 +50,7 @@ export default function ProductReviews({
   userId,
   reviews,
   users,
+  hasBoughtProduct,
 }: ProductReviewsProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -118,74 +121,83 @@ export default function ProductReviews({
       </h2>
 
       {/* Review Input Form */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 bg-muted p-6 border rounded-xl"
-      >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <Input
-            {...register("review")}
-            type="text"
-            placeholder={t("ReviewItem.inputPlaceholder")}
-            className="rounded-lg h-12 bg-background border-none text-sm"
-          />
-          <div className="">
-            <Button
-              type="submit"
-              className={`bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
-                loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
-              }`}
-            >
-              {loading ? (
-                <div className="flex items-center justify-center gap-2">
-                  {t("ReviewItem.submitButton")}
-                  <Loader className="size-4 animate-spin h-5 w-5" />
-                </div>
-              ) : (
-                `${t("ReviewItem.submitButton")}`
-              )}
-            </Button>
+      {hasBoughtProduct && (
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 bg-muted p-6 border rounded-xl"
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <Input
+              {...register("review")}
+              type="text"
+              placeholder={t("ReviewItem.inputPlaceholder")}
+              className="rounded-lg h-12 bg-background border-none text-sm"
+            />
+            <div className="">
+              <Button
+                type="submit"
+                className={`bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+                  loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+                }`}
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center gap-2">
+                    {t("ReviewItem.submitButton")}
+                    <Loader className="size-4 animate-spin h-5 w-5" />
+                  </div>
+                ) : (
+                  `${t("ReviewItem.submitButton")}`
+                )}
+              </Button>
+            </div>
           </div>
-        </div>
 
-        {errors.review && (
-          <p className="text-destructive text-sm">{errors.review.message}</p>
-        )}
-
-        {alreadyHasReview && (
-          <p className="text-red-500 text-xs">{t("alreadyHasReview")}</p>
-        )}
-
-        {addedSuccessfully && (
-          <p className="text-green-500 text-sm">{t("success_message")}</p>
-        )}
-
-        {/* Rating System */}
-        <div className="flex items-center gap-2">
-          {isMounted && (
-            <>
-              <Rating
-                name="product-rating"
-                value={ratingValue}
-                onChange={(_, newValue) => setValue("rating", newValue ?? 1)}
-              />
-              <span className="text-muted-foreground text-sm">
-                {ratingValue} Stars
-              </span>
-            </>
+          {errors.review && (
+            <p className="text-destructive text-sm">{errors.review.message}</p>
           )}
-        </div>
-        {errors.rating && (
-          <p className="text-destructive text-sm">{errors.rating.message}</p>
-        )}
-      </form>
+
+          {alreadyHasReview && (
+            <p className="text-red-500 text-xs">{t("alreadyHasReview")}</p>
+          )}
+
+          {addedSuccessfully && (
+            <p className="text-green-500 text-sm">{t("success_message")}</p>
+          )}
+
+          {/* Rating System */}
+          <div className="flex items-center gap-2">
+            {isMounted && (
+              <>
+                <Rating
+                  name="product-rating"
+                  value={ratingValue}
+                  onChange={(_, newValue) => setValue("rating", newValue ?? 1)}
+                />
+                <span className="text-muted-foreground text-sm">
+                  {ratingValue} Stars
+                </span>
+              </>
+            )}
+          </div>
+          {errors.rating && (
+            <p className="text-destructive text-sm">{errors.rating.message}</p>
+          )}
+        </form>
+      )}
 
       {/* Review List */}
-      <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4">
-        <p className="text-start text-base font-medium">
-          {reviews.length} {t("ReviewsNum")}
-        </p>
-      </div>
+      {reviews.length > 0 && (
+        <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4">
+          <p className="text-start text-base font-medium">
+            {reviews.length} {t("ReviewsNum")}
+          </p>
+        </div>
+      )}
+
+      {/* If there is not reviews yet */}
+      {reviews.length === 0 && (
+        <p className="text-center text-muted-foreground">{t("emptyMessage")}</p>
+      )}
 
       {/* Review Cards */}
       <div className="flex flex-col gap-6">
