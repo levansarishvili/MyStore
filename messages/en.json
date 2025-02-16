@@ -151,6 +151,18 @@
         "button": "Go to cart"
       }
     },
+    "ProductReviwes": {
+      "title": "Product Reviews",
+      "emptyMessage": "There are no reviews yet!",
+      "success_message": "Review added successfully!",
+      "alreadyHasReview": "You already have a review for this product!",
+      "ReviewsNum": "Reviews",
+      "ReviewItem": {
+        "inputPlaceholder": "Write your review here...",
+        "submitButton": "Add review"
+      }
+    },
+
     "SimilarProducts": {
       "title": "Similar Products",
       "viewAll": "View All"

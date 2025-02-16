@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Rating } from "@mui/material";
-import type { ReviewsType } from "./page";
+import type { ReviewsType, UsersType } from "./page";
 import { Button } from "src/app/components/ui/button";
 import { Input } from "src/app/components/ui/input";
 import { createClient } from "src/utils/supabase/client";
+import { useRouter } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -23,6 +24,8 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "../../../../components/ui/avatar";
+import { useTranslations } from "next-intl";
+import { Loader } from "lucide-react";
 
 // Supabase setup
 const supabase = createClient();
@@ -37,15 +40,22 @@ interface ProductReviewsProps {
   id: string;
   userId: string | undefined;
   reviews: ReviewsType[];
+  users: UsersType[];
 }
 
 export default function ProductReviews({
   id,
   userId,
   reviews,
+  users,
 }: ProductReviewsProps) {
   const [isMounted, setIsMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [reviewsData, setReviewsData] = useState(reviews);
+  const [addedSuccessfully, setAddedSuccessfully] = useState(false);
+  const [alreadyHasReview, setAlreadyHasReview] = useState(false);
+  const t = useTranslations("Products.ProductReviwes");
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -68,8 +78,18 @@ export default function ProductReviews({
 
   const ratingValue = watch("rating");
 
+  // Check if user already has a review
+  const userHasReview = reviews.some((review) => review.user_id === userId);
+
   // Submit review to Supabase
   const onSubmit = async (data: { review: string; rating: number }) => {
+    if (userHasReview) {
+      console.log("You already have a review for this product");
+      setAlreadyHasReview(() => true);
+      reset();
+      return;
+    }
+    setLoading(() => true);
     const { error } = await supabase.from("product_reviews").insert([
       {
         review_text: data.review,
@@ -81,37 +101,63 @@ export default function ProductReviews({
 
     if (error) {
       console.error("Error submitting review:", error.message);
+      setLoading(() => false);
     } else {
       console.log("Review submitted successfully!");
       reset();
+      setAddedSuccessfully(() => true);
+      setLoading(() => false);
+      router.refresh();
     }
   };
 
   return (
-    <section className="w-full flex flex-col gap-6 md:gap-8 lg:gap-12">
+    <section className="w-full flex flex-col gap-8 md:gap-10 lg:gap-12">
       <h2 className="text-center text-xl md:text-2xl font-medium">
-        Customer Reviews
+        {t("title")}
       </h2>
 
       {/* Review Input Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <div className="flex justify-between items-center gap-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 bg-muted p-6 border rounded-xl"
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <Input
             {...register("review")}
             type="text"
-            placeholder="Write a review here"
-            className="rounded-lg"
+            placeholder={t("ReviewItem.inputPlaceholder")}
+            className="rounded-lg h-12 bg-background border-none text-sm"
           />
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-primary text-white rounded-lg hover:bg-[#2ca76e] transition-all duration-300"
-          >
-            {isSubmitting ? "Posting..." : "Post"}
-          </Button>
+          <div className="">
+            <Button
+              type="submit"
+              className={`bg-primary text-white text-xs md:text-sm font-medium py-2 px-6 rounded-lg transition-all duration-300 ${
+                loading ? "cursor-wait opacity-70" : "hover:bg-[#2ca76e]"
+              }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  {t("ReviewItem.submitButton")}
+                  <Loader className="size-4 animate-spin h-5 w-5" />
+                </div>
+              ) : (
+                `${t("ReviewItem.submitButton")}`
+              )}
+            </Button>
+          </div>
         </div>
+
         {errors.review && (
-          <p className="text-red-500 text-sm">{errors.review.message}</p>
+          <p className="text-destructive text-sm">{errors.review.message}</p>
+        )}
+
+        {alreadyHasReview && (
+          <p className="text-red-500 text-xs">{t("alreadyHasReview")}</p>
+        )}
+
+        {addedSuccessfully && (
+          <p className="text-green-500 text-sm">{t("success_message")}</p>
         )}
 
         {/* Rating System */}
@@ -123,50 +169,49 @@ export default function ProductReviews({
                 value={ratingValue}
                 onChange={(_, newValue) => setValue("rating", newValue ?? 1)}
               />
-              <span className="text-gray-700 text-sm">{ratingValue} Stars</span>
+              <span className="text-muted-foreground text-sm">
+                {ratingValue} Stars
+              </span>
             </>
           )}
         </div>
         {errors.rating && (
-          <p className="text-red-500 text-sm">{errors.rating.message}</p>
+          <p className="text-destructive text-sm">{errors.rating.message}</p>
         )}
       </form>
 
       {/* Review List */}
-      <div className="flex justify-between gap-12">
-        <p className="text-sm md:text-base font-medium">
-          {reviews.length} Reviews
+      <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4">
+        <p className="text-start text-base font-medium">
+          {reviews.length} {t("ReviewsNum")}
         </p>
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort reviews by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="apple">Newest</SelectItem>
-              <SelectItem value="banana">Oldest</SelectItem>
-              <SelectItem value="blueberry">Most liked</SelectItem>
-              <SelectItem value="grapes">Most disliked</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
       </div>
 
-      <div className="flex flex-col gap-4">
+      {/* Review Cards */}
+      <div className="flex flex-col gap-6">
         {isMounted &&
           reviews.map((review) => (
             <div
               key={review.id}
-              className="flex flex-col gap-2 border border-muted bg-card rounded-lg p-4"
+              className="flex flex-col gap-3 border border-muted bg-card rounded-xl p-5 shadow-sm"
             >
-              <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <p className="text-sm">{review.review_text}</p>
+              <div className="flex items-center gap-3">
+                <Avatar className="w-6 h-6">
+                  <AvatarImage src="/assets/user.svg" alt="User Avatar" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold text-sm">
+                    {
+                      users.find((user) => user.user_id === review.user_id)
+                        ?.email
+                    }
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-foreground">
+                {review.review_text}
+              </p>
               <div className="flex items-center gap-2">
                 <Rating
                   name="product-rating"
@@ -174,7 +219,7 @@ export default function ProductReviews({
                   readOnly
                   size="small"
                 />
-                <span className="text-gray-700 text-sm">
+                <span className="text-muted-foreground text-sm">
                   {review.rating} Stars
                 </span>
               </div>

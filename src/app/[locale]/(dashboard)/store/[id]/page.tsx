@@ -14,6 +14,11 @@ interface paramsType {
   };
 }
 
+export interface UsersType {
+  user_id: string;
+  email: string;
+}
+
 export interface ReviewsType {
   id: number;
   created_at: string;
@@ -92,10 +97,33 @@ export default async function ProductDetailsPage({ params }: paramsType) {
     return null;
   }
 
+  // Fetch user's email from Supabase
+  const { data: users, error: userError } = (await supabase
+    .from("user_profiles")
+    .select("email, user_id")) as { data: UsersType[]; error: any };
+
+  if (userError) {
+    console.error("Error fetching user:", userError);
+    return null;
+  }
+
+  // Check if user bought this product before
+  const { data: orderItems, error: orderItemsError } = await supabase
+    .from("order_items")
+    .select("*")
+    .eq("product_id", Number(id))
+    .eq("user_id", userId);
+
+  if (orderItemsError) {
+    console.error("Error fetching hasBoughtProduct:", orderItemsError);
+    return null;
+  }
+  console.log(orderItems);
+
   return (
-    <section className="w-full max-w-[90rem] my-0 mx-auto flex flex-col gap:6 md:gap-8 lg:gap-12 px-6 md:px-12 lg:px-20 py-0">
+    <section className="w-full max-w-[90rem] my-0 mx-auto flex flex-col gap-6 md:gap-8 lg:gap-12 px-6 md:px-12 lg:px-20 py-0">
       <ProductDetails product={product} isInCart={isInCart} locale={locale} />
-      <ProductReviews id={id} userId={userId} reviews={reviews} />
+      <ProductReviews id={id} userId={userId} reviews={reviews} users={users} />
       <SimilarProducts
         products={products}
         locale={locale}
