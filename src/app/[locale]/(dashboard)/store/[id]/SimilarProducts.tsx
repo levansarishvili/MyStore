@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { ProductsType } from "../page";
 import ProductItem from "../ProductItem";
-import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface Props {
