@@ -26,7 +26,6 @@ export default function NewProductsSlider({
   reviews,
 }: Props) {
   const [swiperKey, setSwiperKey] = useState(0);
-  console.log(reviews);
 
   // Handle Swiper reinitialization on resize
   useEffect(() => {
