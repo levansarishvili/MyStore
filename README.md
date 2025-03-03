@@ -33,7 +33,7 @@ Welcome to **MyStore**, your go-to destination for all things **electronics**! F
 ## 🔗 Links
 
 - **GitHub Repository:** [MyStore Repo](https://github.com/levansarishvili/MyStore)
-- **Live Demo:** [View Website](https://mystore.vercel.app/)
+- **Live Demo:** [View Website](https://mystore-levansarishvili.vercel.app/)
 
 ## 👨‍💻 Author
 

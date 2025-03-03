@@ -6,7 +6,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/toaster";
 
 export const metadata = {
-  title: "e-shop",
+  title: "Mystore",
   description: "Web site created with Next.js.",
   icons: {
     icon: "/favicon.svg",
