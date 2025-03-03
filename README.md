@@ -1,6 +1,6 @@
-# 🛒 E-Shop – Electronics Store
+# 🛒 MyStore – Electronics Store
 
-Welcome to **E-Shop**, your go-to destination for all things **electronics**! From **laptops** and **mobiles** to the latest gadgets, we provide high-quality products with a seamless shopping experience.
+Welcome to **MyStore**, your go-to destination for all things **electronics**! From **laptops** and **mobiles** to the latest gadgets, we provide high-quality products with a seamless shopping experience.
 
 ## 📸 Screenshot
 
@@ -32,8 +32,8 @@ Welcome to **E-Shop**, your go-to destination for all things **electronics**! Fr
 
 ## 🔗 Links
 
-- **GitHub Repository:** [E-Shop Repo](https://github.com/levansarishvili/TBC-Academy-React)
-- **Live Demo:** [View Website](https://tbc-academy-react.vercel.app/)
+- **GitHub Repository:** [MyStore Repo](https://github.com/levansarishvili/MyStore)
+- **Live Demo:** [View Website](https://mystore-levansarishvili.vercel.app/)
 
 ## 👨‍💻 Author
 

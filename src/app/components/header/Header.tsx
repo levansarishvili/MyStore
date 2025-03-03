@@ -56,8 +56,8 @@ async function Header({ locale }: { locale: string }) {
             height={400}
             className="w-12"
           />
-          <p className="max-lg:hidden text-xl md:text-2xl font-semibold">
-            e-shop
+          <p className="max-lg:hidden text-xl md:text-xl font-semibold">
+            MyStore
           </p>
         </Link>
 
