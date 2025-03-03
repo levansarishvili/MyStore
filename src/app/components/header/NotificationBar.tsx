@@ -44,7 +44,7 @@ export default function NotificationBar({ locale }: { locale: string }) {
         <div className="flex gap-12 items-center">
           <a href="mailto:contact@eshop.ge" className="flex gap-2 items-center">
             <Mail className="size-3.5 fill-primary" />
-            <span className="text-xs font-medium">contact@eshop.ge</span>
+            <span className="text-xs font-medium">contact@mystore.ge</span>
           </a>
         </div>
       </div>

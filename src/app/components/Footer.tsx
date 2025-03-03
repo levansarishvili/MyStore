@@ -32,7 +32,7 @@ function Footer({ locale }: { locale: string }) {
               className="w-10"
             />
             <p className="max-sm:hidden text-lg md:text-xl font-semibold">
-              e-shop
+              MyStore
             </p>
           </div>
           <p className="text-base font-normal md:font-medium md:text-xl max-w-[16.5rem]">
