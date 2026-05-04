@@ -1,0 +1,15 @@
+name: Keep MyStore Supabase Backend Awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *" # every 10 minutes
+  workflow_dispatch: # allows manual run
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping API
+        run: |
+          curl -X GET https://mystore-levansarishvili.vercel.app/health
