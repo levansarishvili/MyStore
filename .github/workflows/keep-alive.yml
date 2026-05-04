@@ -2,7 +2,7 @@ name: Keep MyStore Supabase Backend Awake
 
 on:
   schedule:
-    - cron: "*/10 * * * *" # every 10 minutes
+    - cron: "0 0 * * 0" # every Sunday at 00:00 UTC
   workflow_dispatch: # allows manual run
 
 jobs:
